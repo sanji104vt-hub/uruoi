@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="化粧水・美容液・日焼け止めなど167商品を肌タイプ・悩み別に比較。AI肌診断やスキンケアコラムも。あなたに合った一本が見つかる比較サイト。">
-<title>うるおいらぼ｜スキンケア商品の比較・肌診断・ランキング</title>
+<title>Moilum（モイルム）｜スキンケア商品の比較・肌診断・ランキング</title>
 <style>
 :root{
   --bg:#faf9f7;--bg2:#fff;--bg3:#f0ede8;
@@ -278,7 +278,7 @@ nav{display:flex;gap:4px}
 <body>
 
 <header>
-  <div class="logo">うるおい<span>らぼ</span></div>
+  <div class="logo">Moi<span>lum</span></div>
   <nav>
     <button class="nav-btn active" onclick="showPage('products')">商品</button>
     <button class="nav-btn" onclick="showPage('brands')">ブランド</button>
@@ -427,7 +427,7 @@ nav{display:flex;gap:4px}
       <a onclick="openInfo('contact')">お問い合わせ</a>
     </div>
     <p style="margin-bottom:6px">当サイトに掲載の価格・成分・効果に関する情報は参考であり、正確性・最新性を保証するものではありません。購入前に必ず各販売サイト・公式情報をご確認ください。</p>
-    <p>当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。© うるおいらぼ</p>
+    <p>当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。© Moilum</p>
   </div>
 </footer>
 
@@ -1136,9 +1136,14 @@ function toggleDark(){
 
 const INFO_PAGES={
   about:`<h2>運営者情報</h2>
-    <p style="line-height:1.8;color:var(--txt2)">サイト名：うるおいらぼ<br>
-    運営の目的：スキンケア商品の情報比較・肌悩み別の商品選びをサポートすること。<br>
-    ※運用開始前に、運営者名・連絡先・所在地（特定商取引法上必要な場合）をここに記載してください。</p>`,
+    <table style="width:100%;line-height:1.8;color:var(--txt2);font-size:14px;border-collapse:collapse">
+      <tr><td style="padding:8px 0;width:120px;color:var(--txt3);vertical-align:top">サイト名</td><td style="padding:8px 0">Moilum（モイルム）</td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">運営者</td><td style="padding:8px 0">Moilum編集部</td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">連絡先</td><td style="padding:8px 0"><a href="mailto:sanji.104vt@gmail.com" style="color:var(--accent)">sanji.104vt@gmail.com</a></td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">運営開始</td><td style="padding:8px 0">2026年</td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">運営目的</td><td style="padding:8px 0">スキンケア商品の比較情報を提供し、肌タイプ・悩みに合った商品選びをサポートすること。</td></tr>
+    </table>
+    <p style="line-height:1.8;color:var(--txt2);font-size:14px;margin-top:14px">当サイトはスキンケア商品の情報を独自にまとめて掲載する比較メディアです。商品の販売は行っておらず、各販売サイト（Amazon・楽天市場・Qoo10等）への送客を行うアフィリエイトサイトです。お問い合わせは上記メールアドレスまでお願いいたします。</p>`,
   privacy:`<h2>プライバシーポリシー</h2>
     <p style="line-height:1.8;color:var(--txt2)">当サイトでは、アクセス解析や広告配信のためにCookie等を利用する場合があります。これらは個人を特定する情報を含みません。<br><br>
     <b>アクセス解析ツール</b><br>当サイトはGoogle Analytics等のアクセス解析ツールを使用する場合があります。トラフィックデータは匿名で収集されます。<br><br>
@@ -1149,8 +1154,9 @@ const INFO_PAGES={
     購入者の負担が増えることはありません。掲載順位やおすすめは、当サイト独自の基準に基づくものです。<br><br>
     景品表示法（ステマ規制）に基づき、広告であることを明示しています。</p>`,
   contact:`<h2>お問い合わせ</h2>
-    <p style="line-height:1.8;color:var(--txt2)">ご意見・掲載情報の訂正依頼などは、運用開始時に設置するお問い合わせフォームまたはメールアドレスよりご連絡ください。<br><br>
-    ※ここに実際の連絡先（フォームURLやメールアドレス）を記載してください。</p>`,
+    <p style="line-height:1.8;color:var(--txt2);font-size:14px">掲載情報の誤りのご指摘、ご意見・ご要望などは、下記メールアドレスまでお気軽にご連絡ください。内容を確認のうえ、順次対応いたします。</p>
+    <p style="line-height:1.8;font-size:15px;margin-top:14px"><b>メール：</b><a href="mailto:sanji.104vt@gmail.com" style="color:var(--accent)">sanji.104vt@gmail.com</a></p>
+    <p style="line-height:1.8;color:var(--txt3);font-size:13px;margin-top:14px">※返信までお時間をいただく場合があります。商品そのものに関する個別のご相談（在庫・配送など）は、各販売サイトへお問い合わせください。</p>`,
 };
 function openInfo(key){
   document.getElementById("infoContent").innerHTML=INFO_PAGES[key]||"";
@@ -1289,7 +1295,7 @@ function openColumn(id){
       <button class="back-btn" onclick="renderColumnList()">← コラム一覧に戻る</button>
       <div class="ctag" style="color:var(--accent);font-weight:700;font-size:12px">${c.cat}</div>
       <h1>${c.title}</h1>
-      <div class="meta">うるおいらぼ編集部 ・ ${c.readtime}</div>
+      <div class="meta">Moilum編集部 ・ ${c.readtime}</div>
       ${c.body}
       ${related.length?`<div class="related">
         <div style="font-size:13px;font-weight:700;margin-bottom:10px">この記事に関連する商品</div>
