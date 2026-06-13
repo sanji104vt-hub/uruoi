@@ -1,0 +1,1319 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="化粧水・美容液・日焼け止めなど167商品を肌タイプ・悩み別に比較。AI肌診断やスキンケアコラムも。あなたに合った一本が見つかる比較サイト。">
+<title>Moilum（モイルム）｜スキンケア商品の比較・肌診断・ランキング</title>
+<style>
+:root{
+  --bg:#faf9f7;--bg2:#fff;--bg3:#f0ede8;
+  --txt:#1a1a1a;--txt2:#555;--txt3:#888;
+  --accent:#d4856a;--accent2:#f5ede8;
+  --border:#e8e3dc;--border2:#d4cec5;
+  --card-shadow:0 2px 12px rgba(0,0,0,.06);
+  --radius:14px;--radius-sm:8px;
+}
+.dark{
+  --bg:#0f0e0d;--bg2:#1a1917;--bg3:#242220;
+  --txt:#f0ede8;--txt2:#b5b0a8;--txt3:#7a756e;
+  --accent:#e09a82;--accent2:#2a1f1a;
+  --border:#2f2c28;--border2:#3d3a35;
+  --card-shadow:0 2px 12px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:'Hiragino Kaku Gothic Pro','Yu Gothic',sans-serif;min-height:100vh;transition:background .3s,color .3s}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit}
+
+header{
+  background:var(--bg2);border-bottom:1px solid var(--border);
+  padding:0 20px;display:flex;align-items:center;justify-content:space-between;
+  height:60px;position:sticky;top:0;z-index:100;
+}
+.logo{font-size:20px;font-weight:700;letter-spacing:-.5px;color:var(--accent)}
+.logo span{color:var(--txt);font-weight:400}
+
+nav{display:flex;gap:4px}
+.nav-btn{
+  background:none;border:none;padding:8px 14px;border-radius:var(--radius-sm);
+  color:var(--txt2);font-size:14px;transition:all .2s;
+}
+.nav-btn:hover,.nav-btn.active{background:var(--accent2);color:var(--accent)}
+.dark-btn{
+  background:none;border:1px solid var(--border2);border-radius:var(--radius-sm);
+  padding:6px 10px;color:var(--txt2);font-size:13px;margin-left:8px;transition:all .2s;
+}
+.dark-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+.page{display:none;padding:24px 20px;max-width:1100px;margin:0 auto}
+.page.active{display:block}
+
+.search-bar{
+  display:flex;gap:10px;margin-bottom:20px;align-items:center;flex-wrap:wrap;
+}
+.search-input{
+  flex:1;min-width:200px;padding:10px 16px;border:1px solid var(--border2);
+  border-radius:var(--radius-sm);background:var(--bg2);color:var(--txt);
+  font-size:15px;font-family:inherit;outline:none;transition:border .2s;
+}
+.search-input:focus{border-color:var(--accent)}
+.filter-group{display:flex;gap:6px;flex-wrap:wrap}
+.filter-btn{
+  background:var(--bg2);border:1px solid var(--border2);border-radius:20px;
+  padding:6px 14px;font-size:13px;color:var(--txt2);transition:all .2s;
+}
+.filter-btn:hover,.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:18px;transition:box-shadow .2s,transform .2s;cursor:pointer;
+  display:flex;flex-direction:column;gap:10px;
+}
+.card:hover{box-shadow:var(--card-shadow);transform:translateY(-2px)}
+.card-tag{
+  display:inline-block;background:var(--accent2);color:var(--accent);
+  font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;
+}
+.card-name{font-size:17px;font-weight:700;line-height:1.3}
+.card-brand{font-size:13px;color:var(--txt3)}
+.card-desc{font-size:13px;color:var(--txt2);line-height:1.6}
+.card-price{font-size:18px;font-weight:700;color:var(--accent)}
+.card-price span{font-size:12px;color:var(--txt3);font-weight:400}
+.stars{color:#f5a623;font-size:14px;letter-spacing:1px}
+.card-footer{display:flex;gap:8px;margin-top:4px}
+.card-img{margin:-6px -6px 6px;border-radius:var(--radius-sm);overflow:hidden}
+.card-img svg{display:block}
+.pr-tag{
+  display:inline-block;background:var(--txt3);color:var(--bg2);
+  font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px;
+}
+.shop-btns{display:flex;gap:8px;flex-wrap:wrap}
+.shop-btn{
+  flex:1;min-width:120px;padding:12px;border:none;border-radius:var(--radius-sm);
+  font-size:14px;font-weight:700;color:#fff;font-family:inherit;transition:opacity .2s;
+}
+.shop-btn:hover{opacity:.85}
+.shop-btn.amazon{background:#ff9900;color:#1a1a1a}
+.shop-btn.rakuten{background:#bf0000}
+.shop-btn.qoo10{background:#e60012}
+.pr-banner{
+  background:var(--accent2);color:var(--accent);font-size:12px;
+  padding:8px 20px;text-align:center;border-bottom:1px solid var(--border);
+}
+.site-footer{
+  background:var(--bg2);border-top:1px solid var(--border);
+  padding:28px 20px;margin-top:40px;font-size:13px;color:var(--txt3);
+}
+.site-footer .footer-inner{max-width:1100px;margin:0 auto}
+.site-footer a{color:var(--accent);cursor:pointer}
+.site-footer .footer-links{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+.site-footer .footer-links a{font-weight:600}
+.column-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px}
+.column-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;cursor:pointer;transition:box-shadow .2s,transform .2s;
+}
+.column-card:hover{box-shadow:var(--card-shadow);transform:translateY(-2px)}
+.column-card .ctag{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.5px}
+.column-card h3{font-size:17px;font-weight:700;margin:8px 0;line-height:1.4}
+.column-card p{font-size:13px;color:var(--txt2);line-height:1.6}
+.column-card .readtime{font-size:12px;color:var(--txt3);margin-top:10px}
+.article{max-width:760px}
+.article h1{font-size:26px;font-weight:800;line-height:1.4;margin-bottom:12px}
+.article .meta{font-size:13px;color:var(--txt3);margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.article h2{font-size:20px;font-weight:700;margin:28px 0 12px}
+.article p{font-size:15px;line-height:1.9;color:var(--txt);margin-bottom:16px}
+.article ul{margin:0 0 16px 20px;line-height:1.9;font-size:15px}
+.article li{margin-bottom:6px}
+.article .back-btn{
+  background:none;border:1px solid var(--border2);border-radius:var(--radius-sm);
+  padding:8px 16px;font-size:13px;color:var(--txt2);margin-bottom:20px;font-family:inherit;
+}
+.article .back-btn:hover{border-color:var(--accent);color:var(--accent)}
+.article .related{background:var(--bg3);border-radius:var(--radius);padding:16px;margin-top:24px}
+.article .related a{color:var(--accent);font-weight:600;cursor:pointer;font-size:14px}
+.btn{
+  flex:1;padding:9px;border-radius:var(--radius-sm);border:none;
+  font-size:13px;font-weight:600;transition:all .2s;font-family:inherit;
+}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{opacity:.85}
+.btn-secondary{background:var(--bg3);color:var(--txt2);border:1px solid var(--border2)}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.btn-fav{
+  width:38px;flex:none;background:var(--bg3);border:1px solid var(--border2);
+  color:var(--txt3);font-size:16px;border-radius:var(--radius-sm);transition:all .2s;
+}
+.btn-fav.active,.btn-fav:hover{background:var(--accent2);border-color:var(--accent);color:var(--accent)}
+
+.modal-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200;
+  align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:var(--bg2);border-radius:var(--radius);padding:28px;
+  max-width:680px;width:100%;max-height:85vh;overflow-y:auto;position:relative;
+}
+.modal-close{
+  position:absolute;top:16px;right:16px;background:none;border:none;
+  font-size:20px;color:var(--txt3);cursor:pointer;
+}
+.modal-close:hover{color:var(--txt)}
+.modal h2{font-size:22px;margin-bottom:16px}
+.modal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}
+.detail-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}
+.detail-row:last-child{border:none}
+.detail-label{color:var(--txt3);font-size:14px}
+.detail-val{font-weight:600;font-size:14px}
+.ingredient-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.ingredient{
+  background:var(--bg3);border:1px solid var(--border);border-radius:20px;
+  padding:4px 12px;font-size:12px;color:var(--txt2);
+}
+.ingredient.key{background:var(--accent2);border-color:var(--accent);color:var(--accent)}
+
+.compare-bar{
+  display:none;position:fixed;bottom:0;left:0;right:0;z-index:150;
+  background:var(--bg2);border-top:1px solid var(--border);padding:14px 20px;
+  align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;
+}
+.compare-bar.open{display:flex}
+.compare-item{
+  background:var(--bg3);border:1px solid var(--border2);border-radius:var(--radius-sm);
+  padding:8px 14px;font-size:13px;display:flex;align-items:center;gap:8px;
+}
+.compare-item button{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:16px}
+
+.compare-table-wrap{overflow-x:auto;margin-top:20px}
+.compare-table{width:100%;border-collapse:collapse;font-size:14px}
+.compare-table th,.compare-table td{padding:12px 16px;text-align:left;border-bottom:1px solid var(--border)}
+.compare-table th{background:var(--bg3);font-weight:600;font-size:13px;color:var(--txt2)}
+.compare-table .highlight{color:var(--accent);font-weight:700}
+
+.ranking-list{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.ranking-item{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px 20px;display:flex;align-items:center;gap:16px;
+  transition:box-shadow .2s;cursor:pointer;
+}
+.ranking-item:hover{box-shadow:var(--card-shadow)}
+.rank-num{
+  font-size:26px;font-weight:800;min-width:44px;text-align:center;
+  color:var(--accent);line-height:1;
+}
+.rank-num.gold{color:#d4a017}
+.rank-num.silver{color:#9e9e9e}
+.rank-num.bronze{color:#a0522d}
+.rank-info{flex:1}
+.rank-name{font-size:16px;font-weight:700;margin-bottom:4px}
+.rank-sub{font-size:13px;color:var(--txt3)}
+
+.brand-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.brand-card{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px;text-align:center;cursor:pointer;transition:all .2s;
+}
+.brand-card:hover{border-color:var(--accent);background:var(--accent2)}
+.brand-logo{font-size:28px;margin-bottom:8px}
+.brand-name{font-size:15px;font-weight:700;margin-bottom:4px}
+.brand-count{font-size:12px;color:var(--txt3)}
+
+.diagnosis-form{max-width:560px}
+.q-block{margin-bottom:24px}
+.q-block label{display:block;font-size:15px;font-weight:600;margin-bottom:10px}
+.q-options{display:flex;flex-wrap:wrap;gap:8px}
+.q-opt{
+  background:var(--bg2);border:1px solid var(--border2);border-radius:20px;
+  padding:8px 16px;font-size:14px;color:var(--txt2);cursor:pointer;transition:all .2s;
+}
+.q-opt:hover,.q-opt.active{background:var(--accent);border-color:var(--accent);color:#fff}
+.diag-btn{
+  background:var(--accent);color:#fff;border:none;border-radius:var(--radius-sm);
+  padding:12px 32px;font-size:15px;font-weight:700;font-family:inherit;
+  margin-top:8px;transition:opacity .2s;
+}
+.diag-btn:hover{opacity:.85}
+.diag-result{margin-top:28px}
+.diag-result h3{font-size:18px;font-weight:700;margin-bottom:16px}
+
+.ai-chat{
+  background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;margin-top:20px;
+}
+.ai-msg{
+  background:var(--accent2);border-radius:var(--radius-sm);padding:14px 16px;
+  font-size:14px;line-height:1.7;margin-bottom:12px;border-left:3px solid var(--accent);
+}
+.loading-dots{display:flex;gap:4px;align-items:center;padding:8px 0}
+.loading-dots span{
+  width:7px;height:7px;background:var(--accent);border-radius:50%;
+  animation:bounce .8s infinite;
+}
+.loading-dots span:nth-child(2){animation-delay:.15s}
+.loading-dots span:nth-child(3){animation-delay:.3s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-8px)}}
+
+.section-title{font-size:22px;font-weight:800;margin-bottom:20px}
+.badge{
+  display:inline-block;background:var(--accent2);color:var(--accent);
+  font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px;margin-right:8px;
+}
+
+.fav-empty{
+  text-align:center;padding:60px 20px;color:var(--txt3);font-size:15px;
+}
+
+@media(max-width:600px){
+  header{padding:0 12px}
+  .nav-btn{padding:6px 8px;font-size:12px}
+  .page{padding:16px 12px}
+  .modal{padding:20px 16px}
+  .modal-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Moi<span>lum</span></div>
+  <nav>
+    <button class="nav-btn active" onclick="showPage('products')">商品</button>
+    <button class="nav-btn" onclick="showPage('brands')">ブランド</button>
+    <button class="nav-btn" onclick="showPage('ranking')">ランキング</button>
+    <button class="nav-btn" onclick="showPage('diagnosis')">肌診断</button>
+    <button class="nav-btn" onclick="showPage('column')">コラム</button>
+    <button class="nav-btn" onclick="showPage('favorites')">お気に入り</button>
+    <button class="dark-btn" onclick="toggleDark()">🌙</button>
+  </nav>
+</header>
+
+<div class="pr-banner">本サイトはアフィリエイト広告（Amazon・楽天・Qoo10等）を利用しています。価格・在庫は各販売サイトでご確認ください。</div>
+
+<div id="productsPage" class="page active">
+  <div class="section-title">スキンケア商品一覧</div>
+  <div class="search-bar">
+    <input id="search" class="search-input" placeholder="商品名・ブランド・成分で検索…">
+    <div class="filter-group" id="filters">
+      <button class="filter-btn active" data-filter="all" onclick="setFilter('all',this)">すべて</button>
+      <button class="filter-btn" data-filter="化粧水" onclick="setFilter('化粧水',this)">化粧水</button>
+      <button class="filter-btn" data-filter="美容液" onclick="setFilter('美容液',this)">美容液</button>
+      <button class="filter-btn" data-filter="保湿クリーム" onclick="setFilter('保湿クリーム',this)">クリーム</button>
+      <button class="filter-btn" data-filter="洗顔" onclick="setFilter('洗顔',this)">洗顔</button>
+      <button class="filter-btn" data-filter="日焼け止め" onclick="setFilter('日焼け止め',this)">日焼け止め</button>
+      <button class="filter-btn" data-filter="パック・マスク" onclick="setFilter('パック・マスク',this)">マスク</button>
+      <button class="filter-btn" data-filter="アイケア" onclick="setFilter('アイケア',this)">その他</button>
+    </div>
+  </div>
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+    <div id="resultCount" style="font-size:13px;color:var(--txt3)"></div>
+    <select id="sortSelect" onchange="applyFilters()" style="padding:8px 12px;border:1px solid var(--border2);border-radius:var(--radius-sm);background:var(--bg2);color:var(--txt);font-size:13px;font-family:inherit;cursor:pointer">
+      <option value="popular">人気順（評価×件数）</option>
+      <option value="rating">評価が高い順</option>
+      <option value="priceLow">価格が安い順</option>
+      <option value="priceHigh">価格が高い順</option>
+      <option value="reviews">レビューが多い順</option>
+    </select>
+  </div>
+  <div id="products" class="grid"></div>
+</div>
+
+<div id="brandsPage" class="page">
+  <div class="section-title">ブランド一覧</div>
+  <div id="brands" class="brand-grid"></div>
+</div>
+
+<div id="rankingPage" class="page">
+  <div class="section-title">人気ランキング</div>
+  <div class="filter-group" id="rankFilters" style="margin-bottom:20px">
+    <button class="filter-btn active" data-rf="all" onclick="setRankFilter('all',this)">総合</button>
+    <button class="filter-btn" data-rf="化粧水" onclick="setRankFilter('化粧水',this)">化粧水</button>
+    <button class="filter-btn" data-rf="美容液" onclick="setRankFilter('美容液',this)">美容液</button>
+    <button class="filter-btn" data-rf="保湿クリーム" onclick="setRankFilter('保湿クリーム',this)">クリーム</button>
+    <button class="filter-btn" data-rf="洗顔" onclick="setRankFilter('洗顔',this)">洗顔</button>
+    <button class="filter-btn" data-rf="日焼け止め" onclick="setRankFilter('日焼け止め',this)">日焼け止め</button>
+    <button class="filter-btn" data-rf="パック・マスク" onclick="setRankFilter('パック・マスク',this)">マスク</button>
+  </div>
+  <div id="ranking" class="ranking-list"></div>
+</div>
+
+<div id="diagnosisPage" class="page">
+  <div class="section-title">AI肌診断</div>
+  <p style="color:var(--txt2);margin-bottom:24px;font-size:14px">お肌の状態をお聞きして、あなたに合ったスキンケアをAIがご提案します。</p>
+  <div class="diagnosis-form">
+    <div class="q-block">
+      <label>肌タイプを教えてください</label>
+      <div class="q-options" id="q1">
+        <button class="q-opt" data-val="乾燥肌">乾燥肌</button>
+        <button class="q-opt" data-val="脂性肌（オイリー）">脂性肌</button>
+        <button class="q-opt" data-val="混合肌">混合肌</button>
+        <button class="q-opt" data-val="敏感肌">敏感肌</button>
+        <button class="q-opt" data-val="普通肌">普通肌</button>
+      </div>
+    </div>
+    <div class="q-block">
+      <label>お肌のお悩みは？（複数選択可）</label>
+      <div class="q-options" id="q2" data-multi="true">
+        <button class="q-opt" data-val="乾燥・かさつき">乾燥・かさつき</button>
+        <button class="q-opt" data-val="毛穴の開き・黒ずみ">毛穴・黒ずみ</button>
+        <button class="q-opt" data-val="シミ・くすみ">シミ・くすみ</button>
+        <button class="q-opt" data-val="ニキビ・吹き出物">ニキビ</button>
+        <button class="q-opt" data-val="シワ・たるみ">シワ・たるみ</button>
+        <button class="q-opt" data-val="肌荒れ・赤み">肌荒れ・赤み</button>
+      </div>
+    </div>
+    <div class="q-block">
+      <label>予算の目安は？</label>
+      <div class="q-options" id="q3">
+        <button class="q-opt" data-val="～2,000円">〜2,000円</button>
+        <button class="q-opt" data-val="2,000〜5,000円">2,000〜5,000円</button>
+        <button class="q-opt" data-val="5,000〜10,000円">5,000〜10,000円</button>
+        <button class="q-opt" data-val="10,000円以上">10,000円〜</button>
+      </div>
+    </div>
+    <button class="diag-btn" onclick="diagnose()">AI診断を開始する →</button>
+  </div>
+  <div id="diagResult" class="diag-result" style="display:none"></div>
+</div>
+
+<div id="columnPage" class="page">
+  <div class="section-title">スキンケアコラム</div>
+  <p style="color:var(--txt2);margin-bottom:20px;font-size:14px">肌悩み別の選び方や成分の基礎知識を、わかりやすく解説します。</p>
+  <div id="columnList" class="column-grid"></div>
+  <div id="columnArticle" style="display:none"></div>
+</div>
+
+<div id="favoritesPage" class="page">
+  <div class="section-title">お気に入り</div>
+  <div id="favGrid" class="grid"></div>
+</div>
+
+<div class="compare-bar" id="compareBar">
+  <div style="font-size:13px;font-weight:600;color:var(--txt2)">比較中：</div>
+  <div id="compareItems" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+  <button class="btn btn-primary" style="width:auto;padding:8px 20px" onclick="openCompareModal()">比較する</button>
+  <button class="btn btn-secondary" style="width:auto;padding:8px 16px" onclick="clearCompare()">クリア</button>
+</div>
+
+<div class="modal-overlay" id="detailModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
+    <div id="detailContent"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="compareModal">
+  <div class="modal" style="max-width:900px">
+    <button class="modal-close" onclick="closeModal('compareModal')">✕</button>
+    <div id="compareContent"></div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="infoModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('infoModal')">✕</button>
+    <div id="infoContent"></div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a onclick="openInfo('about')">運営者情報</a>
+      <a onclick="openInfo('privacy')">プライバシーポリシー</a>
+      <a onclick="openInfo('disclosure')">アフィリエイトについて</a>
+      <a onclick="openInfo('contact')">お問い合わせ</a>
+    </div>
+    <p style="margin-bottom:6px">当サイトに掲載の価格・成分・効果に関する情報は参考であり、正確性・最新性を保証するものではありません。購入前に必ず各販売サイト・公式情報をご確認ください。</p>
+    <p>当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。© Moilum</p>
+  </div>
+</footer>
+
+<script>
+const PRODUCTS=[
+  {"id": 1, "name": "キュレル 潤浸保湿化粧水 III（とてもしっとり）", "brand": "キュレル", "category": "化粧水", "price": 1760, "rating": 4.6, "reviews": 2841, "skin": ["敏感肌", "乾燥肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "セラミドケア成分配合で敏感肌でも安心のロングセラー。しっとりしたテクスチャーで乾燥から肌を守ります。", "keyIngredients": ["セラミド機能成分", "グリセリン", "ユーカリエキス"], "icon": "💧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 2, "name": "肌ラボ 極潤 ヒアルロン液", "brand": "ロート製薬", "category": "化粧水", "price": 763, "rating": 4.4, "reviews": 8932, "skin": ["乾燥肌", "普通肌", "混合肌"], "concern": ["乾燥・かさつき"], "desc": "ヒアルロン酸3種配合のプチプラ高保湿化粧水。とろみのあるテクスチャーで肌の奥までうるおいを届けます。", "keyIngredients": ["加水分解ヒアルロン酸", "アセチルヒアルロン酸Na", "ヒアルロン酸Na"], "icon": "💦", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 3, "name": "無印良品 化粧水 敏感肌用 高保湿タイプ", "brand": "無印良品", "category": "化粧水", "price": 1190, "rating": 4.3, "reviews": 6521, "skin": ["敏感肌", "乾燥肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "岩手県釜石の天然水使用。無香料・無着色・無鉱物油の低刺激処方で、大容量コスパ抜群の定番化粧水。", "keyIngredients": ["リピジュア", "ヒアルロン酸Na", "スベリヒユエキス"], "icon": "🌿", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 4, "name": "Anua ドクダミ77% スージングトナー", "brand": "Anua", "category": "化粧水", "price": 3080, "rating": 4.7, "reviews": 5123, "skin": ["混合肌", "脂性肌", "敏感肌"], "concern": ["ニキビ・吹き出物", "肌荒れ・赤み", "毛穴の開き・黒ずみ"], "desc": "ドクダミエキス77%配合で毛穴ケアと鎮静効果が話題の韓国人気化粧水。さっぱりした使い心地。", "keyIngredients": ["ドクダミエキス", "ナイアシンアミド", "パンテノール"], "icon": "🌿", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 5, "name": "ミノン アミノモイスト モイストチャージローション II", "brand": "第一三共ヘルスケア", "category": "化粧水", "price": 1650, "rating": 4.5, "reviews": 3421, "skin": ["敏感肌", "乾燥肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "9種の保湿アミノ酸配合。とろりとした使い心地で敏感肌・乾燥肌をうるおいで満たすもっとしっとりタイプ。", "keyIngredients": ["保湿アミノ酸", "スフィンゴ脂質", "グリチルリチン酸2K"], "icon": "🍃", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 6, "name": "ヒフミド エッセンスローション", "brand": "小林製薬", "category": "化粧水", "price": 4950, "rating": 4.5, "reviews": 1234, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "ヒト型セラミド3種配合。乾燥小じわに集中アプローチする高機能化粧水。", "keyIngredients": ["ヒト型セラミド", "ヒアルロン酸", "コラーゲン"], "icon": "🌸", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 7, "name": "イニスフリー グリーンティー ヒアルロン スキン", "brand": "イニスフリー", "category": "化粧水", "price": 2200, "rating": 4.4, "reviews": 2890, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "チェジュ島緑茶由来成分配合。緑茶乳酸菌が肌のうるおいバリアをサポートするみずみずしい化粧水。", "keyIngredients": ["緑茶エキス", "緑茶乳酸菌", "ヒアルロン酸"], "icon": "🍵", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 8, "name": "ファンケル モイストリファイン 化粧液 II", "brand": "ファンケル", "category": "化粧水", "price": 1650, "rating": 4.3, "reviews": 1890, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき", "毛穴の開き・黒ずみ"], "desc": "無添加処方で敏感肌にも安心。コラーゲン・モイストチャージ成分で角層のすみずみまで保湿。", "keyIngredients": ["アミノ酸", "ヒアルロン酸", "コラーゲン"], "icon": "🏺", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 9, "name": "アクアレーベル バランスケア ローション", "brand": "資生堂", "category": "化粧水", "price": 1320, "rating": 4.2, "reviews": 4210, "skin": ["混合肌", "普通肌"], "concern": ["乾燥・かさつき", "毛穴の開き・黒ずみ"], "desc": "うるおいバランスを整えるドラッグストアの定番。ベタつきにくくしっとり仕上がる化粧水。", "keyIngredients": ["ベビーアミノ酸", "ヒアルロン酸", "コラーゲンGL"], "icon": "💎", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 10, "name": "ナチュリエ ハトムギ化粧水", "brand": "イミュ", "category": "化粧水", "price": 715, "rating": 4.5, "reviews": 12043, "skin": ["脂性肌", "混合肌", "普通肌"], "concern": ["乾燥・かさつき", "ニキビ・吹き出物"], "desc": "ハトムギエキス配合のさっぱり大容量化粧水。たっぷり使えてコスパ最強、全身に使える定番品。", "keyIngredients": ["ハトムギエキス", "グリセリン"], "icon": "🌾", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 11, "name": "Torriden ダイブイン 低分子ヒアルロン酸トナー", "brand": "Torriden", "category": "化粧水", "price": 2400, "rating": 4.6, "reviews": 4532, "skin": ["敏感肌", "乾燥肌", "混合肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "5種類の低分子ヒアルロン酸配合。肌にすばやく浸透し、ベタつかずにうるおいで満たす韓国人気トナー。", "keyIngredients": ["低分子ヒアルロン酸", "パンテノール", "アラントイン"], "icon": "🌊", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 12, "name": "ちふれ 化粧水 とてもしっとりタイプ", "brand": "ちふれ", "category": "化粧水", "price": 660, "rating": 4.3, "reviews": 5621, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "高保湿成分配合の超プチプラ化粧水。詰め替え用もあり経済的、シンプル処方で長年愛される定番。", "keyIngredients": ["ヒアルロン酸", "トレハロース"], "icon": "🧴", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 13, "name": "オルビス クリアフル ローション M", "brand": "オルビス", "category": "化粧水", "price": 1650, "rating": 4.4, "reviews": 3210, "skin": ["脂性肌", "混合肌"], "concern": ["ニキビ・吹き出物", "毛穴の開き・黒ずみ"], "desc": "繰り返す大人ニキビにアプローチする薬用化粧水。うるおいを与えながら肌荒れを防ぐしっとりタイプ。", "keyIngredients": ["紫根エキス", "甘草由来成分", "ヒアルロン酸"], "icon": "🟠", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 14, "name": "SK-II フェイシャルトリートメントクリアローション", "brand": "SK-II", "category": "化粧水", "price": 9900, "rating": 4.6, "reviews": 1567, "skin": ["普通肌", "混合肌"], "concern": ["毛穴の開き・黒ずみ", "シミ・くすみ"], "desc": "古い角質をやさしくオフする拭き取り化粧水。ピテラ™配合で肌を整え透明感を引き出します。", "keyIngredients": ["ピテラ™", "AHA"], "icon": "✨", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 15, "name": "VT シカ マイルドトナー", "brand": "VT Cosmetics", "category": "化粧水", "price": 1980, "rating": 4.4, "reviews": 2103, "skin": ["敏感肌", "混合肌"], "concern": ["肌荒れ・赤み", "ニキビ・吹き出物"], "desc": "CICA成分配合で肌を鎮静。低刺激でゆらぎやすい肌を整える韓国の人気シカライン。", "keyIngredients": ["CICA(ツボクサエキス)", "パンテノール", "マデカッソシド"], "icon": "🍀", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 16, "name": "d プログラム バランスケア ローション MB", "brand": "資生堂", "category": "化粧水", "price": 3520, "rating": 4.5, "reviews": 1876, "skin": ["敏感肌", "混合肌"], "concern": ["肌荒れ・赤み", "ニキビ・吹き出物"], "desc": "敏感肌のための薬用化粧水。皮脂バランスを整えながらうるおいを与え、肌荒れ・ニキビを防ぎます。", "keyIngredients": ["トラネキサム酸", "グリチルリチン酸塩", "ヒアルロン酸"], "icon": "🛡️", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 17, "name": "ハダラボ 白潤プレミアム 薬用浸透美白化粧水", "brand": "ロート製薬", "category": "化粧水", "price": 990, "rating": 4.3, "reviews": 3654, "skin": ["普通肌", "乾燥肌"], "concern": ["シミ・くすみ", "乾燥・かさつき"], "desc": "トラネキサム酸配合の薬用美白化粧水。プチプラながらシミ・そばかすを防ぐ、とろみのある使い心地。", "keyIngredients": ["トラネキサム酸", "ビタミンC誘導体", "ヒアルロン酸"], "icon": "🤍", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 18, "name": "KOSE 米肌 肌潤化粧水", "brand": "コーセー", "category": "化粧水", "price": 5500, "rating": 4.6, "reviews": 2341, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "ライスパワーNo.11配合で肌の水分保持能を改善。乾燥による小じわにもアプローチする実力派化粧水。", "keyIngredients": ["ライスパワーNo.11", "大豆発酵エキス", "グリセリン"], "icon": "🍚", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 19, "name": "DEW ローション コンセントレート", "brand": "カネボウ", "category": "化粧水", "price": 4400, "rating": 4.4, "reviews": 987, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "濃密なとろみで肌をうるおいで満たす保湿化粧水。コラーゲン産生をサポートしハリを与えます。", "keyIngredients": ["ヒアルロン酸", "コラーゲン", "ローヤルゼリーエキス"], "icon": "💠", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 20, "name": "ロクシタン イモーテル プレシューズエッセンスフェース", "brand": "ロクシタン", "category": "化粧水", "price": 8470, "rating": 4.5, "reviews": 654, "skin": ["普通肌", "乾燥肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "イモーテルエッセンシャルオイル配合のエイジングケア化粧水。ハリと弾力に満ちた肌へ導きます。", "keyIngredients": ["イモーテルオイル", "ヒアルロン酸", "ミリアセア"], "icon": "🌼", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 21, "name": "SK-II フェイシャルトリートメントエッセンス", "brand": "SK-II", "category": "美容液", "price": 25300, "rating": 4.8, "reviews": 9876, "skin": ["普通肌", "乾燥肌", "混合肌"], "concern": ["シミ・くすみ", "シワ・たるみ"], "desc": "SK-IIを代表する美容液。独自成分ピテラ™配合で透明感とハリのある肌へ導きます。", "keyIngredients": ["ピテラ™", "ナイアシン"], "icon": "✨", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 22, "name": "Anua PDRN ヒアルロン酸カプセル100セラム", "brand": "Anua", "category": "美容液", "price": 3450, "rating": 4.7, "reviews": 3890, "skin": ["乾燥肌", "普通肌", "混合肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "注目成分PDRNとヒアルロン酸・コラーゲン配合。水のようなテクスチャーで使い続けると肌がもちもちに。", "keyIngredients": ["PDRN", "ヒアルロン酸", "コラーゲン"], "icon": "💉", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 23, "name": "メディキューブ PDRN ピンクアンプル", "brand": "MEDICUBE", "category": "美容液", "price": 5380, "rating": 4.6, "reviews": 4210, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "サーモン由来PDRN10,000ppm配合。ピンク色のとろみセラムでコラーゲン合成をサポート、ハリツヤ肌へ。", "keyIngredients": ["PDRN", "コラーゲン", "ナイアシンアミド"], "icon": "🩷", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 24, "name": "オバジ C25セラム ネオ", "brand": "ロート製薬", "category": "美容液", "price": 11000, "rating": 4.6, "reviews": 3421, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "純粋ビタミンC25%配合の高濃度美容液。毛穴・キメ・くすみ・ハリの多角的悩みにアプローチ。", "keyIngredients": ["ピュアビタミンC25%", "ビタミンE", "コラーゲン"], "icon": "🍋", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 25, "name": "COSRX アドバンス スネイル 96 ムチンパワーエッセンス", "brand": "COSRX", "category": "美容液", "price": 2530, "rating": 4.6, "reviews": 4321, "skin": ["乾燥肌", "敏感肌", "普通肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "かたつむり分泌液96%配合。高保湿でなめらかなテクスチャー、肌をしっとり弾力のある状態に整えます。", "keyIngredients": ["カタツムリ分泌液96%", "ナイアシンアミド", "アデノシン"], "icon": "🐌", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 26, "name": "Beauty of Joseon グロウセラム 米+アルブチン", "brand": "Beauty of Joseon", "category": "美容液", "price": 1980, "rating": 4.6, "reviews": 5643, "skin": ["普通肌", "乾燥肌", "混合肌"], "concern": ["シミ・くすみ", "乾燥・かさつき"], "desc": "米ぬか発酵エキス＋アルブチン配合。くすみケアとうるおいを両立する韓国の人気プチプラ美容液。", "keyIngredients": ["米ぬか発酵エキス", "アルブチン", "ナイアシンアミド"], "icon": "🌾", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 27, "name": "資生堂 アルティミューン パワライジングコンセントレート III", "brand": "資生堂", "category": "美容液", "price": 12100, "rating": 4.7, "reviews": 4532, "skin": ["全肌質", "普通肌"], "concern": ["シワ・たるみ", "肌荒れ・赤み"], "desc": "肌の免疫力に着目した先行美容液。あらゆる肌悩みに先回りでアプローチするロングセラー。", "keyIngredients": ["イムジェネロール", "アカヤジオウ根エキス", "グリセリン"], "icon": "🔴", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 28, "name": "メラノCC 薬用しみ集中対策 美容液", "brand": "ロート製薬", "category": "美容液", "price": 1180, "rating": 4.4, "reviews": 9821, "skin": ["普通肌", "脂性肌"], "concern": ["シミ・くすみ", "ニキビ・吹き出物"], "desc": "活性型ビタミンC配合のプチプラ美容液。シミ・ニキビ跡の集中ケアに、コスパ抜群の定番品。", "keyIngredients": ["活性型ビタミンC", "ビタミンE", "グリチルリチン酸"], "icon": "🍊", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 29, "name": "トリデン ダイブイン セラム", "brand": "Torriden", "category": "美容液", "price": 2640, "rating": 4.5, "reviews": 2341, "skin": ["敏感肌", "混合肌", "脂性肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "低分子ヒアルロン酸でうるおいを届ける軽いテクスチャーのセラム。ベタつかず脂性肌にもおすすめ。", "keyIngredients": ["低分子ヒアルロン酸", "パンテノール", "ベタイン"], "icon": "🌊", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 30, "name": "イニスフリー ブラックティー ユースセラム", "brand": "イニスフリー", "category": "美容液", "price": 3810, "rating": 4.5, "reviews": 1654, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "発酵茶葉由来Rコンセントレート配合。乾燥くすみやハリ低下にアプローチするエイジングケア美容液。", "keyIngredients": ["発酵茶葉エキス", "ヒアルロン酸", "アミノ酸"], "icon": "🍵", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 31, "name": "VINTORTE アクアハイドロセラム", "brand": "ヴァントルテ", "category": "美容液", "price": 4180, "rating": 4.4, "reviews": 876, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "5種のヒアルロン酸とセラミド配合。天然ミネラル由来のとろみセラムで集中保湿。", "keyIngredients": ["ヒアルロン酸", "セラミド", "ナイアシンアミド"], "icon": "💧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 32, "name": "ロート製薬 Obagi C10セラム", "brand": "ロート製薬", "category": "美容液", "price": 4180, "rating": 4.5, "reviews": 2103, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "ビタミンC10%配合の入門向け美容液。毛穴・キメを整えてつるんとした肌へ導きます。", "keyIngredients": ["ピュアビタミンC10%", "ビタミンE"], "icon": "🍋", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 33, "name": "Torriden バランスフル シカ セラム", "brand": "Torriden", "category": "美容液", "price": 2640, "rating": 4.5, "reviews": 1432, "skin": ["敏感肌", "混合肌"], "concern": ["肌荒れ・赤み", "ニキビ・吹き出物"], "desc": "孔雀石抽出物配合の3秒セラム。すばやく浸透して鎮静、テカリが気になる肌にぴったり。", "keyIngredients": ["マラカイトエキス", "CICA", "ヒアルロン酸"], "icon": "💙", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 34, "name": "ELIXIR エンリッチド リンクルクリーム S", "brand": "資生堂", "category": "美容液", "price": 6050, "rating": 4.7, "reviews": 5234, "skin": ["普通肌", "乾燥肌"], "concern": ["シワ・たるみ"], "desc": "純粋レチノール配合の薬用シワ改善美容液。目もと・口もとの気になるシワを改善する医薬部外品。", "keyIngredients": ["純粋レチノール", "コラーゲンGL"], "icon": "⏳", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 35, "name": "ドクターシーラボ VC100エッセンスローションEX", "brand": "ドクターシーラボ", "category": "美容液", "price": 5170, "rating": 4.4, "reviews": 3421, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "高浸透ビタミンC誘導体配合の化粧水兼美容液。毛穴・ハリ・くすみをトータルケア。", "keyIngredients": ["APPS", "ビタミンC誘導体", "ビタミンE誘導体"], "icon": "🧪", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 36, "name": "NUMBUZIN 3番 すべすべキメケアセラム", "brand": "numbuzin", "category": "美容液", "price": 2860, "rating": 4.5, "reviews": 2341, "skin": ["普通肌", "混合肌", "脂性肌"], "concern": ["毛穴の開き・黒ずみ", "シミ・くすみ"], "desc": "ナイアシンアミドとビタミン配合。キメを整え、つるんとなめらかな肌に導く韓国人気セラム。", "keyIngredients": ["ナイアシンアミド", "ビタミンC", "乳酸菌"], "icon": "3️⃣", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 37, "name": "ニベアクリーム 大缶", "brand": "ニベア", "category": "保湿クリーム", "price": 598, "rating": 4.4, "reviews": 15432, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "青缶で有名な定番保湿クリーム。顔・体・全身に使える濃厚保湿、コスパ最強のロングセラー。", "keyIngredients": ["スクワラン", "ホホバオイル", "グリセリン"], "icon": "🫙", "origin": "ドイツ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 38, "name": "クレ・ド・ポー ボーテ ラ クレームN", "brand": "資生堂", "category": "保湿クリーム", "price": 33000, "rating": 4.9, "reviews": 3456, "skin": ["普通肌", "乾燥肌", "混合肌"], "concern": ["シワ・たるみ", "シミ・くすみ"], "desc": "資生堂フラグシップクリーム。独自複合成分でハリ・弾力・透明感を高次元で実現する最高峰クリーム。", "keyIngredients": ["レチノール", "ナイアシンアミド", "コラーゲン"], "icon": "👑", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 39, "name": "AESTURA アトバリア365 クリーム", "brand": "AESTURA", "category": "保湿クリーム", "price": 3300, "rating": 4.7, "reviews": 4123, "skin": ["敏感肌", "乾燥肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "皮膚科学に基づくセラミド配合の保湿クリーム。バリア機能をサポートし敏感肌を365日守ります。", "keyIngredients": ["セラミド", "パンテノール", "マデカッソシド"], "icon": "🧱", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 40, "name": "キュレル 潤浸保湿フェイスクリーム", "brand": "キュレル", "category": "保湿クリーム", "price": 2200, "rating": 4.5, "reviews": 3210, "skin": ["敏感肌", "乾燥肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "セラミドケアの濃厚保湿クリーム。夜の乾燥対策に、敏感肌でも安心して使える低刺激処方。", "keyIngredients": ["セラミド機能成分", "ユーカリエキス", "グリセリン"], "icon": "💙", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 41, "name": "CeraVe 保湿クリーム", "brand": "CeraVe", "category": "保湿クリーム", "price": 2280, "rating": 4.5, "reviews": 3987, "skin": ["乾燥肌", "敏感肌", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "3種のセラミドとヒアルロン酸配合。皮膚科医も推奨するアメリカ発の高保湿クリーム。", "keyIngredients": ["セラミド3種", "ヒアルロン酸", "MVEテクノロジー"], "icon": "🔵", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 42, "name": "Curel エイジングケアシリーズ クリーム", "brand": "キュレル", "category": "保湿クリーム", "price": 3300, "rating": 4.5, "reviews": 1234, "skin": ["敏感肌", "乾燥肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "セラミドケア＋ハリ成分配合のエイジングケアクリーム。年齢を重ねた敏感肌をふっくら保湿。", "keyIngredients": ["セラミド機能成分", "ユーカリエキス", "コラーゲン"], "icon": "⏳", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 43, "name": "Glow Recipe ウォーターメロングロウ モイストクリーム", "brand": "Glow Recipe", "category": "保湿クリーム", "price": 4400, "rating": 4.5, "reviews": 1678, "skin": ["脂性肌", "混合肌", "普通肌"], "concern": ["毛穴の開き・黒ずみ", "シミ・くすみ"], "desc": "スイカエキスとヒアルロン酸配合。べたつかずしっとりするライトウェイトクリーム、毛穴ケアにも。", "keyIngredients": ["スイカエキス", "ヒアルロン酸", "AHA"], "icon": "🍉", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 44, "name": "ラ ロッシュ ポゼ トレリアン ウルトラ", "brand": "ラロッシュポゼ", "category": "保湿クリーム", "price": 4290, "rating": 4.6, "reviews": 2341, "skin": ["敏感肌", "乾燥肌"], "concern": ["肌荒れ・赤み", "乾燥・かさつき"], "desc": "敏感肌専用の保湿クリーム。ターマルウォーター配合で肌を鎮静し、デリケートな肌を守ります。", "keyIngredients": ["ターマルウォーター", "ニアシンアミド", "シアバター"], "icon": "🏥", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 45, "name": "ETUDE スンジョン センシティブクリーム", "brand": "ETUDE", "category": "保湿クリーム", "price": 1980, "rating": 4.4, "reviews": 1876, "skin": ["敏感肌", "乾燥肌"], "concern": ["肌荒れ・赤み", "乾燥・かさつき"], "desc": "パンテノール配合の低刺激クリーム。敏感肌をやさしく保湿する韓国のスキンケアライン。", "keyIngredients": ["パンテノール", "マデカッソシド", "ヒアルロン酸"], "icon": "🌱", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 46, "name": "HABA スクワランクリーム", "brand": "HABA", "category": "保湿クリーム", "price": 2860, "rating": 4.5, "reviews": 1543, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき"], "desc": "高品質スクワラン配合の無添加クリーム。肌なじみがよく、しっとりなめらかな仕上がり。", "keyIngredients": ["スクワラン", "シアバター", "ホホバ種子油"], "icon": "🌾", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 47, "name": "ロクシタン シア フェースクリーム", "brand": "ロクシタン", "category": "保湿クリーム", "price": 6160, "rating": 4.5, "reviews": 987, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "シアバター20%配合の濃密保湿クリーム。乾燥した肌をうるおいで包み込みハリを与えます。", "keyIngredients": ["シアバター20%", "ヒアルロン酸"], "icon": "🌰", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 48, "name": "ラロッシュポゼ エファクラー モウスW", "brand": "ラロッシュポゼ", "category": "洗顔", "price": 1870, "rating": 4.6, "reviews": 2103, "skin": ["脂性肌", "混合肌"], "concern": ["毛穴の開き・黒ずみ", "ニキビ・吹き出物"], "desc": "皮脂コントロールに特化した泡洗顔。過剰な皮脂を落としつつ肌バランスを整える低刺激処方。", "keyIngredients": ["亜鉛", "グリコール酸", "セレン"], "icon": "🧼", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 49, "name": "ファンケル マイルドクレンジングオイル", "brand": "ファンケル", "category": "洗顔", "price": 1870, "rating": 4.6, "reviews": 8765, "skin": ["全肌質", "乾燥肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "うるおいを守りながらメイクをすっきり落とすクレンジングオイル。まつエクOK、無添加処方。", "keyIngredients": ["エイジングケアオイル", "ヒアルロン酸"], "icon": "🛢️", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 50, "name": "ビオレ ザ クレンズ オイルメイク落とし", "brand": "花王", "category": "洗顔", "price": 1100, "rating": 4.4, "reviews": 4321, "skin": ["全肌質", "混合肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "濃いメイクも素早く溶かすクレンジングオイル。とろけるテクスチャーで毛穴汚れもオフ。", "keyIngredients": ["オイル", "グリセリン"], "icon": "💧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 51, "name": "CeraVe ハイドレイティングクレンザー", "brand": "CeraVe", "category": "洗顔", "price": 1980, "rating": 4.5, "reviews": 2341, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき"], "desc": "セラミド配合の保湿洗顔料。うるおいを残しながら洗い上げる、皮膚科医も推奨する低刺激処方。", "keyIngredients": ["セラミド3種", "ヒアルロン酸", "グリセリン"], "icon": "🔵", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 52, "name": "専科 パーフェクトホイップ", "brand": "資生堂", "category": "洗顔", "price": 550, "rating": 4.4, "reviews": 9876, "skin": ["全肌質", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "濃密なもっちり泡が特徴のプチプラ洗顔。シルクエキス配合でしっとり洗い上げる定番品。", "keyIngredients": ["シルクエキス", "ヒアルロン酸"], "icon": "🫧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 53, "name": "Anua ヘチマ70 ポアクレンジングオイル", "brand": "Anua", "category": "洗顔", "price": 2640, "rating": 4.5, "reviews": 1876, "skin": ["脂性肌", "混合肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "ヘチマエキス配合のクレンジングオイル。毛穴の黒ずみや角栓をすっきり落とす韓国人気アイテム。", "keyIngredients": ["ヘチマエキス", "ホホバオイル", "ビタミンE"], "icon": "🧽", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 54, "name": "ロゼット 洗顔パスタ 海泥スムース", "brand": "ロゼット", "category": "洗顔", "price": 660, "rating": 4.3, "reviews": 5432, "skin": ["脂性肌", "混合肌"], "concern": ["毛穴の開き・黒ずみ", "ニキビ・吹き出物"], "desc": "海泥配合の毛穴ケア洗顔。余分な皮脂や角質を吸着し、つるんとなめらかな肌に洗い上げます。", "keyIngredients": ["海泥(マリンシルト)", "グリチルリチン酸"], "icon": "🌊", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 55, "name": "無印良品 マイルド保湿洗顔フォーム", "brand": "無印良品", "category": "洗顔", "price": 750, "rating": 4.3, "reviews": 3210, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき"], "desc": "天然うるおい成分配合の低刺激洗顔フォーム。敏感肌にもやさしく、しっとり洗い上げます。", "keyIngredients": ["リピジュア", "ヒアルロン酸Na", "アンズ果汁"], "icon": "🌿", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 56, "name": "ビオレUV アクアリッチ ウォータリーエッセンス", "brand": "花王", "category": "日焼け止め", "price": 990, "rating": 4.6, "reviews": 12341, "skin": ["全肌質", "混合肌"], "concern": ["シミ・くすみ"], "desc": "SPF50+ PA++++。みずみずしいエッセンスタイプで白浮きせず、化粧下地にも使える定番日焼け止め。", "keyIngredients": ["ヒアルロン酸", "ローヤルゼリーエキス"], "icon": "☀️", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 57, "name": "アネッサ パーフェクトUV スキンケアミルク N", "brand": "資生堂", "category": "日焼け止め", "price": 3300, "rating": 4.7, "reviews": 8765, "skin": ["全肌質", "普通肌"], "concern": ["シミ・くすみ"], "desc": "SPF50+ PA++++。汗・水・熱に強いオートブースター技術。スキンケア成分50%配合の高機能UV。", "keyIngredients": ["スーパーヒアルロン酸", "コラーゲンGL", "トラネキサム酸"], "icon": "🌟", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 58, "name": "ラロッシュポゼ UVイデア XL プロテクショントーンアップ", "brand": "ラロッシュポゼ", "category": "日焼け止め", "price": 3740, "rating": 4.6, "reviews": 4532, "skin": ["敏感肌", "混合肌"], "concern": ["シミ・くすみ", "肌荒れ・赤み"], "desc": "SPF50 PA++++。敏感肌用のトーンアップ日焼け止め。ローズの色で肌を明るく見せる化粧下地兼用。", "keyIngredients": ["ターマルウォーター", "ビタミンE", "ヒアルロン酸"], "icon": "🌹", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 59, "name": "スキンアクア トーンアップUVエッセンス", "brand": "ロート製薬", "category": "日焼け止め", "price": 825, "rating": 4.4, "reviews": 6543, "skin": ["全肌質", "混合肌"], "concern": ["シミ・くすみ"], "desc": "SPF50+ PA++++。ラベンダーカラーで透明感アップ。プチプラなのに化粧下地としても優秀。", "keyIngredients": ["ヒアルロン酸", "ビタミンC誘導体", "コラーゲン"], "icon": "💜", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 60, "name": "ニベアUV ディープ プロテクト＆ケア ジェル", "brand": "ニベア", "category": "日焼け止め", "price": 990, "rating": 4.4, "reviews": 3210, "skin": ["全肌質", "乾燥肌"], "concern": ["シミ・くすみ", "乾燥・かさつき"], "desc": "SPF50+ PA++++。美容液成分配合のジェルタイプ。みずみずしくのびて全身に使える日焼け止め。", "keyIngredients": ["ヒアルロン酸", "保湿美容液成分"], "icon": "🧴", "origin": "ドイツ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 61, "name": "イニスフリー トーンアップ ノーセバム サンスクリーン", "brand": "イニスフリー", "category": "日焼け止め", "price": 2090, "rating": 4.4, "reviews": 1654, "skin": ["脂性肌", "混合肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "SPF50+ PA++++。皮脂テカリを抑えながら自然にトーンアップ。化粧下地にもなる韓国人気UV。", "keyIngredients": ["グリーンティーエキス", "ナイアシンアミド"], "icon": "🍵", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 62, "name": "ルルルン プレシャス GREEN（バランス）", "brand": "ルルルン", "category": "パック・マスク", "price": 1650, "rating": 4.4, "reviews": 5432, "skin": ["普通肌", "混合肌"], "concern": ["乾燥・かさつき", "毛穴の開き・黒ずみ"], "desc": "32枚入り大容量フェイスマスク。毎日使える肌バランス保湿マスク、プチプラで続けやすい定番。", "keyIngredients": ["ヒアルロン酸", "加水分解コラーゲン", "ナイアシンアミド"], "icon": "🟢", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 63, "name": "MEDIHEAL N.M.F アクアリングアンプルマスク", "brand": "MEDIHEAL", "category": "パック・マスク", "price": 2200, "rating": 4.5, "reviews": 4321, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "NMF保湿成分配合の韓国人気シートマスク。10枚入り、肌にうるおいをたっぷりチャージ。", "keyIngredients": ["NMF", "ヒアルロン酸", "パンテノール"], "icon": "💧", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 64, "name": "我的美麗日記（私のきれい日記）黒真珠マスク", "brand": "我的美麗日記", "category": "パック・マスク", "price": 1100, "rating": 4.3, "reviews": 3210, "skin": ["普通肌", "乾燥肌"], "concern": ["シミ・くすみ", "乾燥・かさつき"], "desc": "黒真珠エキス配合の台湾人気シートマスク。透明感を引き出すうるおいケア、お手頃価格。", "keyIngredients": ["黒真珠エキス", "ヒアルロン酸"], "icon": "🖤", "origin": "台湾", "purchase": "https://www.qoo10.jp/"},
+  {"id": 65, "name": "VT シカ デイリースージングマスク", "brand": "VT Cosmetics", "category": "パック・マスク", "price": 2640, "rating": 4.5, "reviews": 2103, "skin": ["敏感肌", "混合肌"], "concern": ["肌荒れ・赤み", "ニキビ・吹き出物"], "desc": "CICA成分配合のデイリーマスク。30枚入りで肌荒れ・赤みを鎮静、コスパの良い韓国シカパック。", "keyIngredients": ["CICA", "パンテノール", "マデカッソシド"], "icon": "🍀", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 66, "name": "クオリティファースト ダーマレーザー スーパーVC100マスク", "brand": "クオリティファースト", "category": "パック・マスク", "price": 1430, "rating": 4.4, "reviews": 2341, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "ビタミンC誘導体配合の集中ケアマスク。毛穴・くすみにアプローチする高機能シートマスク。", "keyIngredients": ["ビタミンC誘導体", "ナイアシンアミド", "コラーゲン"], "icon": "🍋", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 67, "name": "メディキューブ エイジショット ニードルアイクリーム", "brand": "MEDICUBE", "category": "アイケア", "price": 4980, "rating": 4.5, "reviews": 1876, "skin": ["普通肌", "乾燥肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "目もとのハリ・小じわにアプローチするアイクリーム。塗る美容針コンセプトの韓国人気アイテム。", "keyIngredients": ["PDRN", "ペプチド", "ナイアシンアミド"], "icon": "👁️", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 68, "name": "アイキララ", "brand": "北の快適工房", "category": "アイケア", "price": 2980, "rating": 4.2, "reviews": 3210, "skin": ["普通肌", "乾燥肌"], "concern": ["シワ・たるみ", "シミ・くすみ"], "desc": "目の下のクマ・くすみに着目したアイクリーム。ハリを与えて明るい印象の目もとへ導きます。", "keyIngredients": ["MGAビタミンC誘導体", "ハロキシル", "K複合体"], "icon": "👀", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 69, "name": "ELIXIR つや玉ミスト", "brand": "資生堂", "category": "アイケア", "price": 1980, "rating": 4.4, "reviews": 1543, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき"], "desc": "いつでもうるおいチャージできる美容ミスト。メイクの上からも使えて乾燥を防ぐ即効ケア。", "keyIngredients": ["ヒアルロン酸", "コラーゲンGL"], "icon": "💨", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 70, "name": "DECORTÉ モイスチュアリポソーム", "brand": "コーセー", "category": "美容液", "price": 13200, "rating": 4.7, "reviews": 2341, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "多重層リポソーム技術で角層のすみずみまで保湿成分を届ける先行美容液。なめらかでうるおう肌へ。", "keyIngredients": ["多重層リポソーム", "ヒアルロン酸", "フィトステロール"], "icon": "💧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 71, "name": "Dr.Jart+ シカペアクリーム", "brand": "Dr.Jart+", "category": "保湿クリーム", "price": 4180, "rating": 4.5, "reviews": 3210, "skin": ["敏感肌", "混合肌"], "concern": ["肌荒れ・赤み", "乾燥・かさつき"], "desc": "CICA成分配合の鎮静クリーム。赤み・肌荒れをケアし、ゆらぎ肌を健やかに整える韓国人気品。", "keyIngredients": ["CICA", "タイガーハーブ", "ナイアシンアミド"], "icon": "🐯", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 72, "name": "KANEBO ザ ファースト セラム", "brand": "カネボウ", "category": "美容液", "price": 16500, "rating": 4.6, "reviews": 1234, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "とろけるようなテクスチャーの先行美容液。肌の生命感に着目しハリとうるおいに満ちた肌へ。", "keyIngredients": ["イオネックス", "保湿成分", "エモリエント成分"], "icon": "🌟", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 73, "name": "ロート製薬 メンソレータム リップ メディケーティッド", "brand": "ロート製薬", "category": "アイケア", "price": 420, "rating": 4.3, "reviews": 8765, "skin": ["全肌質"], "concern": ["乾燥・かさつき"], "desc": "乾燥した唇をケアする薬用リップクリーム。ビタミン配合でうるおいを保つ携帯に便利な定番品。", "keyIngredients": ["ビタミンE", "ビタミンB6", "アラントイン"], "icon": "💄", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 74, "name": "クラランス ダブル セーラム EX", "brand": "クラランス", "category": "美容液", "price": 15400, "rating": 4.7, "reviews": 1654, "skin": ["全肌質", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "水溶性と油溶性の2層構造美容液。21種の植物成分で多角的にエイジングケア、ハリ・ツヤ肌へ。", "keyIngredients": ["ターメリック", "バナナ葉エキス", "オーガニックオート"], "icon": "💛", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 75, "name": "ESTÉE LAUDER アドバンス ナイト リペア", "brand": "エスティローダー", "category": "美容液", "price": 13200, "rating": 4.7, "reviews": 5432, "skin": ["全肌質", "乾燥肌"], "concern": ["シワ・たるみ", "シミ・くすみ"], "desc": "夜の修復に着目した茶色いボトルの名品美容液。うるおいとハリを与え翌朝の肌コンディションを整える。", "keyIngredients": ["クロノラックス", "ヒアルロン酸", "酵母エキス"], "icon": "🟤", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 76, "name": "LANCÔME ジェニフィック アドバンスト N", "brand": "ランコム", "category": "美容液", "price": 11000, "rating": 4.6, "reviews": 4321, "skin": ["全肌質", "普通肌"], "concern": ["シワ・たるみ", "肌荒れ・赤み"], "desc": "肌のうるおいバリアに着目した先行美容液。なめらかなテクスチャーでハリと透明感のある肌へ。", "keyIngredients": ["ビフィズス菌培養溶解質", "ヒアルロン酸"], "icon": "🌸", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 77, "name": "NUMBUZIN 5番 ハリツヤ濃縮 TXAアンプル", "brand": "numbuzin", "category": "美容液", "price": 3300, "rating": 4.5, "reviews": 1432, "skin": ["普通肌", "乾燥肌"], "concern": ["シミ・くすみ", "シワ・たるみ"], "desc": "トラネキサム酸配合の高濃縮アンプル。くすみケアとハリツヤを両立する韓国人気のセラム。", "keyIngredients": ["トラネキサム酸", "ナイアシンアミド", "ペプチド"], "icon": "5️⃣", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 78, "name": "skinfood ロイヤルハニー プロポリスエンリッチエッセンス", "brand": "SKINFOOD", "category": "美容液", "price": 2530, "rating": 4.4, "reviews": 1876, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "ロイヤルゼリー・ハチミツ・プロポリス配合の濃密エッセンス。とろみのある質感で集中保湿。", "keyIngredients": ["ロイヤルゼリー", "プロポリス", "ハチミツ"], "icon": "🍯", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 79, "name": "コーセー 雪肌精 クリアウェルネス ピュア コンク", "brand": "コーセー", "category": "化粧水", "price": 5500, "rating": 4.5, "reviews": 2341, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "和漢植物エキス配合の薬用美白化粧液。みずみずしくうるおい、透明感のある肌へ導く名品。", "keyIngredients": ["イトワエキス", "ハトムギエキス", "ビタミンC誘導体"], "icon": "❄️", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 80, "name": "クリニーク モイスチャー サージ 100H", "brand": "クリニーク", "category": "保湿クリーム", "price": 6050, "rating": 4.5, "reviews": 2103, "skin": ["乾燥肌", "混合肌"], "concern": ["乾燥・かさつき"], "desc": "100時間うるおいが続くと謳うジェルクリーム。みずみずしくベタつかず、乾燥肌をしっかり保湿。", "keyIngredients": ["アロエバーベラ", "ヒアルロン酸"], "icon": "💚", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 81, "name": "DUO ザ クレンジングバーム", "brand": "プレミアアンチエイジング", "category": "洗顔", "price": 3960, "rating": 4.5, "reviews": 6543, "skin": ["全肌質", "乾燥肌"], "concern": ["毛穴の開き・黒ずみ", "乾燥・かさつき"], "desc": "とろける感触のクレンジングバーム。メイク落とし・洗顔・角質ケア・マッサージ・トリートメントの5役。", "keyIngredients": ["31種のエイジングケア成分", "毛穴クリアカプセル"], "icon": "🍮", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 82, "name": "ビオデルマ サンシビオ エイチツーオー D", "brand": "ビオデルマ", "category": "洗顔", "price": 2420, "rating": 4.5, "reviews": 4321, "skin": ["敏感肌", "全肌質"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "敏感肌向け拭き取りクレンジングウォーター。こすらずメイクオフ、肌に優しいフランスの定番品。", "keyIngredients": ["精製水", "キュウリ果実エキス"], "icon": "💧", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 83, "name": "ペアアクネ クリーミーフォーム", "brand": "ライオン", "category": "洗顔", "price": 1100, "rating": 4.3, "reviews": 2341, "skin": ["脂性肌", "混合肌"], "concern": ["ニキビ・吹き出物", "毛穴の開き・黒ずみ"], "desc": "思春期・大人ニキビ向け薬用洗顔フォーム。なめらかな泡で毛穴汚れをオフし肌荒れを防ぐ。", "keyIngredients": ["イソプロピルメチルフェノール", "グリチルリチン酸"], "icon": "🫧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 84, "name": "ジルスチュアート リラックス ボディローション", "brand": "ジルスチュアート", "category": "保湿クリーム", "price": 3300, "rating": 4.4, "reviews": 987, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき"], "desc": "上品な香りの全身保湿ローション。みずみずしくのびてしっとり、ギフトにも人気のアイテム。", "keyIngredients": ["ヒアルロン酸", "植物エキス"], "icon": "💐", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 85, "name": "THREE バランシング クレンジングオイル", "brand": "THREE", "category": "洗顔", "price": 4620, "rating": 4.5, "reviews": 765, "skin": ["全肌質", "乾燥肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "天然由来成分配合のクレンジングオイル。メイクをすっきり落としながらうるおいを守る。", "keyIngredients": ["植物オイル", "エッセンシャルオイル"], "icon": "🌿", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 86, "name": "ALBION エクサージュ モイスト フルエッセンス ローション", "brand": "アルビオン", "category": "化粧水", "price": 6050, "rating": 4.6, "reviews": 1543, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "とろみのある高保湿化粧水。うるおいとハリを与え、なめらかでふっくらした肌に整える。", "keyIngredients": ["ヒアルロン酸", "コラーゲン", "アミノ酸"], "icon": "💧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 87, "name": "Curél ディープモイスチャースプレー", "brand": "キュレル", "category": "化粧水", "price": 1320, "rating": 4.5, "reviews": 3210, "skin": ["敏感肌", "乾燥肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "逆さでも使えるミスト化粧水。セラミドケアで顔・体・髪の生え際まで瞬間保湿、敏感肌に。", "keyIngredients": ["セラミド機能成分", "ユーカリエキス"], "icon": "💨", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 88, "name": "オードムーゲ 薬用ローション", "brand": "小林製薬", "category": "化粧水", "price": 1320, "rating": 4.4, "reviews": 4532, "skin": ["脂性肌", "混合肌"], "concern": ["ニキビ・吹き出物", "肌荒れ・赤み"], "desc": "拭き取り式の薬用ローション。肌のあれ・ニキビを防ぐ、長年愛される清潔ケアの定番品。", "keyIngredients": ["グリチルリチン酸", "イソプロピルメチルフェノール"], "icon": "🧴", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 89, "name": "ハトムギ保湿ジェル", "brand": "イミュ", "category": "保湿クリーム", "price": 770, "rating": 4.4, "reviews": 5432, "skin": ["脂性肌", "混合肌", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "ハトムギエキス配合のさっぱりジェル。ベタつかずたっぷり使える大容量保湿、全身OK。", "keyIngredients": ["ハトムギエキス", "ヒアルロン酸"], "icon": "🌾", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 90, "name": "ANUA ナイアシンアミド10% + TXA4% セラム", "brand": "Anua", "category": "美容液", "price": 3300, "rating": 4.5, "reviews": 2103, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "ナイアシンアミドとトラネキサム酸配合。くすみ・毛穴・色ムラにアプローチする韓国人気セラム。", "keyIngredients": ["ナイアシンアミド10%", "トラネキサム酸4%", "ビタミンC"], "icon": "⚗️", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 91, "name": "Kiehl's クリーミー アイ トリートメント アボカド", "brand": "キールズ", "category": "アイケア", "price": 4290, "rating": 4.4, "reviews": 1654, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "アボカドオイル配合のアイクリーム。目もとの乾燥をしっとりケア、なめらかなテクスチャー。", "keyIngredients": ["アボカドオイル", "シアバター", "βカロチン"], "icon": "🥑", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 92, "name": "Fujifilm アスタリフト ジェリー アクアリスタ", "brand": "富士フイルム", "category": "美容液", "price": 9180, "rating": 4.6, "reviews": 2341, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "ナノ化技術のセラミド＆アスタキサンチン配合先行ジェリー美容液。ぷるんとした感触でハリ肌へ。", "keyIngredients": ["ヒト型ナノセラミド", "ナノアスタキサンチン", "ナノリコピン"], "icon": "🟠", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 93, "name": "ONE BY KOSE メラノショット ホワイト D", "brand": "コーセー", "category": "美容液", "price": 5478, "rating": 4.5, "reviews": 3210, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ"], "desc": "コウジ酸配合の薬用美白美容液。メラニンの生成を抑え、シミ・そばかすを防ぐ実力派。", "keyIngredients": ["コウジ酸", "ヒアルロン酸"], "icon": "🤍", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 94, "name": "ドゥーオーガニック クオリティ セラム モイスト", "brand": "ドゥーオーガニック", "category": "美容液", "price": 6600, "rating": 4.4, "reviews": 654, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "オーガニック認証の発酵美容液。国産植物成分でうるおいとハリを与える肌に優しいセラム。", "keyIngredients": ["玄米発酵エキス", "アルガンオイル", "ヒアルロン酸"], "icon": "🌾", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 95, "name": "CNP Laboratory プロポリス アンプルミスト", "brand": "CNP", "category": "化粧水", "price": 2530, "rating": 4.4, "reviews": 1432, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "プロポリスエキス配合のミスト化粧水。メイクの上からうるおいチャージ、韓国の皮膚科学コスメ。", "keyIngredients": ["プロポリスエキス", "ハチミツ", "パンテノール"], "icon": "🐝", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 96, "name": "Mediheal マデカソ シカ アンプル", "brand": "MEDIHEAL", "category": "美容液", "price": 2860, "rating": 4.4, "reviews": 1543, "skin": ["敏感肌", "混合肌"], "concern": ["肌荒れ・赤み", "ニキビ・吹き出物"], "desc": "マデカッソシド配合の鎮静アンプル。赤み・肌荒れをケアし、ゆらぎ肌を整える韓国セラム。", "keyIngredients": ["マデカッソシド", "CICA", "パンテノール"], "icon": "🍀", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 97, "name": "ETVOS モイスチャライジングセラム", "brand": "エトヴォス", "category": "美容液", "price": 4400, "rating": 4.5, "reviews": 2103, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "ヒト型セラミド5種配合の保湿美容液。バリア機能をサポートし、敏感肌のうるおいを保つ。", "keyIngredients": ["ヒト型セラミド5種", "ヒアルロン酸", "リピジュア"], "icon": "🌿", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 98, "name": "KIEHL'S ウルトラ フェイシャル クリーム", "brand": "キールズ", "category": "保湿クリーム", "price": 4400, "rating": 4.5, "reviews": 3210, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき"], "desc": "スクワラン配合の定番保湿クリーム。24時間うるおいが続き、あらゆる肌質に使える人気品。", "keyIngredients": ["スクワラン", "氷河糖タンパク質", "ヒアルロン酸"], "icon": "💧", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 99, "name": "無印良品 エイジングケア美容液", "brand": "無印良品", "category": "美容液", "price": 1990, "rating": 4.3, "reviews": 3654, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "10種の植物由来成分配合のエイジングケア美容液。とろみのある質感でうるおいとハリを与える。", "keyIngredients": ["ザクロエキス", "ローズヒップオイル", "ヒアルロン酸"], "icon": "🌿", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 100, "name": "rom&nd グラスティング ウォーター ティント", "brand": "rom&nd", "category": "アイケア", "price": 1320, "rating": 4.4, "reviews": 2341, "skin": ["全肌質"], "concern": ["乾燥・かさつき"], "desc": "うるおいとツヤを与えるリップティント。みずみずしい発色で唇の乾燥を防ぐ韓国人気リップ。", "keyIngredients": ["ヒアルロン酸", "植物オイル"], "icon": "💋", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 101, "name": "CLINIQUE 拭き取り化粧水 クラリファイングローション", "brand": "クリニーク", "category": "化粧水", "price": 4400, "rating": 4.4, "reviews": 2103, "skin": ["混合肌", "脂性肌"], "concern": ["毛穴の開き・黒ずみ", "乾燥・かさつき"], "desc": "古い角質をやさしくオフする拭き取り化粧水。なめらかな肌に整え、次のケアの浸透を高める。", "keyIngredients": ["サリチル酸", "ヒアルロン酸"], "icon": "🧴", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 102, "name": "Curél 皮脂トラブルケア 保湿ジェル", "brand": "キュレル", "category": "保湿クリーム", "price": 2200, "rating": 4.4, "reviews": 1543, "skin": ["脂性肌", "混合肌"], "concern": ["ニキビ・吹き出物", "毛穴の開き・黒ずみ"], "desc": "皮脂によるベタつき・ニキビが気になる肌向けのジェル。セラミドケアでうるおいバランスを整える。", "keyIngredients": ["セラミド機能成分", "ライスパワー", "グリチルリチン酸"], "icon": "🟦", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 103, "name": "THE ORDINARY ナイアシンアミド 10% + Zinc 1%", "brand": "The Ordinary", "category": "美容液", "price": 1200, "rating": 4.4, "reviews": 5432, "skin": ["脂性肌", "混合肌"], "concern": ["毛穴の開き・黒ずみ", "ニキビ・吹き出物"], "desc": "高濃度ナイアシンアミド配合の機能性セラム。皮脂・毛穴ケアに、シンプル処方で人気のカナダブランド。", "keyIngredients": ["ナイアシンアミド10%", "亜鉛PCA"], "icon": "⚗️", "origin": "カナダ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 104, "name": "THE ORDINARY ハイアルロニックアシッド 2% + B5", "brand": "The Ordinary", "category": "美容液", "price": 1300, "rating": 4.4, "reviews": 4321, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "複数分子量のヒアルロン酸配合セラム。肌の異なる層にうるおいを届ける高コスパ保湿美容液。", "keyIngredients": ["ヒアルロン酸", "ビタミンB5"], "icon": "💧", "origin": "カナダ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 105, "name": "LANEIGE ウォーター スリーピング マスク EX", "brand": "LANEIGE", "category": "パック・マスク", "price": 3300, "rating": 4.5, "reviews": 3210, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "夜塗って寝るだけのスリーピングマスク。翌朝うるおいに満ちたもっちり肌へ導く韓国人気品。", "keyIngredients": ["スリープティックスコンプレックス", "ヒアルロン酸"], "icon": "🌙", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 106, "name": "LANEIGE リップ スリーピング マスク", "brand": "LANEIGE", "category": "アイケア", "price": 2640, "rating": 4.6, "reviews": 6543, "skin": ["全肌質"], "concern": ["乾燥・かさつき"], "desc": "夜の唇集中ケアマスク。ベリーミックスの香りで、寝ている間にうるおいぷるぷる唇へ。", "keyIngredients": ["ベリーミックスコンプレックス", "ビタミンC", "ヒアルロン酸"], "icon": "🍓", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 107, "name": "ちふれ 美容液 ノンアルコールタイプ", "brand": "ちふれ", "category": "美容液", "price": 1100, "rating": 4.3, "reviews": 2341, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき"], "desc": "ヒアルロン酸配合の高保湿美容液。ノンアルコールで肌にやさしい、超プチプラの定番セラム。", "keyIngredients": ["ヒアルロン酸", "トレハロース"], "icon": "🧴", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 108, "name": "シロジャム", "brand": "NACOL", "category": "アイケア", "price": 2980, "rating": 4.2, "reviews": 1654, "skin": ["全肌質", "乾燥肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "手・指・爪の乾燥ケアに着目したハンドジェルセラム。うるおいとハリを与える保湿ケア。", "keyIngredients": ["ナールスゲン", "プロテオグリカン", "ヒアルロン酸"], "icon": "🤲", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 109, "name": "Bioré UV アスリズム スキンプロテクトエッセンス", "brand": "花王", "category": "日焼け止め", "price": 1650, "rating": 4.6, "reviews": 4532, "skin": ["全肌質", "混合肌"], "concern": ["シミ・くすみ"], "desc": "SPF50+ PA++++。汗・水・摩擦に強い最強級UV。スポーツやレジャーにも対応する高耐久日焼け止め。", "keyIngredients": ["ヒアルロン酸", "ローヤルゼリーエキス"], "icon": "🏃", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 110, "name": "ALLIE クロノビューティ ジェルUV EX", "brand": "カネボウ", "category": "日焼け止め", "price": 1980, "rating": 4.5, "reviews": 3210, "skin": ["全肌質", "混合肌"], "concern": ["シミ・くすみ"], "desc": "SPF50+ PA++++。汗・水・皮脂・擦れに強いウォータープルーフ。みずみずしいジェルタイプUV。", "keyIngredients": ["ヒアルロン酸", "カミツレエキス"], "icon": "⏱️", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 111, "name": "コーセー サンカット パーフェクトUV スプレー", "brand": "コーセー", "category": "日焼け止め", "price": 990, "rating": 4.3, "reviews": 3654, "skin": ["全肌質"], "concern": ["シミ・くすみ"], "desc": "SPF50+ PA++++。シューッと手軽に塗れるスプレータイプ。髪・体・背中にも、お直しに便利。", "keyIngredients": ["ヒアルロン酸", "コラーゲン"], "icon": "💨", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 112, "name": "Curél UVカット デイバリア UVローション", "brand": "キュレル", "category": "日焼け止め", "price": 1980, "rating": 4.5, "reviews": 1876, "skin": ["敏感肌", "乾燥肌"], "concern": ["シミ・くすみ", "乾燥・かさつき"], "desc": "SPF50+ PA+++。敏感肌向けのUVローション。セラミドケアでうるおいながら紫外線・乾燥を防ぐ。", "keyIngredients": ["セラミド機能成分", "ユーカリエキス"], "icon": "🛡️", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 113, "name": "無印良品 日焼け止めミルク SPF50+", "brand": "無印良品", "category": "日焼け止め", "price": 990, "rating": 4.3, "reviews": 2341, "skin": ["敏感肌", "全肌質"], "concern": ["シミ・くすみ"], "desc": "敏感肌にも使えるUVミルク。化粧下地にもなり、石けんで落とせる低刺激処方のプチプラUV。", "keyIngredients": ["ヒアルロン酸Na", "スベリヒユエキス"], "icon": "🧴", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 114, "name": "ファシオ パーマネントカール マスカラ", "brand": "コーセー", "category": "アイケア", "price": 1320, "rating": 4.3, "reviews": 2103, "skin": ["全肌質"], "concern": ["乾燥・かさつき"], "desc": "お湯で落ちるのに汗・水に強いマスカラ。カールキープ力に優れた人気のアイメイクアイテム。", "keyIngredients": ["パンテノール", "ヒアルロン酸"], "icon": "👁️", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 115, "name": "CipiCipi グリッターイルミネーションライナー", "brand": "CipiCipi", "category": "アイケア", "price": 1320, "rating": 4.4, "reviews": 1543, "skin": ["全肌質"], "concern": ["乾燥・かさつき"], "desc": "繊細なラメが目もとを華やかに彩るグリッターライナー。涙袋メイクにも人気のプチプラコスメ。", "keyIngredients": ["保湿成分", "グリセリン"], "icon": "✨", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 116, "name": "Torriden セルメイジング クリーム", "brand": "Torriden", "category": "保湿クリーム", "price": 2860, "rating": 4.4, "reviews": 1234, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "ペプチド配合のエイジングケアクリーム。ハリとうるおいを与え、なめらかな肌に整える韓国品。", "keyIngredients": ["ペプチド", "ナイアシンアミド", "ヒアルロン酸"], "icon": "🌊", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 117, "name": "ドクターシーラボ アクアコラーゲンゲル スーパーモイスチャー", "brand": "ドクターシーラボ", "category": "保湿クリーム", "price": 5170, "rating": 4.5, "reviews": 4321, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "化粧水・乳液・美容液・クリーム・パックの5役オールインワンゲル。これ一つでうるおいケア完了。", "keyIngredients": ["ヒアルロン酸", "コラーゲン", "セラミド"], "icon": "🟢", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 118, "name": "PERFECT ONE モイスチャージェル", "brand": "新日本製薬", "category": "保湿クリーム", "price": 4180, "rating": 4.4, "reviews": 5432, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "7つの機能を1つにしたオールインワン美容ジェル。9種のコラーゲン配合でうるおいとハリを実感。", "keyIngredients": ["コラーゲン9種", "ヒアルロン酸", "プラセンタ"], "icon": "🟡", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 119, "name": "資生堂 dプログラム 薬用 スキンケアベース CC", "brand": "資生堂", "category": "日焼け止め", "price": 3520, "rating": 4.4, "reviews": 1654, "skin": ["敏感肌", "混合肌"], "concern": ["シミ・くすみ", "肌荒れ・赤み"], "desc": "敏感肌用の薬用CC化粧下地。SPF20で日常の紫外線を防ぎ、肌色を自然に整える。", "keyIngredients": ["トラネキサム酸", "グリチルリチン酸塩"], "icon": "🎨", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 120, "name": "ロート製薬 ハダラボ 極潤 αクリーム", "brand": "ロート製薬", "category": "保湿クリーム", "price": 1320, "rating": 4.4, "reviews": 2341, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "3種のヒアルロン酸＋ハリ成分配合のプチプラ保湿クリーム。濃厚なのにベタつかない使い心地。", "keyIngredients": ["ヒアルロン酸3種", "3Dヒアルロン酸", "加水分解ヒアルロン酸"], "icon": "🟡", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 121, "name": "Innisfree レチノール シカ アンプル", "brand": "イニスフリー", "category": "美容液", "price": 3960, "rating": 4.4, "reviews": 1432, "skin": ["普通肌", "混合肌"], "concern": ["シワ・たるみ", "肌荒れ・赤み"], "desc": "レチノールとCICA配合のエイジングケアアンプル。ハリケアと鎮静を両立する韓国人気セラム。", "keyIngredients": ["レチノール", "CICA", "スクワラン"], "icon": "🍵", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 122, "name": "La Roche-Posay シカプラスト バーム B5+", "brand": "ラロッシュポゼ", "category": "保湿クリーム", "price": 2530, "rating": 4.6, "reviews": 3210, "skin": ["敏感肌", "乾燥肌"], "concern": ["肌荒れ・赤み", "乾燥・かさつき"], "desc": "パンテノール配合の高保湿マルチバーム。荒れた肌や乾燥部分の集中ケアに、顔・体・唇に使える。", "keyIngredients": ["パンテノール5%", "マデカッソシド", "シアバター"], "icon": "🏥", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 123, "name": "FEMMUE ルミエール ヴァイタルC", "brand": "FEMMUE", "category": "美容液", "price": 8800, "rating": 4.5, "reviews": 987, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "ビタミンC誘導体配合の人気ブライトニングセラム。透明感とうるおいを与える上質な韓国発コスメ。", "keyIngredients": ["ビタミンC誘導体", "プロテオグリカン", "植物幹細胞"], "icon": "🍊", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 124, "name": "コスメデコルテ リポソーム アドバンスト リペアセラム", "brand": "コーセー", "category": "美容液", "price": 11000, "rating": 4.7, "reviews": 3654, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "進化した多重層リポソーム美容液。角層のすみずみまで届けてうるおい・ハリ・ツヤを与える名品。", "keyIngredients": ["多重層リポソーム", "ヒアルロン酸", "ビタミンC誘導体"], "icon": "💧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 125, "name": "ナイアード ガスールパウダー", "brand": "ナイアード", "category": "洗顔", "price": 1320, "rating": 4.4, "reviews": 1543, "skin": ["脂性肌", "混合肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "モロッコの天然クレイ「ガスール」。皮脂・汚れを吸着して洗い流す、肌に優しい洗顔・パック素材。", "keyIngredients": ["ガスール(モロッコ溶岩クレイ)"], "icon": "🟫", "origin": "モロッコ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 126, "name": "Heatherm ヒアルロン酸 原液", "brand": "Heatherm", "category": "美容液", "price": 1100, "rating": 4.2, "reviews": 876, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "高純度ヒアルロン酸の原液美容液。手持ちの化粧水に混ぜて使える、保湿力を高めるブースター。", "keyIngredients": ["ヒアルロン酸Na"], "icon": "💧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 127, "name": "MISSHA タイムレボリューション ナイトリペア アンプル", "brand": "MISSHA", "category": "美容液", "price": 4400, "rating": 4.5, "reviews": 2341, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "発酵成分配合の夜用修復アンプル。とろみのある質感で翌朝のハリ・ツヤをサポートする韓国名品。", "keyIngredients": ["ガラクトミセス発酵物", "ビフィダ発酵物", "ナイアシンアミド"], "icon": "🌙", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 128, "name": "ALOBABY ミルクローション", "brand": "ALOBABY", "category": "保湿クリーム", "price": 1980, "rating": 4.5, "reviews": 2103, "skin": ["敏感肌", "乾燥肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "オーガニック由来成分の全身用ミルクローション。赤ちゃんから大人まで使える低刺激保湿。", "keyIngredients": ["シアバター", "ホホバオイル", "アロエベラ"], "icon": "🍼", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 129, "name": "UNO ホイップウォッシュ", "brand": "資生堂", "category": "洗顔", "price": 550, "rating": 4.3, "reviews": 3210, "skin": ["脂性肌", "混合肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "メンズ向け濃密泡洗顔。皮脂や毛穴汚れをすっきり落とす、男性に人気のプチプラ洗顔料。", "keyIngredients": ["クレイ", "炭"], "icon": "🧔", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 130, "name": "ettusais エテュセ 薬用 アクネ ジェルクリーム", "brand": "エテュセ", "category": "保湿クリーム", "price": 1430, "rating": 4.3, "reviews": 1876, "skin": ["脂性肌", "混合肌"], "concern": ["ニキビ・吹き出物", "乾燥・かさつき"], "desc": "ニキビを防ぐ薬用ジェルクリーム。べたつかずうるおいを与え、ゆらぎがちな肌をケア。", "keyIngredients": ["グリチルリチン酸", "ヒアルロン酸", "植物エキス"], "icon": "💚", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 131, "name": "KOSE クリアターン プリンセスヴェール モーニングスキンケアマスク", "brand": "コーセー", "category": "パック・マスク", "price": 825, "rating": 4.3, "reviews": 2341, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき"], "desc": "朝用のオールインワンシートマスク。化粧水・美容液・乳液・クリーム・化粧下地の5役を1枚で。", "keyIngredients": ["ヒアルロン酸", "コラーゲン", "ローヤルゼリーエキス"], "icon": "👸", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 132, "name": "Abib ガムシートマスク ドクダミカーミング", "brand": "Abib", "category": "パック・マスク", "price": 2640, "rating": 4.5, "reviews": 1432, "skin": ["敏感肌", "混合肌"], "concern": ["肌荒れ・赤み", "ニキビ・吹き出物"], "desc": "ドクダミエキス配合の鎮静シートマスク。密着力の高いシートで肌荒れ・赤みをケアする韓国人気品。", "keyIngredients": ["ドクダミエキス", "CICA", "パンテノール"], "icon": "🍃", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 133, "name": "SANA なめらか本舗 リンクル化粧水 N", "brand": "常盤薬品", "category": "化粧水", "price": 990, "rating": 4.4, "reviews": 4321, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "豆乳発酵液＋純粋レチノール配合のプチプラ化粧水。とろみのある質感でハリとうるおいを与える。", "keyIngredients": ["豆乳発酵液", "純粋レチノール", "ヒアルロン酸"], "icon": "🫛", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 134, "name": "ロート製薬 50の恵 養潤液", "brand": "ロート製薬", "category": "化粧水", "price": 1320, "rating": 4.3, "reviews": 2103, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "50種の保湿・ハリ成分配合のオールインワン化粧水。エイジング世代に人気の高保湿ケア。", "keyIngredients": ["コラーゲン", "ヒアルロン酸", "ローヤルゼリーエキス"], "icon": "🌿", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 135, "name": "DHC 薬用ディープクレンジングオイル", "brand": "DHC", "category": "洗顔", "price": 1804, "rating": 4.5, "reviews": 6543, "skin": ["全肌質", "乾燥肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "オリーブバージンオイル配合のクレンジングオイル。濃いメイクもするんと落とし、うるおいを残す名品。", "keyIngredients": ["オリーブバージンオイル", "ローズマリーエキス", "ビタミンE"], "icon": "🫒", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 136, "name": "KISO ヒアルロン酸 原液", "brand": "KISO", "category": "美容液", "price": 1430, "rating": 4.3, "reviews": 1234, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき"], "desc": "国産の高純度ヒアルロン酸原液。手持ちのスキンケアにプラスして保湿力を底上げするブースター。", "keyIngredients": ["ヒアルロン酸Na", "加水分解ヒアルロン酸"], "icon": "💧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 137, "name": "Saborino 目ざまシート", "brand": "スタイリングライフ", "category": "パック・マスク", "price": 1320, "rating": 4.4, "reviews": 5432, "skin": ["全肌質", "混合肌"], "concern": ["乾燥・かさつき"], "desc": "朝の60秒で洗顔・スキンケア・保湿が完了する朝用マスク。忙しい朝の時短ケアに人気の定番品。", "keyIngredients": ["ハトムギ種子エキス", "オレンジ果実エキス", "ヒアルロン酸"], "icon": "⏰", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 138, "name": "ロクシタン シア ハンドクリーム", "brand": "ロクシタン", "category": "アイケア", "price": 1540, "rating": 4.6, "reviews": 8765, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき"], "desc": "シアバター20%配合の濃密ハンドクリーム。乾燥した手肌をしっとり保湿、ギフトにも人気の定番。", "keyIngredients": ["シアバター20%", "ハチミツ", "ココナッツオイル"], "icon": "🤲", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 139, "name": "メンソレータム アクネス 薬用クリーム洗顔", "brand": "ロート製薬", "category": "洗顔", "price": 660, "rating": 4.2, "reviews": 2341, "skin": ["脂性肌", "混合肌"], "concern": ["ニキビ・吹き出物", "毛穴の開き・黒ずみ"], "desc": "ニキビを防ぐ薬用クリーム洗顔。アクネ菌を殺菌しながら、うるおいを守って洗い上げるプチプラ品。", "keyIngredients": ["イソプロピルメチルフェノール", "ビタミンC誘導体"], "icon": "🧼", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 140, "name": "THREE バランシング SO オイル", "brand": "THREE", "category": "美容液", "price": 6600, "rating": 4.5, "reviews": 765, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "天然由来成分100%のブースターオイル。スキンケア前に使ってうるおいとなめらかさを高める。", "keyIngredients": ["スクワラン", "植物オイル", "エッセンシャルオイル"], "icon": "🌿", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 141, "name": "ハーバー 高品位スクワラン", "brand": "ハーバー", "category": "美容液", "price": 2750, "rating": 4.6, "reviews": 4321, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき"], "desc": "純度99.9%のスクワランオイル。1滴で肌をしっとりなめらかに整える無添加の美容オイル名品。", "keyIngredients": ["スクワラン99.9%"], "icon": "💧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 142, "name": "コーセー 米肌 活潤リフト クリーム", "brand": "コーセー", "category": "保湿クリーム", "price": 6600, "rating": 4.5, "reviews": 1543, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "ライスパワーNo.11＋ハリ成分配合のエイジングケアクリーム。ふっくらハリのある肌へ導く。", "keyIngredients": ["ライスパワーNo.11", "コラーゲン", "ヒアルロン酸"], "icon": "🍚", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 143, "name": "dasique シャドウパレット", "brand": "dasique", "category": "アイケア", "price": 2200, "rating": 4.5, "reviews": 3210, "skin": ["全肌質"], "concern": ["乾燥・かさつき"], "desc": "発色のよいアイシャドウパレット。デイリーに使いやすいカラー展開で韓国コスメ好きに人気。", "keyIngredients": ["保湿成分"], "icon": "🎨", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 144, "name": "Anua 桃70% ナイアシン セラム", "brand": "Anua", "category": "美容液", "price": 3300, "rating": 4.4, "reviews": 1654, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "桃エキス70%＋ナイアシンアミド配合。くすみケアとうるおいを両立する韓国人気の角質ケアセラム。", "keyIngredients": ["桃エキス", "ナイアシンアミド", "PHA"], "icon": "🍑", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 145, "name": "ロート製薬 ケアセラ APフェイス＆ボディ乳液", "brand": "ロート製薬", "category": "保湿クリーム", "price": 1100, "rating": 4.4, "reviews": 3210, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "7種の天然型セラミド配合の全身用乳液。顔も体も全身保湿、乾燥肌・敏感肌に人気のプチプラ品。", "keyIngredients": ["天然型セラミド7種", "ヘパリン類似物質"], "icon": "🧴", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 146, "name": "ファンケル エンリッチプラス 化粧液 II", "brand": "ファンケル", "category": "化粧水", "price": 1870, "rating": 4.4, "reviews": 1876, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "コラーゲンとハリ成分配合のエイジングケア化粧液。無添加でうるおいとハリを与えるとろみ化粧水。", "keyIngredients": ["アディポジェネシス", "コラーゲン", "ヒアルロン酸"], "icon": "🌸", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 147, "name": "ESTÉE LAUDER マイクロ エッセンス ローション", "brand": "エスティローダー", "category": "化粧水", "price": 11000, "rating": 4.5, "reviews": 1432, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき", "シミ・くすみ"], "desc": "発酵成分配合の先行美容液ローション。みずみずしく浸透し透明感とうるおいに満ちた肌へ。", "keyIngredients": ["発酵酵母エキス", "ヒアルロン酸"], "icon": "💧", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 148, "name": "Tatcha ザ デューイ スキン クリーム", "brand": "Tatcha", "category": "保湿クリーム", "price": 9900, "rating": 4.5, "reviews": 765, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "日本の美容に着想を得たリッチな保湿クリーム。みずみずしくうるおい、ツヤのある肌へ導く。", "keyIngredients": ["ハディーフ発酵コンプレックス", "スクワラン", "ヒアルロン酸"], "icon": "🌸", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 149, "name": "CICABIO クリーム", "brand": "ビオデルマ", "category": "保湿クリーム", "price": 2200, "rating": 4.5, "reviews": 1543, "skin": ["敏感肌", "乾燥肌"], "concern": ["肌荒れ・赤み", "乾燥・かさつき"], "desc": "乾燥して荒れた肌の集中ケアクリーム。鎮静成分配合で、デリケートな肌をなめらかに整える。", "keyIngredients": ["銅・亜鉛複合体", "セントロール", "レジネオール"], "icon": "🩹", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 150, "name": "無印良品 クリアケア化粧水", "brand": "無印良品", "category": "化粧水", "price": 1490, "rating": 4.3, "reviews": 2103, "skin": ["脂性肌", "混合肌"], "concern": ["毛穴の開き・黒ずみ", "ニキビ・吹き出物"], "desc": "フルーツ酸（AHA）配合の角質ケア化粧水。毛穴の汚れや古い角質をオフし、なめらかな肌に整える。", "keyIngredients": ["AHA(フルーツ酸)", "ビタミンC誘導体", "ヒアルロン酸"], "icon": "🍋", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 151, "name": "Curél リップケア クリーム", "brand": "キュレル", "category": "アイケア", "price": 880, "rating": 4.4, "reviews": 2341, "skin": ["敏感肌", "乾燥肌"], "concern": ["乾燥・かさつき"], "desc": "セラミドケアの薬用リップクリーム。荒れがちな唇をしっとり保湿、敏感肌にもやさしい無香料。", "keyIngredients": ["セラミド機能成分", "ユーカリエキス"], "icon": "💋", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 152, "name": "ロレアルパリ レビタリフト ファーミング セラム", "brand": "ロレアル", "category": "美容液", "price": 2980, "rating": 4.4, "reviews": 2341, "skin": ["普通肌", "乾燥肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "ヒアルロン酸高配合のハリ・弾力セラム。みずみずしく浸透し、ふっくらしたハリ肌へ導くプチプラ品。", "keyIngredients": ["ヒアルロン酸", "プロキシレン"], "icon": "💛", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 153, "name": "VT リードルショット 100", "brand": "VT Cosmetics", "category": "美容液", "price": 3960, "rating": 4.5, "reviews": 4321, "skin": ["普通肌", "混合肌"], "concern": ["毛穴の開き・黒ずみ", "乾燥・かさつき"], "desc": "塗る針コンセプトの人気セラム。スパイキュール配合で肌のキメ・毛穴・なめらかさにアプローチ。", "keyIngredients": ["スパイキュール", "ナイアシンアミド", "パンテノール"], "icon": "💉", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 154, "name": "無印良品 ホホバオイル", "brand": "無印良品", "category": "美容液", "price": 1290, "rating": 4.5, "reviews": 6543, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき"], "desc": "無香料・無着色の天然ホホバオイル。顔・体・髪に使える万能保湿オイル、コスパ抜群のロングセラー。", "keyIngredients": ["ホホバ種子油"], "icon": "🫧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 155, "name": "肌美精 超浸透3Dマスク エイジングケア", "brand": "クラシエ", "category": "パック・マスク", "price": 1100, "rating": 4.3, "reviews": 2341, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "立体構造シートが密着するエイジングケアマスク。うるおいとハリを与える、プチプラの集中ケア品。", "keyIngredients": ["コラーゲン", "ヒアルロン酸", "レチノール"], "icon": "🎭", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 156, "name": "ちふれ ウォッシャブル コールド クリーム", "brand": "ちふれ", "category": "洗顔", "price": 660, "rating": 4.4, "reviews": 3210, "skin": ["全肌質", "乾燥肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "マッサージにも使える水で洗い流せるコールドクリーム。メイク落としとしても優秀な超プチプラ品。", "keyIngredients": ["流動パラフィン", "スクワラン"], "icon": "❄️", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 157, "name": "KOSE 雪肌精 みずみずしい化粧水", "brand": "コーセー", "category": "化粧水", "price": 4180, "rating": 4.5, "reviews": 3654, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ", "乾燥・かさつき"], "desc": "和漢植物エキス配合のロングセラー化粧水。みずみずしくうるおい、透明感のある肌へ導く名品。", "keyIngredients": ["ハトムギエキス", "トウキエキス", "メロスリア"], "icon": "❄️", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 158, "name": "ONE THING ドクダミエキス", "brand": "ONE THING", "category": "化粧水", "price": 1320, "rating": 4.4, "reviews": 2103, "skin": ["敏感肌", "脂性肌", "混合肌"], "concern": ["肌荒れ・赤み", "ニキビ・吹き出物"], "desc": "ドクダミ単一成分の化粧水。シンプル処方で肌を鎮静、手持ちのケアに足せる韓国の人気原液トナー。", "keyIngredients": ["ドクダミエキス"], "icon": "🌿", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 159, "name": "HAKU メラノフォーカスEV", "brand": "資生堂", "category": "美容液", "price": 11000, "rating": 4.6, "reviews": 3210, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ"], "desc": "4MSK＋トラネキサム酸配合の薬用美白美容液。シミの発生を多角的に防ぐ、美白ケアの実力派。", "keyIngredients": ["4MSK", "m-トラネキサム酸", "Dメラノ"], "icon": "🤍", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 160, "name": "Bulgari オムニア クリスタリン ボディローション", "brand": "ブルガリ", "category": "保湿クリーム", "price": 4400, "rating": 4.3, "reviews": 543, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき"], "desc": "上品な香りをまとえる全身用ボディローション。しっとりなめらかな肌に整える、ギフト人気の高級品。", "keyIngredients": ["シアバター", "植物エキス"], "icon": "💎", "origin": "イタリア", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 161, "name": "ロート製薬 メラノCC 薬用しみ対策 美白化粧水", "brand": "ロート製薬", "category": "化粧水", "price": 990, "rating": 4.4, "reviews": 5432, "skin": ["普通肌", "脂性肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "ビタミンC＋アルピニアホワイト配合の薬用美白化粧水。さっぱりした使い心地でシミ予防、プチプラ。", "keyIngredients": ["ビタミンC誘導体", "アルピニアホワイト", "グリチルリチン酸"], "icon": "🍊", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 162, "name": "OLAY レチノール24 ナイトモイスチャライザー", "brand": "オレイ", "category": "保湿クリーム", "price": 3980, "rating": 4.4, "reviews": 2341, "skin": ["普通肌", "乾燥肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "レチノール＋ナイアシンアミド配合の夜用クリーム。翌朝のなめらかさとハリをサポートする実力派。", "keyIngredients": ["レチノール", "ナイアシンアミド", "ペプチド"], "icon": "🌙", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 163, "name": "コーセー ジュレーム ヘアマスク", "brand": "コーセー", "category": "パック・マスク", "price": 1320, "rating": 4.3, "reviews": 2103, "skin": ["全肌質"], "concern": ["乾燥・かさつき"], "desc": "傷んだ髪を集中補修するヘアマスク。アミノ酸配合でしっとりまとまる髪へ導くヘアケアアイテム。", "keyIngredients": ["アミノ酸", "アルガンオイル", "ハチミツ"], "icon": "💇", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 164, "name": "Anua クレンジングオイル ヘチマ70", "brand": "Anua", "category": "洗顔", "price": 2640, "rating": 4.5, "reviews": 1432, "skin": ["脂性肌", "混合肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "ヘチマエキス配合で毛穴ケアできるクレンジングオイル。角栓・黒ずみをすっきり、韓国の人気品。", "keyIngredients": ["ヘチマエキス", "ビタミンE", "ホホバオイル"], "icon": "🧽", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 165, "name": "ファンケル ディープクリア洗顔パウダー", "brand": "ファンケル", "category": "洗顔", "price": 1980, "rating": 4.5, "reviews": 3210, "skin": ["全肌質", "混合肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "酵素＋吸着泥配合の洗顔パウダー。毛穴の黒ずみ・角栓をオフしながら、うるおいを守って洗い上げる。", "keyIngredients": ["プロテアーゼ", "モロッコ溶岩クレイ", "ヒアルロン酸"], "icon": "🧴", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 166, "name": "HotTab 重炭酸入浴剤", "brand": "HotTab", "category": "保湿クリーム", "price": 2750, "rating": 4.4, "reviews": 1876, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき"], "desc": "重炭酸イオンが溶け込む入浴剤。温浴効果を高めて全身ぽかぽか、乾燥肌のボディケアにも人気。", "keyIngredients": ["重炭酸イオン", "ビタミンC"], "icon": "🛁", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 167, "name": "DEW スペリア ローション コンセントレート", "brand": "カネボウ", "category": "化粧水", "price": 6600, "rating": 4.5, "reviews": 1234, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "ローヤルゼリー配合の濃密保湿化粧水。とろみのある質感で角層まで浸透し、ハリ・うるおいを与える。", "keyIngredients": ["ローヤルゼリーエキス", "ヒアルロン酸", "コラーゲン"], "icon": "💠", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+];
+
+const BRANDS=[
+  {"name": "ロート製薬", "icon": "🧪", "origin": "日本", "desc": "プチプラから機能性まで幅広い製薬大手"},
+  {"name": "資生堂", "icon": "👑", "origin": "日本", "desc": "日本を代表するブランド"},
+  {"name": "コーセー", "icon": "💎", "origin": "日本", "desc": "米肌・雪肌精で有名な大手"},
+  {"name": "キュレル", "icon": "💙", "origin": "日本", "desc": "花王の敏感肌ブランド"},
+  {"name": "無印良品", "icon": "🌿", "origin": "日本", "desc": "シンプル&高コスパ"},
+  {"name": "Anua", "icon": "🌿", "origin": "韓国", "desc": "天然由来にこだわるK-Beauty"},
+  {"name": "イニスフリー", "icon": "🍵", "origin": "韓国", "desc": "チェジュ島自然派K-Beauty"},
+  {"name": "ファンケル", "icon": "🌸", "origin": "日本", "desc": "無添加スキンケアの先駆け"},
+  {"name": "Torriden", "icon": "🌊", "origin": "韓国", "desc": "低分子ヒアルロン酸で人気"},
+  {"name": "カネボウ", "icon": "🌟", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "ラロッシュポゼ", "icon": "🏥", "origin": "フランス", "desc": "皮膚科学に基づく敏感肌ケア"},
+  {"name": "ちふれ", "icon": "🧴", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "VT Cosmetics", "icon": "🍀", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "ロクシタン", "icon": "🌼", "origin": "フランス", "desc": "フランスのスキンケアブランド"},
+  {"name": "花王", "icon": "💧", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "小林製薬", "icon": "🌸", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "イミュ", "icon": "🌾", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "SK-II", "icon": "✨", "origin": "日本", "desc": "ピテラ™で有名なプレミアム"},
+  {"name": "MEDICUBE", "icon": "🩷", "origin": "韓国", "desc": "PDRNで話題のK-Beauty"},
+  {"name": "ドクターシーラボ", "icon": "🧪", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "numbuzin", "icon": "🔢", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "ニベア", "icon": "🫙", "origin": "ドイツ", "desc": "世界で愛される定番"},
+  {"name": "CeraVe", "icon": "🔵", "origin": "アメリカ", "desc": "アメリカのスキンケアブランド"},
+  {"name": "MEDIHEAL", "icon": "💧", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "エスティローダー", "icon": "🟤", "origin": "アメリカ", "desc": "茶瓶の名品で有名"},
+  {"name": "クリニーク", "icon": "💚", "origin": "アメリカ", "desc": "アメリカのスキンケアブランド"},
+  {"name": "ビオデルマ", "icon": "💧", "origin": "フランス", "desc": "フランスのスキンケアブランド"},
+  {"name": "THREE", "icon": "🌿", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "キールズ", "icon": "💧", "origin": "アメリカ", "desc": "アメリカのスキンケアブランド"},
+  {"name": "The Ordinary", "icon": "⚗️", "origin": "カナダ", "desc": "成分シンプルな高コスパ"},
+  {"name": "LANEIGE", "icon": "🌙", "origin": "韓国", "desc": "水分ケアで有名なK-Beauty"},
+  {"name": "第一三共ヘルスケア", "icon": "🍃", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "オルビス", "icon": "🟠", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "COSRX", "icon": "🐌", "origin": "韓国", "desc": "成分重視のK-Beauty"},
+  {"name": "Beauty of Joseon", "icon": "🌾", "origin": "韓国", "desc": "韓方コスメの人気ブランド"},
+  {"name": "ヴァントルテ", "icon": "🧴", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "AESTURA", "icon": "🧴", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "Glow Recipe", "icon": "🍉", "origin": "アメリカ", "desc": "アメリカのスキンケアブランド"},
+  {"name": "ETUDE", "icon": "🌱", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "HABA", "icon": "🌾", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "ロゼット", "icon": "🌊", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "ルルルン", "icon": "🧴", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "我的美麗日記", "icon": "🖤", "origin": "台湾", "desc": "台湾のスキンケアブランド"},
+  {"name": "クオリティファースト", "icon": "🎭", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "北の快適工房", "icon": "👀", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "Dr.Jart+", "icon": "🐯", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "クラランス", "icon": "💛", "origin": "フランス", "desc": "フランスのスキンケアブランド"},
+  {"name": "ランコム", "icon": "🌸", "origin": "フランス", "desc": "フランスのスキンケアブランド"},
+  {"name": "SKINFOOD", "icon": "🍯", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "プレミアアンチエイジング", "icon": "🍮", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "ライオン", "icon": "🫧", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "ジルスチュアート", "icon": "💐", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "アルビオン", "icon": "💧", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "富士フイルム", "icon": "🟠", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "ドゥーオーガニック", "icon": "🌾", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "CNP", "icon": "🐝", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "エトヴォス", "icon": "🌿", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "rom&nd", "icon": "💋", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "NACOL", "icon": "🤲", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "CipiCipi", "icon": "✨", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "新日本製薬", "icon": "🟡", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "FEMMUE", "icon": "🍊", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "ナイアード", "icon": "🟫", "origin": "モロッコ", "desc": "モロッコのスキンケアブランド"},
+  {"name": "Heatherm", "icon": "💧", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "MISSHA", "icon": "🌙", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "ALOBABY", "icon": "🍼", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "エテュセ", "icon": "💚", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "Abib", "icon": "🍃", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "常盤薬品", "icon": "🫛", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "DHC", "icon": "🫒", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "KISO", "icon": "💧", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "スタイリングライフ", "icon": "⏰", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "ハーバー", "icon": "🧴", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "dasique", "icon": "🎨", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "Tatcha", "icon": "🌸", "origin": "アメリカ", "desc": "アメリカのスキンケアブランド"},
+  {"name": "ロレアル", "icon": "💛", "origin": "フランス", "desc": "フランスのスキンケアブランド"},
+  {"name": "クラシエ", "icon": "🎭", "origin": "日本", "desc": "日本のスキンケアブランド"},
+  {"name": "ONE THING", "icon": "🧴", "origin": "韓国", "desc": "韓国のスキンケアブランド"},
+  {"name": "ブルガリ", "icon": "💎", "origin": "イタリア", "desc": "イタリアのスキンケアブランド"},
+  {"name": "オレイ", "icon": "🌙", "origin": "アメリカ", "desc": "アメリカのスキンケアブランド"},
+  {"name": "HotTab", "icon": "🛁", "origin": "日本", "desc": "日本のスキンケアブランド"},
+];
+
+/* =========================================================
+   アフィリエイト設定 ★運用前にここを自分のIDに書き換えてください★
+   ---------------------------------------------------------
+   各プログラムに登録・審査通過後、発行されたIDを入れると
+   全商品のリンクが自動でアフィリエイトリンクになります。
+   空欄のままだと通常の検索リンク（報酬なし）になります。
+   ========================================================= */
+const AFFILIATE={
+  // Amazonアソシエイト：末尾-22のトラッキングID（例 "uruoilabo-22"）
+  amazonTag:"",
+  // 楽天アフィリエイトID（例 "1a2b3c4d.5e6f7g8h.1a2b3c4e.9i0j1k2l"）
+  rakutenId:"",
+  // もしもアフィリエイト：Amazon/楽天をまとめて使う場合のa_id等（任意）
+  moshimoAId:"",
+  // どのショップのボタンを表示するか
+  showAmazon:true,
+  showRakuten:true,
+  showQoo10:true,
+};
+
+// 価格の調査時点（審査・誤認防止のため明記。価格更新時にここも更新）
+const PRICE_DATE="2026年6月";
+
+// 商品名から各ショップの検索型アフィリエイトリンクを生成
+function amazonLink(p){
+  const kw=encodeURIComponent(p.brand+" "+p.name);
+  const base=`https://www.amazon.co.jp/s?k=${kw}`;
+  return AFFILIATE.amazonTag?`${base}&tag=${AFFILIATE.amazonTag}`:base;
+}
+function rakutenLink(p){
+  const kw=encodeURIComponent(p.brand+" "+p.name);
+  const search=`https://search.rakuten.co.jp/search/mall/${kw}/`;
+  if(AFFILIATE.rakutenId){
+    return `https://hb.afl.rakuten.co.jp/hgc/${AFFILIATE.rakutenId}/?pc=${encodeURIComponent(search)}&m=${encodeURIComponent(search)}`;
+  }
+  return search;
+}
+function qoo10Link(p){
+  const kw=encodeURIComponent(p.brand+" "+p.name);
+  return `https://www.qoo10.jp/s/?keyword=${kw}`;
+}
+
+// クリック計測（簡易・localStorage集計）
+function trackClick(shop,id){
+  try{
+    const k="ulabo_clicks";
+    const c=JSON.parse(localStorage.getItem(k)||"{}");
+    const key=shop+":"+id;
+    c[key]=(c[key]||0)+1;
+    localStorage.setItem(k,JSON.stringify(c));
+  }catch(e){}
+}
+function goAffiliate(shop,id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  trackClick(shop,id);
+  const url=shop==="amazon"?amazonLink(p):shop==="rakuten"?rakutenLink(p):qoo10Link(p);
+  window.open(url,"_blank","noopener");
+}
+
+// カテゴリ別カラー（商品イラスト・画像生成用）
+const CAT_COLORS={
+  "化粧水":["#7fb8e6","#e8f3fb"],
+  "美容液":["#d4856a","#faf0eb"],
+  "保湿クリーム":["#e6a96b","#fbf3e8"],
+  "洗顔":["#7fc8b0","#e8f7f1"],
+  "日焼け止め":["#f2c94c","#fdf8e8"],
+  "パック・マスク":["#c89fd4","#f6eefb"],
+  "アイケア":["#e89bb5","#fbecf2"],
+};
+// 著作権フリーのオリジナルSVG商品イラストを生成（カテゴリ別ボトル形状）
+function productImage(p,big){
+  const[c1,c2]=CAT_COLORS[p.category]||["#aaa","#eee"];
+  const h=big?160:120;
+  // カテゴリで容器の形を変える
+  let shape="";
+  if(p.category==="化粧水"||p.category==="美容液"){
+    shape=`<rect x="80" y="55" width="40" height="20" rx="3" fill="${c1}" opacity="0.85"/>
+      <rect x="86" y="40" width="28" height="20" rx="3" fill="${c1}"/>
+      <rect x="70" y="72" width="60" height="78" rx="10" fill="${c1}"/>
+      <rect x="78" y="88" width="44" height="50" rx="4" fill="#fff" opacity="0.25"/>`;
+  }else if(p.category==="保湿クリーム"){
+    shape=`<ellipse cx="100" cy="62" rx="42" ry="12" fill="${c1}"/>
+      <rect x="58" y="62" width="84" height="78" rx="8" fill="${c1}"/>
+      <ellipse cx="100" cy="140" rx="42" ry="12" fill="${c1}" opacity="0.7"/>
+      <ellipse cx="100" cy="62" rx="30" ry="7" fill="#fff" opacity="0.3"/>`;
+  }else if(p.category==="日焼け止め"){
+    shape=`<rect x="88" y="38" width="24" height="16" rx="3" fill="${c1}"/>
+      <rect x="74" y="54" width="52" height="96" rx="14" fill="${c1}"/>
+      <rect x="82" y="74" width="36" height="44" rx="4" fill="#fff" opacity="0.25"/>`;
+  }else if(p.category==="洗顔"){
+    shape=`<path d="M78 50 h44 l-6 100 h-32 z" fill="${c1}"/>
+      <rect x="84" y="40" width="32" height="14" rx="3" fill="${c1}"/>
+      <rect x="86" y="72" width="28" height="40" rx="3" fill="#fff" opacity="0.25"/>`;
+  }else if(p.category==="パック・マスク"){
+    shape=`<rect x="60" y="50" width="80" height="100" rx="8" fill="${c1}"/>
+      <circle cx="100" cy="92" r="26" fill="#fff" opacity="0.3"/>
+      <rect x="74" y="60" width="52" height="8" rx="4" fill="#fff" opacity="0.4"/>`;
+  }else{ // アイケア他：チューブ
+    shape=`<rect x="86" y="40" width="28" height="14" rx="3" fill="${c1}"/>
+      <path d="M78 54 h44 v76 q0 18 -22 18 q-22 0 -22 -18 z" fill="${c1}"/>
+      <rect x="86" y="72" width="28" height="40" rx="3" fill="#fff" opacity="0.25"/>`;
+  }
+  return `<svg viewBox="0 0 200 ${h+40}" width="100%" height="${h+40}" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="${p.brand}の${p.category}イメージ">
+    <rect width="200" height="${h+40}" rx="10" fill="${c2}"/>
+    ${shape}
+    <text x="100" y="${h+10}" text-anchor="middle" font-size="13" fill="${c1}" font-weight="bold">${p.icon} ${p.brand}</text>
+  </svg>`;
+}
+
+let currentFilter="all";
+let favorites=JSON.parse(localStorage.getItem("ulabo_fav")||"[]");
+let compareList=[];
+
+function render(list){
+  const el=document.getElementById("products");
+  if(!list.length){el.innerHTML='<p style="color:var(--txt3);padding:40px 0">該当する商品が見つかりませんでした。</p>';return}
+  el.innerHTML=list.map(p=>`
+    <div class="card" onclick="openDetail(${p.id})">
+      <div class="card-img">${productImage(p)}</div>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <span class="card-tag">${p.category}</span>
+        <span style="font-size:24px">${p.icon}</span>
+      </div>
+      <div class="card-name">${p.name}</div>
+      <div class="card-brand">${p.brand} / ${p.origin||p.skin.join("・")}</div>
+      <div class="card-desc">${p.desc}</div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <span class="stars">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5-Math.round(p.rating))}</span>
+        <span style="font-size:13px;font-weight:700">${p.rating}</span>
+        <span style="font-size:12px;color:var(--txt3)">(${p.reviews.toLocaleString()}件)</span>
+      </div>
+      <div class="card-price">¥${p.price.toLocaleString()} <span>（${PRICE_DATE}時点の参考価格）</span></div>
+      <div class="card-footer" onclick="event.stopPropagation()">
+        <button class="btn btn-secondary" onclick="addToCompare(${p.id})">比較に追加</button>
+        <button class="btn-fav ${favorites.includes(p.id)?'active':''}" onclick="toggleFav(${p.id},this)">♡</button>
+      </div>
+    </div>`).join("");
+}
+
+function applyFilters(){
+  const q=document.getElementById("search").value.toLowerCase();
+  let list=PRODUCTS;
+  if(currentFilter==="アイケア") list=list.filter(p=>p.category==="アイケア");
+  else if(currentFilter!=="all") list=list.filter(p=>p.category===currentFilter);
+  if(q) list=list.filter(p=>
+    p.name.toLowerCase().includes(q)||
+    p.brand.toLowerCase().includes(q)||
+    p.origin.toLowerCase().includes(q)||
+    p.keyIngredients.some(i=>i.toLowerCase().includes(q))
+  );
+  const sort=document.getElementById("sortSelect")?.value||"popular";
+  list=[...list].sort((a,b)=>{
+    if(sort==="rating") return b.rating-a.rating;
+    if(sort==="priceLow") return a.price-b.price;
+    if(sort==="priceHigh") return b.price-a.price;
+    if(sort==="reviews") return b.reviews-a.reviews;
+    return (b.rating*Math.log10(b.reviews+1))-(a.rating*Math.log10(a.reviews+1));
+  });
+  const cnt=document.getElementById("resultCount");
+  if(cnt) cnt.textContent=`${list.length}件の商品`;
+  render(list);
+}
+
+function setFilter(f,btn){
+  currentFilter=f;
+  document.querySelectorAll("#filters .filter-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  applyFilters();
+}
+
+document.getElementById("search").oninput=applyFilters;
+
+function openDetail(id){
+  const p=PRODUCTS.find(x=>x.id===id);
+  if(!p) return;
+  document.getElementById("detailContent").innerHTML=`
+    <div style="background:var(--bg3);border-radius:var(--radius);padding:16px;margin-bottom:16px">${productImage(p,true)}</div>
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
+      <span style="font-size:40px">${p.icon}</span>
+      <div>
+        <div style="font-size:11px;color:var(--accent);font-weight:700;text-transform:uppercase;letter-spacing:1px">${p.category}</div>
+        <div class="badge">${p.brand}</div>
+      </div>
+    </div>
+    <h2>${p.name}</h2>
+    <div style="display:flex;align-items:center;gap:8px;margin:10px 0">
+      <span class="stars">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5-Math.round(p.rating))}</span>
+      <span style="font-weight:700">${p.rating}</span>
+      <span style="color:var(--txt3);font-size:13px">(${p.reviews.toLocaleString()}件のレビュー)</span>
+    </div>
+    <p style="font-size:15px;line-height:1.7;color:var(--txt2);margin:12px 0">${p.desc}</p>
+    <div class="detail-row"><span class="detail-label">参考価格</span><span class="detail-val" style="color:var(--accent)">¥${p.price.toLocaleString()}（${PRICE_DATE}時点）</span></div>
+    <div class="detail-row"><span class="detail-label">適した肌タイプ</span><span class="detail-val">${p.skin.join("・")}</span></div>
+    <div class="detail-row"><span class="detail-label">主な悩みへの対応</span><span class="detail-val">${p.concern.join("・")}</span></div>
+    <div style="margin-top:16px">
+      <div style="font-size:13px;color:var(--txt3);margin-bottom:8px;font-weight:600">主要成分</div>
+      <div class="ingredient-list">
+        ${p.keyIngredients.map((i,idx)=>`<span class="ingredient${idx<2?' key':''}">${i}</span>`).join("")}
+      </div>
+    </div>
+    <div style="margin-top:20px">
+      <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
+        <span class="pr-tag">PR</span>
+        <span style="font-size:12px;color:var(--txt3)">以下は広告リンクです。掲載価格は${PRICE_DATE}時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</span>
+      </div>
+      <div class="shop-btns">
+        ${AFFILIATE.showAmazon?`<button class="shop-btn amazon" onclick="goAffiliate('amazon',${p.id})">Amazonで見る</button>`:""}
+        ${AFFILIATE.showRakuten?`<button class="shop-btn rakuten" onclick="goAffiliate('rakuten',${p.id})">楽天で見る</button>`:""}
+        ${AFFILIATE.showQoo10?`<button class="shop-btn qoo10" onclick="goAffiliate('qoo10',${p.id})">Qoo10で見る</button>`:""}
+      </div>
+      <button class="btn btn-secondary" onclick="addToCompare(${p.id})" style="margin-top:10px;width:100%">比較に追加</button>
+    </div>
+  `;
+  document.getElementById("detailModal").classList.add("open");
+}
+
+function closeModal(id){document.getElementById(id).classList.remove("open")}
+document.querySelectorAll(".modal-overlay").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("open")}));
+
+function toggleFav(id,btn){
+  if(favorites.includes(id)) favorites=favorites.filter(x=>x!==id);
+  else favorites.push(id);
+  localStorage.setItem("ulabo_fav",JSON.stringify(favorites));
+  btn.classList.toggle("active");
+  document.querySelectorAll(".btn-fav").forEach(b=>{
+    const pid=parseInt(b.getAttribute("onclick").match(/\d+/)[0]);
+    if(pid===id) b.classList.toggle("active",favorites.includes(id));
+  });
+}
+
+function addToCompare(id){
+  if(compareList.includes(id)){alert("すでに追加済みです");return}
+  if(compareList.length>=3){alert("比較できるのは最大3商品です");return}
+  compareList.push(id);
+  updateCompareBar();
+}
+function removeFromCompare(id){compareList=compareList.filter(x=>x!==id);updateCompareBar()}
+function clearCompare(){compareList=[];updateCompareBar()}
+function updateCompareBar(){
+  const bar=document.getElementById("compareBar");
+  const items=document.getElementById("compareItems");
+  if(!compareList.length){bar.classList.remove("open");return}
+  bar.classList.add("open");
+  items.innerHTML=compareList.map(id=>{
+    const p=PRODUCTS.find(x=>x.id===id);
+    return `<div class="compare-item">${p.icon} ${p.name.slice(0,14)}… <button onclick="removeFromCompare(${id})">✕</button></div>`;
+  }).join("");
+}
+function openCompareModal(){
+  if(compareList.length<2){alert("2商品以上選択してください");return}
+  const ps=compareList.map(id=>PRODUCTS.find(x=>x.id===id));
+  const rows=[
+    ["カテゴリ",p=>p.category],
+    ["参考価格",p=>`¥${p.price.toLocaleString()}`],
+    ["評価",p=>`${"★".repeat(Math.round(p.rating))} ${p.rating}`],
+    ["レビュー数",p=>`${p.reviews.toLocaleString()}件`],
+    ["適した肌タイプ",p=>p.skin.join("・")],
+    ["対応する悩み",p=>p.concern.join("・")],
+    ["主要成分",p=>p.keyIngredients.join("、")],
+  ];
+  document.getElementById("compareContent").innerHTML=`
+    <h2 style="margin-bottom:20px">商品比較</h2>
+    <div class="compare-table-wrap">
+    <table class="compare-table">
+      <thead><tr><th>項目</th>${ps.map(p=>`<th>${p.icon} ${p.name.slice(0,16)}…</th>`).join("")}</tr></thead>
+      <tbody>${rows.map(([label,fn])=>`
+        <tr><td style="color:var(--txt3);font-weight:600">${label}</td>${ps.map(p=>`<td>${fn(p)}</td>`).join("")}</tr>
+      `).join("")}</tbody>
+    </table></div>
+    <p style="font-size:12px;color:var(--txt3);margin-top:12px">※参考価格は${PRICE_DATE}時点のものです。最新価格は各販売サイトでご確認ください。</p>
+  `;
+  document.getElementById("compareModal").classList.add("open");
+}
+
+function renderBrands(){
+  const counts={};PRODUCTS.forEach(p=>{counts[p.brand]=(counts[p.brand]||0)+1});
+  document.getElementById("brands").innerHTML=BRANDS.map(b=>`
+    <div class="brand-card" onclick="filterByBrand('${b.name}')">
+      <div class="brand-logo">${b.icon}</div>
+      <div class="brand-name">${b.name}</div>
+      <div class="brand-count">${b.origin} · ${counts[b.name]||0}商品</div>
+      <div style="font-size:12px;color:var(--txt3);margin-top:6px">${b.desc}</div>
+    </div>`).join("");
+}
+
+function filterByBrand(brand){
+  showPage("products");
+  currentFilter="all";
+  document.querySelectorAll("#filters .filter-btn").forEach(b=>b.classList.toggle("active",b.dataset.filter==="all"));
+  document.getElementById("search").value=brand;
+  applyFilters();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+let rankFilter="all";
+function setRankFilter(f,btn){
+  rankFilter=f;
+  document.querySelectorAll("#rankFilters .filter-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  renderRanking();
+}
+function renderRanking(){
+  let list=rankFilter==="all"?PRODUCTS:PRODUCTS.filter(p=>p.category===rankFilter);
+  const sorted=[...list].sort((a,b)=>b.rating-a.rating||b.reviews-a.reviews).slice(0,30);
+  document.getElementById("ranking").innerHTML=sorted.map((p,i)=>`
+    <div class="ranking-item" onclick="openDetail(${p.id})">
+      <div class="rank-num ${i===0?'gold':i===1?'silver':i===2?'bronze':''}">${i+1}</div>
+      <div style="font-size:28px">${p.icon}</div>
+      <div class="rank-info">
+        <div class="rank-name">${p.name}</div>
+        <div class="rank-sub">${p.brand} · ${p.category} · ¥${p.price.toLocaleString()}</div>
+        <div style="margin-top:4px">
+          <span class="stars">${"★".repeat(Math.round(p.rating))}</span>
+          <span style="font-size:13px;font-weight:700;margin-left:4px">${p.rating}</span>
+          <span style="font-size:12px;color:var(--txt3);margin-left:6px">${p.reviews.toLocaleString()}件</span>
+        </div>
+      </div>
+      <div style="font-size:18px;font-weight:700;color:var(--accent)">¥${p.price.toLocaleString()}</div>
+    </div>`).join("");
+}
+
+function renderFavorites(){
+  const favEl=document.getElementById("favGrid");
+  if(!favorites.length){
+    favEl.innerHTML='<div class="fav-empty"><div style="font-size:40px;margin-bottom:12px">♡</div>お気に入りはまだありません。<br>商品一覧から♡ボタンで追加できます。</div>';
+    return;
+  }
+  render(PRODUCTS.filter(p=>favorites.includes(p.id)));
+  document.getElementById("favGrid").innerHTML=document.getElementById("products").innerHTML;
+}
+
+async function diagnose(){
+  const getSelected=(id,multi)=>{
+    const els=document.querySelectorAll(`#${id} .q-opt.active`);
+    return multi?[...els].map(e=>e.dataset.val):els[0]?.dataset.val;
+  };
+  const skin=getSelected("q1");
+  const concerns=getSelected("q2",true);
+  const budget=getSelected("q3");
+  if(!skin||!budget){alert("肌タイプと予算を選択してください");return}
+
+  const resultEl=document.getElementById("diagResult");
+  resultEl.style.display="block";
+  resultEl.innerHTML=`
+    <h3>診断結果</h3>
+    <div class="ai-chat">
+      <div style="font-size:13px;color:var(--txt3);margin-bottom:10px">🤖 AI分析中…</div>
+      <div class="loading-dots"><span></span><span></span><span></span></div>
+    </div>`;
+
+  const recommended=PRODUCTS.filter(p=>{
+    const skinMatch=p.skin.includes(skin)||p.skin.includes("普通肌");
+    const budgetOk=budget==="～2,000円"?p.price<=2000:
+      budget==="2,000〜5,000円"?p.price>2000&&p.price<=5000:
+      budget==="5,000〜10,000円"?p.price>5000&&p.price<=10000:p.price>10000;
+    return skinMatch&&budgetOk;
+  }).slice(0,4);
+
+  try{
+    const prompt=`あなたはスキンケアの専門家です。以下の情報をもとに、お客様に最適なスキンケアルーティンをご提案してください。
+- 肌タイプ: ${skin}
+- お悩み: ${concerns.length?concerns.join("、"):"特になし"}
+- 予算: ${budget}
+
+100字程度の簡潔なアドバイスと、以下の商品の中からおすすめ順でコメントをつけてください：
+${recommended.map(p=>`・${p.name}（${p.brand}）: ${p.desc}`).join("\n")}
+
+日本語で、親しみやすいトーンで回答してください。`;
+
+    const res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:800,messages:[{role:"user",content:prompt}]})
+    });
+    const data=await res.json();
+    const aiText=data.content?.[0]?.text||"診断結果を取得できませんでした。";
+
+    resultEl.innerHTML=`
+      <h3>診断結果</h3>
+      <div class="ai-chat">
+        <div style="font-size:12px;color:var(--txt3);margin-bottom:8px">🤖 AIスキンケアアドバイザー</div>
+        <div class="ai-msg">${aiText.replace(/\n/g,"<br>")}</div>
+      </div>
+      <div style="margin-top:20px">
+        <div style="font-size:15px;font-weight:700;margin-bottom:14px">あなたへのおすすめ商品</div>
+        <div class="grid">${recommended.map(p=>`
+          <div class="card" onclick="openDetail(${p.id})">
+            <div class="card-img">${productImage(p)}</div>
+            <div style="display:flex;justify-content:space-between">
+              <span class="card-tag">${p.category}</span>
+              <span style="font-size:24px">${p.icon}</span>
+            </div>
+            <div class="card-name">${p.name}</div>
+            <div class="card-brand">${p.brand}</div>
+            <div class="card-price">¥${p.price.toLocaleString()}</div>
+          </div>`).join("")}
+        </div>
+      </div>`;
+  }catch(e){
+    resultEl.querySelector(".ai-chat").innerHTML=`<div class="ai-msg">
+      <b>${skin}の方へのアドバイス：</b><br>
+      ${concerns.includes("乾燥・かさつき")?"保湿を最優先に、セラミドやヒアルロン酸配合の化粧水・クリームを選びましょう。":""}
+      ${concerns.includes("ニキビ・吹き出物")?"ナイアシンアミドやBHAなど、皮脂コントロール成分が効果的です。":""}
+      ${concerns.includes("シミ・くすみ")?"ビタミンC誘導体やナイアシンアミドで透明感ケアを。":""}
+      ${concerns.includes("シワ・たるみ")?"コラーゲン生成を促すレチノールやビタミンCを取り入れて。":""}
+      ${!concerns.length?"まずは基本の保湿ケアを徹底することが大切です。":""}
+    </div>
+    <div style="font-size:13px;font-weight:700;margin-top:16px">おすすめ商品</div>
+    <div class="grid" style="margin-top:10px">${recommended.map(p=>`
+      <div class="card" onclick="openDetail(${p.id})">
+        <div class="card-img">${productImage(p)}</div>
+        <span class="card-tag">${p.category}</span>
+        <div class="card-name" style="margin-top:8px">${p.name}</div>
+        <div class="card-price">¥${p.price.toLocaleString()}</div>
+      </div>`).join("")}
+    </div>`;
+  }
+
+  resultEl.scrollIntoView({behavior:"smooth"});
+}
+
+document.querySelectorAll(".q-opt").forEach(btn=>{
+  btn.addEventListener("click",function(){
+    const group=this.closest(".q-options");
+    const multi=group.dataset.multi==="true";
+    if(!multi) group.querySelectorAll(".q-opt").forEach(b=>b.classList.remove("active"));
+    this.classList.toggle("active");
+  });
+});
+
+function showPage(name){
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
+  document.getElementById(name+"Page").classList.add("active");
+  const idx=["products","brands","ranking","diagnosis","column","favorites"].indexOf(name);
+  document.querySelectorAll(".nav-btn")[idx]?.classList.add("active");
+  if(name==="brands") renderBrands();
+  if(name==="ranking") renderRanking();
+  if(name==="column") renderColumnList();
+  if(name==="favorites") renderFavorites();
+}
+
+function toggleDark(){
+  const d=document.body.classList.toggle("dark");
+  localStorage.setItem("ulabo_dark",d?"1":"0");
+}
+
+const INFO_PAGES={
+  about:`<h2>運営者情報</h2>
+    <table style="width:100%;line-height:1.8;color:var(--txt2);font-size:14px;border-collapse:collapse">
+      <tr><td style="padding:8px 0;width:120px;color:var(--txt3);vertical-align:top">サイト名</td><td style="padding:8px 0">Moilum（モイルム）</td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">運営者</td><td style="padding:8px 0">Moilum編集部</td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">連絡先</td><td style="padding:8px 0"><a href="mailto:sanji.104vt@gmail.com" style="color:var(--accent)">sanji.104vt@gmail.com</a></td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">運営開始</td><td style="padding:8px 0">2026年</td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">運営目的</td><td style="padding:8px 0">スキンケア商品の比較情報を提供し、肌タイプ・悩みに合った商品選びをサポートすること。</td></tr>
+    </table>
+    <p style="line-height:1.8;color:var(--txt2);font-size:14px;margin-top:14px">当サイトはスキンケア商品の情報を独自にまとめて掲載する比較メディアです。商品の販売は行っておらず、各販売サイト（Amazon・楽天市場・Qoo10等）への送客を行うアフィリエイトサイトです。お問い合わせは上記メールアドレスまでお願いいたします。</p>`,
+  privacy:`<h2>プライバシーポリシー</h2>
+    <p style="line-height:1.8;color:var(--txt2)">当サイトでは、アクセス解析や広告配信のためにCookie等を利用する場合があります。これらは個人を特定する情報を含みません。<br><br>
+    <b>アクセス解析ツール</b><br>当サイトはGoogle Analytics等のアクセス解析ツールを使用する場合があります。トラフィックデータは匿名で収集されます。<br><br>
+    <b>広告について</b><br>当サイトはAmazonアソシエイト、楽天アフィリエイト、Qoo10等の第三者配信の広告サービスを利用しています。これらの広告配信事業者はユーザーの興味に応じた広告を表示するためCookieを使用することがあります。<br><br>
+    ※実際の運用では、利用する解析・広告サービスに合わせて内容を調整してください。</p>`,
+  disclosure:`<h2>アフィリエイトについて（広告表記）</h2>
+    <p style="line-height:1.8;color:var(--txt2)">当サイトのリンクには、Amazon・楽天市場・Qoo10などのアフィリエイトプログラムによる広告（PR）が含まれます。商品リンク経由で購入された場合、当サイトが販売事業者から紹介料を受け取ることがあります。<br><br>
+    購入者の負担が増えることはありません。掲載順位やおすすめは、当サイト独自の基準に基づくものです。<br><br>
+    景品表示法（ステマ規制）に基づき、広告であることを明示しています。</p>`,
+  contact:`<h2>お問い合わせ</h2>
+    <p style="line-height:1.8;color:var(--txt2);font-size:14px">掲載情報の誤りのご指摘、ご意見・ご要望などは、下記メールアドレスまでお気軽にご連絡ください。内容を確認のうえ、順次対応いたします。</p>
+    <p style="line-height:1.8;font-size:15px;margin-top:14px"><b>メール：</b><a href="mailto:sanji.104vt@gmail.com" style="color:var(--accent)">sanji.104vt@gmail.com</a></p>
+    <p style="line-height:1.8;color:var(--txt3);font-size:13px;margin-top:14px">※返信までお時間をいただく場合があります。商品そのものに関する個別のご相談（在庫・配送など）は、各販売サイトへお問い合わせください。</p>`,
+};
+function openInfo(key){
+  document.getElementById("infoContent").innerHTML=INFO_PAGES[key]||"";
+  document.getElementById("infoModal").classList.add("open");
+}
+
+/* ===== コラム記事（オリジナル文章。審査の記事数・独自性対策） ===== */
+const COLUMNS=[
+  {
+    id:"basic-routine",
+    cat:"基礎知識",
+    title:"スキンケアの基本ステップと正しい順番",
+    excerpt:"洗顔・化粧水・美容液・乳液・クリーム。それぞれの役割と、効果を引き出す塗る順番をまとめました。",
+    readtime:"約4分",
+    related:[1,2,33],
+    body:`
+      <p>スキンケアは品数を増やすことより、基本のステップを正しい順番で行うことが大切です。ここでは朝晩共通の考え方を整理します。</p>
+      <h2>1. 洗顔でリセットする</h2>
+      <p>肌の汚れや余分な皮脂を落とすことが、すべてのケアの土台になります。ゴシゴシこすらず、たっぷりの泡でやさしく包むように洗い、ぬるま湯ですすぎましょう。熱いお湯は必要な皮脂まで奪い、乾燥の原因になります。</p>
+      <h2>2. 化粧水で水分を与える</h2>
+      <p>洗顔後は時間を置かず、すぐに化粧水で水分を補給します。手のひらで顔を包み、肌が手に吸いつくまでやさしく押し込むのがコツです。コットンよりも手のほうが摩擦が少なく済みます。</p>
+      <h2>3. 美容液で悩みにアプローチ</h2>
+      <p>美容液は、シミ・くすみ・乾燥・ハリなど、自分の悩みに合わせて選ぶ集中ケアアイテムです。化粧水の後、乳液やクリームの前に使うのが基本です。</p>
+      <h2>4. 乳液・クリームでフタをする</h2>
+      <p>最後に油分を含む乳液やクリームで、与えた水分が蒸発しないようにフタをします。これを省くと、せっかくの化粧水が乾いて逆効果になることもあります。</p>
+      <h2>覚えておきたい考え方</h2>
+      <p>基本は「水分のあるものから油分の多いものへ」という順番です。テクスチャーがさらっとしたものを先に、こっくりしたものを後に使うと覚えておくと迷いません。</p>
+    `,
+  },
+  {
+    id:"skin-type",
+    cat:"肌タイプ",
+    title:"自分の肌タイプの見分け方｜乾燥肌・脂性肌・混合肌・敏感肌",
+    excerpt:"スキンケア選びの第一歩は肌タイプを知ること。簡単なセルフチェックと、タイプ別の選び方を解説します。",
+    readtime:"約5分",
+    related:[1,4,11],
+    body:`
+      <p>同じ商品でも、肌タイプによって合う・合わないは変わります。まずは自分のタイプを知ることが、遠回りしないスキンケアの近道です。</p>
+      <h2>洗顔後の感覚でチェック</h2>
+      <p>洗顔して何もつけずに10分ほど待ったときの肌の状態が、タイプを見分ける手がかりになります。</p>
+      <ul>
+        <li><b>乾燥肌</b>：全体的につっぱる、カサつく</li>
+        <li><b>脂性肌</b>：時間が経つと顔全体がテカる、ベタつく</li>
+        <li><b>混合肌</b>：Tゾーンはテカるのに、頬は乾く</li>
+        <li><b>普通肌</b>：つっぱりもテカりも強くない</li>
+      </ul>
+      <h2>敏感肌について</h2>
+      <p>敏感肌は上記とは別の軸で、刺激に対して反応しやすい状態を指します。新しい化粧品でヒリヒリしたり赤くなりやすい場合は、低刺激処方の商品を選び、使う前にパッチテストをするのが安心です。</p>
+      <h2>タイプ別の選び方のヒント</h2>
+      <p>乾燥肌は保湿力の高いセラミドやヒアルロン酸配合のものを、脂性肌はさっぱりした使用感で皮脂バランスを整えるものを選ぶと失敗しにくくなります。混合肌は部分ごとに使い分けるのも有効です。</p>
+    `,
+  },
+  {
+    id:"ingredients",
+    cat:"成分ガイド",
+    title:"知っておきたい美容成分の基礎｜セラミド・ナイアシンアミド・ビタミンC",
+    excerpt:"パッケージでよく見る人気成分を、はたらきと向いている悩み別にやさしく解説します。",
+    readtime:"約6分",
+    related:[6,8,23],
+    body:`
+      <p>成分の名前と役割をざっくり知っておくと、商品選びがぐっと楽になります。ここでは特によく見かける成分を紹介します。</p>
+      <h2>セラミド｜うるおいを守る</h2>
+      <p>もともと肌の角層にある保湿成分で、水分を抱え込み、外部刺激から肌を守るバリア機能を支えます。乾燥肌・敏感肌の保湿ケアの定番です。</p>
+      <h2>ナイアシンアミド｜多機能な万能選手</h2>
+      <p>ビタミンB3の一種で、保湿、皮脂ケア、キメを整えるなど幅広いはたらきが期待される成分です。さまざまな肌タイプで使いやすいのが魅力です。</p>
+      <h2>ビタミンC（誘導体）｜透明感ケア</h2>
+      <p>くすみやキメの乱れが気になる人に人気の成分です。製品によって配合量や安定性が異なるため、使用感と合わせて選びましょう。刺激を感じる場合は濃度の低いものから始めると安心です。</p>
+      <h2>使うときの注意</h2>
+      <p>高機能な成分ほど、肌に合うかどうかの個人差も出やすくなります。一度にいくつも新しい成分を取り入れず、ひとつずつ試して様子を見るのが安全です。気になる症状が出たら使用を中止し、必要に応じて皮膚科に相談してください。</p>
+    `,
+  },
+  {
+    id:"sunscreen",
+    cat:"紫外線対策",
+    title:"日焼け止めの選び方｜SPFとPAの意味、塗る量の目安",
+    excerpt:"SPF50だけが正解ではありません。シーン別の選び方と、効果を発揮させる使い方を解説します。",
+    readtime:"約4分",
+    related:[50,51,52],
+    body:`
+      <p>紫外線は一年中降り注いでいるため、季節を問わず対策が大切です。数値の意味を知って、シーンに合った日焼け止めを選びましょう。</p>
+      <h2>SPFとPAの違い</h2>
+      <p>SPFは肌が赤くなる原因のUVB、PAはシワ・たるみに関わるUVAを防ぐ目安です。SPFは数値、PAは「＋」の数で強さを表します。</p>
+      <h2>シーン別の選び方</h2>
+      <ul>
+        <li><b>日常（通勤・買い物）</b>：SPF20〜30／PA++程度で十分</li>
+        <li><b>屋外レジャー・スポーツ</b>：SPF50＋／PA++++、汗・水に強いタイプ</li>
+      </ul>
+      <p>数値が高いほど肌への負担が増える傾向もあるため、シーンに合わせて使い分けるのが賢い選び方です。</p>
+      <h2>塗る量と塗り直し</h2>
+      <p>多くの人は塗る量が足りず、表示どおりの効果を得られていません。顔ならパール2個分が目安です。汗をかいたり時間が経ったら、こまめに塗り直すことで効果を保てます。</p>
+    `,
+  },
+  {
+    id:"k-beauty",
+    cat:"トレンド",
+    title:"韓国コスメ（K-Beauty）が人気の理由と選び方",
+    excerpt:"ドクダミ・CICA・PDRNなど話題の成分続々。韓国コスメの特徴と、自分に合う選び方を紹介します。",
+    readtime:"約5分",
+    related:[4,5,21],
+    body:`
+      <p>近年、Qoo10やドラッグストアで存在感を増している韓国コスメ。その人気の背景と、選ぶときのポイントを整理します。</p>
+      <h2>人気の理由</h2>
+      <p>話題の美容成分をいち早く取り入れる新しさ、手に取りやすい価格、そして「低刺激なのに高機能」を両立させた処方が支持されています。鎮静成分を使ったゆらぎ肌ケアの提案も上手です。</p>
+      <h2>よく見る成分</h2>
+      <ul>
+        <li><b>ドクダミ・CICA（ツボクサ）</b>：肌を落ち着かせる鎮静ケア</li>
+        <li><b>PDRN</b>：ハリ・弾力ケアで近年注目</li>
+        <li><b>ナイアシンアミド</b>：くすみ・キメのトータルケア</li>
+      </ul>
+      <h2>選ぶときのポイント</h2>
+      <p>SNSで話題でも、自分の肌タイプと悩みに合うかが一番大切です。成分名だけで判断せず、使用感やレビューも参考にしましょう。海外製品は個人差が出やすいので、最初は少量から試すのがおすすめです。</p>
+    `,
+  },
+];
+
+function renderColumnList(){
+  document.getElementById("columnArticle").style.display="none";
+  document.getElementById("columnList").style.display="grid";
+  document.getElementById("columnList").innerHTML=COLUMNS.map(c=>`
+    <div class="column-card" onclick="openColumn('${c.id}')">
+      <div class="ctag">${c.cat}</div>
+      <h3>${c.title}</h3>
+      <p>${c.excerpt}</p>
+      <div class="readtime">📖 ${c.readtime}</div>
+    </div>`).join("");
+}
+function openColumn(id){
+  const c=COLUMNS.find(x=>x.id===id);
+  if(!c) return;
+  document.getElementById("columnList").style.display="none";
+  const art=document.getElementById("columnArticle");
+  art.style.display="block";
+  const related=(c.related||[]).map(pid=>PRODUCTS.find(p=>p.id===pid)).filter(Boolean);
+  art.innerHTML=`
+    <div class="article">
+      <button class="back-btn" onclick="renderColumnList()">← コラム一覧に戻る</button>
+      <div class="ctag" style="color:var(--accent);font-weight:700;font-size:12px">${c.cat}</div>
+      <h1>${c.title}</h1>
+      <div class="meta">Moilum編集部 ・ ${c.readtime}</div>
+      ${c.body}
+      ${related.length?`<div class="related">
+        <div style="font-size:13px;font-weight:700;margin-bottom:10px">この記事に関連する商品</div>
+        ${related.map(p=>`<div style="margin-bottom:6px"><a onclick="closeColumnToProduct(${p.id})">${p.icon} ${p.name}</a></div>`).join("")}
+      </div>`:""}
+      <p style="font-size:12px;color:var(--txt3);margin-top:24px">※本記事は一般的な情報提供を目的としたもので、医学的助言や効果を保証するものではありません。肌トラブルが続く場合は皮膚科専門医にご相談ください。</p>
+    </div>`;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function closeColumnToProduct(id){
+  showPage("products");
+  openDetail(id);
+}
+
+if(localStorage.getItem("ulabo_dark")==="1") document.body.classList.add("dark");
+
+applyFilters();
+renderBrands();
+</script>
+</body>
+</html>
