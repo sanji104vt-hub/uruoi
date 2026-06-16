@@ -46,7 +46,7 @@ nav{display:flex;gap:4px}
 }
 .dark-btn:hover{border-color:var(--accent);color:var(--accent)}
 
-.page{display:none;padding:24px 20px;max-width:1100px;margin:0 auto}
+.page{display:none;padding:24px 20px;max-width:1400px;margin:0 auto}
 .page.active{display:block}
 
 .search-bar{
@@ -65,7 +65,7 @@ nav{display:flex;gap:4px}
 }
 .filter-btn:hover,.filter-btn.active{background:var(--accent);border-color:var(--accent);color:#fff}
 
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
 .card{
   background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
   padding:18px;transition:box-shadow .2s,transform .2s;cursor:pointer;
@@ -273,6 +273,83 @@ nav{display:flex;gap:4px}
   .modal{padding:20px 16px}
   .modal-grid{grid-template-columns:1fr}
 }
+
+/* ===== ヒーローバナー ===== */
+.hero{position:relative;display:flex;align-items:center;gap:24px;background:linear-gradient(135deg,#fbeee6 0%,#f6e3da 45%,#efd9e4 100%);border-radius:24px;padding:40px 44px;margin-bottom:14px;overflow:hidden}
+.dark .hero{background:linear-gradient(135deg,#2a1f1a 0%,#241a1f 50%,#1d1a24 100%)}
+.hero-text{flex:1;min-width:0;z-index:2}
+.hero-badge{display:inline-block;background:rgba(212,133,106,.16);color:var(--accent);font-size:12px;font-weight:700;padding:5px 14px;border-radius:20px;margin-bottom:14px}
+.hero-title{font-size:34px;font-weight:800;line-height:1.3;letter-spacing:-.5px;margin-bottom:14px;color:#3a2a24}
+.dark .hero-title{color:#f5e9e2}
+.hero-title span{color:var(--accent)}
+.hero-sub{font-size:14px;line-height:1.8;color:#7a655c;margin-bottom:22px}
+.dark .hero-sub{color:#c9b8af}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-btn{padding:13px 26px;border-radius:30px;font-size:14px;font-weight:700;border:none;font-family:inherit;transition:transform .15s,box-shadow .2s}
+.hero-btn.primary{background:var(--accent);color:#fff;box-shadow:0 6px 18px rgba(212,133,106,.4)}
+.hero-btn.primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(212,133,106,.5)}
+.hero-btn.ghost{background:rgba(255,255,255,.6);color:#6a554c;border:1px solid rgba(255,255,255,.8)}
+.dark .hero-btn.ghost{background:rgba(255,255,255,.08);color:#e0d0c8;border-color:rgba(255,255,255,.15)}
+.hero-btn.ghost:hover{transform:translateY(-2px)}
+.hero-visual{position:relative;width:200px;height:180px;flex:none}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.55}
+.blob1{width:130px;height:130px;background:radial-gradient(circle at 30% 30%,#f5c6a8,#e89b7a);top:0;right:10px}
+.blob2{width:90px;height:90px;background:radial-gradient(circle at 40% 40%,#e9b8d0,#d48cae);bottom:6px;right:80px}
+.hero-bottle{position:absolute;left:50%;top:52%;transform:translate(-50%,-50%);z-index:2;display:flex;flex-direction:column;align-items:center}
+.hb-cap{width:30px;height:16px;background:#c9a896;border-radius:5px 5px 2px 2px}
+.hb-neck{width:22px;height:10px;background:#d9bdae}
+.hb-body{width:74px;height:92px;background:linear-gradient(160deg,#fff,#fbeee8);border-radius:14px;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(180,120,90,.25)}
+.hb-body span{font-size:12px;font-weight:800;color:var(--accent)}
+.dark .hb-body{background:linear-gradient(160deg,#3a302b,#2c2521)}
+/* ===== カテゴリ即リンク ===== */
+.cat-quicklinks{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 14px;margin-bottom:6px;-webkit-overflow-scrolling:touch}
+.ql{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:14px 18px;min-width:78px;font-size:12px;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s}
+.ql:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);box-shadow:var(--card-shadow)}
+.ql-ic{font-size:24px}
+/* ===== サイドバーレイアウト ===== */
+.layout-with-sidebar{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start}
+.main-col{min-width:0}
+.sidebar{display:flex;flex-direction:column;gap:18px;position:sticky;top:78px}
+.side-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--card-shadow)}
+.side-card h3{font-size:14px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.side-rank{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity .2s}
+.side-rank:last-child{border-bottom:none}
+.side-rank:hover{opacity:.7}
+.side-rank-num{font-size:15px;font-weight:800;color:var(--accent);min-width:20px;text-align:center}
+.side-rank-num.top{color:#d4a017}
+.side-rank-thumb{width:42px;height:42px;border-radius:8px;object-fit:contain;background:#fff;border:1px solid var(--border);flex:none}
+.side-rank-info{min-width:0;flex:1}
+.side-rank-name{font-size:12px;font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.side-rank-price{font-size:11px;color:var(--accent);font-weight:700;margin-top:2px}
+.side-col-link{display:block;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;font-weight:600;color:var(--txt2);cursor:pointer;transition:color .2s}
+.side-col-link:last-child{border-bottom:none}
+.side-col-link:hover{color:var(--accent)}
+.side-col-link .ct{font-size:10px;color:var(--accent);display:block;margin-bottom:2px}
+.ad-slot{background:repeating-linear-gradient(45deg,var(--bg3),var(--bg3) 10px,var(--bg2) 10px,var(--bg2) 20px);border:1px dashed var(--border2);border-radius:var(--radius);padding:24px 12px;text-align:center;font-size:12px;color:var(--txt3)}
+.related-products{margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+.related-products h3{font-size:15px;font-weight:800;margin-bottom:14px}
+.related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.related-card{background:var(--bg3);border-radius:10px;padding:10px;cursor:pointer;transition:transform .15s}
+.related-card:hover{transform:translateY(-2px)}
+.related-card img{width:100%;height:90px;object-fit:contain;background:#fff;border-radius:6px;margin-bottom:6px}
+.related-card .rc-name{font-size:11px;font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.related-card .rc-price{font-size:12px;color:var(--accent);font-weight:700;margin-top:3px}
+/* ===== カード強化 ===== */
+.card{position:relative;overflow:hidden}
+.card-img{position:relative}
+.origin-flag{position:absolute;top:10px;left:10px;z-index:3;background:rgba(255,255,255,.92);color:#555;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.dark .origin-flag{background:rgba(40,36,33,.92);color:#ccc}
+.card-rank-badge{position:absolute;top:10px;right:10px;z-index:3;background:linear-gradient(135deg,#f5a623,#e0871a);color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;box-shadow:0 2px 8px rgba(224,135,26,.4)}
+.shop-mini{display:flex;gap:5px;margin-top:6px}
+.shop-mini button{flex:1;font-size:11px;font-weight:700;padding:7px 4px;border:none;border-radius:7px;color:#fff;cursor:pointer;transition:opacity .2s}
+.shop-mini button:hover{opacity:.85}
+.sm-amazon{background:#ff9900;color:#1a1a1a}
+.sm-rakuten{background:#bf0000}
+.sm-qoo10{background:#e60012}
+.section-title{position:relative;padding-left:14px}
+.section-title::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:24px;background:linear-gradient(var(--accent),#e0a98a);border-radius:3px}
+@media(max-width:980px){.layout-with-sidebar{grid-template-columns:1fr}.sidebar{position:static}}
+@media(max-width:680px){.hero{flex-direction:column;text-align:center;padding:32px 24px;gap:16px}.hero-visual{width:160px;height:130px}.hero-title{font-size:27px}.hero-actions{justify-content:center}.hero-blob{display:none}}
 </style>
 </head>
 <body>
@@ -293,7 +370,33 @@ nav{display:flex;gap:4px}
 <div class="pr-banner">本サイトはアフィリエイト広告（Amazon・楽天・Qoo10等）を利用しています。価格・在庫は各販売サイトでご確認ください。</div>
 
 <div id="productsPage" class="page active">
+  <section class="hero">
+    <div class="hero-text">
+      <div class="hero-badge">192商品を徹底比較</div>
+      <h1 class="hero-title">あなたの肌に、<br>ぴったりの<span>一本</span>を。</h1>
+      <p class="hero-sub">化粧水・美容液・日焼け止めから、肌タイプ・お悩み・予算で探せる。<br>AI肌診断で、迷わず選べるスキンケア比較サイト。</p>
+      <div class="hero-actions">
+        <button class="hero-btn primary" onclick="showPage('diagnosis')">AI肌診断をはじめる</button>
+        <button class="hero-btn ghost" onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'});document.getElementById('search').focus()">商品をさがす</button>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="hero-blob blob1"></div>
+      <div class="hero-blob blob2"></div>
+      <div class="hero-bottle"><div class="hb-cap"></div><div class="hb-neck"></div><div class="hb-body"><span>Moilum</span></div></div>
+    </div>
+  </section>
+  <div class="cat-quicklinks">
+    <button class="ql" onclick="quickCat('化粧水')"><span class="ql-ic">💧</span>化粧水</button>
+    <button class="ql" onclick="quickCat('美容液')"><span class="ql-ic">✨</span>美容液</button>
+    <button class="ql" onclick="quickCat('保湿クリーム')"><span class="ql-ic">🫙</span>クリーム</button>
+    <button class="ql" onclick="quickCat('日焼け止め')"><span class="ql-ic">☀️</span>UV</button>
+    <button class="ql" onclick="quickCat('洗顔')"><span class="ql-ic">🧼</span>洗顔</button>
+    <button class="ql" onclick="quickCat('パック・マスク')"><span class="ql-ic">🎭</span>マスク</button>
+  </div>
   <div class="section-title">スキンケア商品一覧</div>
+  <div class="layout-with-sidebar">
+    <div class="main-col">
   <div class="search-bar">
     <input id="search" class="search-input" placeholder="商品名・ブランド・成分で検索…">
     <div class="filter-group" id="filters">
@@ -318,6 +421,9 @@ nav{display:flex;gap:4px}
     </select>
   </div>
   <div id="products" class="grid"></div>
+    </div>
+    <aside class="sidebar" id="sidebar"></aside>
+  </div>
 </div>
 
 <div id="brandsPage" class="page">
@@ -600,9 +706,39 @@ const PRODUCTS=[
   {"id": 165, "name": "ファンケル ディープクリア洗顔パウダー", "brand": "ファンケル", "category": "洗顔", "price": 1980, "rating": 4.5, "reviews": 3210, "skin": ["全肌質", "混合肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "酵素＋吸着泥配合の洗顔パウダー。毛穴の黒ずみ・角栓をオフしながら、うるおいを守って洗い上げる。", "keyIngredients": ["プロテアーゼ", "モロッコ溶岩クレイ", "ヒアルロン酸"], "icon": "🧴", "origin": "日本", "purchase": "https://www.amazon.co.jp/", "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakuten24-cosmetics/cabinet/344/4908049568344.jpg?_ex=300x300"},
   {"id": 166, "name": "HotTab 重炭酸入浴剤", "brand": "HotTab", "category": "保湿クリーム", "price": 2750, "rating": 4.4, "reviews": 1876, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき"], "desc": "重炭酸イオンが溶け込む入浴剤。温浴効果を高めて全身ぽかぽか、乾燥肌のボディケアにも人気。", "keyIngredients": ["重炭酸イオン", "ビタミンC"], "icon": "🛁", "origin": "日本", "purchase": "https://www.amazon.co.jp/", "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/coniconi/cabinet/100jyou_2set.jpg?_ex=300x300"},
   {"id": 167, "name": "DEW スペリア ローション コンセントレート", "brand": "カネボウ", "category": "化粧水", "price": 6600, "rating": 4.5, "reviews": 1234, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "ローヤルゼリー配合の濃密保湿化粧水。とろみのある質感で角層まで浸透し、ハリ・うるおいを与える。", "keyIngredients": ["ローヤルゼリーエキス", "ヒアルロン酸", "コラーゲン"], "icon": "💠", "origin": "日本", "purchase": "https://www.amazon.co.jp/", "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/bibian/cabinet/08867360/imgrc0153982594.jpg?_ex=300x300"},
+  {"id": 168, "name": "アテニア スキンクリア クレンズ オイル アロマタイプ", "brand": "アテニア", "category": "洗顔", "price": 1870, "rating": 4.7, "reviews": 5234, "skin": ["全肌質", "乾燥肌"], "concern": ["毛穴の開き・黒ずみ", "乾燥・かさつき"], "desc": "@cosmeベストコスメ総合大賞を連続受賞したクレンジングオイル。毛穴汚れや古い角質をオフし、アロマの香りで癒されながらメイクオフできます。", "keyIngredients": ["ロックローズオイル", "アルガンオイル", "バオバブオイル"], "icon": "🍊", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 169, "name": "トリデン ビタCブライトニングアンプル", "brand": "Torriden", "category": "美容液", "price": 2970, "rating": 4.6, "reviews": 3120, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "ビタミンC配合のブライトニング美容液。みずみずしいテクスチャーで毛穴とくすみにアプローチ、朝のメイク前にもおすすめの韓国人気アンプル。", "keyIngredients": ["ビタミンC", "ナイアシンアミド", "ヒアルロン酸"], "icon": "🍋", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 170, "name": "ナンバーズイン 5番 ビタミンCブライトニングセラム", "brand": "numbuzin", "category": "美容液", "price": 3300, "rating": 4.5, "reviews": 2870, "skin": ["普通肌", "混合肌"], "concern": ["シミ・くすみ"], "desc": "ビタミン系成分を凝縮したブライトニングセラム。くすみのない明るい印象の肌を目指す、韓国で大人気のトーンケア美容液。", "keyIngredients": ["ビタミンC誘導体", "ナイアシンアミド", "ユズエキス"], "icon": "🍊", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 171, "name": "メディヒール マデカソサイド エッセンシャル トナーパッド", "brand": "MEDIHEAL", "category": "化粧水", "price": 2200, "rating": 4.5, "reviews": 3450, "skin": ["敏感肌", "混合肌"], "concern": ["肌荒れ・赤み", "乾燥・かさつき"], "desc": "鎮静成分配合の拭き取り・コットンパッド。角質ケアとうるおい補給を同時に叶える、時短ケアに便利な韓国人気トナーパッド。", "keyIngredients": ["マデカッソシド", "CICA", "パンテノール"], "icon": "🟢", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 172, "name": "ダルバ ウォーターフルトーンアップサンクリーム", "brand": "dalba", "category": "日焼け止め", "price": 2860, "rating": 4.6, "reviews": 4210, "skin": ["全肌質", "乾燥肌"], "concern": ["シミ・くすみ", "乾燥・かさつき"], "desc": "UVケア・補正・保湿が1本で叶うトーンアップ日焼け止め。自然に明るい肌に整え、乾燥しにくいと人気の韓国の万能下地。", "keyIngredients": ["ホワイトトリュフエキス", "ヒアルロン酸", "ビタミンE"], "icon": "🤍", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 173, "name": "ロート製薬 メラノCC 美白パック", "brand": "ロート製薬", "category": "パック・マスク", "price": 990, "rating": 4.4, "reviews": 3210, "skin": ["普通肌", "脂性肌"], "concern": ["シミ・くすみ", "毛穴の開き・黒ずみ"], "desc": "ビタミンC配合の洗い流すタイプの美白パック。気になる毛穴やくすみに密着、プチプラで続けやすい集中ケアアイテム。", "keyIngredients": ["ビタミンC誘導体", "ビタミンE", "グリチルリチン酸"], "icon": "🍊", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 174, "name": "VT シナモロール限定 CICAデイリースージングマスク", "brand": "VT Cosmetics", "category": "パック・マスク", "price": 2970, "rating": 4.6, "reviews": 5430, "skin": ["敏感肌", "混合肌"], "concern": ["肌荒れ・赤み", "乾燥・かさつき"], "desc": "Qoo10で人気No.1常連のシカデイリーマスク。30枚入りで肌荒れ・赤みを鎮静しながらたっぷり保湿、コスパ抜群の韓国シートマスク。", "keyIngredients": ["CICA", "ティーツリー", "ヒアルロン酸"], "icon": "🐰", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 175, "name": "イニスフリー レチノール シカ リペア アンプル", "brand": "イニスフリー", "category": "美容液", "price": 4290, "rating": 4.5, "reviews": 2340, "skin": ["普通肌", "混合肌"], "concern": ["シワ・たるみ", "肌荒れ・赤み"], "desc": "レチノールとCICAを掛け合わせたエイジングケアアンプル。ハリ不足と肌荒れを同時にケア、夜のスペシャルケアに人気の韓国セラム。", "keyIngredients": ["レチノール", "CICA", "スクワラン"], "icon": "🍵", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 176, "name": "ランコム ジェニフィック アルティメ エッセンスローション", "brand": "ランコム", "category": "化粧水", "price": 11550, "rating": 4.7, "reviews": 1870, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "VOCEベストコスメ受賞の発酵化粧水。新鮮なシールド感でうるおいを満たし、お疲れ肌をすばやく整えるリュクスなローション。", "keyIngredients": ["発酵エキス", "ビフィズス菌培養溶解質", "ヒアルロン酸"], "icon": "🌸", "origin": "フランス", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 177, "name": "コーセー 米肌 肌潤改善エッセンス", "brand": "コーセー", "category": "美容液", "price": 8800, "rating": 4.6, "reviews": 2140, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "ライスパワーNo.11配合で肌の水分保持能を改善する薬用美容液。乾燥による小じわにもアプローチする実力派の集中ケア。", "keyIngredients": ["ライスパワーNo.11", "ビタミンC誘導体", "グリセリン"], "icon": "🍚", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 178, "name": "ESTÉE LAUDER アドバンス ナイト リペア SMR コンプレックス", "brand": "エスティローダー", "category": "美容液", "price": 15400, "rating": 4.7, "reviews": 3420, "skin": ["全肌質", "乾燥肌"], "concern": ["シワ・たるみ", "シミ・くすみ"], "desc": "夜の集中補修に着目した名品美容液の最新世代。うるおいとハリを与え、翌朝のなめらかな肌コンディションを整える茶色いボトル。", "keyIngredients": ["クロノラックス", "ヒアルロン酸", "酵母エキス"], "icon": "🟤", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 179, "name": "VT リードルショット 300", "brand": "VT Cosmetics", "category": "美容液", "price": 4950, "rating": 4.5, "reviews": 3870, "skin": ["普通肌", "混合肌"], "concern": ["毛穴の開き・黒ずみ", "シワ・たるみ"], "desc": "塗る針コンセプトで人気のリードルショットの高濃度タイプ。スパイキュール配合でキメ・毛穴・なめらかさにアプローチする韓国セラム。", "keyIngredients": ["スパイキュール", "ナイアシンアミド", "EGF様ペプチド"], "icon": "💉", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 180, "name": "Torriden ダイブイン マイクロ ヒアルロン酸 トナーパッド", "brand": "Torriden", "category": "化粧水", "price": 2640, "rating": 4.6, "reviews": 2980, "skin": ["敏感肌", "乾燥肌", "混合肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "低分子ヒアルロン酸配合のトナーパッド。角質ケアと保湿を同時に行え、肌をなめらかに整える人気のダイブインシリーズ。", "keyIngredients": ["低分子ヒアルロン酸", "パンテノール", "アラントイン"], "icon": "🌊", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 181, "name": "SKIN&LAB バクチオール0.2% アイセラム", "brand": "SKIN&LAB", "category": "アイケア", "price": 3600, "rating": 4.4, "reviews": 1230, "skin": ["普通肌", "乾燥肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "レチノール代替成分として注目のバクチオール配合アイセラム。目もとのハリ・小じわをやさしくケアする低刺激処方の韓国アイクリーム。", "keyIngredients": ["バクチオール", "ペプチド", "ヒアルロン酸"], "icon": "👁️", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 182, "name": "カネボウ ヴェイル オブ デイ／ナイト", "brand": "カネボウ", "category": "保湿クリーム", "price": 6600, "rating": 4.5, "reviews": 1540, "skin": ["全肌質", "乾燥肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "朝用・夜用で使い分ける保湿クリーム。日中は紫外線・乾燥から守り、夜はうるおいを与えて整える、肌のリズムに着目した名品。", "keyIngredients": ["ヒアルロン酸", "コラーゲン", "植物エキス"], "icon": "🌗", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 183, "name": "ファンケル エンリッチプラス 乳液 II", "brand": "ファンケル", "category": "保湿クリーム", "price": 1870, "rating": 4.5, "reviews": 2340, "skin": ["乾燥肌", "敏感肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "コラーゲンとハリ成分配合の無添加エイジングケア乳液。うるおいとハリを与えながら、敏感肌にもやさしく使える人気アイテム。", "keyIngredients": ["アディポジェネシス", "コラーゲン", "ヒアルロン酸"], "icon": "🌸", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 184, "name": "Abib ヒアルロン酸 ジェルクリーム チューブ", "brand": "Abib", "category": "保湿クリーム", "price": 2530, "rating": 4.5, "reviews": 1980, "skin": ["乾燥肌", "混合肌"], "concern": ["乾燥・かさつき"], "desc": "5種のヒアルロン酸配合のみずみずしいジェルクリーム。ベタつかずにうるおいを閉じ込める、韓国で人気の保湿クリーム。", "keyIngredients": ["ヒアルロン酸5種", "パンテノール", "アラントイン"], "icon": "💧", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 185, "name": "ロート製薬 オバジ ダーマパワーX ステムシャープアイ", "brand": "ロート製薬", "category": "アイケア", "price": 6050, "rating": 4.4, "reviews": 1340, "skin": ["普通肌", "乾燥肌"], "concern": ["シワ・たるみ"], "desc": "目もと・口もとのハリにアプローチするアイクリーム。コラーゲン由来成分配合で、年齢サインが気になる部分を集中ケア。", "keyIngredients": ["コラーゲンペプチド", "ナイアシンアミド", "アミノ酸"], "icon": "👁️", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 186, "name": "CNP Laboratory プロポリス エナジー アンプル", "brand": "CNP", "category": "美容液", "price": 3960, "rating": 4.5, "reviews": 2670, "skin": ["乾燥肌", "敏感肌"], "concern": ["乾燥・かさつき", "肌荒れ・赤み"], "desc": "プロポリスエキス高配合のとろみアンプル。うるおいとツヤを与えながら肌をすこやかに整える、韓国皮膚科学コスメの人気美容液。", "keyIngredients": ["プロポリスエキス", "ハチミツ", "パンテノール"], "icon": "🐝", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 187, "name": "ビオレ UV キービジュアルデザイン アクアリッチ ライトアップエッセンス", "brand": "花王", "category": "日焼け止め", "price": 1100, "rating": 4.6, "reviews": 4520, "skin": ["全肌質", "混合肌"], "concern": ["シミ・くすみ"], "desc": "SPF50+ PA++++。みずみずしいエッセンスで自然にトーンアップ。白浮きせず化粧下地にも使える、プチプラUVの定番進化版。", "keyIngredients": ["ヒアルロン酸", "ローヤルゼリーエキス", "ビタミンC誘導体"], "icon": "🌟", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 188, "name": "ドゥ・ラ・メール クレーム ドゥ・ラ・メール", "brand": "ドゥ・ラ・メール", "category": "保湿クリーム", "price": 38500, "rating": 4.7, "reviews": 1230, "skin": ["乾燥肌", "普通肌"], "concern": ["乾燥・かさつき", "シワ・たるみ"], "desc": "独自の発酵成分ミラクルブロス配合の高級保湿クリーム。濃密にうるおい、乾燥した肌をふっくらと健やかに整える名門ブランドの代表作。", "keyIngredients": ["ミラクルブロス", "海藻エキス", "ライムティー"], "icon": "🌊", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 189, "name": "ハダクリエ ナイアシンアミド モイストローション", "brand": "花王", "category": "化粧水", "price": 1320, "rating": 4.3, "reviews": 1670, "skin": ["乾燥肌", "普通肌"], "concern": ["シワ・たるみ", "乾燥・かさつき"], "desc": "ナイアシンアミド配合のプチプラ高保湿化粧水。とろみのあるテクスチャーで、うるおいとハリをチャージするデイリーケア向け。", "keyIngredients": ["ナイアシンアミド", "ヒアルロン酸", "グリセリン"], "icon": "💧", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 190, "name": "rom&nd グラスティング メルティング バーム", "brand": "rom&nd", "category": "アイケア", "price": 1320, "rating": 4.4, "reviews": 2130, "skin": ["全肌質"], "concern": ["乾燥・かさつき"], "desc": "うるおいとツヤを与えるリップバーム。とろけるような塗り心地で唇の乾燥を防ぐ、韓国で人気のグラスティングシリーズ。", "keyIngredients": ["ヒアルロン酸", "植物オイル", "シアバター"], "icon": "💋", "origin": "韓国", "purchase": "https://www.qoo10.jp/"},
+  {"id": 191, "name": "メンソレータム アクネス25 メディカルミルク", "brand": "ロート製薬", "category": "保湿クリーム", "price": 1078, "rating": 4.3, "reviews": 2450, "skin": ["脂性肌", "混合肌"], "concern": ["ニキビ・吹き出物", "乾燥・かさつき"], "desc": "ニキビを防ぐ薬用乳液。うるおいを与えながら肌のバランスを整える、思春期・大人ニキビ向けのプチプラ保湿アイテム。", "keyIngredients": ["イソプロピルメチルフェノール", "ビタミンC誘導体", "ヒアルロン酸"], "icon": "💚", "origin": "日本", "purchase": "https://www.amazon.co.jp/"},
+  {"id": 192, "name": "Kiehl's レチノール スキン-リニューイング デイリー マイクロ-ドーズ セラム", "brand": "キールズ", "category": "美容液", "price": 8800, "rating": 4.5, "reviews": 1760, "skin": ["普通肌", "混合肌"], "concern": ["シワ・たるみ", "毛穴の開き・黒ずみ"], "desc": "毎日使える低刺激設計のレチノール美容液。マイクロドーズ処方でハリ・キメ・なめらかさを整える、エイジングケア入門にも人気。", "keyIngredients": ["レチノール", "ペプチド", "セラミド"], "icon": "🌙", "origin": "アメリカ", "purchase": "https://www.amazon.co.jp/"},
 ];
 
 const BRANDS=[
+  {"name":"アテニア","icon":"🍊","origin":"日本","desc":"@cosme大賞常連のコスパブランド"},
+  {"name":"dalba","icon":"🤍","origin":"韓国","desc":"トリュフ由来の万能スキンケア"},
+  {"name":"SKIN&LAB","icon":"🧪","origin":"韓国","desc":"皮膚科学ベースのK-Beauty"},
+  {"name":"ドゥ・ラ・メール","icon":"🌊","origin":"アメリカ","desc":"ミラクルブロスの高級ブランド"},
+
   {"name": "ロート製薬", "icon": "🧪", "origin": "日本", "desc": "プチプラから機能性まで幅広い製薬大手"},
   {"name": "資生堂", "icon": "👑", "origin": "日本", "desc": "日本を代表するブランド"},
   {"name": "コーセー", "icon": "💎", "origin": "日本", "desc": "米肌・雪肌精で有名な大手"},
@@ -808,27 +944,73 @@ let compareList=[];
 function render(list){
   const el=document.getElementById("products");
   if(!list.length){el.innerHTML='<p style="color:var(--txt3);padding:40px 0">該当する商品が見つかりませんでした。</p>';return}
-  el.innerHTML=list.map(p=>`
+  const flag={"日本":"🇯🇵","韓国":"🇰🇷","フランス":"🇫🇷","アメリカ":"🇺🇸","ドイツ":"🇩🇪","台湾":"🇹🇼","カナダ":"🇨🇦","モロッコ":"🇲🇦","イタリア":"🇮🇹"};
+  el.innerHTML=list.map((p,i)=>`
     <div class="card" onclick="openDetail(${p.id})">
-      <div class="card-img">${productImage(p)}</div>
+      <div class="card-img">
+        ${flag[p.origin]?`<span class="origin-flag">${flag[p.origin]} ${p.origin}</span>`:""}
+        ${i<3?`<span class="card-rank-badge">🏆 ${i+1}位</span>`:""}
+        ${productImage(p)}
+      </div>
       <div style="display:flex;justify-content:space-between;align-items:flex-start">
         <span class="card-tag">${p.category}</span>
         <span style="font-size:24px">${p.icon}</span>
       </div>
       <div class="card-name">${p.name}</div>
-      <div class="card-brand">${p.brand} / ${p.origin||p.skin.join("・")}</div>
+      <div class="card-brand">${p.brand}</div>
       <div class="card-desc">${p.desc}</div>
       <div style="display:flex;align-items:center;gap:8px">
         <span class="stars">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5-Math.round(p.rating))}</span>
         <span style="font-size:13px;font-weight:700">${p.rating}</span>
         <span style="font-size:12px;color:var(--txt3)">(${p.reviews.toLocaleString()}件)</span>
       </div>
-      <div class="card-price">¥${p.price.toLocaleString()} <span>（${PRICE_DATE}時点の参考価格）</span></div>
+      <div class="card-price">¥${p.price.toLocaleString()} <span>（${PRICE_DATE}時点）</span></div>
+      <div class="shop-mini" onclick="event.stopPropagation()">
+        ${AFFILIATE.showAmazon?`<button class="sm-amazon" onclick="goAffiliate('amazon',${p.id})">Amazon</button>`:""}
+        ${AFFILIATE.showRakuten?`<button class="sm-rakuten" onclick="goAffiliate('rakuten',${p.id})">楽天</button>`:""}
+        ${AFFILIATE.showQoo10?`<button class="sm-qoo10" onclick="goAffiliate('qoo10',${p.id})">Qoo10</button>`:""}
+      </div>
       <div class="card-footer" onclick="event.stopPropagation()">
         <button class="btn btn-secondary" onclick="addToCompare(${p.id})">比較に追加</button>
         <button class="btn-fav ${favorites.includes(p.id)?'active':''}" onclick="toggleFav(${p.id},this)">♡</button>
       </div>
     </div>`).join("");
+}
+
+// 小サムネイル
+function productThumb(p){
+  if(p.image) return `<img class="side-rank-thumb" src="${p.image}" alt="${p.name}" loading="lazy">`;
+  return `<div class="side-rank-thumb" style="display:flex;align-items:center;justify-content:center;font-size:20px">${p.icon}</div>`;
+}
+
+// 右サイドバー
+function renderSidebar(){
+  const sb=document.getElementById("sidebar");
+  if(!sb) return;
+  const top5=[...PRODUCTS].sort((a,b)=>(b.rating*Math.log10(b.reviews+1))-(a.rating*Math.log10(a.reviews+1))).slice(0,5);
+  const cols=(typeof COLUMNS!=="undefined"?COLUMNS:[]).slice(0,3);
+  sb.innerHTML=`
+    <div class="side-card">
+      <h3>🏆 人気ランキング TOP5</h3>
+      ${top5.map((p,i)=>`
+        <div class="side-rank" onclick="openDetail(${p.id})">
+          <div class="side-rank-num ${i<3?'top':''}">${i+1}</div>
+          ${productThumb(p)}
+          <div class="side-rank-info">
+            <div class="side-rank-name">${p.name}</div>
+            <div class="side-rank-price">¥${p.price.toLocaleString()}</div>
+          </div>
+        </div>`).join("")}
+    </div>
+    ${cols.length?`<div class="side-card">
+      <h3>📖 新着コラム</h3>
+      ${cols.map(c=>`<div class="side-col-link" onclick="showPage('column');setTimeout(()=>openColumn('${c.id}'),50)">
+        <span class="ct">${c.cat}</span>${c.title}
+      </div>`).join("")}
+    </div>`:""}
+    <div class="side-card" style="padding:0;overflow:hidden">
+      <div class="ad-slot">広告スペース<br><span style="font-size:11px">（Googleアドセンス等の設置枠）</span></div>
+    </div>`;
 }
 
 function applyFilters(){
@@ -863,6 +1045,14 @@ function setFilter(f,btn){
 }
 
 document.getElementById("search").oninput=applyFilters;
+
+function quickCat(cat){
+  currentFilter=cat;
+  document.querySelectorAll("#filters .filter-btn").forEach(b=>b.classList.toggle("active",b.dataset.filter===cat));
+  document.getElementById("search").value="";
+  applyFilters();
+  document.querySelector(".search-bar").scrollIntoView({behavior:"smooth",block:"start"});
+}
 
 function openDetail(id){
   const p=PRODUCTS.find(x=>x.id===id);
@@ -904,8 +1094,30 @@ function openDetail(id){
       </div>
       <button class="btn btn-secondary" onclick="addToCompare(${p.id})" style="margin-top:10px;width:100%">比較に追加</button>
     </div>
+    ${relatedProductsHtml(p)}
   `;
   document.getElementById("detailModal").classList.add("open");
+}
+
+// 関連商品（同カテゴリ＋共通の悩み、最大4件）
+function relatedProductsHtml(p){
+  const rel=PRODUCTS.filter(x=>x.id!==p.id&&(x.category===p.category||x.concern.some(c=>p.concern.includes(c))))
+    .sort((a,b)=>{
+      const aS=(a.category===p.category?2:0)+a.concern.filter(c=>p.concern.includes(c)).length;
+      const bS=(b.category===p.category?2:0)+b.concern.filter(c=>p.concern.includes(c)).length;
+      return bS-aS||b.rating-a.rating;
+    }).slice(0,4);
+  if(!rel.length) return "";
+  return `<div class="related-products">
+    <h3>こちらもおすすめ</h3>
+    <div class="related-grid">
+      ${rel.map(r=>`<div class="related-card" onclick="openDetail(${r.id})">
+        ${r.image?`<img src="${r.image}" alt="${r.name}" loading="lazy">`:`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${r.icon}</div>`}
+        <div class="rc-name">${r.name}</div>
+        <div class="rc-price">¥${r.price.toLocaleString()}</div>
+      </div>`).join("")}
+    </div>
+  </div>`;
 }
 
 function closeModal(id){document.getElementById(id).classList.remove("open")}
@@ -1376,6 +1588,7 @@ if(localStorage.getItem("ulabo_dark")==="1") document.body.classList.add("dark")
 
 applyFilters();
 renderBrands();
+renderSidebar();
 </script>
 </body>
 </html>
