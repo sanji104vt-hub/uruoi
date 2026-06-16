@@ -386,6 +386,26 @@ nav{display:flex;gap:4px}
 .section-title::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:24px;background:linear-gradient(var(--accent),#e0a98a);border-radius:3px}
 @media(max-width:980px){.layout-with-sidebar{grid-template-columns:1fr}.sidebar{position:static}}
 @media(max-width:680px){.hero{flex-direction:column;text-align:center;padding:32px 24px;gap:16px}.hero-visual{width:160px;height:130px}.hero-title{font-size:27px}.hero-actions{justify-content:center}.hero-blob{display:none}}
+
+/* ===== 複合フィルターパネル ===== */
+.filter-panel{margin-bottom:14px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--bg2)}
+.filter-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;padding:12px 16px;background:none;border:none;font-family:inherit;font-size:14px;font-weight:700;color:var(--txt);cursor:pointer}
+.filter-toggle:hover{background:var(--bg3)}
+.filter-body{display:none;padding:8px 16px 16px;border-top:1px solid var(--border)}
+.filter-body.open{display:block}
+.filter-row{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.filter-row:last-of-type{border-bottom:none}
+.filter-label{font-size:13px;font-weight:700;color:var(--txt2);min-width:64px;padding-top:6px}
+.filter-chips{display:flex;flex-wrap:wrap;gap:6px;flex:1}
+.chip{background:var(--bg3);border:1px solid var(--border2);border-radius:20px;padding:6px 13px;font-size:12px;color:var(--txt2);cursor:pointer;transition:all .15s;font-family:inherit}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.chip.active{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:600}
+.filter-reset{background:none;border:none;color:var(--txt3);font-size:12px;cursor:pointer;text-decoration:underline;font-family:inherit;padding:4px}
+.filter-reset:hover{color:var(--accent)}
+.filter-badge{display:inline-block;background:var(--accent);color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px}
+@media(max-width:600px){.filter-row{flex-direction:column;gap:6px}.filter-label{padding-top:0}}
+.section-rec{margin:14px 0 4px}
+.section-rec-label{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px}
 </style>
 <script type="application/ld+json">
 {
@@ -1288,6 +1308,50 @@ nav{display:flex;gap:4px}
       <button class="filter-btn" data-filter="日焼け止め" onclick="setFilter('日焼け止め',this)">日焼け止め</button>
       <button class="filter-btn" data-filter="パック・マスク" onclick="setFilter('パック・マスク',this)">マスク</button>
       <button class="filter-btn" data-filter="アイケア" onclick="setFilter('アイケア',this)">その他</button>
+    </div>
+  </div>
+  <div class="filter-panel">
+    <button class="filter-toggle" onclick="toggleFilterPanel()">
+      <span>🔍 詳しく絞り込む</span>
+      <span id="filterToggleIcon">▼</span>
+    </button>
+    <div class="filter-body" id="filterBody">
+      <div class="filter-row">
+        <div class="filter-label">価格帯</div>
+        <div class="filter-chips" id="priceChips">
+          <button class="chip" data-price="all" onclick="setMultiFilter('price','all',this)">すべて</button>
+          <button class="chip" data-price="0-2000" onclick="setMultiFilter('price','0-2000',this)">〜2,000円</button>
+          <button class="chip" data-price="2000-5000" onclick="setMultiFilter('price','2000-5000',this)">2,000〜5,000円</button>
+          <button class="chip" data-price="5000-10000" onclick="setMultiFilter('price','5000-10000',this)">5,000〜10,000円</button>
+          <button class="chip" data-price="10000-999999" onclick="setMultiFilter('price','10000-999999',this)">10,000円〜</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-label">肌タイプ</div>
+        <div class="filter-chips" id="skinChips">
+          <button class="chip" data-skin="all" onclick="setMultiFilter('skin','all',this)">すべて</button>
+          <button class="chip" data-skin="乾燥肌" onclick="setMultiFilter('skin','乾燥肌',this)">乾燥肌</button>
+          <button class="chip" data-skin="脂性肌" onclick="setMultiFilter('skin','脂性肌',this)">脂性肌</button>
+          <button class="chip" data-skin="混合肌" onclick="setMultiFilter('skin','混合肌',this)">混合肌</button>
+          <button class="chip" data-skin="敏感肌" onclick="setMultiFilter('skin','敏感肌',this)">敏感肌</button>
+          <button class="chip" data-skin="普通肌" onclick="setMultiFilter('skin','普通肌',this)">普通肌</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-label">お悩み</div>
+        <div class="filter-chips" id="concernChips">
+          <button class="chip" data-concern="all" onclick="setMultiFilter('concern','all',this)">すべて</button>
+          <button class="chip" data-concern="乾燥・かさつき" onclick="setMultiFilter('concern','乾燥・かさつき',this)">乾燥</button>
+          <button class="chip" data-concern="毛穴の開き・黒ずみ" onclick="setMultiFilter('concern','毛穴の開き・黒ずみ',this)">毛穴・黒ずみ</button>
+          <button class="chip" data-concern="シミ・くすみ" onclick="setMultiFilter('concern','シミ・くすみ',this)">シミ・くすみ</button>
+          <button class="chip" data-concern="ニキビ・吹き出物" onclick="setMultiFilter('concern','ニキビ・吹き出物',this)">ニキビ</button>
+          <button class="chip" data-concern="シワ・たるみ" onclick="setMultiFilter('concern','シワ・たるみ',this)">シワ・たるみ</button>
+          <button class="chip" data-concern="肌荒れ・赤み" onclick="setMultiFilter('concern','肌荒れ・赤み',this)">肌荒れ・赤み</button>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <button class="filter-reset" onclick="resetFilters()">条件をリセット</button>
+      </div>
     </div>
   </div>
   <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;flex-wrap:wrap;gap:10px">
@@ -2283,16 +2347,20 @@ const COLUMNS=[
       <h2>黒ずみ毛穴のケア</h2>
       <p>黒ずみの正体は、皮脂と角質が混ざって詰まった「角栓」が酸化したものです。無理に押し出すと毛穴が広がり逆効果。やさしく溶かし出すケアが基本です。</p>
       <p>クレンジングや洗顔で皮脂・角質をていねいにオフし、その後の保湿で肌のバランスを整えます。ヘチマエキスや酵素を配合したクレンジング、ドクダミなど鎮静成分を含む化粧水が、毛穴ケアと肌荒れ予防を両立してくれます。ゴシゴシこすらず、毎日の積み重ねでケアすることが大切です。</p>
+      <div class="section-rec" data-ids="53,164,4"></div>
 
       <h2>開き毛穴のケア</h2>
       <p>開き毛穴は、過剰な皮脂が主な原因です。皮脂を取りすぎると、かえって肌が皮脂を出そうとするため、「落としすぎない・保湿する」のバランスが鍵になります。ナイアシンアミドやビタミンCなど、皮脂やキメにアプローチする成分配合のアイテムが向いています。</p>
+      <div class="section-rec" data-ids="90,103,48"></div>
 
       <h2>たるみ毛穴のケア</h2>
       <p>たるみ毛穴は、肌のハリ低下が背景にあります。保湿に加えて、レチノールやビタミンC、ペプチドなど、ハリ・弾力をサポートする成分を取り入れるとよいでしょう。エイジングケアの視点が必要なタイプです。</p>
+      <div class="section-rec" data-ids="24,175,121"></div>
 
       <h2>毛穴ケアで共通して大切なこと</h2>
       <p>どのタイプにも共通するのは、「保湿」と「紫外線対策」です。乾燥すると皮脂が過剰になり、紫外線は毛穴のたるみを進めます。毎日の保湿と日焼け止めは、毛穴ケアの土台です。</p>
       <p>下の「こちらもおすすめ」から、毛穴ケアに向いたクレンジング・化粧水・美容液の詳細や参考価格を比較できます。自分の毛穴タイプに合わせて選んでみてください。</p>
+      <div class="section-rec" data-ids="11,56"></div>
 
       <h2>注意：セルフケアで改善しないとき</h2>
       <p>毛穴の状態が気になりすぎて頻繁に触ってしまったり、市販品で改善しない場合は、皮膚科や美容皮膚科で相談する選択肢もあります。専門的な施術が適している場合もあります。肌をこすりすぎないことが、毛穴悪化を防ぐ一番のポイントです。</p>
@@ -2567,7 +2635,25 @@ function openColumn(id){
       </div>`:""}
       <p style="font-size:12px;color:var(--txt3);margin-top:24px">※本記事は一般的な情報提供を目的としたもので、医学的助言や効果を保証するものではありません。肌トラブルが続く場合は皮膚科専門医にご相談ください。</p>
     </div>`;
+  renderSectionRecs();
   window.scrollTo({top:0,behavior:"smooth"});
+}
+
+// コラム本文の .section-rec マーカーに、data-ids の商品カードを描画（PRODUCTSから動的生成）
+function renderSectionRecs(){
+  document.querySelectorAll(".section-rec").forEach(el=>{
+    const ids=(el.dataset.ids||"").split(",").map(s=>parseInt(s.trim())).filter(Boolean);
+    const items=ids.map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+    if(!items.length){el.innerHTML="";return}
+    el.innerHTML=`<div class="section-rec-label">🧴 このセクションでおすすめの商品</div>
+      <div class="related-grid">
+        ${items.map(r=>`<div class="related-card" onclick="closeColumnToProduct(${r.id})">
+          ${r.image?`<img src="${r.image}" alt="${r.name}" loading="lazy">`:`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${r.icon}</div>`}
+          <div class="rc-name">${r.name}</div>
+          <div class="rc-price">¥${r.price.toLocaleString()}</div>
+        </div>`).join("")}
+      </div>`;
+  });
 }
 function closeColumnToProduct(id){
   showPage("products");
