@@ -1431,6 +1431,12 @@ nav{display:flex;gap:4px}
     <button class="filter-btn" data-rf="日焼け止め" onclick="setRankFilter('日焼け止め',this)">日焼け止め</button>
     <button class="filter-btn" data-rf="パック・マスク" onclick="setRankFilter('パック・マスク',this)">マスク</button>
   </div>
+  <div class="filter-group" id="rankPriceFilters" style="margin-bottom:20px">
+    <button class="filter-btn active" data-rp="all" onclick="setRankPrice('all',this)">価格すべて</button>
+    <button class="filter-btn" data-rp="0-5000" onclick="setRankPrice('0-5000',this)">〜5,000円</button>
+    <button class="filter-btn" data-rp="5000-10000" onclick="setRankPrice('5000-10000',this)">5,000〜10,000円</button>
+    <button class="filter-btn" data-rp="10000-999999" onclick="setRankPrice('10000-999999',this)">10,000円〜</button>
+  </div>
   <div id="ranking" class="ranking-list"></div>
 </div>
 
@@ -2325,40 +2331,63 @@ function filterByBrand(brand){
 }
 
 let rankFilter="all";
+let rankPrice="all";
 function setRankFilter(f,btn){
   rankFilter=f;
   document.querySelectorAll("#rankFilters .filter-btn").forEach(b=>b.classList.remove("active"));
   btn.classList.add("active");
   renderRanking();
 }
+function setRankPrice(p,btn){
+  rankPrice=p;
+  document.querySelectorAll("#rankPriceFilters .filter-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  renderRanking();
+}
 function renderRanking(){
   let list=rankFilter==="all"?PRODUCTS:PRODUCTS.filter(p=>p.category===rankFilter);
-  const sorted=[...list].sort((a,b)=>b.rating-a.rating||b.reviews-a.reviews).slice(0,30);
-  // 順位の理由を生成（客観データから）
-  const reason=(p,i)=>{
+  // 価格帯で絞り込み
+  if(rankPrice!=="all"){
+    const [lo,hi]=rankPrice.split("-").map(Number);
+    list=list.filter(p=>p.price>=lo&&p.price<hi);
+  }
+  // 複合スコア：評価ベースの人気＋コスパ＋中身（コスパ重視で高すぎる商品が上位に来にくい）
+  const score=p=>{
+    const s=productScores(p);
+    const popularity=s.overall + Math.min(Math.log10(p.reviews+10),4)*0.4;
+    return popularity*0.45 + s.cospa*0.40 + ((s.moist+s.mild)/2)*0.15;
+  };
+  const sorted=[...list].sort((a,b)=>score(b)-score(a)).slice(0,20);
+  const reason=p=>{
+    const s=productScores(p);
     const parts=[];
+    if(s.cospa>=4.3) parts.push("コスパ良好");
     if(p.rating>=4.7) parts.push(`高評価★${p.rating}`);
     else if(p.rating>=4.5) parts.push(`評価★${p.rating}`);
-    if(p.reviews>=5000) parts.push(`レビュー${(p.reviews/1000).toFixed(0)}千件超の支持`);
-    else if(p.reviews>=2000) parts.push(`レビュー${(p.reviews/1000).toFixed(1)}千件`);
-    if(p.price<=1500) parts.push("手に取りやすい価格");
-    if(p.skin.includes("敏感肌")) parts.push("敏感肌にも対応");
+    if(p.reviews>=5000) parts.push(`${Math.round(p.reviews/1000)}千件超の支持`);
+    if(s.moist>=4.5) parts.push("高保湿");
+    if(s.mild>=4.5) parts.push("低刺激");
     return parts.slice(0,2).join("・")||"総合バランスの良さ";
   };
   const rankEl=document.getElementById("ranking");
-  rankEl.innerHTML=`<div class="rank-criteria">📊 このランキングは、ユーザー評価（★）とレビュー件数をもとに集計しています。各商品の「選ばれる理由」も表示しています。</div>`+sorted.map((p,i)=>`
+  const priceLabel=rankPrice==="all"?"":` / ${rankPrice==="0-5000"?"〜5,000円":rankPrice==="5000-10000"?"5,000〜10,000円":"10,000円〜"}`;
+  if(!sorted.length){
+    rankEl.innerHTML='<p style="color:var(--txt3);padding:30px 0">この条件に合う商品がありませんでした。価格帯を変えてお試しください。</p>';
+    return;
+  }
+  rankEl.innerHTML=`<div class="rank-criteria">📊 <b>${rankFilter}${priceLabel}</b>のランキングです。ユーザー評価による人気度と<b>コスパ</b>を重視し、成分の充実度も加味して順位付けしています。</div>`+sorted.map((p,i)=>`
     <div class="ranking-item" onclick="openDetail(${p.id})">
       <div class="rank-num ${i===0?'gold':i===1?'silver':i===2?'bronze':''}">${i+1}</div>
       <div style="font-size:28px">${p.icon}</div>
       <div class="rank-info">
         <div class="rank-name">${p.name}</div>
-        <div class="rank-sub">${p.brand} · ${p.category} · ¥${p.price.toLocaleString()}</div>
+        <div class="rank-sub">${p.brand} · ¥${p.price.toLocaleString()}</div>
         <div style="margin-top:4px">
           <span class="stars">${"★".repeat(Math.round(p.rating))}</span>
           <span style="font-size:13px;font-weight:700;margin-left:4px">${p.rating}</span>
           <span style="font-size:12px;color:var(--txt3);margin-left:6px">${p.reviews.toLocaleString()}件</span>
         </div>
-        <div class="rank-reason">👑 ${reason(p,i)}</div>
+        <div class="rank-reason">👑 ${reason(p)}</div>
       </div>
     </div>`).join("");
 }
