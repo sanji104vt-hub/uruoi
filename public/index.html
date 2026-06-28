@@ -432,6 +432,37 @@ nav{display:flex;gap:4px}
 @media(max-width:680px){.brand-logo{justify-content:center}.brand-wordmark{font-size:28px}}
 .section-rec{margin:14px 0 4px}
 .section-rec-label{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px}
+.proscons{margin-top:20px}
+.pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.pc-box{border-radius:var(--radius);padding:14px}
+.pc-title{font-size:13px;font-weight:800;margin-bottom:8px}
+.pc-box ul{margin:0;padding-left:18px}
+.pc-box li{font-size:12px;line-height:1.7;color:var(--txt2);margin-bottom:3px}
+.pc-pros{background:rgba(126,200,176,.12);border:1px solid rgba(126,200,176,.4)}
+.pc-pros .pc-title{color:#3a9b7e}
+.pc-cons{background:rgba(224,135,106,.1);border:1px solid rgba(224,135,106,.35)}
+.pc-cons .pc-title{color:#d4856a}
+.pc-fit{background:rgba(127,184,230,.12);border:1px solid rgba(127,184,230,.4)}
+.pc-fit .pc-title{color:#5a8fc0}
+.pc-unfit{background:var(--bg3);border:1px solid var(--border)}
+.pc-unfit .pc-title{color:var(--txt2)}
+@media(max-width:600px){.pc-grid{grid-template-columns:1fr}}
+
+.ai-consult{max-width:680px}
+.chat-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;min-height:120px;max-height:420px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px}
+.chat-msg{padding:11px 14px;border-radius:14px;font-size:14px;line-height:1.7;max-width:85%}
+.chat-msg.ai{background:var(--accent2);color:var(--txt);align-self:flex-start;border-bottom-left-radius:4px}
+.chat-msg.user{background:var(--accent);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
+.chat-msg .chat-prod{display:block;margin-top:8px;padding:8px;background:var(--bg2);border-radius:8px;cursor:pointer;font-size:12px;color:var(--accent);font-weight:600;border:1px solid var(--border)}
+.chat-input-row{display:flex;gap:8px;margin-bottom:10px}
+.chat-input{flex:1;padding:12px 16px;border:1px solid var(--border2);border-radius:24px;background:var(--bg2);color:var(--txt);font-size:14px;font-family:inherit;outline:none}
+.chat-input:focus{border-color:var(--accent)}
+.chat-send{background:var(--accent);color:#fff;border:none;border-radius:24px;padding:0 22px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.chat-send:hover{opacity:.85}
+.chat-send:disabled{opacity:.5;cursor:default}
+.chat-suggestions{display:flex;gap:8px;flex-wrap:wrap}
+.chat-suggestions button{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;padding:7px 14px;font-size:12px;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .15s}
+.chat-suggestions button:hover{border-color:var(--accent);color:var(--accent)}
 </style>
 <script type="application/ld+json">
 {
@@ -1477,6 +1508,23 @@ nav{display:flex;gap:4px}
     <button class="diag-btn" onclick="diagnose()">AI診断を開始する →</button>
   </div>
   <div id="diagResult" class="diag-result" style="display:none"></div>
+
+  <div class="ai-consult">
+    <div class="section-title" style="font-size:18px;margin-top:36px">💬 AIに相談する</div>
+    <p style="color:var(--txt2);font-size:14px;margin-bottom:14px">「乾燥肌におすすめは？」「毛穴ケアの化粧水を教えて」など、お気軽に質問してください。掲載商品からAIがお答えします。</p>
+    <div class="chat-box" id="chatBox">
+      <div class="chat-msg ai">こんにちは！スキンケア選びのお手伝いをします😊 肌の悩みやお探しの商品を教えてください。</div>
+    </div>
+    <div class="chat-input-row">
+      <input id="chatInput" class="chat-input" placeholder="例：敏感肌でも使える美容液は？" onkeydown="if(event.key==='Enter')sendChat()">
+      <button class="chat-send" onclick="sendChat()">送信</button>
+    </div>
+    <div class="chat-suggestions">
+      <button onclick="quickChat('乾燥肌におすすめの化粧水は？')">乾燥肌の化粧水</button>
+      <button onclick="quickChat('毛穴の黒ずみにいい商品は？')">毛穴ケア</button>
+      <button onclick="quickChat('3000円以下のおすすめ美容液は？')">プチプラ美容液</button>
+    </div>
+  </div>
 </div>
 
 <div id="columnPage" class="page">
@@ -1934,6 +1982,39 @@ function productScores(p){
 }
 
 // 5軸レーダーチャートのSVGを生成
+function prosConsData(p){
+  const s=productScores(p);
+  const pros=[], cons=[], fit=[], unfit=[];
+  // メリット
+  if(p.rating>=4.6) pros.push(`ユーザー評価が高い（★${p.rating}）`);
+  if(p.reviews>=4000) pros.push(`${Math.round(p.reviews/1000)}千件超のレビューで実績豊富`);
+  if(s.cospa>=4.3) pros.push("価格に対する満足度が高くコスパ良好");
+  if(s.moist>=4.5) pros.push("保湿力が高く乾燥対策に向く");
+  if(s.mild>=4.5) pros.push("低刺激で敏感肌でも使いやすい");
+  if(p.price<=1500) pros.push("手に取りやすい価格で続けやすい");
+  if(p.keyIngredients.length>=4) pros.push("複数の有効成分を配合");
+  // デメリット
+  if(p.price>=8000) cons.push("価格が高めで継続にはコストがかかる");
+  if(s.mild<3.5) cons.push("敏感肌の人は刺激を感じる可能性");
+  if(p.reviews<1500) cons.push("レビュー件数がまだ少なめ");
+  if(s.cospa<3) cons.push("コスパ面では割高に感じる場合がある");
+  if(!pros.length) pros.push("バランスの取れた使い心地");
+  if(!cons.length) cons.push("特に大きな欠点は見当たらないが、肌との相性は個人差あり");
+  // 向いている人
+  p.skin.forEach(sk=>{ if(sk!=="全肌質") fit.push(`${sk}の人`); });
+  if(p.skin.includes("全肌質")) fit.push("肌質を選ばず使いたい人");
+  p.concern.slice(0,2).forEach(c=>fit.push(`${c}が気になる人`));
+  if(s.cospa>=4.3) fit.push("コスパを重視する人");
+  // 向いていない人
+  if(p.price>=8000) unfit.push("プチプラ重視の人");
+  if(s.mild<3.5) unfit.push("刺激にとても敏感な人");
+  const allSkin=["乾燥肌","脂性肌","混合肌","敏感肌","普通肌"];
+  const notFor=allSkin.filter(sk=>!p.skin.includes(sk)&&!p.skin.includes("全肌質"));
+  if(notFor.length&&notFor.length<=2) unfit.push(`${notFor.join("・")}の人には他の選択肢も`);
+  if(!unfit.length) unfit.push("特になし（幅広い人に使いやすい）");
+  return {pros,cons,fit:[...new Set(fit)].slice(0,4),unfit:unfit.slice(0,3)};
+}
+
 function radarChartSvg(p){
   const s=productScores(p);
   const axes=[
@@ -2214,6 +2295,29 @@ function openDetail(id){
       <div style="font-size:11px;color:var(--txt3);margin-bottom:8px">※評価・レビュー数・価格・成分などからMoilumが自動算出した参考スコアです</div>
       ${radarChartSvg(p)}
     </div>
+    <div class="proscons">
+      <div class="pc-grid">
+        <div class="pc-box pc-pros">
+          <div class="pc-title">👍 メリット</div>
+          <ul>${prosConsData(p).pros.map(x=>`<li>${x}</li>`).join("")}</ul>
+        </div>
+        <div class="pc-box pc-cons">
+          <div class="pc-title">👎 デメリット</div>
+          <ul>${prosConsData(p).cons.map(x=>`<li>${x}</li>`).join("")}</ul>
+        </div>
+      </div>
+      <div class="pc-grid">
+        <div class="pc-box pc-fit">
+          <div class="pc-title">⭕ 向いている人</div>
+          <ul>${prosConsData(p).fit.map(x=>`<li>${x}</li>`).join("")}</ul>
+        </div>
+        <div class="pc-box pc-unfit">
+          <div class="pc-title">△ 向いていない人</div>
+          <ul>${prosConsData(p).unfit.map(x=>`<li>${x}</li>`).join("")}</ul>
+        </div>
+      </div>
+      <div style="font-size:11px;color:var(--txt3);margin-top:8px">※商品データをもとにMoilumが自動でまとめた参考情報です。実際の使用感には個人差があります。</div>
+    </div>
     <div style="margin-top:20px">
       <div style="display:flex;align-items:center;gap:6px;margin-bottom:10px">
         <span class="pr-tag">PR</span>
@@ -2287,27 +2391,41 @@ function updateCompareBar(){
 function openCompareModal(){
   if(compareList.length<2){alert("2商品以上選択してください");return}
   const ps=compareList.map(id=>PRODUCTS.find(x=>x.id===id));
+  const img=p=>p.image?`<img src="${p.image}" alt="${p.name}" style="width:100%;height:80px;object-fit:contain;background:#fff;border-radius:6px">`:`<div style="height:80px;display:flex;align-items:center;justify-content:center;font-size:32px">${p.icon}</div>`;
   const rows=[
     ["カテゴリ",p=>p.category],
-    ["参考価格",p=>`¥${p.price.toLocaleString()}`],
+    ["参考価格",p=>`<b style="color:var(--accent)">¥${p.price.toLocaleString()}</b>`],
     ["評価",p=>`${"★".repeat(Math.round(p.rating))} ${p.rating}`],
     ["レビュー数",p=>`${p.reviews.toLocaleString()}件`],
+    ["総合スコア",p=>scoreBar(productScores(p).overall)],
+    ["コスパ",p=>scoreBar(productScores(p).cospa)],
+    ["保湿力",p=>scoreBar(productScores(p).moist)],
+    ["低刺激",p=>scoreBar(productScores(p).mild)],
     ["適した肌タイプ",p=>p.skin.join("・")],
     ["対応する悩み",p=>p.concern.join("・")],
     ["主要成分",p=>p.keyIngredients.join("、")],
+    ["こんな人に",p=>prosConsData(p).fit.slice(0,2).join("・")],
   ];
   document.getElementById("compareContent").innerHTML=`
-    <h2 style="margin-bottom:20px">商品比較</h2>
+    <h2 style="margin-bottom:16px">商品を比較</h2>
     <div class="compare-table-wrap">
     <table class="compare-table">
-      <thead><tr><th>項目</th>${ps.map(p=>`<th>${p.icon} ${p.name.slice(0,16)}…</th>`).join("")}</tr></thead>
+      <thead><tr><th style="min-width:90px">項目</th>${ps.map(p=>`<th style="min-width:140px"><div style="margin-bottom:6px">${img(p)}</div>${p.name.slice(0,18)}</th>`).join("")}</tr></thead>
       <tbody>${rows.map(([label,fn])=>`
         <tr><td style="color:var(--txt3);font-weight:600">${label}</td>${ps.map(p=>`<td>${fn(p)}</td>`).join("")}</tr>
-      `).join("")}</tbody>
+      `).join("")}
+      <tr><td style="color:var(--txt3);font-weight:600">購入</td>${ps.map(p=>`<td><button class="sm-rakuten" style="border:none;color:#fff;padding:7px 10px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer" onclick="goAffiliate('rakuten',${p.id})">楽天で見る</button></td>`).join("")}</tr>
+      </tbody>
     </table></div>
-    <p style="font-size:12px;color:var(--txt3);margin-top:12px">※参考価格は${PRICE_DATE}時点のものです。最新価格は各販売サイトでご確認ください。</p>
+    <p style="font-size:12px;color:var(--txt3);margin-top:12px">※スコアはMoilum独自の参考値。参考価格は${PRICE_DATE}時点。最新価格は各販売サイトでご確認ください。</p>
   `;
   document.getElementById("compareModal").classList.add("open");
+}
+
+// スコアを横バーで表示
+function scoreBar(v){
+  const pct=v/5*100;
+  return `<div style="display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;min-width:50px"><div style="width:${pct}%;height:100%;background:var(--accent)"></div></div><span style="font-size:11px;font-weight:700;color:var(--accent)">${v}</span></div>`;
 }
 
 function renderBrands(){
@@ -2511,6 +2629,87 @@ function showPage(name){
   if(name==="ranking") renderRanking();
   if(name==="column") renderColumnList();
   if(name==="favorites") renderFavorites();
+}
+
+let chatHistory=[];
+function quickChat(q){
+  document.getElementById("chatInput").value=q;
+  sendChat();
+}
+function appendChatMsg(text,who,products){
+  const box=document.getElementById("chatBox");
+  const div=document.createElement("div");
+  div.className="chat-msg "+who;
+  div.innerHTML=text.replace(/\n/g,"<br>");
+  if(products&&products.length){
+    products.forEach(p=>{
+      const a=document.createElement("span");
+      a.className="chat-prod";
+      a.textContent="🔍 "+p.name+"（¥"+p.price.toLocaleString()+"）";
+      a.onclick=()=>openDetail(p.id);
+      div.appendChild(a);
+    });
+  }
+  box.appendChild(div);
+  box.scrollTop=box.scrollHeight;
+  return div;
+}
+async function sendChat(){
+  const input=document.getElementById("chatInput");
+  const q=input.value.trim();
+  if(!q) return;
+  input.value="";
+  appendChatMsg(q,"user");
+  const sendBtn=document.querySelector(".chat-send");
+  sendBtn.disabled=true;
+  const loading=appendChatMsg("考え中…","ai");
+
+  // 商品データを簡略化してAIに渡す（トークン節約のため上位の関連候補に絞る）
+  const kw=q.toLowerCase();
+  let cands=PRODUCTS.filter(p=>
+    p.skin.some(s=>q.includes(s))||p.concern.some(c=>q.includes(c.split("・")[0]))||
+    p.category&&q.includes(p.category)||p.name.toLowerCase().includes(kw)||p.brand.toLowerCase().includes(kw)
+  );
+  if(cands.length<5) cands=PRODUCTS;
+  cands=[...cands].sort((a,b)=>b.rating-a.rating).slice(0,40);
+  const catalog=cands.map(p=>`[id:${p.id}] ${p.name}(${p.brand}) ${p.category} ¥${p.price} ★${p.rating} 肌:${p.skin.join("/")} 悩み:${p.concern.join("/")} 成分:${p.keyIngredients.join("/")}`).join("\n");
+
+  try{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({
+        model:"claude-sonnet-4-6",
+        max_tokens:600,
+        messages:[...chatHistory,{role:"user",content:`あなたはスキンケア比較サイト「Moilum」の親しみやすいアドバイザーです。以下の掲載商品リストの中からのみ、ユーザーの質問に合う商品を提案してください。リストにない商品は紹介しないこと。回答は150字程度で簡潔に。おすすめ商品があれば、文末に必ず「@@@おすすめ:id,id,id」の形式で商品idを最大3つ記載してください（この行はユーザーには表示されません）。薬機法に配慮し「治る」等の断定表現は避けてください。
+
+【掲載商品リスト】
+${catalog}
+
+【ユーザーの質問】
+${q}`}]
+      })
+    });
+    const data=await res.json();
+    let answer=data.content?.[0]?.text||"うまくお答えできませんでした。もう一度質問してください。";
+    // おすすめid抽出
+    let recProducts=[];
+    const m=answer.match(/@@@おすすめ:([\d,\s]+)/);
+    if(m){
+      const ids=m[1].split(",").map(s=>parseInt(s.trim())).filter(Boolean);
+      recProducts=ids.map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+      answer=answer.replace(/@@@おすすめ:[\d,\s]+/,"").trim();
+    }
+    loading.remove();
+    appendChatMsg(answer,"ai",recProducts);
+    chatHistory.push({role:"user",content:q});
+    chatHistory.push({role:"assistant",content:answer});
+    if(chatHistory.length>8) chatHistory=chatHistory.slice(-8);
+  }catch(e){
+    loading.remove();
+    appendChatMsg("ごめんなさい、接続でエラーが起きました。少し時間をおいて試してください。","ai");
+  }
+  sendBtn.disabled=false;
 }
 
 function toggleDark(){
