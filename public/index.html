@@ -463,6 +463,85 @@ nav{display:flex;gap:4px}
 .chat-suggestions{display:flex;gap:8px;flex-wrap:wrap}
 .chat-suggestions button{background:var(--bg2);border:1px solid var(--border2);border-radius:18px;padding:7px 14px;font-size:12px;color:var(--txt2);cursor:pointer;font-family:inherit;transition:all .15s}
 .chat-suggestions button:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ===== SNSシェア ===== */
+.share-section{margin-top:20px;padding:16px;background:var(--bg3);border-radius:var(--radius);text-align:center}
+.share-buttons{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.share-btn{padding:10px 18px;border:none;border-radius:24px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;background:var(--accent);color:#fff;transition:opacity .2s}
+.share-btn:hover{opacity:.85}
+.share-btn.share-x{background:#000}
+.share-btn.share-line{background:#06c755}
+
+/* ===== カードの視覚的差別化 ===== */
+.card-hero{grid-column:span 2;background:linear-gradient(135deg,#fff 0%,#fbeee6 100%);border:2px solid var(--accent);box-shadow:0 8px 28px rgba(212,133,106,.25)}
+.card-hero::before{content:"👑 1位";position:absolute;top:14px;left:14px;background:linear-gradient(135deg,#f5a623,#e0871a);color:#fff;font-size:13px;font-weight:800;padding:5px 14px;border-radius:20px;z-index:5;box-shadow:0 3px 10px rgba(224,135,26,.5)}
+.card-hero .card-rank-badge,.card-hero .origin-flag{display:none}
+.card-hero .card-name{font-size:19px}
+.card-hero .card-img svg,.card-hero .card-img img{height:180px}
+.card-kbeauty{border-left:4px solid #a78bd1}
+.card-kbeauty .card-tag{background:rgba(167,139,209,.15);color:#7d5fb0}
+.card-luxe{background:linear-gradient(180deg,#fff 0%,#f5f0eb 100%);border:1px solid #2a1f1a}
+.card-luxe .card-name{color:#2a1f1a}
+.card-luxe::after{content:"DEPACOS";position:absolute;bottom:8px;right:10px;font-size:9px;font-weight:800;letter-spacing:2px;color:#2a1f1a;opacity:0.5}
+.dark .card-luxe{background:linear-gradient(180deg,var(--bg2) 0%,#0d0c0a 100%);border-color:#d4cec5}
+.dark .card-luxe::after{color:#d4cec5}
+.card-premium{position:relative}
+.card-premium::before{content:"✨ 注目成分";position:absolute;top:10px;left:10px;background:linear-gradient(135deg,#e8c468,#c9a23f);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:12px;z-index:4;box-shadow:0 2px 8px rgba(201,162,63,.4)}
+.card-premium.card-hero::before{content:"👑 1位"} /* 巨大カードは1位バッジを優先 */
+@media(max-width:600px){.card-hero{grid-column:span 1}}
+
+/* ===== おすすめフィード ===== */
+.reco-feed:empty{display:none}
+.reco-feed{margin-bottom:18px;padding:18px;background:linear-gradient(135deg,#fef6f0 0%,#fdf0e8 100%);border-radius:var(--radius);border:1px solid var(--border)}
+.dark .reco-feed{background:linear-gradient(135deg,#241a17 0%,#2a1f1a 100%)}
+.reco-head{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.reco-badge{font-size:15px;font-weight:800;color:var(--accent)}
+.reco-sub{font-size:12px;color:var(--txt3)}
+.reco-scroll{display:flex;gap:12px;overflow-x:auto;padding:4px 0;-webkit-overflow-scrolling:touch}
+.reco-card{flex:none;width:140px;background:var(--bg2);border-radius:12px;padding:10px;cursor:pointer;transition:transform .15s,box-shadow .2s;border:1px solid var(--border)}
+.reco-card:hover{transform:translateY(-2px);box-shadow:var(--card-shadow)}
+.reco-card img{width:100%;height:100px;object-fit:contain;background:#fff;border-radius:6px;margin-bottom:6px}
+.reco-emoji{height:100px;display:flex;align-items:center;justify-content:center;font-size:38px;background:var(--bg3);border-radius:6px;margin-bottom:6px}
+.reco-card .reco-name{font-size:11px;font-weight:600;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:var(--txt)}
+.reco-card .reco-brand{font-size:10px;color:var(--txt3);margin-top:2px}
+.reco-card .reco-price{font-size:12px;font-weight:700;color:var(--accent);margin-top:3px}
+
+/* ===== ブランドストーリー ===== */
+.brand-back{background:none;border:1px solid var(--border2);border-radius:20px;padding:7px 16px;font-size:13px;color:var(--txt2);cursor:pointer;font-family:inherit;margin-bottom:16px}
+.brand-back:hover{border-color:var(--accent);color:var(--accent)}
+.brand-hero{background:linear-gradient(135deg,#fbeee6 0%,#f6e3da 50%,#efd9e4 100%);border-radius:24px;padding:48px 32px;text-align:center;margin-bottom:24px;position:relative;overflow:hidden}
+.dark .brand-hero{background:linear-gradient(135deg,#2a1f1a 0%,#241a1f 50%,#1d1a24 100%)}
+.brand-hero-mark{font-size:64px;margin-bottom:12px}
+.brand-hero-name{font-size:36px;font-weight:800;color:#3a2a24;margin-bottom:6px;letter-spacing:-1px}
+.dark .brand-hero-name{color:#f5e9e2}
+.brand-hero-origin{font-size:13px;color:var(--accent);font-weight:700;letter-spacing:2px;margin-bottom:12px}
+.brand-hero-tagline{font-size:15px;color:#7a655c;max-width:520px;margin:0 auto}
+.dark .brand-hero-tagline{color:#c9b8af}
+.brand-story-text{font-size:14px;line-height:1.9;color:var(--txt2);background:var(--bg2);border-radius:var(--radius);padding:20px 24px;margin-bottom:20px;border:1px solid var(--border)}
+.brand-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.bs-item{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center}
+.bs-num{font-size:24px;font-weight:800;color:var(--accent);line-height:1.2}
+.bs-label{font-size:12px;color:var(--txt3);margin-top:4px}
+.brand-section-h{font-size:18px;font-weight:800;margin:24px 0 14px;position:relative;padding-left:14px}
+.brand-section-h::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:20px;background:var(--accent);border-radius:3px}
+@media(max-width:600px){.brand-stats{grid-template-columns:repeat(2,1fr)}.brand-hero{padding:36px 20px}.brand-hero-name{font-size:28px}}
+
+/* ===== 関連コラム／あわせて読みたい記事 ===== */
+.related-columns{margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+.related-columns h3{font-size:15px;font-weight:800;margin-bottom:12px}
+.rcol-list{display:flex;flex-direction:column;gap:8px}
+.rcol-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--bg3);border-radius:10px;cursor:pointer;transition:background .15s}
+.rcol-item:hover{background:var(--accent2)}
+.rcol-cat{font-size:10px;font-weight:700;color:#fff;background:var(--accent);padding:3px 8px;border-radius:10px;flex:none}
+.rcol-title{font-size:13px;font-weight:600;color:var(--txt)}
+.more-articles{margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+.more-articles h3{font-size:17px;font-weight:800;margin-bottom:16px}
+.more-articles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.ma-card{background:var(--bg3);border-radius:var(--radius);padding:16px;cursor:pointer;transition:transform .15s,box-shadow .2s}
+.ma-card:hover{transform:translateY(-2px);box-shadow:var(--card-shadow)}
+.ma-cat{font-size:10px;font-weight:700;color:var(--accent)}
+.ma-title{font-size:14px;font-weight:700;margin:6px 0;line-height:1.4}
+.ma-excerpt{font-size:12px;color:var(--txt3);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 </style>
 <script type="application/ld+json">
 {
@@ -1362,6 +1441,7 @@ nav{display:flex;gap:4px}
       <div class="hero-bottle"><div class="hb-cap"></div><div class="hb-neck"></div><div class="hb-body"><span>Moilum</span></div></div>
     </div>
   </section>
+  <div id="recoFeed" class="reco-feed"></div>
   <div class="cat-quicklinks">
     <button class="ql" onclick="quickCat('化粧水')"><span class="ql-ic">💧</span>化粧水</button>
     <button class="ql" onclick="quickCat('美容液')"><span class="ql-ic">✨</span>美容液</button>
@@ -1449,6 +1529,7 @@ nav{display:flex;gap:4px}
 <div id="brandsPage" class="page">
   <div class="section-title">ブランド一覧</div>
   <div id="brands" class="brand-grid"></div>
+  <div id="brandStory" style="display:none"></div>
 </div>
 
 <div id="rankingPage" class="page">
@@ -2103,12 +2184,23 @@ let activeFilters={price:"all",skin:"all",concern:"all"};
 let favorites=JSON.parse(localStorage.getItem("ulabo_fav")||"[]");
 let compareList=[];
 
+function cardVariant(p,i){
+  const c=[];
+  if(i===0) c.push("card-hero"); // 1位は巨大カード
+  if(p.origin==="韓国") c.push("card-kbeauty"); // 韓国コスメ＝紫
+  if(p.price>=10000) c.push("card-luxe"); // 高級＝黒
+  if(p.keyIngredients.some(x=>x.includes("PDRN")||x.includes("レチノール")||x.includes("ピテラ"))) c.push("card-premium"); // 注目成分＝金
+  return c.join(" ");
+}
+
 function render(list){
   const el=document.getElementById("products");
   if(!list.length){el.innerHTML='<p style="color:var(--txt3);padding:40px 0">該当する商品が見つかりませんでした。</p>';return}
   const flag={"日本":"🇯🇵","韓国":"🇰🇷","フランス":"🇫🇷","アメリカ":"🇺🇸","ドイツ":"🇩🇪","台湾":"🇹🇼","カナダ":"🇨🇦","モロッコ":"🇲🇦","イタリア":"🇮🇹"};
-  el.innerHTML=list.map((p,i)=>`
-    <div class="card" onclick="openDetail(${p.id})">
+  el.innerHTML=list.map((p,i)=>{
+    const variant=cardVariant(p,i);
+    return `
+    <div class="card ${variant}" onclick="openDetail(${p.id})">
       <div class="card-img">
         ${flag[p.origin]?`<span class="origin-flag">${flag[p.origin]} ${p.origin}</span>`:""}
         ${i<3?`<span class="card-rank-badge">🏆 ${i+1}位</span>`:""}
@@ -2136,7 +2228,8 @@ function render(list){
         <button class="btn btn-secondary" onclick="addToCompare(${p.id})">比較に追加</button>
         <button class="btn-fav ${favorites.includes(p.id)?'active':''}" onclick="toggleFav(${p.id},this)">♡</button>
       </div>
-    </div>`).join("");
+    </div>`;
+  }).join("");
 }
 
 // 小サムネイル
@@ -2173,6 +2266,49 @@ function renderSidebar(){
     <div class="side-card" style="padding:0;overflow:hidden">
       <div class="ad-slot">広告スペース<br><span style="font-size:11px">（Googleアドセンス等の設置枠）</span></div>
     </div>`;
+}
+
+// 「あなたへのおすすめ」フィード（閲覧履歴・お気に入りから類似商品を推薦）
+function renderRecoFeed(){
+  const el=document.getElementById("recoFeed");
+  if(!el) return;
+  const hist=JSON.parse(localStorage.getItem("ulabo_history")||"[]");
+  const seedIds=[...new Set([...hist.slice(0,5),...favorites.slice(0,5)])];
+  if(!seedIds.length){el.innerHTML="";return}
+  // 種商品から特性（カテゴリ・悩み・肌）を集計
+  const cats={},concerns={},skins={};
+  seedIds.forEach(id=>{
+    const p=PRODUCTS.find(x=>x.id===id);if(!p)return;
+    cats[p.category]=(cats[p.category]||0)+1;
+    p.concern.forEach(c=>concerns[c]=(concerns[c]||0)+1);
+    p.skin.forEach(s=>skins[s]=(skins[s]||0)+1);
+  });
+  // スコアリングして推薦（種商品は除外）
+  const score=p=>{
+    if(seedIds.includes(p.id)) return -1;
+    let s=0;
+    if(cats[p.category]) s+=cats[p.category]*2;
+    p.concern.forEach(c=>{if(concerns[c]) s+=concerns[c]});
+    p.skin.forEach(sk=>{if(skins[sk]) s+=skins[sk]*0.5});
+    s+=(p.rating-4)*2;
+    return s;
+  };
+  const top=[...PRODUCTS].sort((a,b)=>score(b)-score(a)).slice(0,6);
+  el.innerHTML=`
+    <div class="reco-head">
+      <span class="reco-badge">✨ あなたへのおすすめ</span>
+      <span class="reco-sub">閲覧履歴・お気に入りから</span>
+    </div>
+    <div class="reco-scroll">
+      ${top.map(p=>`
+        <div class="reco-card" onclick="openDetail(${p.id})">
+          ${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:`<div class="reco-emoji">${p.icon}</div>`}
+          <div class="reco-name">${p.name}</div>
+          <div class="reco-brand">${p.brand}</div>
+          <div class="reco-price">¥${p.price.toLocaleString()}</div>
+        </div>`).join("")}
+    </div>
+  `;
 }
 
 function applyFilters(){
@@ -2264,6 +2400,13 @@ function quickCat(cat){
 
 function openDetail(id){
   const p=PRODUCTS.find(x=>x.id===id);
+  // 閲覧履歴をlocalStorageに記録（最大20件）
+  try{
+    let hist=JSON.parse(localStorage.getItem("ulabo_history")||"[]");
+    hist=[id,...hist.filter(x=>x!==id)].slice(0,20);
+    localStorage.setItem("ulabo_history",JSON.stringify(hist));
+  }catch(e){}
+  setTimeout(renderRecoFeed,50);
   if(!p) return;
   document.getElementById("detailContent").innerHTML=`
     <div style="background:var(--bg3);border-radius:var(--radius);padding:16px;margin-bottom:16px">${productImage(p,true)}</div>
@@ -2331,8 +2474,27 @@ function openDetail(id){
       <button class="btn btn-secondary" onclick="addToCompare(${p.id})" style="margin-top:10px;width:100%">比較に追加</button>
     </div>
     ${relatedProductsHtml(p)}
+    ${relatedColumnsHtml(p)}
   `;
   document.getElementById("detailModal").classList.add("open");
+}
+
+// 関連コラム（商品のrelatedを持つ・同カテゴリ・同悩みのコラム、最大3件）
+function relatedColumnsHtml(p){
+  if(typeof COLUMNS==="undefined"||!COLUMNS.length) return "";
+  const rel=COLUMNS.filter(c=>(c.related||[]).includes(p.id)||
+      (c.related||[]).some(rid=>{const rp=PRODUCTS.find(x=>x.id===rid);return rp&&(rp.category===p.category||rp.concern.some(cc=>p.concern.includes(cc)))})
+    ).slice(0,3);
+  const fallback=rel.length?rel:COLUMNS.slice(0,3);
+  return `<div class="related-columns">
+    <h3>📖 関連するコラム</h3>
+    <div class="rcol-list">
+      ${fallback.map(c=>`<div class="rcol-item" onclick="closeModal('detailModal');showPage('column');setTimeout(()=>openColumn('${c.id}'),50)">
+        <span class="rcol-cat">${c.cat}</span>
+        <span class="rcol-title">${c.title}</span>
+      </div>`).join("")}
+    </div>
+  </div>`;
 }
 
 // 関連商品（同カテゴリ＋共通の悩み、最大4件）
@@ -2363,6 +2525,7 @@ function toggleFav(id,btn){
   if(favorites.includes(id)) favorites=favorites.filter(x=>x!==id);
   else favorites.push(id);
   localStorage.setItem("ulabo_fav",JSON.stringify(favorites));
+  renderRecoFeed();
   btn.classList.toggle("active");
   document.querySelectorAll(".btn-fav").forEach(b=>{
     const pid=parseInt(b.getAttribute("onclick").match(/\d+/)[0]);
@@ -2431,12 +2594,71 @@ function scoreBar(v){
 function renderBrands(){
   const counts={};PRODUCTS.forEach(p=>{counts[p.brand]=(counts[p.brand]||0)+1});
   document.getElementById("brands").innerHTML=BRANDS.map(b=>`
-    <div class="brand-card" onclick="filterByBrand('${b.name}')">
+    <div class="brand-card" onclick="openBrandStory('${b.name}')">
       <div class="brand-logo">${b.icon}</div>
       <div class="brand-name">${b.name}</div>
       <div class="brand-count">${b.origin} · ${counts[b.name]||0}商品</div>
       <div style="font-size:12px;color:var(--txt3);margin-top:6px">${b.desc}</div>
     </div>`).join("");
+}
+
+// ブランドストーリー詳細を表示
+function openBrandStory(name){
+  const b=BRANDS.find(x=>x.name===name);
+  const items=PRODUCTS.filter(p=>p.brand===name).sort((a,b)=>b.rating-a.rating);
+  if(!b||!items.length){filterByBrand(name);return}
+  document.getElementById("brands").style.display="none";
+  const story=document.getElementById("brandStory");
+  story.style.display="block";
+  const top3=items.slice(0,3);
+  const rest=items.slice(3);
+  // ブランドの傾向から自動でストーリー文を生成
+  const avgPrice=Math.round(items.reduce((s,p)=>s+p.price,0)/items.length);
+  const cats=[...new Set(items.map(p=>p.category))];
+  const concerns={};items.forEach(p=>p.concern.forEach(c=>concerns[c]=(concerns[c]||0)+1));
+  const topConcern=Object.entries(concerns).sort((a,b)=>b[1]-a[1])[0]?.[0]||"";
+  const story_text=`${b.desc}。${b.origin}発のブランドで、平均価格は約¥${avgPrice.toLocaleString()}、${cats.length}カテゴリの商品を展開しています。${topConcern?`特に「${topConcern}」のケアを得意とし、`:""}Moilumには${items.length}商品を掲載しています。`;
+  story.innerHTML=`
+    <button class="brand-back" onclick="closeBrandStory()">← ブランド一覧へ戻る</button>
+    <div class="brand-hero">
+      <div class="brand-hero-mark">${b.icon}</div>
+      <div class="brand-hero-name">${b.name}</div>
+      <div class="brand-hero-origin">${b.origin}</div>
+      <div class="brand-hero-tagline">${b.desc}</div>
+    </div>
+    <div class="brand-story-text">${story_text}</div>
+    <div class="brand-stats">
+      <div class="bs-item"><div class="bs-num">${items.length}</div><div class="bs-label">掲載商品</div></div>
+      <div class="bs-item"><div class="bs-num">¥${avgPrice.toLocaleString()}</div><div class="bs-label">平均価格</div></div>
+      <div class="bs-item"><div class="bs-num">★${(items.reduce((s,p)=>s+p.rating,0)/items.length).toFixed(1)}</div><div class="bs-label">平均評価</div></div>
+      <div class="bs-item"><div class="bs-num">${cats.length}</div><div class="bs-label">カテゴリ数</div></div>
+    </div>
+    <h3 class="brand-section-h">🏆 このブランドの代表商品</h3>
+    <div class="grid">${top3.map(p=>{
+      const variant=cardVariant(p,-1);
+      return `<div class="card ${variant}" onclick="openDetail(${p.id})">
+        <div class="card-img">${productImage(p)}</div>
+        <span class="card-tag">${p.category}</span>
+        <div class="card-name">${p.name}</div>
+        <div class="card-brand">${p.brand}</div>
+        <div class="card-price">¥${p.price.toLocaleString()}</div>
+      </div>`;
+    }).join("")}</div>
+    ${rest.length?`<h3 class="brand-section-h">その他の商品（${rest.length}件）</h3>
+    <div class="grid">${rest.map(p=>`
+      <div class="card" onclick="openDetail(${p.id})">
+        <div class="card-img">${productImage(p)}</div>
+        <span class="card-tag">${p.category}</span>
+        <div class="card-name">${p.name}</div>
+        <div class="card-price">¥${p.price.toLocaleString()}</div>
+      </div>`).join("")}</div>`:""}
+  `;
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+function closeBrandStory(){
+  document.getElementById("brandStory").style.display="none";
+  document.getElementById("brands").style.display="";
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function filterByBrand(brand){
@@ -2572,6 +2794,16 @@ ${recommended.map(p=>`・${p.name}（${p.brand}）: ${p.desc}`).join("\n")}
         <div style="font-size:12px;color:var(--txt3);margin-bottom:8px">🤖 AIスキンケアアドバイザー</div>
         <div class="ai-msg">${aiText.replace(/\n/g,"<br>")}</div>
       </div>
+      <div class="share-section">
+        <div style="font-size:14px;font-weight:700;margin-bottom:10px">📸 診断結果をシェアする</div>
+        <canvas id="shareCanvas" width="600" height="630" style="display:none"></canvas>
+        <div id="sharePreview" style="margin-bottom:10px"></div>
+        <div class="share-buttons">
+          <button class="share-btn" onclick="downloadShareImage()">💾 画像を保存</button>
+          <button class="share-btn share-x" onclick="shareTo('x')">𝕏 でシェア</button>
+          <button class="share-btn share-line" onclick="shareTo('line')">LINEでシェア</button>
+        </div>
+      </div>
       <div style="margin-top:20px">
         <div style="font-size:15px;font-weight:700;margin-bottom:14px">あなたへのおすすめ商品</div>
         <div class="grid">${recommended.map(p=>`
@@ -2607,7 +2839,79 @@ ${recommended.map(p=>`・${p.name}（${p.brand}）: ${p.desc}`).join("\n")}
     </div>`;
   }
 
+  renderShareImage(skin, concerns, recommended);
   resultEl.scrollIntoView({behavior:"smooth"});
+}
+
+function renderShareImage(skin, concerns, recommended){
+  const canvas=document.getElementById("shareCanvas");
+  if(!canvas) return;
+  const ctx=canvas.getContext("2d");
+  const W=600,H=630;
+  // グラデーション背景
+  const grad=ctx.createLinearGradient(0,0,W,H);
+  grad.addColorStop(0,"#fbeee6");grad.addColorStop(0.5,"#f6e3da");grad.addColorStop(1,"#efd9e4");
+  ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+  // 装飾円
+  ctx.fillStyle="rgba(245,198,168,0.4)";ctx.beginPath();ctx.arc(540,80,80,0,Math.PI*2);ctx.fill();
+  ctx.fillStyle="rgba(233,184,208,0.4)";ctx.beginPath();ctx.arc(560,560,60,0,Math.PI*2);ctx.fill();
+  // しずくロゴ
+  ctx.fillStyle="#d4856a";ctx.beginPath();
+  ctx.moveTo(300,55);ctx.bezierCurveTo(300,55,260,100,260,140);ctx.arc(300,140,40,Math.PI,0,true);ctx.bezierCurveTo(340,100,300,55,300,55);ctx.fill();
+  ctx.fillStyle="rgba(255,255,255,0.45)";ctx.beginPath();ctx.ellipse(287,135,10,17,0,0,Math.PI*2);ctx.fill();
+  // ブランド
+  ctx.font="bold 28px 'Hiragino Kaku Gothic Pro','Yu Gothic',sans-serif";
+  ctx.fillStyle="#3a2a24";ctx.textAlign="center";
+  ctx.fillText("Mo",277,222);
+  ctx.fillStyle="#d4856a";ctx.fillText("ilum",327,222);
+  // タイトル
+  ctx.font="bold 36px 'Hiragino Kaku Gothic Pro',sans-serif";
+  ctx.fillStyle="#3a2a24";
+  ctx.fillText("あなたは",300,290);
+  ctx.font="bold 44px 'Hiragino Kaku Gothic Pro',sans-serif";
+  ctx.fillStyle="#d4856a";
+  ctx.fillText(skin+"タイプ",300,345);
+  // 悩み
+  ctx.font="500 18px 'Hiragino Kaku Gothic Pro',sans-serif";
+  ctx.fillStyle="#7a655c";
+  const cTxt=concerns.length?"気になる悩み："+concerns.slice(0,2).join("・"):"バランスの取れた肌";
+  ctx.fillText(cTxt,300,385);
+  // おすすめ商品3つ
+  ctx.font="bold 20px 'Hiragino Kaku Gothic Pro',sans-serif";
+  ctx.fillStyle="#3a2a24";
+  ctx.fillText("AIのおすすめ",300,440);
+  ctx.font="600 16px 'Hiragino Kaku Gothic Pro',sans-serif";
+  ctx.fillStyle="#5a4a40";
+  recommended.slice(0,3).forEach((p,i)=>{
+    const name=p.name.length>26?p.name.slice(0,26)+"…":p.name;
+    ctx.fillText("✦ "+name,300,475+i*30);
+  });
+  // フッター
+  ctx.font="600 15px sans-serif";
+  ctx.fillStyle="#a8917f";
+  ctx.fillText("moilum.sanji-104vt.workers.dev",300,600);
+  // プレビュー表示
+  const preview=document.getElementById("sharePreview");
+  preview.innerHTML=`<img src="${canvas.toDataURL('image/png')}" style="max-width:300px;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.15);display:block">`;
+}
+
+function downloadShareImage(){
+  const canvas=document.getElementById("shareCanvas");
+  if(!canvas) return;
+  const link=document.createElement("a");
+  link.download="moilum-diagnosis.png";
+  link.href=canvas.toDataURL("image/png");
+  link.click();
+}
+
+function shareTo(target){
+  const url="https://moilum.sanji-104vt.workers.dev/";
+  const text="Moilumの無料肌診断で、自分に合うスキンケアが見つかった！";
+  if(target==="x"){
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=Moilum,スキンケア`,"_blank");
+  } else if(target==="line"){
+    window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`,"_blank");
+  }
 }
 
 document.querySelectorAll(".q-opt").forEach(btn=>{
@@ -3110,6 +3414,16 @@ function openColumn(id){
   const art=document.getElementById("columnArticle");
   art.style.display="block";
   const related=(c.related||[]).map(pid=>PRODUCTS.find(p=>p.id===pid)).filter(Boolean);
+  // 関連商品を多めにレコメンド（同カテゴリ・同悩みも加えて最大8件）
+  const extraRel=PRODUCTS.filter(p=>!related.some(r=>r.id===p.id)&&
+    related.some(r=>r.category===p.category||r.concern.some(cc=>p.concern.includes(cc))))
+    .sort((a,b)=>b.rating-a.rating).slice(0,Math.max(0,8-related.length));
+  const allRel=[...related,...extraRel];
+  // 他のおすすめ記事（同カテゴリ優先、それ以外も表示）
+  const otherCols=COLUMNS.filter(x=>x.id!==c.id);
+  const sameCat=otherCols.filter(x=>x.cat===c.cat);
+  const diffCat=otherCols.filter(x=>x.cat!==c.cat);
+  const moreArticles=[...sameCat,...diffCat];
   art.innerHTML=`
     <div class="article">
       <button class="back-btn" onclick="renderColumnList()">← コラム一覧に戻る</button>
@@ -3117,11 +3431,27 @@ function openColumn(id){
       <h1>${c.title}</h1>
       <div class="meta">Moilum編集部 ・ ${c.readtime}</div>
       ${c.body}
-      ${related.length?`<div class="related">
-        <div style="font-size:13px;font-weight:700;margin-bottom:10px">この記事に関連する商品</div>
-        ${related.map(p=>`<div style="margin-bottom:6px"><a onclick="closeColumnToProduct(${p.id})">${p.icon} ${p.name}</a></div>`).join("")}
+      ${allRel.length?`<div class="related-products" style="margin-top:24px">
+        <h3>この記事に関連する商品</h3>
+        <div class="related-grid">
+          ${allRel.map(p=>`<div class="related-card" onclick="closeColumnToProduct(${p.id})">
+            ${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${p.icon}</div>`}
+            <div class="rc-name">${p.name}</div>
+            <div class="rc-price">¥${p.price.toLocaleString()}</div>
+          </div>`).join("")}
+        </div>
       </div>`:""}
       <p style="font-size:12px;color:var(--txt3);margin-top:24px">※本記事は一般的な情報提供を目的としたもので、医学的助言や効果を保証するものではありません。肌トラブルが続く場合は皮膚科専門医にご相談ください。</p>
+      ${moreArticles.length?`<div class="more-articles">
+        <h3>📚 あわせて読みたい記事</h3>
+        <div class="more-articles-grid">
+          ${moreArticles.map(mc=>`<div class="ma-card" onclick="openColumn('${mc.id}')">
+            <span class="ma-cat">${mc.cat}</span>
+            <div class="ma-title">${mc.title}</div>
+            <div class="ma-excerpt">${mc.excerpt}</div>
+          </div>`).join("")}
+        </div>
+      </div>`:""}
     </div>`;
   renderSectionRecs();
   window.scrollTo({top:0,behavior:"smooth"});
@@ -3157,6 +3487,7 @@ document.querySelectorAll(".filter-chips").forEach(group=>{
 applyFilters();
 renderBrands();
 renderSidebar();
+renderRecoFeed();
 </script>
 </body>
 </html>
