@@ -542,6 +542,41 @@ nav{display:flex;gap:4px}
 .ma-cat{font-size:10px;font-weight:700;color:var(--accent)}
 .ma-title{font-size:14px;font-weight:700;margin:6px 0;line-height:1.4}
 .ma-excerpt{font-size:12px;color:var(--txt3);line-height:1.6;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* ===== 肌カルテ ===== */
+.karte-empty{text-align:center;padding:60px 20px;background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border)}
+.karte-section{margin-bottom:28px}
+.karte-section h3{font-size:16px;font-weight:800;margin-bottom:14px}
+.karte-timeline{display:flex;flex-direction:column;gap:10px}
+.karte-entry{display:flex;gap:14px;padding:14px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius)}
+.ke-date{flex:none;width:44px;font-size:13px;font-weight:800;color:var(--accent);text-align:center}
+.ke-body{flex:1;min-width:0}
+.ke-skin{font-size:14px;font-weight:700;margin-bottom:6px}
+.ke-recs{display:flex;flex-wrap:wrap;gap:6px}
+.ke-rec{font-size:11px;background:var(--bg3);padding:4px 10px;border-radius:12px;cursor:pointer;color:var(--txt2)}
+.ke-rec:hover{background:var(--accent2);color:var(--accent)}
+.karte-chart{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.kc-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.kc-row:last-child{margin-bottom:0}
+.kc-label{width:64px;font-size:12px;font-weight:700;flex:none}
+.kc-bar-wrap{flex:1;height:16px;background:var(--bg3);border-radius:8px;overflow:hidden}
+.kc-bar{height:100%;background:linear-gradient(90deg,var(--accent),#e0a98a);border-radius:8px}
+.kc-count{width:38px;font-size:12px;color:var(--txt3);text-align:right;flex:none}
+
+/* ===== コレクション機能 ===== */
+.collections-section{margin-top:32px;padding-top:24px;border-top:1px solid var(--border)}
+.cs-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:6px}
+.cs-head h3{font-size:18px;font-weight:800}
+.collection-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px}
+.cc-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.cc-title{font-size:15px;font-weight:700}
+.cc-count{font-size:12px;color:var(--txt3);font-weight:500;margin-left:8px}
+.cc-delete{background:none;border:none;color:var(--txt3);font-size:12px;cursor:pointer;text-decoration:underline}
+.cc-delete:hover{color:#c0554a}
+.cc-remove{position:absolute;top:4px;right:4px;width:20px;height:20px;background:rgba(0,0,0,.6);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;z-index:2}
+
+/* ===== 無限スクロール ===== */
+.scroll-loader{grid-column:1/-1;text-align:center;padding:24px 0;font-size:13px;color:var(--txt3)}
 </style>
 <script type="application/ld+json">
 {
@@ -1407,6 +1442,7 @@ nav{display:flex;gap:4px}
     <button class="nav-btn" onclick="showPage('ranking')">ランキング</button>
     <button class="nav-btn" onclick="showPage('diagnosis')">肌診断</button>
     <button class="nav-btn" onclick="showPage('column')">コラム</button>
+    <button class="nav-btn" onclick="showPage('karte')">肌カルテ</button>
     <button class="nav-btn" onclick="showPage('favorites')">お気に入り</button>
     <button class="dark-btn" onclick="toggleDark()">🌙</button>
   </nav>
@@ -1615,9 +1651,23 @@ nav{display:flex;gap:4px}
   <div id="columnArticle" style="display:none"></div>
 </div>
 
+<div id="kartePage" class="page">
+  <div class="section-title">肌カルテ</div>
+  <p style="color:var(--txt2);margin-bottom:20px;font-size:14px">あなたの診断履歴・チェックした商品を記録しています。振り返って、肌ケアの変化を確認しましょう。</p>
+  <div id="karteContent"></div>
+</div>
+
 <div id="favoritesPage" class="page">
   <div class="section-title">お気に入り</div>
   <div id="favGrid" class="grid"></div>
+  <div class="collections-section">
+    <div class="cs-head">
+      <h3>📁 マイコレクション</h3>
+      <button class="hero-btn primary" style="padding:9px 18px;font-size:13px" onclick="createCollection()">+ 新しいリストを作る</button>
+    </div>
+    <p style="font-size:13px;color:var(--txt3);margin-bottom:16px">「敏感肌向け」「3,000円以下」など、自分だけのテーマでリストを作れます。</p>
+    <div id="collectionsList"></div>
+  </div>
 </div>
 
 <div class="compare-bar" id="compareBar">
@@ -2184,6 +2234,7 @@ let activeFilters={price:"all",skin:"all",concern:"all"};
 let favorites=JSON.parse(localStorage.getItem("ulabo_fav")||"[]");
 let compareList=[];
 
+// カードのバリエーション判定（視覚的差別化）
 function cardVariant(p,i){
   const c=[];
   if(i===0) c.push("card-hero"); // 1位は巨大カード
@@ -2193,11 +2244,29 @@ function cardVariant(p,i){
   return c.join(" ");
 }
 
+let currentList=[];
+let renderedCount=0;
+const PAGE_SIZE=24;
+const FLAG_MAP={"日本":"🇯🇵","韓国":"🇰🇷","フランス":"🇫🇷","アメリカ":"🇺🇸","ドイツ":"🇩🇪","台湾":"🇹🇼","カナダ":"🇨🇦","モロッコ":"🇲🇦","イタリア":"🇮🇹"};
+
 function render(list){
   const el=document.getElementById("products");
-  if(!list.length){el.innerHTML='<p style="color:var(--txt3);padding:40px 0">該当する商品が見つかりませんでした。</p>';return}
-  const flag={"日本":"🇯🇵","韓国":"🇰🇷","フランス":"🇫🇷","アメリカ":"🇺🇸","ドイツ":"🇩🇪","台湾":"🇹🇼","カナダ":"🇨🇦","モロッコ":"🇲🇦","イタリア":"🇮🇹"};
-  el.innerHTML=list.map((p,i)=>{
+  currentList=list;
+  renderedCount=0;
+  if(!list.length){el.innerHTML='<p style="color:var(--txt3);padding:40px 0">該当する商品が見つかりませんでした。</p>';removeScrollSentinel();return}
+  el.innerHTML="";
+  appendMoreProducts();
+  setupScrollSentinel();
+}
+
+// 追加分をレンダリングしてel末尾に足す（無限スクロール用）
+function appendMoreProducts(){
+  const el=document.getElementById("products");
+  const flag=FLAG_MAP;
+  const slice=currentList.slice(renderedCount, renderedCount+PAGE_SIZE);
+  if(!slice.length) return;
+  const html=slice.map((p,localI)=>{
+    const i=renderedCount+localI;
     const variant=cardVariant(p,i);
     return `
     <div class="card ${variant}" onclick="openDetail(${p.id})">
@@ -2230,6 +2299,50 @@ function render(list){
       </div>
     </div>`;
   }).join("");
+  el.insertAdjacentHTML("beforeend", html);
+  renderedCount+=slice.length;
+  updateScrollSentinelVisibility();
+}
+
+// 無限スクロール監視
+let scrollObserver=null;
+function setupScrollSentinel(){
+  removeScrollSentinel();
+  const el=document.getElementById("products");
+  const sentinel=document.createElement("div");
+  sentinel.id="scrollSentinel";
+  sentinel.style.cssText="grid-column:1/-1;height:1px";
+  el.insertAdjacentElement("afterend", sentinel);
+  scrollObserver=new IntersectionObserver((entries)=>{
+    if(entries[0].isIntersecting && renderedCount<currentList.length){
+      appendMoreProducts();
+    }
+  },{rootMargin:"400px"});
+  scrollObserver.observe(sentinel);
+  updateScrollSentinelVisibility();
+}
+function removeScrollSentinel(){
+  if(scrollObserver){scrollObserver.disconnect();scrollObserver=null;}
+  const old=document.getElementById("scrollSentinel");
+  if(old) old.remove();
+  const loader=document.getElementById("scrollLoader");
+  if(loader) loader.remove();
+}
+function updateScrollSentinelVisibility(){
+  let loader=document.getElementById("scrollLoader");
+  if(renderedCount<currentList.length){
+    if(!loader){
+      loader=document.createElement("div");
+      loader.id="scrollLoader";
+      loader.className="scroll-loader";
+      loader.textContent="読み込み中…";
+      document.getElementById("scrollSentinel")?.insertAdjacentElement("afterend", loader);
+    }
+    loader.style.display="block";
+  } else if(loader){
+    loader.textContent="すべての商品を表示しました（"+currentList.length+"件）";
+    loader.style.opacity="0.6";
+  }
 }
 
 // 小サムネイル
@@ -2471,7 +2584,10 @@ function openDetail(id){
         ${AFFILIATE.showRakuten?`<button class="shop-btn rakuten" onclick="goAffiliate('rakuten',${p.id})">楽天で見る</button>`:""}
         ${AFFILIATE.showQoo10?`<button class="shop-btn qoo10" onclick="goAffiliate('qoo10',${p.id})">Qoo10で見る</button>`:""}
       </div>
-      <button class="btn btn-secondary" onclick="addToCompare(${p.id})" style="margin-top:10px;width:100%">比較に追加</button>
+      <div style="display:flex;gap:8px;margin-top:10px">
+        <button class="btn btn-secondary" onclick="addToCompare(${p.id})" style="flex:1">比較に追加</button>
+        <button class="btn btn-secondary" onclick="addToCollection(${p.id})" style="flex:1">📁 リストに追加</button>
+      </div>
     </div>
     ${relatedProductsHtml(p)}
     ${relatedColumnsHtml(p)}
@@ -2732,6 +2848,173 @@ function renderRanking(){
     </div>`).join("");
 }
 
+// 肌カルテ：診断結果を記録
+function saveKarteEntry(skin, concerns, recommended){
+  try{
+    let karte=JSON.parse(localStorage.getItem("ulabo_karte")||"[]");
+    karte.unshift({
+      date:new Date().toISOString(),
+      skin, concerns,
+      recIds:recommended.slice(0,3).map(p=>p.id)
+    });
+    karte=karte.slice(0,30); // 最大30件保存
+    localStorage.setItem("ulabo_karte",JSON.stringify(karte));
+  }catch(e){}
+}
+
+// 肌カルテページの描画
+function renderKarte(){
+  const el=document.getElementById("karteContent");
+  const karte=JSON.parse(localStorage.getItem("ulabo_karte")||"[]");
+  const hist=JSON.parse(localStorage.getItem("ulabo_history")||"[]");
+
+  if(!karte.length&&!hist.length&&!favorites.length){
+    el.innerHTML=`<div class="karte-empty">
+      <div style="font-size:40px;margin-bottom:10px">📋</div>
+      <p style="color:var(--txt3);font-size:14px">まだ記録がありません。<br>AI肌診断を試すと、ここに記録されていきます。</p>
+      <button class="hero-btn primary" style="margin-top:16px" onclick="showPage('diagnosis')">AI肌診断をやってみる</button>
+    </div>`;
+    return;
+  }
+
+  // 診断履歴の肌タイプ推移
+  let timelineHtml="";
+  if(karte.length){
+    timelineHtml=`<div class="karte-section">
+      <h3>📅 診断履歴（最新${karte.length}件）</h3>
+      <div class="karte-timeline">
+        ${karte.map((k,i)=>{
+          const d=new Date(k.date);
+          const dateStr=`${d.getMonth()+1}/${d.getDate()}`;
+          const recNames=k.recIds.map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+          return `<div class="karte-entry">
+            <div class="ke-date">${dateStr}</div>
+            <div class="ke-body">
+              <div class="ke-skin">${k.skin}タイプ${k.concerns&&k.concerns.length?` ・ ${k.concerns.slice(0,2).join("・")}`:""}</div>
+              ${recNames.length?`<div class="ke-recs">${recNames.map(p=>`<span class="ke-rec" onclick="openDetail(${p.id})">${p.icon} ${p.name.slice(0,16)}</span>`).join("")}</div>`:""}
+            </div>
+          </div>`;
+        }).join("")}
+      </div>
+    </div>`;
+  }
+
+  // 肌タイプの傾向グラフ（簡易棒グラフ）
+  let chartHtml="";
+  if(karte.length>=2){
+    const skinCounts={};
+    karte.forEach(k=>skinCounts[k.skin]=(skinCounts[k.skin]||0)+1);
+    const maxCount=Math.max(...Object.values(skinCounts));
+    chartHtml=`<div class="karte-section">
+      <h3>📊 診断結果の傾向</h3>
+      <div class="karte-chart">
+        ${Object.entries(skinCounts).sort((a,b)=>b[1]-a[1]).map(([skin,cnt])=>`
+          <div class="kc-row">
+            <div class="kc-label">${skin}</div>
+            <div class="kc-bar-wrap"><div class="kc-bar" style="width:${cnt/maxCount*100}%"></div></div>
+            <div class="kc-count">${cnt}回</div>
+          </div>`).join("")}
+      </div>
+    </div>`;
+  }
+
+  // 最近見た商品
+  let historyHtml="";
+  if(hist.length){
+    const items=hist.slice(0,10).map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+    historyHtml=`<div class="karte-section">
+      <h3>👀 最近チェックした商品</h3>
+      <div class="reco-scroll">
+        ${items.map(p=>`<div class="reco-card" onclick="openDetail(${p.id})">
+          ${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:`<div class="reco-emoji">${p.icon}</div>`}
+          <div class="reco-name">${p.name}</div>
+          <div class="reco-price">¥${p.price.toLocaleString()}</div>
+        </div>`).join("")}
+      </div>
+    </div>`;
+  }
+
+  el.innerHTML=chartHtml+timelineHtml+historyHtml+`
+    <div style="text-align:right;margin-top:16px">
+      <button class="filter-reset" onclick="clearKarte()">記録をすべて削除する</button>
+    </div>`;
+}
+
+function clearKarte(){
+  if(!confirm("診断履歴・閲覧履歴の記録を削除します。よろしいですか？")) return;
+  localStorage.removeItem("ulabo_karte");
+  localStorage.removeItem("ulabo_history");
+  renderKarte();
+}
+
+// ===== コレクション機能 =====
+function getCollections(){
+  try{ return JSON.parse(localStorage.getItem("ulabo_collections")||"[]"); }catch(e){ return []; }
+}
+function saveCollections(cols){
+  localStorage.setItem("ulabo_collections",JSON.stringify(cols));
+}
+function createCollection(){
+  const name=prompt("リストの名前を入力してください(例:敏感肌向け、3,000円以下など)");
+  if(!name||!name.trim()) return;
+  const cols=getCollections();
+  if(cols.some(c=>c.name===name.trim())){ alert("同じ名前のリストがすでにあります"); return; }
+  cols.unshift({id:"col_"+Date.now(),name:name.trim(),productIds:[],createdAt:new Date().toISOString()});
+  saveCollections(cols);
+  renderCollections();
+}
+function deleteCollection(id){
+  if(!confirm("このリストを削除しますか?")) return;
+  saveCollections(getCollections().filter(c=>c.id!==id));
+  renderCollections();
+}
+function addToCollection(productId){
+  const cols=getCollections();
+  if(!cols.length){
+    if(confirm("まだリストがありません。新しいリストを作りますか?")) createCollection();
+    return;
+  }
+  const options=cols.map((c,i)=>`${i+1}. ${c.name}`).join("\n");
+  const choice=prompt("追加するリストの番号を入力してください:\n"+options);
+  const idx=parseInt(choice)-1;
+  if(isNaN(idx)||!cols[idx]) return;
+  if(!cols[idx].productIds.includes(productId)) cols[idx].productIds.push(productId);
+  saveCollections(cols);
+  alert(`「${cols[idx].name}」に追加しました`);
+  renderCollections();
+}
+function removeFromCollection(colId,productId){
+  const cols=getCollections();
+  const col=cols.find(c=>c.id===colId);
+  if(col){ col.productIds=col.productIds.filter(id=>id!==productId); saveCollections(cols); renderCollections(); }
+}
+function renderCollections(){
+  const el=document.getElementById("collectionsList");
+  if(!el) return;
+  const cols=getCollections();
+  if(!cols.length){
+    el.innerHTML='<p style="color:var(--txt3);font-size:13px;padding:20px 0;text-align:center">まだリストがありません。「+ 新しいリストを作る」から始めましょう。</p>';
+    return;
+  }
+  el.innerHTML=cols.map(c=>{
+    const items=c.productIds.map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+    return `<div class="collection-card">
+      <div class="cc-head">
+        <div class="cc-title">${c.name}<span class="cc-count">${items.length}件</span></div>
+        <button class="cc-delete" onclick="deleteCollection('${c.id}')">削除</button>
+      </div>
+      ${items.length?`<div class="reco-scroll">
+        ${items.map(p=>`<div class="reco-card" style="position:relative" onclick="openDetail(${p.id})">
+          <span class="cc-remove" onclick="event.stopPropagation();removeFromCollection('${c.id}',${p.id})">×</span>
+          ${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:`<div class="reco-emoji">${p.icon}</div>`}
+          <div class="reco-name">${p.name}</div>
+          <div class="reco-price">¥${p.price.toLocaleString()}</div>
+        </div>`).join("")}
+      </div>`:'<p style="font-size:12px;color:var(--txt3);padding:10px 0">商品詳細ページの「リストに追加」からここに商品を追加できます。</p>'}
+    </div>`;
+  }).join("");
+}
+
 function renderFavorites(){
   const favEl=document.getElementById("favGrid");
   if(!favorites.length){
@@ -2839,6 +3122,7 @@ ${recommended.map(p=>`・${p.name}（${p.brand}）: ${p.desc}`).join("\n")}
     </div>`;
   }
 
+  saveKarteEntry(skin, concerns, recommended);
   renderShareImage(skin, concerns, recommended);
   resultEl.scrollIntoView({behavior:"smooth"});
 }
@@ -2927,12 +3211,13 @@ function showPage(name){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
   document.getElementById(name+"Page").classList.add("active");
-  const idx=["products","brands","ranking","diagnosis","column","favorites"].indexOf(name);
+  const idx=["products","brands","ranking","diagnosis","column","karte","favorites"].indexOf(name);
   document.querySelectorAll(".nav-btn")[idx]?.classList.add("active");
   if(name==="brands") renderBrands();
   if(name==="ranking") renderRanking();
   if(name==="column") renderColumnList();
-  if(name==="favorites") renderFavorites();
+  if(name==="favorites"){renderFavorites();renderCollections();}
+  if(name==="karte") renderKarte();
 }
 
 let chatHistory=[];
