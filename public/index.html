@@ -1062,6 +1062,39 @@ nav{display:flex;gap:4px}
   ]
 }
 </script>
+<!-- 構造化データ：FAQ（保険的実装。表示保証はないため最小限の内容） -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Moilumのランキングはどうやって決まっていますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "編集部が独自に算出した「編集部スコア」（人気度×45％＋コスパ評価×40％＋保湿力・低刺激度の平均×15％）にもとづき順位付けしています。外部サイトのレビュー評価をそのまま転載したものではありません。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "掲載されている価格はいつ時点のものですか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "各商品ページに調査時点（価格取得日）を明記しています。価格・在庫は変動するため、購入前に必ず各販売サイトで最新情報をご確認ください。"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Moilumはアフィリエイト広告を利用していますか？",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "はい。Amazon・楽天・Qoo10等のアフィリエイト広告を利用しています。商品の選定・評価は編集部が独自に行っています。"
+      }
+    }
+  ]
+}
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-BC0FBSZSWX"></script>
 <script>
@@ -1827,6 +1860,24 @@ const AFFILIATE={
 
 // 価格の調査時点（審査・誤認防止のため明記。価格更新時にここも更新）
 const PRICE_DATE="2026年6月";
+// 構造化データのpriceValidUntilに使うISO日付（PRICE_DATE更新時にあわせて更新すること）
+const PRICE_VALID_UNTIL="2026-07-31";
+
+// ページ内容に応じて<head>内のJSON-LDを動的に追加/更新する（SPAのため、URLは変わらずDOM内容のみ切り替わる）
+function setJsonLd(id, data){
+  let el=document.getElementById(id);
+  if(!el){
+    el=document.createElement("script");
+    el.type="application/ld+json";
+    el.id=id;
+    document.head.appendChild(el);
+  }
+  el.textContent=JSON.stringify(data);
+}
+function removeJsonLd(id){
+  const el=document.getElementById(id);
+  if(el) el.remove();
+}
 
 // 商品名から各ショップの検索型アフィリエイトリンクを生成
 function amazonLink(p){
@@ -2311,6 +2362,24 @@ function openDetail(id){
   }catch(e){}
   setTimeout(renderRecoFeed,50);
   if(!p) return;
+  // 構造化データ：Product + offers（価格取得日をpriceValidUntilに連動）
+  setJsonLd("jsonld-product",{
+    "@context":"https://schema.org",
+    "@type":"Product",
+    "name":p.name,
+    "brand":{"@type":"Brand","name":p.brand},
+    "description":p.desc,
+    "category":p.category,
+    ...(p.image?{"image":p.image}:{}),
+    "offers":{
+      "@type":"Offer",
+      "price":p.price,
+      "priceCurrency":"JPY",
+      "availability":"https://schema.org/InStock",
+      "priceValidUntil":PRICE_VALID_UNTIL,
+      "url":p.purchase
+    }
+  });
   document.getElementById("detailContent").innerHTML=`
     <div style="background:var(--bg3);border-radius:var(--radius);padding:16px;margin-bottom:16px">${productImage(p,true)}</div>
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:8px">
@@ -2424,8 +2493,11 @@ function relatedProductsHtml(p){
   </div>`;
 }
 
-function closeModal(id){document.getElementById(id).classList.remove("open")}
-document.querySelectorAll(".modal-overlay").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)m.classList.remove("open")}));
+function closeModal(id){
+  document.getElementById(id).classList.remove("open");
+  if(id==="detailModal") removeJsonLd("jsonld-product");
+}
+document.querySelectorAll(".modal-overlay").forEach(m=>m.addEventListener("click",e=>{if(e.target===m)closeModal(m.id)}));
 
 function toggleFav(id,btn){
   if(favorites.includes(id)) favorites=favorites.filter(x=>x!==id);
@@ -2619,6 +2691,7 @@ function renderRanking(){
   const priceLabel=rankPrice==="all"?"":` / ${rankPrice==="0-5000"?"〜5,000円":rankPrice==="5000-10000"?"5,000〜10,000円":"10,000円〜"}`;
   if(!sorted.length){
     rankEl.innerHTML='<p style="color:var(--txt3);padding:30px 0">この条件に合う商品がありませんでした。価格帯を変えてお試しください。</p>';
+    removeJsonLd("jsonld-itemlist-ranking");
     return;
   }
   rankEl.innerHTML=`<div class="rank-criteria">📊 <b>${rankFilter}${priceLabel}</b>のランキングです。ユーザー評価による人気度と<b>コスパ</b>を重視し、成分の充実度も加味して順位付けしています。</div>
@@ -2640,6 +2713,30 @@ function renderRanking(){
         <div class="rank-reason">👑 ${reason(p)}</div>
       </div>
     </div>`).join("");
+  // 構造化データ：ItemList（表示中のランキング上位10件。編集部スコアを独自の評価値として扱い、外部レビュー評価は転載しない）
+  setJsonLd("jsonld-itemlist-ranking",{
+    "@context":"https://schema.org",
+    "@type":"ItemList",
+    "name":`${rankFilter==="all"?"人気":rankFilter}ランキング`,
+    "itemListElement":sorted.slice(0,10).map((p,i)=>({
+      "@type":"ListItem",
+      "position":i+1,
+      "item":{
+        "@type":"Product",
+        "name":p.name,
+        "brand":{"@type":"Brand","name":p.brand},
+        ...(p.image?{"image":p.image}:{}),
+        "offers":{
+          "@type":"Offer",
+          "price":p.price,
+          "priceCurrency":"JPY",
+          "availability":"https://schema.org/InStock",
+          "priceValidUntil":PRICE_VALID_UNTIL,
+          "url":p.purchase
+        }
+      }
+    }))
+  });
 }
 
 // 肌カルテ：診断結果を記録
@@ -3012,6 +3109,20 @@ function showPage(name){
   if(name==="column") renderColumnList();
   if(name==="favorites"){renderFavorites();renderCollections();}
   if(name==="karte") renderKarte();
+  // 構造化データ：BreadcrumbList（SPAのためページ切り替え時に更新。トップ（商品一覧）は1階層のみなので設置しない）
+  const PAGE_LABELS={brands:"ブランド一覧",ranking:"人気ランキング",diagnosis:"AI肌診断",column:"スキンケアコラム",karte:"肌カルテ",favorites:"お気に入り"};
+  if(name==="products"){
+    removeJsonLd("jsonld-breadcrumb");
+  }else{
+    setJsonLd("jsonld-breadcrumb",{
+      "@context":"https://schema.org",
+      "@type":"BreadcrumbList",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"ホーム","item":"https://moilum.sanji-104vt.workers.dev/"},
+        {"@type":"ListItem","position":2,"name":PAGE_LABELS[name]||name}
+      ]
+    });
+  }
 }
 
 let chatHistory=[];
