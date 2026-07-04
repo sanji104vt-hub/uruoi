@@ -144,6 +144,10 @@ nav{display:flex;gap:4px}
   background:var(--accent2);color:var(--accent);font-size:12px;
   padding:8px 20px;text-align:center;border-bottom:1px solid var(--border);
 }
+.breadcrumb-ui{padding:8px 20px;font-size:12px;color:var(--txt3);border-bottom:1px solid var(--border);background:var(--bg2)}
+.breadcrumb-ui a{color:var(--accent);cursor:pointer}
+.breadcrumb-ui a:hover{text-decoration:underline}
+.breadcrumb-ui .bc-sep{margin:0 6px;color:var(--txt3)}
 .site-footer{
   background:var(--bg2);border-top:1px solid var(--border);
   padding:28px 20px;margin-top:40px;font-size:13px;color:var(--txt3);
@@ -310,7 +314,9 @@ nav{display:flex;gap:4px}
 
 @media(max-width:600px){
   header{padding:0 12px}
-  .nav-btn{padding:6px 8px;font-size:12px}
+  nav{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;max-width:calc(100vw - 130px)}
+  nav::-webkit-scrollbar{display:none}
+  .nav-btn{padding:6px 8px;font-size:12px;white-space:nowrap;flex:none}
   .page{padding:16px 12px}
   .modal{padding:20px 16px}
   .modal-grid{grid-template-columns:1fr}
@@ -382,12 +388,12 @@ nav{display:flex;gap:4px}
 .origin-flag{position:absolute;top:10px;left:10px;z-index:3;background:rgba(255,255,255,.92);color:#555;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
 .dark .origin-flag{background:rgba(40,36,33,.92);color:#ccc}
 .card-rank-badge{position:absolute;top:10px;right:10px;z-index:3;background:linear-gradient(135deg,#f5a623,#e0871a);color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;box-shadow:0 2px 8px rgba(224,135,26,.4)}
-.shop-mini{display:flex;gap:5px;margin-top:6px}
-.shop-mini button{flex:1;font-size:11px;font-weight:700;padding:7px 4px;border:none;border-radius:7px;color:#fff;cursor:pointer;transition:opacity .2s}
-.shop-mini button:hover{opacity:.85}
-.sm-amazon{background:#ff9900;color:#1a1a1a}
-.sm-rakuten{background:#bf0000}
-.sm-qoo10{background:#e60012}
+.shop-mini{display:flex;gap:6px;margin-top:6px}
+.shop-mini button{flex:1;font-size:12px;font-weight:800;padding:10px 4px;border:none;border-radius:8px;color:#fff;cursor:pointer;transition:opacity .2s,transform .15s}
+.shop-mini button:hover{opacity:.9;transform:translateY(-1px)}
+.sm-amazon{background:#ff9900;color:#1a1a1a;box-shadow:0 3px 8px rgba(255,153,0,.35)}
+.sm-rakuten{background:#bf0000;box-shadow:0 3px 8px rgba(191,0,0,.35)}
+.sm-qoo10{background:#e60012;box-shadow:0 3px 8px rgba(230,0,18,.35)}
 .section-title{position:relative;padding-left:14px}
 .section-title::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:24px;background:linear-gradient(var(--accent),#e0a98a);border-radius:3px}
 @media(max-width:980px){.layout-with-sidebar{grid-template-columns:1fr}.sidebar{position:static}}
@@ -415,6 +421,15 @@ nav{display:flex;gap:4px}
 
 .rank-criteria{background:var(--accent2);color:var(--txt2);font-size:12px;line-height:1.6;padding:12px 16px;border-radius:var(--radius);margin-bottom:16px;border-left:3px solid var(--accent)}
 .rank-reason{display:inline-block;margin-top:6px;font-size:12px;color:var(--accent);background:var(--accent2);padding:3px 10px;border-radius:12px;font-weight:600}
+.rank-compare-wrap{overflow-x:auto;margin-bottom:20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg2)}
+.rank-compare-table{width:100%;border-collapse:collapse;font-size:13px}
+.rank-compare-table th,.rank-compare-table td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);white-space:normal}
+.rank-compare-table th{background:var(--bg3);font-size:12px;color:var(--txt2)}
+.rank-compare-table td:first-child,.rank-compare-table th:first-child{color:var(--txt3);font-size:12px;font-weight:600;white-space:nowrap}
+.rank-compare-table tr:last-child td{border-bottom:none}
+.rank-cross-links{margin-top:24px;padding-top:20px;border-top:1px solid var(--border)}
+.rank-cross-label{font-size:13px;font-weight:700;color:var(--txt2);margin-bottom:10px}
+.rank-cross-buttons{display:flex;gap:8px;flex-wrap:wrap}
 
 .logo{display:flex;align-items:center;gap:8px}
 .logo-mark{flex:none;filter:drop-shadow(0 2px 4px rgba(212,133,106,.3))}
@@ -1272,6 +1287,7 @@ nav{display:flex;gap:4px}
 </header>
 
 <div class="pr-banner">本サイトはアフィリエイト広告（Amazon・楽天・Qoo10等）を利用しています。商品の選定・評価は編集部が独自に行っています。価格・在庫は各販売サイトでご確認ください。</div>
+<nav id="breadcrumbUI" class="breadcrumb-ui" style="display:none" aria-label="パンくずリスト"></nav>
 
 <div id="productsPage" class="page active">
   <section class="hero">
@@ -1525,6 +1541,13 @@ nav{display:flex;gap:4px}
       <a onclick="openInfo('privacy')">プライバシーポリシー</a>
       <a onclick="openInfo('disclosure')">アフィリエイトについて</a>
       <a onclick="openInfo('contact')">お問い合わせ</a>
+    </div>
+    <div class="footer-updates" style="margin-bottom:14px">
+      <h3 style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--txt2)">更新履歴</h3>
+      <ul style="font-size:12px;color:var(--txt3);line-height:1.8;list-style:none;padding:0;margin:0">
+        <li>2026-07-04：ランキングを「乾燥肌・毛穴/皮脂・ニキビ/肌荒れ・エイジングケア・敏感肌」の悩み別5本に再編。プチプラ／デパコスの価格帯タブを追加し、編集部スコアの算出方法を公開しました。</li>
+        <li>2026-06：商品画像・比較表・お気に入りコレクション・肌カルテ機能などを順次追加しました。</li>
+      </ul>
     </div>
     <p style="margin-bottom:6px">当サイトに掲載の価格・成分・効果に関する情報は参考であり、正確性・最新性を保証するものではありません。購入前に必ず各販売サイト・公式情報をご確認ください。</p>
     <p>当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。© Moilum</p>
@@ -2747,11 +2770,32 @@ function renderRanking(){
     removeJsonLd("jsonld-itemlist-ranking");
     return;
   }
+  // 上位3件の簡易比較表（価格・評価・主要成分を横並び表示）
+  const top3=sorted.slice(0,3);
+  const compareHtml=top3.length?`<div class="rank-compare-wrap">
+    <table class="rank-compare-table">
+      <thead><tr><th>比較項目</th>${top3.map((p,i)=>`<th>${i+1}位：${p.name.length>16?p.name.slice(0,16)+"…":p.name}</th>`).join("")}</tr></thead>
+      <tbody>
+        <tr><td>参考価格</td>${top3.map(p=>`<td><b style="color:var(--accent)">¥${p.price.toLocaleString()}</b>（${PRICE_DATE}時点）</td>`).join("")}</tr>
+        <tr><td>評価</td>${top3.map(p=>`<td>★${p.rating}（${p.reviews.toLocaleString()}件）</td>`).join("")}</tr>
+        <tr><td>主要成分</td>${top3.map(p=>`<td>${p.keyIngredients.slice(0,2).join("・")}</td>`).join("")}</tr>
+      </tbody>
+    </table>
+  </div>`:"";
+  // 他の悩み別ランキングへの相互リンク（内部リンク強化）
+  const otherKeys=Object.keys(CONCERN_RANKINGS).filter(k=>k!==rankConcern);
+  const crossLinksHtml=`<div class="rank-cross-links">
+    <div class="rank-cross-label">他のお悩みのランキングもチェック</div>
+    <div class="rank-cross-buttons">
+      ${otherKeys.map(k=>`<button class="filter-btn" onclick="jumpToRanking('${k}')">${CONCERN_RANKINGS[k].label}が気になる方はこちら →</button>`).join("")}
+    </div>
+  </div>`;
   rankEl.innerHTML=`<div class="rank-criteria">📊 <b>${cfg.heading}${priceLabel}${sorted.length}選</b>。ユーザー評価による人気度と<b>コスパ</b>を重視し、成分の充実度も加味して順位付けしています。</div>
   <div style="font-size:12px;color:var(--txt3);background:var(--bg3);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:16px;line-height:1.7">
     <b>編集部スコアの算出方法：</b>人気度（評価＋レビュー件数を対数正規化した加点）×45％ + コスパ評価×40％ + 保湿力・低刺激度の平均×15％ で算出しています。掲載順位は編集部が独自に付与した参考値であり、楽天等の外部レビュー評価をそのまま転載したものではありません。<br>
     <b>最終更新日：</b>${PRICE_DATE}
-  </div>`+sorted.map((p,i)=>`
+  </div>
+  ${compareHtml}`+sorted.map((p,i)=>`
     <div class="ranking-item" onclick="openDetail(${p.id})">
       <div class="rank-num ${i===0?'gold':i===1?'silver':i===2?'bronze':''}">${i+1}</div>
       <div style="font-size:28px">${p.icon}</div>
@@ -2765,7 +2809,7 @@ function renderRanking(){
         </div>
         <div class="rank-reason">👑 ${reason(p)}</div>
       </div>
-    </div>`).join("");
+    </div>`).join("")+crossLinksHtml;
   // 構造化データ：ItemList（表示中のランキング上位10件。編集部スコアを独自の評価値として扱い、外部レビュー評価は転載しない）
   setJsonLd("jsonld-itemlist-ranking",{
     "@context":"https://schema.org",
@@ -3164,10 +3208,12 @@ function showPage(name){
   if(name==="column") renderColumnList();
   if(name==="favorites"){renderFavorites();renderCollections();}
   if(name==="karte") renderKarte();
-  // 構造化データ：BreadcrumbList（SPAのためページ切り替え時に更新。トップ（商品一覧）は1階層のみなので設置しない）
+  // 構造化データ＋視覚的UI：BreadcrumbList（SPAのためページ切り替え時に更新。トップ（商品一覧）は1階層のみなので設置しない）
   const PAGE_LABELS={brands:"ブランド一覧",ranking:"人気ランキング",diagnosis:"AI肌診断",column:"スキンケアコラム",karte:"肌カルテ",favorites:"お気に入り"};
+  const bcUI=document.getElementById("breadcrumbUI");
   if(name==="products"){
     removeJsonLd("jsonld-breadcrumb");
+    if(bcUI) bcUI.style.display="none";
   }else{
     setJsonLd("jsonld-breadcrumb",{
       "@context":"https://schema.org",
@@ -3177,6 +3223,10 @@ function showPage(name){
         {"@type":"ListItem","position":2,"name":PAGE_LABELS[name]||name}
       ]
     });
+    if(bcUI){
+      bcUI.style.display="block";
+      bcUI.innerHTML=`<a onclick="showPage('products')">ホーム</a><span class="bc-sep">›</span><span>${PAGE_LABELS[name]||name}</span>`;
+    }
   }
 }
 
