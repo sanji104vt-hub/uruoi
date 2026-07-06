@@ -47,14 +47,22 @@
   "description":"スキンケア商品の比較・肌診断メディア"
 }
 </script>
+<!-- 水鏡 -MIZUKAGAMI- デザイン用フォント -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500&family=Cormorant:ital,wght@0,500;1,500&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#faf9f7;--bg2:#fff;--bg3:#f0ede8;
-  --txt:#1a1a1a;--txt2:#555;--txt3:#888;
-  --accent:#d4856a;--accent2:#f5ede8;
-  --border:#e8e3dc;--border2:#d4cec5;
-  --card-shadow:0 2px 12px rgba(0,0,0,.06);
-  --radius:14px;--radius-sm:8px;
+  /* 水鏡 -MIZUKAGAMI- デザイントークン */
+  --base:#FBF9F6;--ink:#2B2622;--water:#DCEAEC;--deep:#B7CDD3;
+  --iris-1:#E8D5E0;--iris-2:#D5E4E8;--iris-3:#E4E8D5;
+  --font-head:'Zen Old Mincho',serif;--font-body:'Zen Kaku Gothic New',sans-serif;--font-num:'Cormorant',serif;
+  --bg:var(--base);--bg2:#fff;--bg3:var(--water);
+  --txt:var(--ink);--txt2:#5a6b6e;--txt3:#8fa3a7;
+  --accent:#7FA8B3;--accent2:var(--water);
+  --border:#e3e9e5;--border2:#c9d6d1;
+  --card-shadow:0 8px 32px rgba(43,38,34,.06);
+  --radius:16px;--radius-sm:10px;
 }
 .dark{
   --bg:#0f0e0d;--bg2:#1a1917;--bg3:#242220;
@@ -64,7 +72,9 @@
   --card-shadow:0 2px 12px rgba(0,0,0,.3);
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--txt);font-family:'Hiragino Kaku Gothic Pro','Yu Gothic',sans-serif;min-height:100vh;transition:background .3s,color .3s}
+body{background:var(--bg);color:var(--txt);font-family:var(--font-body),'Hiragino Kaku Gothic Pro','Yu Gothic',sans-serif;min-height:100vh;transition:background .3s,color .3s}
+h1,h2,h3,.section-title,.card-name,.rank-name,.logo,.brand-hero-name,.hero-title{font-family:var(--font-head),serif}
+.card-price,.rank-num,.bs-num,.kc-count,.detail-val,.compare-table .highlight{font-family:var(--font-num),serif}
 a{color:inherit;text-decoration:none}
 button{cursor:pointer;font-family:inherit}
 
@@ -111,9 +121,17 @@ nav{display:flex;gap:4px}
 .card{
   background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
   padding:18px;transition:box-shadow .2s,transform .2s;cursor:pointer;
-  display:flex;flex-direction:column;gap:10px;
+  display:flex;flex-direction:column;gap:10px;position:relative;
 }
 .card:hover{box-shadow:var(--card-shadow);transform:translateY(-2px)}
+.card::after{
+  content:"";position:absolute;inset:0;border-radius:var(--radius);padding:1px;
+  background:conic-gradient(from 0deg,var(--iris-1),var(--iris-2),var(--iris-3),var(--iris-1));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask-composite:exclude;
+  opacity:0;transition:opacity .3s ease;pointer-events:none;
+}
+.card:hover::after{opacity:.4}
 .card-tag{
   display:inline-block;background:var(--accent2);color:var(--accent);
   font-size:11px;padding:3px 10px;border-radius:20px;font-weight:600;
@@ -488,7 +506,7 @@ nav{display:flex;gap:4px}
 .share-btn.share-line{background:#06c755}
 
 /* ===== カードの視覚的差別化 ===== */
-.card-hero{grid-column:span 2;background:linear-gradient(135deg,#fff 0%,#fbeee6 100%);border:2px solid var(--accent);box-shadow:0 8px 28px rgba(212,133,106,.25)}
+.card-hero{grid-column:span 2;background:linear-gradient(135deg,#fff 0%,var(--water) 100%);border:2px solid var(--accent);box-shadow:0 8px 28px rgba(43,38,34,.12)}
 .card-hero::before{content:"👑 1位";position:absolute;top:14px;left:14px;background:linear-gradient(135deg,#f5a623,#e0871a);color:#fff;font-size:13px;font-weight:800;padding:5px 14px;border-radius:20px;z-index:5;box-shadow:0 3px 10px rgba(224,135,26,.5)}
 .card-hero .card-rank-badge,.card-hero .origin-flag{display:none}
 .card-hero .card-name{font-size:19px}
@@ -497,9 +515,9 @@ nav{display:flex;gap:4px}
 .card-kbeauty .card-tag{background:rgba(167,139,209,.15);color:#7d5fb0}
 .card-luxe{background:linear-gradient(180deg,#fff 0%,#f5f0eb 100%);border:1px solid #2a1f1a}
 .card-luxe .card-name{color:#2a1f1a}
-.card-luxe::after{content:"DEPACOS";position:absolute;bottom:8px;right:10px;font-size:9px;font-weight:800;letter-spacing:2px;color:#2a1f1a;opacity:0.5}
+.card-luxe:not(.card-hero):not(.card-premium)::before{content:"DEPACOS";position:absolute;bottom:8px;right:10px;font-size:9px;font-weight:800;letter-spacing:2px;color:#2a1f1a;opacity:0.5}
 .dark .card-luxe{background:linear-gradient(180deg,var(--bg2) 0%,#0d0c0a 100%);border-color:#d4cec5}
-.dark .card-luxe::after{color:#d4cec5}
+.dark .card-luxe:not(.card-hero):not(.card-premium)::before{color:#d4cec5}
 .card-premium{position:relative}
 .card-premium::before{content:"✨ 注目成分";position:absolute;top:10px;left:10px;background:linear-gradient(135deg,#e8c468,#c9a23f);color:#fff;font-size:10px;font-weight:800;padding:3px 9px;border-radius:12px;z-index:4;box-shadow:0 2px 8px rgba(201,162,63,.4)}
 .card-premium.card-hero::before{content:"👑 1位"} /* 巨大カードは1位バッジを優先 */
@@ -2036,12 +2054,12 @@ function radarChartSvg(p){
   axes.forEach((a,i)=>{
     const[x,y]=pt(i,R+22);
     labels+=`<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle" font-size="12" font-weight="700" fill="var(--txt2)">${a.label}</text>`;
-    labels+=`<text x="${x}" y="${y+13}" text-anchor="middle" dominant-baseline="middle" font-size="10" fill="var(--accent)" font-weight="700">${a.val}</text>`;
+    labels+=`<text x="${x}" y="${y+14}" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="var(--deep)" font-weight="700" font-family="var(--font-num),serif" font-style="italic">${a.val}</text>`;
   });
   return `<svg viewBox="0 0 280 260" width="100%" style="max-width:320px;margin:0 auto;display:block">
     ${grid}${spokes}
-    <polygon points="${dpts}" fill="var(--accent)" fill-opacity="0.25" stroke="var(--accent)" stroke-width="2"/>
-    ${axes.map((a,i)=>{const[x,y]=pt(i,R*a.val/5);return `<circle cx="${x}" cy="${y}" r="3.5" fill="var(--accent)"/>`}).join("")}
+    <polygon points="${dpts}" fill="var(--deep)" fill-opacity="0.25" stroke="var(--deep)" stroke-width="2"/>
+    ${axes.map((a,i)=>{const[x,y]=pt(i,R*a.val/5);return `<circle cx="${x}" cy="${y}" r="3.5" fill="var(--deep)"/>`}).join("")}
     ${labels}
   </svg>`;
 }
@@ -2586,7 +2604,7 @@ function openCompareModal(){
 // スコアを横バーで表示
 function scoreBar(v){
   const pct=v/5*100;
-  return `<div style="display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;min-width:50px"><div style="width:${pct}%;height:100%;background:var(--accent)"></div></div><span style="font-size:11px;font-weight:700;color:var(--accent)">${v}</span></div>`;
+  return `<div style="display:flex;align-items:center;gap:6px"><div style="flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden;min-width:50px"><div style="width:${pct}%;height:100%;background:var(--deep)"></div></div><span style="font-size:12px;font-weight:700;color:var(--deep);font-family:var(--font-num),serif;font-style:italic">${v}</span></div>`;
 }
 
 function renderBrands(){
