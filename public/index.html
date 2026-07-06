@@ -357,7 +357,8 @@ nav{display:flex;gap:4px}
 .hero-btn.ghost{background:rgba(255,255,255,.6);color:#6a554c;border:1px solid rgba(255,255,255,.8)}
 .dark .hero-btn.ghost{background:rgba(255,255,255,.08);color:#e0d0c8;border-color:rgba(255,255,255,.15)}
 .hero-btn.ghost:hover{transform:translateY(-2px)}
-.hero-visual{position:relative;width:200px;height:180px;flex:none}
+.mizukagami-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.hero-visual{position:relative;width:200px;height:180px;flex:none;z-index:1}
 .hero-blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.55}
 .blob1{width:130px;height:130px;background:radial-gradient(circle at 30% 30%,var(--water),var(--iris-2));top:0;right:10px}
 .blob2{width:90px;height:90px;background:radial-gradient(circle at 40% 40%,var(--iris-1),var(--deep));bottom:6px;right:80px}
@@ -1308,7 +1309,8 @@ nav{display:flex;gap:4px}
 <nav id="breadcrumbUI" class="breadcrumb-ui" style="display:none" aria-label="パンくずリスト"></nav>
 
 <div id="productsPage" class="page active">
-  <section class="hero">
+  <section class="hero" id="heroSection">
+    <canvas id="mizukagamiCanvas" class="mizukagami-canvas" aria-hidden="true" style="display:none"></canvas>
     <div class="hero-text">
       <div class="brand-logo">
         <svg class="brand-mark" viewBox="0 0 40 40" width="44" height="44" aria-hidden="true">
@@ -1321,14 +1323,14 @@ nav{display:flex;gap:4px}
         <div class="brand-wordmark">Moi<span>lum</span><em>モイルム</em></div>
       </div>
       <div class="hero-badge">207商品を徹底比較</div>
-      <h1 class="hero-title">あなたの肌に、<br>ぴったりの<span>一本</span>を。</h1>
-      <p class="hero-sub">化粧水・美容液・日焼け止めから、肌タイプ・お悩み・予算で探せる。<br>AI肌診断で、迷わず選べるスキンケア比較サイト。</p>
+      <h1 class="hero-title">濁りのない、<br><span>スキンケア比較</span>。</h1>
+      <p class="hero-sub">207商品を独自スコアで正直にレビュー。「向かない人」まで書きます。</p>
       <div class="hero-actions">
         <button class="hero-btn primary" onclick="showPage('diagnosis')">AI肌診断をはじめる</button>
         <button class="hero-btn ghost" onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'});document.getElementById('search').focus()">商品をさがす</button>
       </div>
     </div>
-    <div class="hero-visual" aria-hidden="true">
+    <div class="hero-visual" id="heroVisualFallback" aria-hidden="true">
       <div class="hero-blob blob1"></div>
       <div class="hero-blob blob2"></div>
       <div class="hero-bottle"><div class="hb-cap"></div><div class="hb-neck"></div><div class="hb-body"><span>Moilum</span></div></div>
@@ -3801,6 +3803,244 @@ applyFilters();
 renderBrands();
 renderSidebar();
 renderRecoFeed();
+
+// ===== 水鏡 -MIZUKAGAMI- Phase2: Hero水面 + 3Dキャラ「ウルミ」 =====
+// prefers-reduced-motion時やThree.js読込失敗時は、既存のCSSグラデーション背景と
+// hero-blob/hero-bottle(フォールバックDOM、HTML側にstyle操作なしでそのまま表示)を使う。
+(function(){
+  const CDN_URL="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js";
+
+  function cssVar(name,fallback){
+    const v=getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return v||fallback;
+  }
+
+  function loadThreeJs(onReady){
+    if(window.THREE){ onReady(); return; }
+    const script=document.createElement("script");
+    script.src=CDN_URL;
+    script.onload=onReady;
+    script.onerror=function(){ console.warn("[MIZUKAGAMI] Three.jsの読み込みに失敗。CSSフォールバック表示を維持します。"); };
+    document.head.appendChild(script);
+  }
+
+  const WATER_VERT=`
+    varying vec2 vUv;
+    void main(){
+      vUv=uv;
+      gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);
+    }
+  `;
+  const WATER_FRAG=`
+    uniform float uTime;
+    uniform vec3 uColorBase;
+    uniform vec3 uColorWater;
+    varying vec2 vUv;
+    float hash(vec2 p){ return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453123); }
+    float noise(vec2 p){
+      vec2 i=floor(p); vec2 f=fract(p);
+      float a=hash(i); float b=hash(i+vec2(1.0,0.0));
+      float c=hash(i+vec2(0.0,1.0)); float d=hash(i+vec2(1.0,1.0));
+      vec2 u=f*f*(3.0-2.0*f);
+      return mix(a,b,u.x)+(c-a)*u.y*(1.0-u.x)+(d-b)*u.x*u.y;
+    }
+    void main(){
+      vec2 uv1=vUv*6.0+vec2(uTime*0.045,uTime*0.03);
+      vec2 uv2=vUv*8.0+vec2(-uTime*0.035,uTime*0.05);
+      float n1=noise(uv1);
+      float n2=noise(uv2);
+      float caustic=n1*n2;
+      caustic=smoothstep(0.15,0.75,caustic);
+      vec3 color=mix(uColorBase,uColorWater,caustic*0.55);
+      gl_FragColor=vec4(color,0.85);
+    }
+  `;
+  const URUMI_VERT=`
+    uniform float uTime;
+    varying vec3 vNormal;
+    varying vec3 vViewPosition;
+    void main(){
+      vec3 pos=position;
+      float t=clamp((pos.y+1.1)/2.2,0.0,1.0);
+      float squeeze=1.0-smoothstep(0.4,1.0,t)*0.45;
+      pos.x*=squeeze; pos.z*=squeeze;
+      pos+=normal*sin(uTime*1.5+pos.y*3.0)*0.01;
+      vNormal=normalize(normalMatrix*normal);
+      vec4 mvPosition=modelViewMatrix*vec4(pos,1.0);
+      vViewPosition=-mvPosition.xyz;
+      gl_Position=projectionMatrix*mvPosition;
+    }
+  `;
+  const URUMI_FRAG=`
+    uniform float uTime;
+    uniform vec3 uIris1;
+    uniform vec3 uIris2;
+    uniform vec3 uIris3;
+    varying vec3 vNormal;
+    varying vec3 vViewPosition;
+    void main(){
+      vec3 viewDir=normalize(vViewPosition);
+      float fresnel=pow(1.0-max(dot(viewDir,vNormal),0.0),3.0);
+      vec3 irisMix=mix(uIris1,mix(uIris2,uIris3,sin(uTime*0.3)*0.5+0.5),0.5);
+      vec3 rimColor=irisMix*fresnel*0.15;
+      vec3 baseColor=vec3(1.0,1.0,1.0);
+      vec3 color=baseColor+rimColor;
+      float alpha=0.35+fresnel*0.5;
+      gl_FragColor=vec4(color,alpha);
+    }
+  `;
+
+  let rafId=null;
+
+  function initMizukagami(){
+    const canvas=document.getElementById("mizukagamiCanvas");
+    const heroSection=document.getElementById("heroSection");
+    const fallback=document.getElementById("heroVisualFallback");
+    if(!canvas||!heroSection||!window.THREE) return;
+
+    const width=heroSection.clientWidth||600;
+    const height=heroSection.clientHeight||280;
+
+    let renderer;
+    try{
+      renderer=new THREE.WebGLRenderer({canvas:canvas,alpha:true,antialias:true});
+    }catch(e){
+      console.warn("[MIZUKAGAMI] WebGL初期化に失敗。CSSフォールバック表示を維持します。");
+      return;
+    }
+    const isMobile=window.innerWidth<=680;
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.5));
+    renderer.setSize(width,height);
+
+    const scene=new THREE.Scene();
+    const camera=new THREE.PerspectiveCamera(45,width/height,0.1,100);
+    camera.position.set(0,0,7);
+
+    // --- 水面(コースティクス) ---
+    const waterUniforms={
+      uTime:{value:0},
+      uColorBase:{value:new THREE.Color(cssVar("--base","#FBF9F6"))},
+      uColorWater:{value:new THREE.Color(cssVar("--water","#DCEAEC"))},
+    };
+    const waterGeo=new THREE.PlaneGeometry(20,14,1,1);
+    const waterMat=new THREE.ShaderMaterial({
+      uniforms:waterUniforms,vertexShader:WATER_VERT,fragmentShader:WATER_FRAG,
+      transparent:true,depthWrite:false,
+    });
+    const waterMesh=new THREE.Mesh(waterGeo,waterMat);
+    waterMesh.position.z=-3;
+    scene.add(waterMesh);
+
+    // --- ウルミ(雫型3Dキャラ、ポリゴン数3,000以下) ---
+    const urumiUniforms={
+      uTime:{value:0},
+      uIris1:{value:new THREE.Color(cssVar("--iris-1","#E8D5E0"))},
+      uIris2:{value:new THREE.Color(cssVar("--iris-2","#D5E4E8"))},
+      uIris3:{value:new THREE.Color(cssVar("--iris-3","#E4E8D5"))},
+    };
+    const urumiGeo=new THREE.SphereGeometry(1.1,24,18); // 三角形数 約860枚
+    const urumiMat=new THREE.ShaderMaterial({
+      uniforms:urumiUniforms,vertexShader:URUMI_VERT,fragmentShader:URUMI_FRAG,
+      transparent:true,depthWrite:false,
+    });
+    const urumiMesh=new THREE.Mesh(urumiGeo,urumiMat);
+    const urumiBaseX=1.1; // 水面中央よりやや右寄り
+    urumiMesh.position.set(urumiBaseX,0,0);
+    scene.add(urumiMesh);
+
+    // --- 顔：光の点2つのみ（口はつけない） ---
+    const eyeGeo=new THREE.SphereGeometry(0.055,8,8);
+    const eyeMat=new THREE.MeshBasicMaterial({color:new THREE.Color(cssVar("--ink","#2B2622"))});
+    const eyeL=new THREE.Mesh(eyeGeo,eyeMat);
+    const eyeR=new THREE.Mesh(eyeGeo,eyeMat);
+    eyeL.position.set(urumiBaseX-0.28,0.12,0.95);
+    eyeR.position.set(urumiBaseX+0.28,0.12,0.95);
+    scene.add(eyeL,eyeR);
+
+    // 瞬き：4〜7秒のランダム間隔で、目のy方向スケールが一時的に潰れる
+    let blinkActive=false,blinkStart=0;
+    const blinkDuration=140;
+    let nextBlinkAt=performance.now()+4000+Math.random()*3000;
+
+    const clock=new THREE.Clock();
+    let lastFrameTime=0;
+    const frameInterval=isMobile?1000/30:0; // モバイルはFPS30に制限
+
+    function animate(now){
+      rafId=requestAnimationFrame(animate);
+      if(frameInterval&&now-lastFrameTime<frameInterval) return;
+      lastFrameTime=now;
+
+      const t=clock.getElapsedTime();
+      waterUniforms.uTime.value=t;
+      urumiUniforms.uTime.value=t;
+
+      // sin波でゆっくり浮遊（周期4秒）＋微かな回転
+      const floatY=Math.sin(t*(Math.PI*2/4))*0.15;
+      urumiMesh.position.y=floatY;
+      urumiMesh.rotation.y+=0.0018;
+
+      eyeL.position.y=floatY+0.12;
+      eyeR.position.y=floatY+0.12;
+
+      // 瞬き判定
+      const nowMs=performance.now();
+      if(!blinkActive&&nowMs>=nextBlinkAt){
+        blinkActive=true;
+        blinkStart=nowMs;
+      }
+      if(blinkActive){
+        const progress=(nowMs-blinkStart)/blinkDuration;
+        if(progress>=1){
+          blinkActive=false;
+          eyeL.scale.y=1;eyeR.scale.y=1;
+          nextBlinkAt=nowMs+4000+Math.random()*3000; // 次の瞬きまで4〜7秒
+        }else{
+          const s=progress<0.5?1-(progress*2)*0.9:0.1+((progress-0.5)*2)*0.9;
+          eyeL.scale.y=s;eyeR.scale.y=s;
+        }
+      }
+
+      renderer.render(scene,camera);
+    }
+    rafId=requestAnimationFrame(animate);
+
+    // Hero要素が先に表示された後、canvasをふわっと表示してフォールバックDOMと入れ替え
+    canvas.style.display="block";
+    canvas.style.opacity="0";
+    canvas.style.transition="opacity .6s ease";
+    requestAnimationFrame(()=>{ canvas.style.opacity="1"; });
+    if(fallback) fallback.style.display="none";
+
+    window.addEventListener("resize",function(){
+      const w=heroSection.clientWidth||600,h=heroSection.clientHeight||280;
+      renderer.setSize(w,h);
+      camera.aspect=w/h;
+      camera.updateProjectionMatrix();
+    });
+
+    document.addEventListener("visibilitychange",function(){
+      if(document.hidden&&rafId){ cancelAnimationFrame(rafId); rafId=null; }
+      else if(!document.hidden&&!rafId){ rafId=requestAnimationFrame(animate); }
+    });
+  }
+
+  function startMizukagami(){
+    loadThreeJs(initMizukagami);
+  }
+
+  const prefersReducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(!prefersReducedMotion){
+    // 遅延ロード：Heroテキスト（LCP要素）の描画を妨げないよう、アイドル時間 or load後に開始
+    const schedule=function(){
+      if("requestIdleCallback" in window){ requestIdleCallback(startMizukagami,{timeout:2500}); }
+      else{ setTimeout(startMizukagami,300); }
+    };
+    if(document.readyState==="complete"){ schedule(); }
+    else{ window.addEventListener("load",schedule); }
+  }
+  // reduced-motion時は何もしない → 既存のCSSグラデーション背景 + hero-blob/hero-bottleがそのまま表示される
+})();
 </script>
 </body>
 </html>
