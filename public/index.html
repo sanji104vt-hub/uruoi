@@ -359,6 +359,42 @@ nav{display:flex;gap:4px}
 .hero-btn.ghost:hover{transform:translateY(-2px)}
 .mizukagami-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
 .hero-visual{position:relative;width:200px;height:180px;flex:none;z-index:1}
+
+/* ===== 水鏡 Phase3: 常駐ウルミ ===== */
+.urumi-resident{position:fixed;right:20px;bottom:20px;width:66px;height:78px;padding:0;border:none;background:transparent;cursor:pointer;z-index:150;transition:transform .2s ease,opacity .3s ease;filter:drop-shadow(0 4px 12px rgba(43,38,34,.15))}
+.urumi-resident:hover{transform:translateY(-3px) scale(1.05)}
+.urumi-resident:focus-visible{outline:2px solid var(--accent);outline-offset:4px;border-radius:50%}
+.urumi-body{position:relative;display:block;width:100%;height:100%;background:radial-gradient(ellipse 60% 55% at 45% 50%,#fff 0%,var(--water) 55%,var(--deep) 100%);border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;border:1.5px solid rgba(183,205,211,.5);animation:urumiFloat 4s ease-in-out infinite}
+.urumi-eye{position:absolute;width:6px;height:6px;background:var(--ink);border-radius:50%;top:38%;box-shadow:0 0 4px rgba(255,255,255,.6),inset 1px 1px 0 #fff}
+.urumi-eye.left{left:32%}
+.urumi-eye.right{right:32%}
+.urumi-bubble{position:absolute;right:78px;bottom:20px;background:#fff;color:var(--ink);border:1px solid var(--border);border-radius:16px;padding:8px 14px;font-size:12px;font-weight:600;white-space:nowrap;box-shadow:0 4px 14px rgba(43,38,34,.12);animation:urumiBubblePop .4s ease-out}
+.urumi-bubble::after{content:"";position:absolute;right:-6px;bottom:14px;width:0;height:0;border-left:7px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent}
+@keyframes urumiFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes urumiBubblePop{from{opacity:0;transform:translateX(6px)}to{opacity:1;transform:translateX(0)}}
+@media(max-width:600px){.urumi-resident{width:54px;height:64px;right:14px;bottom:14px}.urumi-bubble{right:66px;font-size:11px;padding:6px 10px}}
+
+/* ===== 水鏡 Phase3: 水中セクション（クロスフェード＋気泡） ===== */
+.underwater-section{position:relative;height:0;margin:0;overflow:hidden;transition:background-color .6s ease;background-color:var(--base)}
+.underwater-section.is-active{height:80px;margin-bottom:8px;background-color:var(--water)}
+.bubble{position:absolute;bottom:-16px;width:12px;height:12px;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.85),rgba(220,234,236,.35));border-radius:50%;opacity:0;pointer-events:none}
+.underwater-section.is-active .bubble{animation:bubbleRise 6s ease-in infinite}
+.bubble.b1{left:8%;width:8px;height:8px;animation-delay:0s;animation-duration:5s}
+.bubble.b2{left:22%;width:14px;height:14px;animation-delay:1.2s;animation-duration:7s}
+.bubble.b3{left:38%;width:6px;height:6px;animation-delay:2.4s;animation-duration:4.5s}
+.bubble.b4{left:56%;width:11px;height:11px;animation-delay:.6s;animation-duration:6.2s}
+.bubble.b5{left:74%;width:9px;height:9px;animation-delay:3.1s;animation-duration:5.5s}
+.bubble.b6{left:88%;width:13px;height:13px;animation-delay:1.8s;animation-duration:6.8s}
+@keyframes bubbleRise{0%{transform:translateY(0) translateX(0);opacity:0}20%{opacity:.7}80%{opacity:.5}100%{transform:translateY(-96px) translateX(6px);opacity:0}}
+
+/* ===== 水鏡 Phase3: 商品カードの実体化演出（最初の8枚のみ） ===== */
+.card.mizukagami-materialize{opacity:0;filter:blur(8px);transition:opacity .6s ease,filter .6s ease}
+.card.mizukagami-materialized{opacity:1;filter:blur(0)}
+@media(prefers-reduced-motion:reduce){
+  .card.mizukagami-materialize{opacity:1;filter:none;transition:none}
+  .urumi-body{animation:none}
+  .underwater-section .bubble{animation:none;opacity:0}
+}
 .hero-blob{position:absolute;border-radius:50%;filter:blur(2px);opacity:.55}
 .blob1{width:130px;height:130px;background:radial-gradient(circle at 30% 30%,var(--water),var(--iris-2));top:0;right:10px}
 .blob2{width:90px;height:90px;background:radial-gradient(circle at 40% 40%,var(--iris-1),var(--deep));bottom:6px;right:80px}
@@ -1336,6 +1372,15 @@ nav{display:flex;gap:4px}
       <div class="hero-bottle"><div class="hb-cap"></div><div class="hb-neck"></div><div class="hb-body"><span>Moilum</span></div></div>
     </div>
   </section>
+  <!-- 水鏡 Phase3: Hero直下の「水中」セクション。--base → --water へクロスフェード＋気泡上昇 -->
+  <div id="underwaterSection" class="underwater-section" aria-hidden="true">
+    <span class="bubble b1"></span>
+    <span class="bubble b2"></span>
+    <span class="bubble b3"></span>
+    <span class="bubble b4"></span>
+    <span class="bubble b5"></span>
+    <span class="bubble b6"></span>
+  </div>
   <div id="recoFeed" class="reco-feed"></div>
   <div class="cat-quicklinks">
     <button class="ql" onclick="quickCat('化粧水')"><span class="ql-ic">💧</span>化粧水</button>
@@ -1553,6 +1598,15 @@ nav{display:flex;gap:4px}
     <div id="infoContent"></div>
   </div>
 </div>
+
+<!-- 水鏡 Phase3: 常駐ウルミ（Heroを過ぎたら右下に表示、クリックでAI肌診断へ）-->
+<button id="urumiResident" class="urumi-resident" style="display:none" aria-label="AI肌相談を開く" onclick="showPage('diagnosis')">
+  <span class="urumi-body" aria-hidden="true">
+    <span class="urumi-eye left"></span>
+    <span class="urumi-eye right"></span>
+  </span>
+  <span id="urumiBubble" class="urumi-bubble" style="display:none">肌のこと、聞いてもいいよ</span>
+</button>
 
 <footer class="site-footer">
   <div class="footer-inner">
@@ -3876,16 +3930,21 @@ renderRecoFeed();
     uniform vec3 uIris1;
     uniform vec3 uIris2;
     uniform vec3 uIris3;
+    uniform vec3 uCoreTint;
     varying vec3 vNormal;
     varying vec3 vViewPosition;
     void main(){
       vec3 viewDir=normalize(vViewPosition);
       float fresnel=pow(1.0-max(dot(viewDir,vNormal),0.0),3.0);
       vec3 irisMix=mix(uIris1,mix(uIris2,uIris3,sin(uTime*0.3)*0.5+0.5),0.5);
-      vec3 rimColor=irisMix*fresnel*0.15;
-      vec3 baseColor=vec3(1.0,1.0,1.0);
+      // 縁(rim)の虹彩：強度を0.15→0.28に上げて縁取りをはっきり見せる
+      vec3 rimColor=irisMix*fresnel*0.28;
+      // ボディの基調色：白＋core tint(--deep)を面法線ベースで乗せる
+      // 中心部ほど白に近く、縁に向かって tint を強めることで水滴の透明感を保ちつつ輪郭を出す
+      vec3 baseColor=mix(uCoreTint,vec3(1.0),0.55);
       vec3 color=baseColor+rimColor;
-      float alpha=0.35+fresnel*0.5;
+      // 不透明度：0.35+fresnel*0.5 → 0.55+fresnel*0.4（背景に馴染まず輪郭が見える程度に）
+      float alpha=0.55+fresnel*0.4;
       gl_FragColor=vec4(color,alpha);
     }
   `;
@@ -3937,6 +3996,7 @@ renderRecoFeed();
       uIris1:{value:new THREE.Color(cssVar("--iris-1","#E8D5E0"))},
       uIris2:{value:new THREE.Color(cssVar("--iris-2","#D5E4E8"))},
       uIris3:{value:new THREE.Color(cssVar("--iris-3","#E4E8D5"))},
+      uCoreTint:{value:new THREE.Color(cssVar("--deep","#B7CDD3"))},
     };
     const urumiGeo=new THREE.SphereGeometry(1.1,24,18); // 三角形数 約860枚
     const urumiMat=new THREE.ShaderMaterial({
@@ -3948,14 +4008,24 @@ renderRecoFeed();
     urumiMesh.position.set(urumiBaseX,0,0);
     scene.add(urumiMesh);
 
-    // --- 顔：光の点2つのみ（口はつけない） ---
-    const eyeGeo=new THREE.SphereGeometry(0.055,8,8);
-    const eyeMat=new THREE.MeshBasicMaterial({color:new THREE.Color(cssVar("--ink","#2B2622"))});
+    // --- 顔：光の点2つのみ（口はつけない）---
+    // 目は「濃い墨色の点」ではなく、水滴の中に映る「暗い光の反射点」として、
+    // 中心のコアと外側のグロー2重構造で視線が集まる明るい発光ポイントを作る
+    const eyeGeo=new THREE.SphereGeometry(0.062,10,10);
+    const eyeMat=new THREE.MeshBasicMaterial({color:new THREE.Color(cssVar("--ink","#2B2622")),toneMapped:false});
     const eyeL=new THREE.Mesh(eyeGeo,eyeMat);
     const eyeR=new THREE.Mesh(eyeGeo,eyeMat);
     eyeL.position.set(urumiBaseX-0.28,0.12,0.95);
     eyeR.position.set(urumiBaseX+0.28,0.12,0.95);
     scene.add(eyeL,eyeR);
+    // 目のハイライト（emissive）：白い小さな光点で「命の宿った目」を演出
+    const eyeGlowGeo=new THREE.SphereGeometry(0.024,6,6);
+    const eyeGlowMat=new THREE.MeshBasicMaterial({color:0xffffff,toneMapped:false,transparent:true,opacity:0.95});
+    const eyeGlowL=new THREE.Mesh(eyeGlowGeo,eyeGlowMat);
+    const eyeGlowR=new THREE.Mesh(eyeGlowGeo,eyeGlowMat);
+    eyeGlowL.position.set(urumiBaseX-0.265,0.135,1.0);
+    eyeGlowR.position.set(urumiBaseX+0.295,0.135,1.0);
+    scene.add(eyeGlowL,eyeGlowR);
 
     // 瞬き：4〜7秒のランダム間隔で、目のy方向スケールが一時的に潰れる
     let blinkActive=false,blinkStart=0;
@@ -3982,6 +4052,8 @@ renderRecoFeed();
 
       eyeL.position.y=floatY+0.12;
       eyeR.position.y=floatY+0.12;
+      eyeGlowL.position.y=floatY+0.135;
+      eyeGlowR.position.y=floatY+0.135;
 
       // 瞬き判定
       const nowMs=performance.now();
@@ -3994,10 +4066,12 @@ renderRecoFeed();
         if(progress>=1){
           blinkActive=false;
           eyeL.scale.y=1;eyeR.scale.y=1;
+          eyeGlowL.scale.y=1;eyeGlowR.scale.y=1;
           nextBlinkAt=nowMs+4000+Math.random()*3000; // 次の瞬きまで4〜7秒
         }else{
           const s=progress<0.5?1-(progress*2)*0.9:0.1+((progress-0.5)*2)*0.9;
           eyeL.scale.y=s;eyeR.scale.y=s;
+          eyeGlowL.scale.y=s;eyeGlowR.scale.y=s;
         }
       }
 
@@ -4040,6 +4114,104 @@ renderRecoFeed();
     else{ window.addEventListener("load",schedule); }
   }
   // reduced-motion時は何もしない → 既存のCSSグラデーション背景 + hero-blob/hero-bottleがそのまま表示される
+})();
+
+// ===== 水鏡 Phase3: 常駐ウルミ + 水中スクロール演出 + 商品カード実体化 =====
+// 3機能ともIntersectionObserverベース。Three.jsは追加ロードしない（軽量化）。
+(function(){
+  const prefersReducedMotion=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // ----- (1) 常駐ウルミ -----
+  const heroSection=document.getElementById("heroSection");
+  const urumiBtn=document.getElementById("urumiResident");
+  const urumiBubble=document.getElementById("urumiBubble");
+  if(heroSection&&urumiBtn){
+    const heroObserver=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          urumiBtn.style.display="none";
+          if(urumiBubble) urumiBubble.style.display="none";
+        }else{
+          urumiBtn.style.display="block";
+          // 吹き出し「肌のこと、聞いてもいいよ」は初回訪問時のみ1回だけ表示
+          try{
+            const shown=localStorage.getItem("moilum_urumi_bubble_shown");
+            if(!shown&&urumiBubble){
+              urumiBubble.style.display="block";
+              localStorage.setItem("moilum_urumi_bubble_shown","1");
+              // 6秒後に自動で閉じる
+              setTimeout(function(){ if(urumiBubble) urumiBubble.style.display="none"; },6000);
+            }
+          }catch(e){}
+        }
+      });
+    },{rootMargin:"-40px 0px 0px 0px",threshold:0});
+    heroObserver.observe(heroSection);
+    // 吹き出しをクリックで即座に閉じる
+    if(urumiBubble){
+      urumiBubble.addEventListener("click",function(e){
+        e.stopPropagation();
+        urumiBubble.style.display="none";
+      });
+    }
+  }
+
+  // ----- (2) 水中セクション：Heroが画面から出たら「水中」に切り替え、気泡アニメ開始 -----
+  const underwaterEl=document.getElementById("underwaterSection");
+  if(heroSection&&underwaterEl&&!prefersReducedMotion){
+    const underwaterObserver=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(!entry.isIntersecting){
+          underwaterEl.classList.add("is-active");
+        }else{
+          underwaterEl.classList.remove("is-active");
+        }
+      });
+    },{rootMargin:"-20% 0px 0px 0px",threshold:0});
+    underwaterObserver.observe(heroSection);
+  }
+
+  // ----- (3) 商品カードの実体化演出（最初の8枚のみ、9枚目以降は演出なし）-----
+  // render()で商品カードが#productsに挿入されるので、MutationObserverでカード追加を検知し、
+  // 最初の8枚に .mizukagami-materialize を付与→IntersectionObserverで .mizukagami-materialized に切替。
+  const productsEl=document.getElementById("products");
+  if(productsEl&&!prefersReducedMotion){
+    const materializeObserver=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add("mizukagami-materialized");
+          materializeObserver.unobserve(entry.target);
+        }
+      });
+    },{rootMargin:"0px 0px -10% 0px",threshold:0.1});
+
+    function markFirst8(){
+      // 現在#productsにあるカードの最初の8枚のみ対象化。それより後のカードは触らない。
+      const cards=productsEl.querySelectorAll(".card");
+      for(let i=0;i<Math.min(cards.length,8);i++){
+        const c=cards[i];
+        if(!c.classList.contains("mizukagami-marked")){
+          c.classList.add("mizukagami-marked","mizukagami-materialize");
+          materializeObserver.observe(c);
+        }
+      }
+    }
+    markFirst8();
+
+    // render()呼び出しで#productsのinnerHTMLが再構築されるたびに、先頭8枚を再マーク。
+    // ただし、フィルター切替時にすでに一度演出したカードが再度ぼやけると鬱陶しいので、
+    // 各render呼び出しで先頭8枚のみに新規に演出をかける（既に演出済みでも新しい要素として扱う）。
+    const bodyObs=new MutationObserver(function(muts){
+      let productsChanged=false;
+      muts.forEach(function(m){
+        if(m.target===productsEl||m.target.parentElement===productsEl){
+          productsChanged=true;
+        }
+      });
+      if(productsChanged) markFirst8();
+    });
+    bodyObs.observe(productsEl,{childList:true,subtree:false});
+  }
 })();
 </script>
 </body>
