@@ -487,18 +487,20 @@ nav{display:flex;gap:4px}
 .rank-cross-buttons{display:flex;gap:8px;flex-wrap:wrap}
 
 .logo{display:flex;align-items:center;gap:8px}
-.logo-mark{flex:none;filter:drop-shadow(0 2px 4px rgba(212,133,106,.3))}
+.logo-mark{flex:none;filter:drop-shadow(0 2px 4px rgba(183,205,211,.4))}
 .logo-text{font-size:21px;font-weight:800;letter-spacing:-.5px;color:var(--txt)}
 .logo-accent{color:var(--accent)}
 
 /* ===== ヒーローのタイトルロゴ ===== */
 .brand-logo{display:flex;align-items:center;gap:12px;margin-bottom:18px}
-.brand-mark{flex:none;filter:drop-shadow(0 3px 6px rgba(212,133,106,.35))}
-.brand-wordmark{font-size:34px;font-weight:800;letter-spacing:-1px;color:#3a2a24;line-height:1;position:relative}
-.dark .brand-wordmark{color:#f5e9e2}
+.brand-stop-1{stop-color:var(--iris-2)}
+.brand-stop-2{stop-color:var(--deep)}
+.brand-mark{flex:none;filter:drop-shadow(0 3px 6px rgba(183,205,211,.45))}
+.brand-wordmark{font-size:34px;font-weight:800;letter-spacing:-1px;color:var(--ink);line-height:1;position:relative;font-family:var(--font-head),serif}
+.dark .brand-wordmark{color:var(--txt)}
 .brand-wordmark span{color:var(--accent)}
-.brand-wordmark em{display:block;font-size:11px;font-weight:600;letter-spacing:3px;font-style:normal;color:#a8917f;margin-top:5px}
-.dark .brand-wordmark em{color:#9a8478}
+.brand-wordmark em{display:block;font-size:11px;font-weight:600;letter-spacing:3px;font-style:normal;color:var(--txt2);margin-top:5px}
+.dark .brand-wordmark em{color:var(--txt2)}
 @media(max-width:680px){.brand-logo{justify-content:center}.brand-wordmark{font-size:28px}}
 .section-rec{margin:14px 0 4px}
 .section-rec-label{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px}
@@ -1322,7 +1324,7 @@ nav{display:flex;gap:4px}
   <div class="logo" onclick="showPage('products')" style="cursor:pointer">
     <svg class="logo-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
       <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0%" stop-color="#e6a98a"/><stop offset="100%" stop-color="#d4856a"/>
+        <stop offset="0%" class="brand-stop-1"/><stop offset="100%" class="brand-stop-2"/>
       </linearGradient></defs>
       <path d="M16 3 C16 3 6 14 6 21 a10 10 0 0 0 20 0 C26 14 16 3 16 3 Z" fill="url(#logoGrad)"/>
       <ellipse cx="12.5" cy="18" rx="3" ry="4.5" fill="#fff" opacity="0.45"/>
@@ -1351,7 +1353,7 @@ nav{display:flex;gap:4px}
       <div class="brand-logo">
         <svg class="brand-mark" viewBox="0 0 40 40" width="44" height="44" aria-hidden="true">
           <defs><linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stop-color="#e6a98a"/><stop offset="100%" stop-color="#d4856a"/>
+            <stop offset="0%" class="brand-stop-1"/><stop offset="100%" class="brand-stop-2"/>
           </linearGradient></defs>
           <path d="M20 4 C20 4 7 17 7 26 a13 13 0 0 0 26 0 C33 17 20 4 20 4 Z" fill="url(#brandGrad)"/>
           <ellipse cx="15.5" cy="23" rx="3.5" ry="5.5" fill="#fff" opacity="0.45"/>
@@ -3873,6 +3875,7 @@ renderRecoFeed();
     if(window.THREE){ onReady(); return; }
     const script=document.createElement("script");
     script.src=CDN_URL;
+    script.async=true; // Heroテキスト(LCP要素)の描画をブロックしないよう非同期読込を明示
     script.onload=onReady;
     script.onerror=function(){ console.warn("[MIZUKAGAMI] Three.jsの読み込みに失敗。CSSフォールバック表示を維持します。"); };
     document.head.appendChild(script);
