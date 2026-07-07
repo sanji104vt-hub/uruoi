@@ -649,6 +649,10 @@ nav{display:flex;gap:4px}
 
 /* ===== 無限スクロール ===== */
 .scroll-loader{grid-column:1/-1;text-align:center;padding:24px 0;font-size:13px;color:var(--txt3)}
+
+/* ===== SEO用 個別URL：クローラー向け<a>リンクの見た目維持 ===== */
+.card-name-link,.rank-name-link,.column-title-link,.ma-title-link{color:inherit;text-decoration:none;display:block}
+.card-name-link:hover,.rank-name-link:hover,.column-title-link:hover,.ma-title-link:hover{color:inherit;text-decoration:none}
 </style>
 <script type="application/ld+json">
 {
@@ -2206,7 +2210,7 @@ function appendMoreProducts(){
     const i=renderedCount+localI;
     const variant=cardVariant(p,i);
     return `
-    <div class="card ${variant}" onclick="openDetail(${p.id})">
+    <div class="card ${variant}" onclick="navigateToProduct(${p.id})">
       <div class="card-img">
         ${flag[p.origin]?`<span class="origin-flag">${flag[p.origin]} ${p.origin}</span>`:""}
         ${i<3?`<span class="card-rank-badge">🏆 ${i+1}位</span>`:""}
@@ -2216,7 +2220,7 @@ function appendMoreProducts(){
         <span class="card-tag">${p.category}</span>
         <span style="font-size:24px">${p.icon}</span>
       </div>
-      <div class="card-name">${p.name}</div>
+      <a href="/products/${p.id}" class="card-name-link" onclick="event.preventDefault();navigateToProduct(${p.id})"><div class="card-name">${p.name}</div></a>
       <div class="card-brand">${p.brand}</div>
       <div class="card-desc">${p.desc}</div>
       <div style="display:flex;align-items:center;gap:8px">
@@ -2872,11 +2876,11 @@ function renderRanking(){
     <b>最終更新日：</b>${PRICE_DATE}
   </div>
   ${compareHtml}`+sorted.map((p,i)=>`
-    <div class="ranking-item" onclick="openDetail(${p.id})">
+    <div class="ranking-item" onclick="navigateToProduct(${p.id})">
       <div class="rank-num ${i===0?'gold':i===1?'silver':i===2?'bronze':''}">${i+1}</div>
       <div style="font-size:28px">${p.icon}</div>
       <div class="rank-info">
-        <div class="rank-name">${p.name}</div>
+        <a href="/products/${p.id}" class="rank-name-link" onclick="event.preventDefault();navigateToProduct(${p.id})"><div class="rank-name">${p.name}</div></a>
         <div class="rank-sub">${p.brand} · ¥${p.price.toLocaleString()}</div>
         <div style="margin-top:4px">
           <span class="stars">${"★".repeat(Math.round(p.rating))}</span>
@@ -3771,9 +3775,9 @@ function renderColumnList(){
   document.getElementById("columnArticle").style.display="none";
   document.getElementById("columnList").style.display="grid";
   document.getElementById("columnList").innerHTML=COLUMNS.map(c=>`
-    <div class="column-card" onclick="openColumn('${c.id}')">
+    <div class="column-card" onclick="navigateToColumn('${c.id}')">
       <div class="ctag">${c.cat}</div>
-      <h3>${c.title}</h3>
+      <a href="/columns/${c.id}" class="column-title-link" onclick="event.preventDefault();navigateToColumn('${c.id}')"><h3>${c.title}</h3></a>
       <p>${c.excerpt}</p>
       <div class="readtime">📖 ${c.readtime}</div>
     </div>`).join("");
@@ -3816,9 +3820,9 @@ function openColumn(id){
       ${moreArticles.length?`<div class="more-articles">
         <h3>📚 あわせて読みたい記事</h3>
         <div class="more-articles-grid">
-          ${moreArticles.map(mc=>`<div class="ma-card" onclick="openColumn('${mc.id}')">
+          ${moreArticles.map(mc=>`<div class="ma-card" onclick="navigateToColumn('${mc.id}')">
             <span class="ma-cat">${mc.cat}</span>
-            <div class="ma-title">${mc.title}</div>
+            <a href="/columns/${mc.id}" class="ma-title-link" onclick="event.preventDefault();navigateToColumn('${mc.id}')"><div class="ma-title">${mc.title}</div></a>
             <div class="ma-excerpt">${mc.excerpt}</div>
           </div>`).join("")}
         </div>
@@ -3859,6 +3863,60 @@ applyFilters();
 renderBrands();
 renderSidebar();
 renderRecoFeed();
+
+// ===== SEO用 個別URL対応：Cloudflare Worker側で書き換えた/products/:id, /columns/:slug に対応 =====
+// 初回HTTPレスポンス時点でheadは正しく差し替え済み。ここではJS側の表示状態を該当ページに合わせる。
+(function(){
+  function openFromPath(pathname){
+    const productM = pathname.match(/^\/products\/(\d+)\/?$/);
+    if (productM){
+      const id = parseInt(productM[1], 10);
+      if (PRODUCTS.find(x=>x.id===id)){
+        openDetail(id);
+        return true;
+      }
+    }
+    const columnM = pathname.match(/^\/columns\/([a-z0-9-]+)\/?$/);
+    if (columnM){
+      const slug = columnM[1];
+      if (COLUMNS.find(x=>x.id===slug)){
+        showPage("column");
+        setTimeout(function(){ openColumn(slug); }, 20);
+        return true;
+      }
+    }
+    return false;
+  }
+  // クリック経由の遷移：pushStateしてから該当の画面を開く（SPA挙動を維持）
+  window.navigateToProduct=function(id){
+    try{
+      const url="/products/"+encodeURIComponent(id);
+      if (window.location.pathname !== url) history.pushState({productId:id}, "", url);
+    }catch(e){}
+    openDetail(id);
+  };
+  window.navigateToColumn=function(slug){
+    try{
+      const url="/columns/"+encodeURIComponent(slug);
+      if (window.location.pathname !== url) history.pushState({columnSlug:slug}, "", url);
+    }catch(e){}
+    showPage("column");
+    setTimeout(function(){ openColumn(slug); }, 20);
+  };
+  // ブラウザバック対応
+  window.addEventListener("popstate", function(){
+    const path=window.location.pathname;
+    if (!openFromPath(path)){
+      // ルートに戻ったら詳細モーダルを閉じ、商品一覧に戻す
+      closeModal("detailModal");
+      showPage("products");
+    }
+  });
+  // 初回ロード時、URLパスから該当ページを自動で開く（Workerで差し替えたheadと整合させる）
+  if (window.location.pathname !== "/" && window.location.pathname !== ""){
+    openFromPath(window.location.pathname);
+  }
+})();
 
 // ===== 水鏡 -MIZUKAGAMI- Phase2: Hero水面 + 3Dキャラ「ウルミ」 =====
 // prefers-reduced-motion時やThree.js読込失敗時は、既存のCSSグラデーション背景と

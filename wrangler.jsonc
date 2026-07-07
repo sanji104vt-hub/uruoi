@@ -1,7 +1,10 @@
 {
   "name": "moilum",
   "compatibility_date": "2026-06-13",
+  "main": "src/index.js",
   "assets": {
-    "directory": "./public"
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": true
   }
 }
