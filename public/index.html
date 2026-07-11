@@ -142,7 +142,7 @@ nav{display:flex;gap:4px}
 .card-price{font-size:18px;font-weight:700;color:var(--accent)}
 .card-price span{font-size:12px;color:var(--txt3);font-weight:400}
 .stars{color:#f5a623;font-size:14px;letter-spacing:1px}
-.card-footer{display:flex;gap:8px;margin-top:4px}
+.card-footer{display:flex;gap:8px;margin-top:6px}
 .card-img{margin:-6px -6px 6px;border-radius:var(--radius-sm);overflow:hidden}
 .card-img svg{display:block}
 .pr-tag{
@@ -151,8 +151,8 @@ nav{display:flex;gap:4px}
 }
 .shop-btns{display:flex;gap:8px;flex-wrap:wrap}
 .shop-btn{
-  flex:1;min-width:120px;padding:12px;border:none;border-radius:var(--radius-sm);
-  font-size:14px;font-weight:700;color:#fff;font-family:inherit;transition:opacity .2s;
+  flex:1;min-width:120px;min-height:48px;padding:14px 12px;border:none;border-radius:var(--radius-sm);
+  font-size:14px;font-weight:700;color:#fff;font-family:inherit;transition:opacity .2s;cursor:pointer;
 }
 .shop-btn:hover{opacity:.85}
 .shop-btn.amazon{background:#ff9900;color:#1a1a1a}
@@ -199,7 +199,7 @@ nav{display:flex;gap:4px}
 .article .related{background:var(--bg3);border-radius:var(--radius);padding:16px;margin-top:24px}
 .article .related a{color:var(--accent);font-weight:600;cursor:pointer;font-size:14px}
 .btn{
-  flex:1;padding:9px;border-radius:var(--radius-sm);border:none;
+  flex:1;padding:11px;min-height:44px;border-radius:var(--radius-sm);border:none;
   font-size:13px;font-weight:600;transition:all .2s;font-family:inherit;
 }
 .btn-primary{background:var(--accent);color:#fff}
@@ -207,8 +207,8 @@ nav{display:flex;gap:4px}
 .btn-secondary{background:var(--bg3);color:var(--txt2);border:1px solid var(--border2)}
 .btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
 .btn-fav{
-  width:38px;flex:none;background:var(--bg3);border:1px solid var(--border2);
-  color:var(--txt3);font-size:16px;border-radius:var(--radius-sm);transition:all .2s;
+  width:44px;min-height:44px;flex:none;background:var(--bg3);border:1px solid var(--border2);
+  color:var(--txt3);font-size:18px;border-radius:var(--radius-sm);transition:all .2s;
 }
 .btn-fav.active,.btn-fav:hover{background:var(--accent2);border-color:var(--accent);color:var(--accent)}
 
@@ -443,8 +443,8 @@ nav{display:flex;gap:4px}
 .origin-flag{position:absolute;top:10px;left:10px;z-index:3;background:rgba(255,255,255,.92);color:#555;font-size:11px;font-weight:700;padding:3px 9px;border-radius:20px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
 .dark .origin-flag{background:rgba(40,36,33,.92);color:#ccc}
 .card-rank-badge{position:absolute;top:10px;right:10px;z-index:3;background:linear-gradient(135deg,#f5a623,#e0871a);color:#fff;font-size:11px;font-weight:800;padding:4px 10px;border-radius:20px;box-shadow:0 2px 8px rgba(224,135,26,.4)}
-.shop-mini{display:flex;gap:6px;margin-top:6px}
-.shop-mini button{flex:1;font-size:12px;font-weight:800;padding:10px 4px;border:none;border-radius:8px;color:#fff;cursor:pointer;transition:opacity .2s,transform .15s}
+.shop-mini{display:flex;gap:8px;margin-top:6px}
+.shop-mini button{flex:1;font-size:12px;font-weight:800;padding:10px 4px;min-height:44px;border:none;border-radius:8px;color:#fff;cursor:pointer;transition:opacity .2s,transform .15s;font-family:inherit}
 .shop-mini button:hover{opacity:.9;transform:translateY(-1px)}
 .sm-amazon{background:#ff9900;color:#1a1a1a;box-shadow:0 3px 8px rgba(255,153,0,.35)}
 .sm-rakuten{background:#bf0000;box-shadow:0 3px 8px rgba(191,0,0,.35)}
@@ -452,6 +452,20 @@ nav{display:flex;gap:4px}
 .section-title{position:relative;padding-left:14px}
 .section-title::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:5px;height:24px;background:linear-gradient(var(--accent),#e0a98a);border-radius:3px}
 @media(max-width:980px){.layout-with-sidebar{grid-template-columns:1fr}.sidebar{position:static}}
+/* スマホ(768px以下)：サイドバー(TOP5・新着コラム)を本文下部に配置 + タップ領域強化 */
+@media(max-width:768px){
+  .layout-with-sidebar{display:flex;flex-direction:column;gap:20px}
+  .main-col{order:1}
+  .sidebar{order:2;position:static;margin-top:8px}
+  .side-card{padding:14px}
+  /* ECボタンをさらに大きくする(44px以上を保証) */
+  .shop-mini{gap:8px}
+  .shop-mini button{padding:12px 4px;min-height:48px;font-size:13px}
+  .card-footer{gap:8px}
+  .card-footer .btn{padding:12px;min-height:46px}
+  .card-footer .btn-fav{width:46px;min-height:46px}
+  .shop-btn{padding:14px 12px;min-height:48px}
+}
 @media(max-width:680px){.hero{flex-direction:column;text-align:center;padding:32px 24px;gap:16px}.hero-visual{width:160px;height:130px}.hero-title{font-size:27px}.hero-actions{justify-content:center}.hero-blob{display:none}}
 
 /* ===== 複合フィルターパネル ===== */
