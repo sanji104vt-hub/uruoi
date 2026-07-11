@@ -75,6 +75,13 @@ export default {
     const url = new URL(request.url);
     const pathname = url.pathname;
 
+    // / → /index.html (html_handling: none のためWorker側で明示的にリライト)
+    if (pathname === "/" || pathname === ""){
+      const rewriteUrl = new URL(request.url);
+      rewriteUrl.pathname = "/index.html";
+      return env.ASSETS.fetch(new Request(rewriteUrl, request));
+    }
+
     // /sitemap.xml → 動的生成
     if (pathname === "/sitemap.xml"){
       return new Response(buildSitemap(), {
@@ -96,7 +103,9 @@ export default {
         return env.ASSETS.fetch(new Request(rewriteUrl, request));
       }
       // 該当なし → SPA(トップ)にフォールバック
-      return env.ASSETS.fetch(request);
+      const fallbackUrl = new URL(request.url);
+      fallbackUrl.pathname = "/index.html";
+      return env.ASSETS.fetch(new Request(fallbackUrl, request));
     }
 
     // /columns/{slug} → SPA本体の head を書き換えて返す
@@ -105,11 +114,14 @@ export default {
       const slug = columnMatch[1];
       const c = COLUMNS.find(x => x.id === slug);
       if (c){
-        const indexReq = new Request(SITE_ORIGIN + "/", { method: "GET" });
+        const indexReq = new Request(SITE_ORIGIN + "/index.html", { method: "GET" });
         const indexRes = await env.ASSETS.fetch(indexReq);
         return rewriteColumnHead(new Response(indexRes.body, indexRes), c);
       }
-      return env.ASSETS.fetch(request);
+      // 該当スラッグなし: トップにフォールバック
+      const fallbackUrl = new URL(request.url);
+      fallbackUrl.pathname = "/index.html";
+      return env.ASSETS.fetch(new Request(fallbackUrl, request));
     }
 
     // それ以外は静的アセットにパススルー
