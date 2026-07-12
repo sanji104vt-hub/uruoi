@@ -6,7 +6,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const SITE_ORIGIN = "https://moilum.sanji-104vt.workers.dev";
+const SITE_ORIGIN = "https://moilum.asutelu.com";
 const OGP_IMAGE = SITE_ORIGIN + "/ogp-image.png";
 const GSC_VERIFICATION = "UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q";
 const GA4_ID = "G-BC0FBSZSWX";

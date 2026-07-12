@@ -10,7 +10,7 @@
 import PRODUCTS from "./products.json";
 import COLUMNS from "./columns.json";
 
-const SITE_ORIGIN = "https://moilum.sanji-104vt.workers.dev";
+const SITE_ORIGIN = "https://moilum.asutelu.com";
 const OGP_IMAGE = SITE_ORIGIN + "/ogp-image.png";
 
 function escapeXml(s){
@@ -73,6 +73,12 @@ ${urls.join("\n")}
 export default {
   async fetch(request, env){
     const url = new URL(request.url);
+
+    // workers.dev → asutelu.com への 301 リダイレクト（カスタムドメインを正規URLに統一）
+    if (url.hostname.endsWith("workers.dev")){
+      return Response.redirect("https://moilum.asutelu.com" + url.pathname + url.search, 301);
+    }
+
     const pathname = url.pathname;
 
     // / → /index.html (html_handling: none のためWorker側で明示的にリライト)
