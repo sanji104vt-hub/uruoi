@@ -518,6 +518,46 @@ nav{display:flex;gap:4px}
 @media(max-width:680px){.brand-logo{justify-content:center}.brand-wordmark{font-size:28px}}
 .section-rec{margin:14px 0 4px}
 .section-rec-label{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:8px}
+
+/* ===== コラム強化テンプレート（結論box・比較表・グラフ・向かない人・FAQ・CTA） ===== */
+.col-conclusion{background:var(--water);border-left:4px solid var(--accent);border-radius:var(--radius-sm);padding:16px 18px;margin:18px 0 26px}
+.col-conclusion .cc-label{font-size:12px;font-weight:800;color:var(--accent);letter-spacing:1px;margin-bottom:8px}
+.col-conclusion p{font-size:14px!important;line-height:1.8!important;margin-bottom:0!important;color:var(--ink)!important}
+.col-table-wrap{overflow-x:auto;margin:18px 0 24px;border:1px solid var(--border);border-radius:var(--radius);background:var(--bg2);-webkit-overflow-scrolling:touch}
+.col-table{width:100%;border-collapse:collapse;font-size:13px;min-width:560px}
+.col-table th,.col-table td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}
+.col-table thead th{background:var(--water);font-size:12px;color:var(--txt2);font-weight:700;white-space:nowrap}
+.col-table tbody tr:last-child td{border-bottom:none}
+.col-table td:first-child{font-weight:700;min-width:150px}
+.col-table a{color:var(--accent);text-decoration:underline;text-underline-offset:2px}
+.col-table .ct-price{color:var(--accent);font-weight:800;white-space:nowrap}
+.col-table .ct-rating{white-space:nowrap}
+.col-bars{margin:18px 0 24px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:18px}
+.col-bars .cb-title{font-size:13px;font-weight:800;color:var(--txt2);margin-bottom:14px}
+.col-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.col-bar-row:last-child{margin-bottom:0}
+.col-bar-label{flex:none;width:130px;font-size:12px;font-weight:600;line-height:1.4}
+.col-bar-track{flex:1;height:18px;background:var(--bg3);border-radius:9px;overflow:hidden}
+.col-bar-fill{height:100%;background:linear-gradient(90deg,var(--deep),var(--accent));border-radius:9px}
+.col-bar-val{flex:none;width:72px;font-size:12px;font-weight:800;color:var(--accent);text-align:right;font-family:var(--font-num),serif}
+.col-radar-box{margin:18px 0 24px;background:var(--bg3);border-radius:var(--radius);padding:18px}
+.col-radar-box .cr-name{font-size:13px;font-weight:800;text-align:center;margin-bottom:4px}
+.col-radar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.col-unfit{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--radius);padding:18px;margin:22px 0}
+.col-unfit h3{font-size:15px;margin-bottom:10px}
+.col-unfit ul{margin:0 0 0 20px}
+.col-unfit li{font-size:14px;line-height:1.8;margin-bottom:6px}
+.col-faq{margin:26px 0}
+.col-faq h3{font-size:16px;margin-bottom:14px}
+.col-faq-item{border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:10px;background:var(--bg2)}
+.col-faq-item .q{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.col-faq-item .q::before{content:"Q. ";color:var(--accent);font-weight:800}
+.col-faq-item .a{font-size:13.5px;line-height:1.8;color:var(--txt2)}
+.col-faq-item .a::before{content:"A. ";color:var(--deep);font-weight:800}
+.col-cta{background:linear-gradient(135deg,var(--water),var(--iris-2));border-radius:var(--radius);padding:20px;text-align:center;margin:26px 0 6px}
+.col-cta p{font-size:14px!important;margin-bottom:12px!important}
+.col-cta button{background:var(--accent);color:#fff;border:none;border-radius:24px;padding:12px 28px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;min-height:44px}
+.col-cta button:hover{opacity:.9}
 .proscons{margin-top:20px}
 .pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .pc-box{border-radius:var(--radius);padding:14px}
@@ -3586,39 +3626,92 @@ const COLUMNS=[
     id:"sensitive-ceramide-toner",
     cat:"肌悩み別",
     title:"敏感肌の化粧水はセラミドで選ぶ｜選び方とおすすめ成分を解説",
-    excerpt:"敏感肌の化粧水選びで失敗しないために。鍵となる「セラミド」の役割と、刺激を避ける選び方のポイントをわかりやすくまとめました。",
-    readtime:"約6分",
+    excerpt:"敏感肌の化粧水選びで失敗しないために。鍵となる「セラミド」の役割と、刺激を避ける選び方のポイントを実データ比較でわかりやすくまとめました。",
+    readtime:"約8分",
     related:[1,6,5,3,87],
     body:`
-      <p>化粧水を変えるたびにヒリヒリしたり、赤くなったり——敏感肌の方にとって、化粧水選びは慎重になりますよね。実は敏感肌のケアでは「何を足すか」と同じくらい「肌のバリアを守ること」が大切です。その鍵を握るのが<strong>セラミド</strong>という成分です。この記事では、なぜ敏感肌にセラミドが向いているのか、そして失敗しない選び方を解説します。</p>
+      <p>化粧水を変えるたびにヒリヒリする。「敏感肌用」と書いてあるものを選んだのに、なぜか合わない——。それ、選び方が間違っているのではなく、<strong>「何が入っているか」より「肌のバリアを守れるか」で選べていない</strong>のが原因かもしれません。</p>
 
-      <h2>なぜ敏感肌の化粧水に「セラミド」が良いのか</h2>
-      <p>敏感肌は、肌の一番外側にある「バリア機能」が低下しがちな状態です。バリア機能が弱まると、外部からの刺激を受けやすくなり、水分も逃げやすくなります。これが、乾燥やヒリつき、赤みの原因になります。</p>
-      <p>セラミドは、もともと肌の角層に存在する保湿成分で、水分をしっかり抱え込み、外部刺激から肌を守るバリアの主役です。加齢や乾燥でセラミドは減っていくため、化粧水で補ってあげることで、ゆらぎにくい健やかな肌状態をサポートできます。敏感肌こそ、セラミド配合の化粧水が心強い味方になるのです。</p>
+      <div class="col-conclusion">
+        <div class="cc-label">この記事の結論</div>
+        <p>敏感肌の化粧水は「セラミド配合＋低刺激設計」の2条件で選ぶのが近道です。まず試すならセラミド機能成分配合のプチプラ（キュレル・無印良品など）、保湿力を優先するならヒト型セラミド配合（ヒフミドなど）。ただし、すべての人に合う化粧水は存在しません（「向かない人」も正直に書きます）。</p>
+      </div>
 
-      <h2>セラミドにも種類がある</h2>
-      <p>ひとくちにセラミドといっても、いくつかタイプがあります。選ぶときの参考にしてください。</p>
+      <h2>なぜ敏感肌の化粧水に「セラミド」なのか</h2>
+      <p>敏感肌は、肌のいちばん外側にある「バリア機能」が低下しがちな状態です。バリアが弱まると外部刺激を受けやすくなり、内側の水分も逃げやすくなる。乾燥するからさらにバリアが乱れる——この悪循環が、ヒリつきや赤みの正体です。</p>
+      <p>セラミドは、もともと肌の角層に存在する保湿成分で、角層の細胞のすき間を埋めて水分を抱え込む「バリアの主役」です。加齢や乾燥、洗いすぎでセラミドは減っていくため、化粧水で補うことで、ゆらぎにくい健やかな肌状態を保つサポートができます。「攻めの美容成分」を足す前に、まず「守りの土台」を整える——敏感肌のケアはこの順番が大切です。</p>
+
+      <h2>セラミドの種類と選び分け</h2>
+      <p>ひとくちにセラミドといっても、大きく3タイプあります。</p>
       <ul>
-        <li><strong>ヒト型セラミド</strong>：人の肌のセラミドに近い構造で、なじみがよく保湿力が高い。「セラミドNP」「セラミドAP」などと表記されます。</li>
-        <li><strong>セラミド機能成分（疑似セラミド）</strong>：セラミドに似た働きをするよう設計された成分。比較的手に取りやすい価格帯に多く使われます。</li>
-        <li><strong>天然セラミド・植物性セラミド</strong>：動物や植物由来のセラミド。</li>
+        <li><strong>ヒト型セラミド</strong>：人の肌のセラミドとほぼ同じ構造。なじみがよく保湿力が高い。成分表では「セラミドNP」「セラミドAP」などと表記。価格はやや高め。</li>
+        <li><strong>セラミド機能成分（疑似セラミド）</strong>：セラミドに似た働きをするよう設計された成分。花王キュレルの「セラミド機能成分」が代表格で、手に取りやすい価格帯に多い。</li>
+        <li><strong>天然セラミド・植物性セラミド</strong>：動物や植物由来。コメヌカやコンニャク由来のものが化粧水にも使われます。</li>
       </ul>
-      <p>「とにかく保湿力重視」ならヒト型セラミド、「毎日たっぷり使ってコスパも大事」なら疑似セラミド配合のものから始める、という選び方がしやすいでしょう。</p>
+      <p>迷ったら、<strong>「毎日たっぷり使えるか」を基準に</strong>してください。高価なヒト型セラミド化粧水をチビチビ使うより、疑似セラミドのプチプラを惜しみなく使うほうが、結果的に肌の調子が安定する人は多いです。</p>
 
-      <h2>敏感肌の化粧水を選ぶ3つのポイント</h2>
-      <p>セラミド配合であることに加えて、敏感肌の方は次の点もチェックすると、より安心して使えます。</p>
+      <h2>敏感肌向けセラミド化粧水 4本の実データ比較</h2>
+      <p>当サイト掲載商品の中から、敏感肌向けとして定番のセラミド系化粧水4本を比較します。商品名をタップすると詳細ページに移動できます。</p>
+      <div class="col-compare" data-ids="1,3,5,6"></div>
+
+      <h2>価格で比べると差は歴然</h2>
+      <p>同じ「敏感肌向け」でも、価格帯は3倍以上開きがあります。継続できる価格かどうかは、敏感肌ケアではとても重要な判断軸です。</p>
+      <div class="col-bars">
+        <div class="cb-title">参考価格の比較（2026年6月時点）</div>
+        <div class="col-bar-row"><div class="col-bar-label">無印良品 高保湿</div><div class="col-bar-track"><div class="col-bar-fill" style="width:24%"></div></div><div class="col-bar-val">¥1,190</div></div>
+        <div class="col-bar-row"><div class="col-bar-label">ミノン モイスト II</div><div class="col-bar-track"><div class="col-bar-fill" style="width:33%"></div></div><div class="col-bar-val">¥1,650</div></div>
+        <div class="col-bar-row"><div class="col-bar-label">キュレル 潤浸保湿 III</div><div class="col-bar-track"><div class="col-bar-fill" style="width:36%"></div></div><div class="col-bar-val">¥1,760</div></div>
+        <div class="col-bar-row"><div class="col-bar-label">ヒフミド ローション</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥4,950</div></div>
+      </div>
+      <p>価格差の主な理由は配合されるセラミドのタイプです。ヒフミドは3種のヒト型セラミド配合で保湿力重視、キュレル・無印・ミノンは疑似セラミドやアミノ酸系で「毎日続けやすさ」重視。どちらが上ではなく、役割が違います。</p>
+
+      <h2>主役2本のスコアを見る</h2>
+      <p>「プチプラの定番」キュレルと「ヒト型セラミドの代表」ヒフミドを、当サイトの独自スコアで比べてみます。</p>
+      <div class="col-radar" data-ids="1,6"></div>
+      <p>キュレルはコスパと低刺激のバランス型、ヒフミドは保湿特化型という違いがチャートにも表れています。<strong>「最初の1本」ならキュレルか無印、「乾燥が深刻でお金をかけてもいい」ならヒフミド</strong>——これがこの記事の使い分け提案です。</p>
+
+      <h2>選ぶときの3つのチェックポイント</h2>
       <ul>
-        <li><strong>低刺激設計か</strong>：アルコール（エタノール）、香料、着色料などが気になる方は「無香料」「アルコールフリー」「敏感肌用」の表示を目安に。</li>
-        <li><strong>テクスチャーが好みか</strong>：とろみのあるしっとりタイプは保湿感が高く、さっぱりタイプはべたつきが苦手な方向け。</li>
-        <li><strong>パッチテストをする</strong>：新しい化粧水を顔に使う前に、腕の内側などで試してから使うと、肌に合うか確認できます。</li>
+        <li><strong>低刺激設計か</strong>：アルコール（エタノール）・香料・着色料が気になる方は「無香料」「アルコールフリー」「敏感肌向け」の表示を目安に。</li>
+        <li><strong>テクスチャー</strong>：とろみタイプはしっとり感が長続き、さらさらタイプはベタつきが苦手な人向け。テクスチャーが嫌いだと続きません。</li>
+        <li><strong>パッチテスト</strong>：顔に使う前に腕の内側で1〜2日試す。敏感肌の方はこの一手間で失敗をかなり減らせます。</li>
       </ul>
 
-      <h2>敏感肌向け・セラミド配合の化粧水の選び方まとめ</h2>
-      <p>ドラッグストアで手に取りやすい定番から、ヒト型セラミドにこだわった高機能タイプまで、敏感肌向けの化粧水は選択肢が豊富です。「セラミド機能成分」を配合した低刺激処方の化粧水は、敏感肌・乾燥肌のデイリーケアの定番として長く支持されています。より保湿力を求めるなら、複数のヒト型セラミドを配合した化粧水が、乾燥による小じわ対策にも向いています。</p>
-      <p>下の「こちらもおすすめ」から、敏感肌向け・セラミド配合をはじめとする化粧水の詳細や参考価格を比較できます。自分の肌タイプと使用感の好みに合わせて、まずは少量から試してみてください。</p>
+      <h2>使い方でも差がつく：敏感肌の化粧水のつけ方</h2>
+      <p>どんなに良い化粧水も、つけ方で台無しになることがあります。敏感肌の方が特に気をつけたいのは<strong>「摩擦」</strong>です。コットンでパタパタ叩き込むのは避けて、手のひらで包み込むようにやさしくなじませてください。洗顔後は時間を置かず、タオルドライしたらすぐに（目安は1分以内に）化粧水をつけるのが理想です。乾燥がひどい日は、1回の量を増やすより「少量を2回に分けて重ねる」ほうが、ムラなくなじみます。</p>
+
+      <div class="col-unfit">
+        <h3>⚠️ この記事のおすすめが向かない人</h3>
+        <ul>
+          <li><strong>ニキビが今まさに炎症している人</strong>：保湿の前に、まず皮膚科でニキビ治療を。セラミド化粧水は治療の代わりにはなりません。</li>
+          <li><strong>脂性肌でベタつきが最大の悩みの人</strong>：高保湿タイプはかえって不快に感じることがあります。さっぱり系の化粧水から検討を。</li>
+          <li><strong>特定成分にアレルギーがある人</strong>：「敏感肌用」表示があっても全成分の確認は必須です。</li>
+        </ul>
+      </div>
+
+      <div class="col-faq">
+        <h3>よくある質問</h3>
+        <div class="col-faq-item">
+          <div class="q">セラミド化粧水はどのくらいで変化を感じられますか？</div>
+          <div class="a">個人差が大きいですが、肌のターンオーバー（約28日〜）を目安に、まず1本使い切るまで続けてみるのがおすすめです。数日で判断せず、ただしヒリつき・赤みが出た場合はすぐに中止してください。</div>
+        </div>
+        <div class="col-faq-item">
+          <div class="q">セラミドは化粧水とクリーム、どちらで摂るべき？</div>
+          <div class="a">セラミドは油溶性のため、実はクリームや乳液のほうが配合しやすい成分です。化粧水でセラミドを補い、クリームでフタをする組み合わせが理想ですが、まずはどちらか1つからで十分です。</div>
+        </div>
+        <div class="col-faq-item">
+          <div class="q">プチプラとデパコス、セラミドの質に差はありますか？</div>
+          <div class="a">価格差は主に「セラミドの種類（ヒト型か疑似か）」「配合数」「使用感の設計」によるもので、高い＝必ず良いではありません。肌に合うかどうかが最優先です。</div>
+        </div>
+      </div>
 
       <h2>それでも肌トラブルが続くときは</h2>
-      <p>化粧水を変えても赤みやかゆみ、ヒリつきが続く場合は、化粧品だけで解決しようとせず、皮膚科の専門医に相談することをおすすめします。敏感肌の背景に、別の肌疾患が隠れていることもあるためです。自分の肌を守る一番の近道は、無理をしないことです。</p>
+      <p>化粧水を変えても赤みやかゆみ、ヒリつきが続く場合は、化粧品で解決しようとせず皮膚科専門医に相談してください。敏感肌の背景に、別の肌疾患が隠れていることもあります。無理をしないことが、肌を守る一番の近道です。</p>
+
+      <div class="col-cta">
+        <p>あなたの肌タイプに合う1本を、3つの質問から絞り込めます。</p>
+        <button onclick="showPage('diagnosis')">AI肌診断で自分に合う化粧水を探す →</button>
+      </div>
     `,
   },
   {
@@ -3843,6 +3936,7 @@ function openColumn(id){
       </div>`:""}
     </div>`;
   renderSectionRecs();
+  renderColumnExtras();
   window.scrollTo({top:0,behavior:"smooth"});
 }
 
@@ -3865,6 +3959,40 @@ function renderSectionRecs(){
 function closeColumnToProduct(id){
   showPage("products");
   openDetail(id);
+}
+
+// コラム強化テンプレート：比較表(.col-compare)とレーダーチャート(.col-radar)を
+// PRODUCTS実データから動的生成する（価格・評価の二重管理と転記ミスを防ぐ）
+function renderColumnExtras(){
+  // 比較表：<div class="col-compare" data-ids="1,3,5,6"></div>
+  document.querySelectorAll(".col-compare").forEach(el=>{
+    const ids=(el.dataset.ids||"").split(",").map(s=>parseInt(s.trim())).filter(Boolean);
+    const items=ids.map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+    if(!items.length){el.innerHTML="";return}
+    el.innerHTML=`<div class="col-table-wrap"><table class="col-table">
+      <thead><tr><th>商品名</th><th>参考価格</th><th>評価</th><th>主要成分</th><th>向く肌タイプ</th></tr></thead>
+      <tbody>${items.map(p=>`<tr>
+        <td><a href="/products/${p.id}" onclick="event.preventDefault();navigateToProduct(${p.id})">${p.name}</a><div style="font-size:11px;color:var(--txt3);font-weight:400;margin-top:2px">${p.brand}</div></td>
+        <td class="ct-price">¥${p.price.toLocaleString()}</td>
+        <td class="ct-rating">★${p.rating}<div style="font-size:11px;color:var(--txt3)">${p.reviews.toLocaleString()}件</div></td>
+        <td style="font-size:12px">${p.keyIngredients.slice(0,3).join("、")}</td>
+        <td style="font-size:12px">${p.skin.join("・")}</td>
+      </tr>`).join("")}</tbody>
+    </table></div>
+    <p style="font-size:11px;color:var(--txt3);margin-top:-16px;margin-bottom:20px">※価格は${PRICE_DATE}時点の参考値。評価・レビュー件数は当サイト集計の参考値です。</p>`;
+  });
+  // レーダーチャート：<div class="col-radar" data-ids="1,6"></div>
+  document.querySelectorAll(".col-radar").forEach(el=>{
+    const ids=(el.dataset.ids||"").split(",").map(s=>parseInt(s.trim())).filter(Boolean);
+    const items=ids.map(id=>PRODUCTS.find(p=>p.id===id)).filter(Boolean);
+    if(!items.length){el.innerHTML="";return}
+    el.innerHTML=`<div class="col-radar-box">
+      <div class="col-radar-grid">
+        ${items.map(p=>`<div><div class="cr-name">${p.name.length>22?p.name.slice(0,22)+"…":p.name}</div>${radarChartSvg(p)}</div>`).join("")}
+      </div>
+      <p style="font-size:11px;color:var(--txt3);text-align:center;margin-top:8px">※スコアは評価・価格・成分などからMoilumが独自算出した参考値です</p>
+    </div>`;
+  });
 }
 
 if(localStorage.getItem("ulabo_dark")==="1") document.body.classList.add("dark");
