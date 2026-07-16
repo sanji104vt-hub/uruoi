@@ -21,12 +21,13 @@ function escapeXml(s){
 function rewriteColumnHead(response, c){
   const canonical = `${SITE_ORIGIN}/columns/${c.id}`;
   const title = `${c.title}｜Moilum スキンケアコラム`.slice(0, 68);
-  const description = c.excerpt.slice(0, 156);
+  // SEO用description(120〜160字)を優先。無ければexcerptにフォールバック
+  const description = (c.description || c.excerpt).slice(0, 160);
   const articleJson = JSON.stringify({
     "@context":"https://schema.org",
     "@type":"Article",
     "headline": c.title,
-    "description": c.excerpt,
+    "description": description,
     "articleSection": c.cat,
     "author": {"@type":"Organization","name":"Moilum編集部"},
     "publisher": {"@type":"Organization","name":"Moilum","logo":{"@type":"ImageObject","url": OGP_IMAGE}},

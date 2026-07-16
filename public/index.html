@@ -181,7 +181,7 @@ nav{display:flex;gap:4px}
 }
 .column-card:hover{box-shadow:var(--card-shadow);transform:translateY(-2px)}
 .column-card .ctag{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.5px}
-.column-card h3{font-size:17px;font-weight:700;margin:8px 0;line-height:1.4}
+.column-card h3,.column-card .col-card-title{font-size:17px;font-weight:700;margin:8px 0;line-height:1.4}
 .column-card p{font-size:13px;color:var(--txt2);line-height:1.6}
 .column-card .readtime{font-size:12px;color:var(--txt3);margin-top:10px}
 .article{max-width:760px}
@@ -414,7 +414,7 @@ nav{display:flex;gap:4px}
 .main-col{min-width:0}
 .sidebar{display:flex;flex-direction:column;gap:18px;position:sticky;top:78px}
 .side-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--card-shadow)}
-.side-card h3{font-size:14px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.side-card h3,.side-card h4{font-size:14px;font-weight:800;margin-bottom:12px;display:flex;align-items:center;gap:6px}
 .side-rank{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);cursor:pointer;transition:opacity .2s}
 .side-rank:last-child{border-bottom:none}
 .side-rank:hover{opacity:.7}
@@ -2354,7 +2354,7 @@ function renderSidebar(){
   const cols=(typeof COLUMNS!=="undefined"?COLUMNS:[]).slice(0,3);
   sb.innerHTML=`
     <div class="side-card">
-      <h3>🏆 人気ランキング TOP5</h3>
+      <h4>🏆 人気ランキング TOP5</h4>
       ${top5.map((p,i)=>`
         <div class="side-rank" onclick="openDetail(${p.id})">
           <div class="side-rank-num ${i<3?'top':''}">${i+1}</div>
@@ -2366,7 +2366,7 @@ function renderSidebar(){
         </div>`).join("")}
     </div>
     ${cols.length?`<div class="side-card">
-      <h3>📖 新着コラム</h3>
+      <h4>📖 新着コラム</h4>
       ${cols.map(c=>`<div class="side-col-link" onclick="showPage('column');setTimeout(()=>openColumn('${c.id}'),50)">
         <span class="ct">${c.cat}</span>${c.title}
       </div>`).join("")}
@@ -3486,6 +3486,7 @@ const COLUMNS=[
     cat:"成分ガイド",
     title:"人気保湿成分を徹底比較｜セラミド・ヒアルロン酸・ナイアシンアミドの違い",
     excerpt:"よく聞く3大成分は、それぞれ役割が違います。何がどう違うのか、自分にはどれが合うのかを比較表でわかりやすく解説します。",
+    description:"セラミド・ヒアルロン酸・ナイアシンアミドは働きも向く肌質も別物です。3成分の役割を比較表で整理し、掲載207商品の実データから自分に合う選び方を解説。効果を実感しにくいケースや向かない人まで正直に書いた、Moilum編集部の成分比較ガイドです。",
     readtime:"約7分",
     related:[1,2,36,6],
     body:`
@@ -3521,6 +3522,7 @@ const COLUMNS=[
     cat:"選び方",
     title:"デパコスとプチプラ、どう選ぶ？価格別スキンケアの考え方",
     excerpt:"高い化粧品ほど効果があるとは限りません。デパコスとプチプラの違いと、賢い予算配分の考え方を解説します。",
+    description:"高い化粧品ほど効くとは限りません。デパコスとプチプラの価格差の正体（成分・使用感・容器・広告費）を分解し、お金をかける価値がある工程とプチプラで十分な工程を実データ比較で提案。デパコスが向かない人のケースも正直に解説する予算配分ガイドです。",
     readtime:"約6分",
     related:[3,10,5,2],
     body:`
@@ -3552,6 +3554,7 @@ const COLUMNS=[
     cat:"肌悩み別",
     title:"毛穴の黒ずみ・開きケア完全ガイド｜原因別の対策とスキンケアの選び方",
     excerpt:"毛穴の黒ずみ・開き・たるみは原因がそれぞれ違います。タイプ別の正しいケア方法と、選ぶべきスキンケアのポイントを解説します。",
+    description:"毛穴悩みは黒ずみ・開き・たるみの3タイプで対策が異なります。タイプ別の見分け方と正しいケアを、掲載商品の実データ比較つきで解説。セルフケアでできることと皮膚科に相談すべきケースの境界線まで正直に書いた、Moilumの毛穴ケア完全ガイドです。",
     readtime:"約7分",
     related:[4,53,48,24,11],
     body:`
@@ -3592,6 +3595,7 @@ const COLUMNS=[
     cat:"トレンド",
     title:"乾燥肌におすすめの韓国コスメの選び方｜人気成分と注目アイテム",
     excerpt:"保湿力で人気の韓国コスメ。乾燥肌さんが選ぶべき成分と、選び方のコツをまとめました。プチプラから探せます。",
+    description:"保湿力で人気の韓国コスメですが、すべてが乾燥肌向きではありません。ヒアルロン酸・パンテノール・シカなど注目成分の役割と、乾燥肌が選ぶべき高保湿テクスチャーを掲載商品の実データで比較。刺激が出やすい人への注意点やパッチテストの手順まで正直に解説します。",
     readtime:"約6分",
     related:[11,2,10,42,180],
     body:`
@@ -3627,6 +3631,7 @@ const COLUMNS=[
     cat:"肌悩み別",
     title:"敏感肌の化粧水はセラミドで選ぶ｜選び方とおすすめ成分を解説",
     excerpt:"敏感肌の化粧水選びで失敗しないために。鍵となる「セラミド」の役割と、刺激を避ける選び方のポイントを実データ比較でわかりやすくまとめました。",
+    description:"敏感肌の化粧水は「セラミド配合＋低刺激設計」の2条件で選ぶのが近道。キュレル・無印良品・ミノン・ヒフミドの定番4本を価格・評価・成分の実データで徹底比較し、レーダーチャートで使い分けを提案します。この選び方が向かない人まで正直に書きました。",
     readtime:"約8分",
     related:[1,6,5,3,87],
     body:`
@@ -3719,6 +3724,7 @@ const COLUMNS=[
     cat:"基礎知識",
     title:"スキンケアの基本ステップと正しい順番",
     excerpt:"洗顔・化粧水・美容液・乳液・クリーム。それぞれの役割と、効果を引き出す塗る順番をまとめました。",
+    description:"洗顔・化粧水・美容液・乳液・クリーム。スキンケア5ステップそれぞれの役割と正しい順番を初心者向けにわかりやすく解説します。品数を増やすより順番を整えるほうが先、という考え方のもと、最低限そろえるべきアイテムと省略してよい工程まで正直にまとめた基本ガイドです。",
     readtime:"約4分",
     related:[1,2,33],
     body:`
@@ -3740,6 +3746,7 @@ const COLUMNS=[
     cat:"肌タイプ",
     title:"自分の肌タイプの見分け方｜乾燥肌・脂性肌・混合肌・敏感肌",
     excerpt:"スキンケア選びの第一歩は肌タイプを知ること。簡単なセルフチェックと、タイプ別の選び方を解説します。",
+    description:"スキンケア選びの失敗の多くは、自分の肌タイプの思い込みから始まります。洗顔後10分でできるセルフチェックで乾燥肌・脂性肌・混合肌・敏感肌を見分ける方法と、タイプ別の選び方を解説。季節や体調で肌タイプが変わるケースへの対処法も正直に紹介します。",
     readtime:"約5分",
     related:[1,4,11],
     body:`
@@ -3763,6 +3770,7 @@ const COLUMNS=[
     cat:"成分ガイド",
     title:"知っておきたい美容成分の基礎｜セラミド・ナイアシンアミド・ビタミンC",
     excerpt:"パッケージでよく見る人気成分を、はたらきと向いている悩み別にやさしく解説します。",
+    description:"セラミド・ナイアシンアミド・ビタミンC。パッケージでよく見る3大人気成分のはたらきと向いている悩みを、初心者向けにやさしく整理しました。高機能な成分ほど肌に合うかどうかの個人差が出やすい、という注意点まで含めて正直に解説する成分入門ガイドです。",
     readtime:"約6分",
     related:[6,8,23],
     body:`
@@ -3782,6 +3790,7 @@ const COLUMNS=[
     cat:"紫外線対策",
     title:"日焼け止めの選び方｜SPFとPAの意味、塗る量の目安",
     excerpt:"SPF50だけが正解ではありません。シーン別の選び方と、効果を発揮させる使い方を解説します。",
+    description:"SPF50が常に正解とは限りません。SPF・PAの意味と、通勤・買い物・屋外レジャーなどシーン別の選び方、効果を発揮させる塗る量・塗り直しのコツを解説。数値が高いほど肌への負担も増えやすいというデメリットまで正直に書いた日焼け止めガイドです。",
     readtime:"約4分",
     related:[50,51,52],
     body:`
@@ -3803,6 +3812,7 @@ const COLUMNS=[
     cat:"季節ケア",
     title:"乾燥肌さん向けの夏のスキンケア｜汗・冷房・紫外線から肌を守る方法",
     excerpt:"「夏は保湿しなくていい」は乾燥肌には危険です。汗・冷房・紫外線が重なる夏こそ、乾燥肌専用のケアが必要な理由を解説します。",
+    description:"「夏は保湿を軽くしていい」は乾燥肌には当てはまりません。汗・冷房・紫外線という夏特有の三重負担から肌を守る方法を、洗顔・化粧水・クリーム・日焼け止めの工程別に解説。脂性肌向けの夏ケアとの違いや、乾燥肌には向かないやり方まで正直に整理しました。",
     readtime:"約5分",
     related:[1,5,6],
     body:`
@@ -3830,6 +3840,7 @@ const COLUMNS=[
     cat:"インナーケア",
     title:"乾燥肌さん向けのおすすめサプリ｜内側から潤す成分と選び方",
     excerpt:"スキンケアだけでは補いきれない乾燥に、インナーケアという選択肢があります。乾燥肌に役立つサプリの成分と選び方を解説します。",
+    description:"スキンケアだけで補いきれない乾燥に、内側から整えるインナーケアという選択肢。セラミド・コラーゲン・ビタミンCなど乾燥肌に役立つ成分の役割と選び方を解説します。サプリは医薬品ではなく効果に個人差がある、という大前提から正直に書いた選び方ガイドです。",
     readtime:"約5分",
     related:[1,5,6],
     body:`
@@ -3860,6 +3871,7 @@ const COLUMNS=[
     cat:"トレンド",
     title:"韓国コスメ（K-Beauty）が人気の理由と選び方",
     excerpt:"ドクダミ・CICA・PDRNなど話題の成分続々。韓国コスメの特徴と、自分に合う選び方を紹介します。",
+    description:"ドクダミ・CICA・PDRNなど話題成分をいち早く取り入れる韓国コスメ。人気の理由と選び方のコツを解説します。SNSで話題でも自分の肌に合うとは限らない、海外製品は個人差が出やすいので少量から試す、という注意点まで含めて正直にまとめました。",
     readtime:"約5分",
     related:[4,5,21],
     body:`
@@ -3884,7 +3896,7 @@ function renderColumnList(){
   document.getElementById("columnList").innerHTML=COLUMNS.map(c=>`
     <div class="column-card" onclick="navigateToColumn('${c.id}')">
       <div class="ctag">${c.cat}</div>
-      <a href="/columns/${c.id}" class="column-title-link" onclick="event.preventDefault();navigateToColumn('${c.id}')"><h3>${c.title}</h3></a>
+      <a href="/columns/${c.id}" class="column-title-link" onclick="event.preventDefault();navigateToColumn('${c.id}')"><div class="col-card-title">${c.title}</div></a>
       <p>${c.excerpt}</p>
       <div class="readtime">📖 ${c.readtime}</div>
     </div>`).join("");
@@ -3914,7 +3926,7 @@ function openColumn(id){
       <div class="meta">Moilum編集部 ・ ${c.readtime}</div>
       ${c.body}
       ${allRel.length?`<div class="related-products" style="margin-top:24px">
-        <h3>この記事に関連する商品</h3>
+        <h2 style="font-size:15px;font-weight:800;margin-bottom:14px">この記事に関連する商品</h2>
         <div class="related-grid">
           ${allRel.map(p=>`<div class="related-card" onclick="closeColumnToProduct(${p.id})">
             ${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${p.icon}</div>`}
@@ -3925,7 +3937,7 @@ function openColumn(id){
       </div>`:""}
       <p style="font-size:12px;color:var(--txt3);margin-top:24px">※本記事は一般的な情報提供を目的としたもので、医学的助言や効果を保証するものではありません。肌トラブルが続く場合は皮膚科専門医にご相談ください。</p>
       ${moreArticles.length?`<div class="more-articles">
-        <h3>📚 あわせて読みたい記事</h3>
+        <h2 style="font-size:17px;font-weight:800;margin-bottom:16px">📚 あわせて読みたい記事</h2>
         <div class="more-articles-grid">
           ${moreArticles.map(mc=>`<div class="ma-card" onclick="navigateToColumn('${mc.id}')">
             <span class="ma-cat">${mc.cat}</span>
