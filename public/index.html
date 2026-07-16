@@ -4070,6 +4070,18 @@ renderRecoFeed();
   if (window.location.pathname !== "/" && window.location.pathname !== ""){
     openFromPath(window.location.pathname);
   }
+  // h1重複解消: コラム/商品個別URLで着地した場合、SPA共通Hero見出し(h1)をdivに変換する。
+  // クローラーがレンダリング後のDOMを見たとき、ページの主題h1が記事タイトル1つだけになる。
+  // クラスは維持するため見た目は変わらない。
+  if (/^\/(columns|products)\//.test(window.location.pathname)){
+    const heroH1 = document.querySelector("h1.hero-title");
+    if (heroH1){
+      const div = document.createElement("div");
+      div.className = heroH1.className;
+      div.innerHTML = heroH1.innerHTML;
+      heroH1.replaceWith(div);
+    }
+  }
 })();
 
 // ===== 水鏡 -MIZUKAGAMI- Phase2: Hero水面 + 3Dキャラ「ウルミ」 =====
