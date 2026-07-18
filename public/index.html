@@ -1684,6 +1684,7 @@ nav{display:flex;gap:4px}
     <div class="footer-updates" style="margin-bottom:14px">
       <h3 style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--txt2)">更新履歴</h3>
       <ul style="font-size:12px;color:var(--txt3);line-height:1.8;list-style:none;padding:0;margin:0">
+        <li>2026-07-18：肌診断機能を「肌タイプ診断」にリネームし、ルールベースであることを明示。運営者情報を個人運営として正直に明記し、コラム記事に著者・最終更新日の表示を追加しました。</li>
         <li>2026-07-04：ランキングを「乾燥肌・毛穴/皮脂・ニキビ/肌荒れ・エイジングケア・敏感肌」の悩み別5本に再編。プチプラ／デパコスの価格帯タブを追加し、編集部スコアの算出方法を公開しました。</li>
         <li>2026-06：商品画像・比較表・お気に入りコレクション・肌カルテ機能などを順次追加しました。</li>
       </ul>
@@ -3431,17 +3432,25 @@ const INFO_PAGES={
   about:`<h2>運営者情報</h2>
     <table style="width:100%;line-height:1.8;color:var(--txt2);font-size:14px;border-collapse:collapse">
       <tr><td style="padding:8px 0;width:120px;color:var(--txt3);vertical-align:top">サイト名</td><td style="padding:8px 0">Moilum（モイルム）</td></tr>
-      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">運営者</td><td style="padding:8px 0">Moilum編集部</td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">運営者</td><td style="padding:8px 0">Moilum編集部（個人運営）<br><span style="font-size:12.5px;color:var(--txt3)">屋号での組織的運営ではなく、個人が1人で企画・執筆・サイト管理を行っている個人メディアです。「編集部」は屋号として使用しています。</span></td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">執筆者・編集</td><td style="padding:8px 0">一行（いちぎょう）<br><span style="font-size:12.5px;color:var(--txt3)">スキンケア商品を長年比較検討してきた個人の視点でまとめています。医療・美容の国家資格保有者ではありません。</span></td></tr>
       <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">連絡先</td><td style="padding:8px 0"><a href="mailto:sanji.104vt@gmail.com" style="color:var(--accent)">sanji.104vt@gmail.com</a></td></tr>
       <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">運営開始</td><td style="padding:8px 0">2026年</td></tr>
       <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">運営目的</td><td style="padding:8px 0">スキンケア商品の比較情報を提供し、肌タイプ・悩みに合った商品選びをサポートすること。</td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">情報源</td><td style="padding:8px 0">各商品の公式サイト・販売ページ（Amazon等）に掲載された成分・価格・レビュー情報を編集部が集約。掲載スコアは編集部独自の集計値であり、特定EC平均レビュー値の転載ではありません。</td></tr>
+      <tr><td style="padding:8px 0;color:var(--txt3);vertical-align:top">収益源</td><td style="padding:8px 0">Amazonアソシエイト・楽天アフィリエイト・Qoo10等のアフィリエイト収益。掲載順位はスポンサー料ではなく編集部の評価基準に基づきます。</td></tr>
     </table>
-    <p style="line-height:1.8;color:var(--txt2);font-size:14px;margin-top:14px">当サイトはスキンケア商品の情報を独自にまとめて掲載する比較メディアです。商品の販売は行っておらず、各販売サイト（Amazon・楽天市場・Qoo10等）への送客を行うアフィリエイトサイトです。お問い合わせは上記メールアドレスまでお願いいたします。</p>`,
+    <p style="line-height:1.8;color:var(--txt2);font-size:14px;margin-top:14px">当サイトはスキンケア商品の情報を独自にまとめて掲載する比較メディアです。商品の販売は行っておらず、各販売サイトへの送客を行うアフィリエイトサイトです。掲載情報の誤り・ご要望等は上記メールアドレスまでお気軽にお知らせください。</p>`,
   privacy:`<h2>プライバシーポリシー</h2>
-    <p style="line-height:1.8;color:var(--txt2)">当サイトでは、アクセス解析や広告配信のためにCookie等を利用する場合があります。これらは個人を特定する情報を含みません。<br><br>
-    <b>アクセス解析ツール</b><br>当サイトはGoogle Analytics等のアクセス解析ツールを使用する場合があります。トラフィックデータは匿名で収集されます。<br><br>
-    <b>広告について</b><br>当サイトはAmazonアソシエイト、楽天アフィリエイト、Qoo10等の第三者配信の広告サービスを利用しています。これらの広告配信事業者はユーザーの興味に応じた広告を表示するためCookieを使用することがあります。<br><br>
-    ※実際の運用では、利用する解析・広告サービスに合わせて内容を調整してください。</p>`,
+    <p style="line-height:1.8;color:var(--txt2);font-size:14px">当サイト（Moilum、以下「当サイト」）における個人情報および利用者情報の取扱いについて、以下のとおり定めます。</p>
+    <h3 style="font-size:14px;margin-top:14px;color:var(--txt1)">アクセス解析ツール</h3>
+    <p style="line-height:1.8;color:var(--txt2);font-size:14px">当サイトは、サイト利用状況の把握のため Google Analytics 4（GA4）を使用しています。GA4はCookieを使用しますが、これによって収集されるトラフィックデータは匿名であり、個人を特定するものではありません。この機能はブラウザの設定によりCookieを無効化することで拒否できます。詳しくは <a href="https://policies.google.com/technologies/partner-sites?hl=ja" target="_blank" rel="noopener" style="color:var(--accent)">Googleのポリシー</a> をご確認ください。</p>
+    <h3 style="font-size:14px;margin-top:14px;color:var(--txt1)">広告・アフィリエイトプログラム</h3>
+    <p style="line-height:1.8;color:var(--txt2);font-size:14px">当サイトは Amazonアソシエイト・楽天アフィリエイト・Qoo10 等の第三者配信のアフィリエイトプログラムを利用しています。これらの配信事業者はユーザーの興味に応じた広告を表示するために Cookie を使用することがあります。</p>
+    <h3 style="font-size:14px;margin-top:14px;color:var(--txt1)">お問い合わせフォームで収集する情報</h3>
+    <p style="line-height:1.8;color:var(--txt2);font-size:14px">当サイトはお問い合わせフォームを設けていません。メールでお問い合わせいただいた場合、返信・対応の目的でのみメールアドレスと本文を利用し、第三者への提供は行いません。</p>
+    <h3 style="font-size:14px;margin-top:14px;color:var(--txt1)">免責事項</h3>
+    <p style="line-height:1.8;color:var(--txt2);font-size:14px">当サイト掲載の商品情報（成分・価格・評価等）は、可能な限り正確な情報を掲載するよう努めていますが、内容の正確性・最新性を保証するものではありません。購入前に必ず各販売サイト・公式情報をご確認ください。</p>`,
   disclosure:`<h2>アフィリエイトについて（広告表記）</h2>
     <p style="line-height:1.8;color:var(--txt2)">当サイトのリンクには、Amazon・楽天市場・Qoo10などのアフィリエイトプログラムによる広告（PR）が含まれます。商品リンク経由で購入された場合、当サイトが販売事業者から紹介料を受け取ることがあります。<br><br>
     購入者の負担が増えることはありません。掲載順位やおすすめは、当サイト独自の基準に基づくものです。<br><br>
@@ -5474,7 +5483,10 @@ function openColumn(id){
       <button class="back-btn" onclick="renderColumnList()">← コラム一覧に戻る</button>
       <div class="ctag" style="color:var(--accent);font-weight:700;font-size:12px">${c.cat}</div>
       <h1>${c.title}</h1>
-      <div class="meta">Moilum編集部 ・ ${c.readtime}</div>
+      <div class="meta" style="line-height:1.7">
+        <div>執筆：Moilum編集部（一行／個人運営） ・ ${c.readtime}</div>
+        <div style="font-size:11.5px;color:var(--txt3);margin-top:4px">最終更新：${c.updated||"2026-07-18"} ／ 掲載商品データ基準日：2026-06 <a onclick="openInfo('about')" style="color:var(--accent);cursor:pointer;text-decoration:underline">運営者情報</a></div>
+      </div>
       ${c.body}
       ${allRel.length?`<div class="related-products" style="margin-top:24px">
         <h2 style="font-size:15px;font-weight:800;margin-bottom:14px">この記事に関連する商品</h2>
