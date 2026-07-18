@@ -72,7 +72,7 @@ ${urls.join("\n")}
 }
 
 export default {
-  async fetch(request, env){
+  async fetch(request, env, ctx){
     const url = new URL(request.url);
 
     // workers.dev → asutelu.com への 301 リダイレクト（カスタムドメインを正規URLに統一）
@@ -89,14 +89,27 @@ export default {
       return env.ASSETS.fetch(new Request(rewriteUrl, request));
     }
 
-    // /sitemap.xml → 動的生成
+    // /sitemap.xml → 動的生成（Cache API で Worker 側にもキャッシュし、生成コストを削減）
+    // キーはクエリ文字列を除外した canonical URL に固定（?bust= のようなキャッシュバスターで
+    // 別キー扱いになるのを防ぐ）。TTL は Cache-Control ヘッダー(max-age=3600)に従う。
     if (pathname === "/sitemap.xml"){
-      return new Response(buildSitemap(), {
+      const cacheKey = new Request("https://moilum.asutelu.com/sitemap.xml", { method: "GET" });
+      const cache = caches.default;
+      let cached = await cache.match(cacheKey);
+      if (cached) return cached;
+      const body = buildSitemap();
+      const response = new Response(body, {
         headers: {
           "content-type": "application/xml; charset=utf-8",
-          "cache-control": "public, max-age=3600"
+          "cache-control": "public, max-age=3600",
+          "x-generated-at": new Date().toISOString()
         }
       });
+      // レスポンス返却後にキャッシュへ書き込み（応答時間を伸ばさない）
+      if (ctx && typeof ctx.waitUntil === "function"){
+        ctx.waitUntil(cache.put(cacheKey, response.clone()));
+      }
+      return response;
     }
 
     // /products/{id} → /products/{id}.html リライト（Sillageの/columns/{slug}と同パターン）
