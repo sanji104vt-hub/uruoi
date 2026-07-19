@@ -50,8 +50,11 @@ function rewriteColumnHead(response, c){
     .transform(response);
 }
 
+// /about/{slug} で公開している静的ページのallowlist（Workerリライト用）
+const ABOUT_SLUGS = new Set(["rating-policy", "sources", "changelog"]);
+
 function buildSitemap(){
-  const staticPaths = ["/","/brands","/ranking","/diagnosis","/column","/favorites"];
+  const staticPaths = ["/","/brands","/ranking","/diagnosis","/column","/favorites","/about/rating-policy","/about/sources","/about/changelog"];
   const now = new Date().toISOString().slice(0,10);
   const urls = [];
   for (const path of staticPaths){
@@ -123,6 +126,21 @@ export default {
         return env.ASSETS.fetch(new Request(rewriteUrl, request));
       }
       // 該当なし → SPA(トップ)にフォールバック
+      const fallbackUrl = new URL(request.url);
+      fallbackUrl.pathname = "/index.html";
+      return env.ASSETS.fetch(new Request(fallbackUrl, request));
+    }
+
+    // /about/{slug} → /about/{slug}.html リライト（allowlistで既知slugのみ受ける）
+    const aboutMatch = pathname.match(/^\/about\/([a-z0-9-]+)\/?$/);
+    if (aboutMatch){
+      const slug = aboutMatch[1];
+      if (ABOUT_SLUGS.has(slug)){
+        const rewriteUrl = new URL(request.url);
+        rewriteUrl.pathname = `/about/${slug}.html`;
+        return env.ASSETS.fetch(new Request(rewriteUrl, request));
+      }
+      // 該当なし → SPAトップにフォールバック
       const fallbackUrl = new URL(request.url);
       fallbackUrl.pathname = "/index.html";
       return env.ASSETS.fetch(new Request(fallbackUrl, request));
