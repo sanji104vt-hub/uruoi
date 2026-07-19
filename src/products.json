@@ -1938,7 +1938,8 @@
     "icon": "💄",
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/ladydrug/cabinet/pic1611/4987241105106_1.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/ladydrug/cabinet/pic1611/4987241105106_1.jpg?_ex=300x300",
+    "productType": "makeup"
   },
   {
     "id": 74,
@@ -2225,7 +2226,8 @@
     ],
     "icon": "💐",
     "origin": "日本",
-    "purchase": "https://www.amazon.co.jp/"
+    "purchase": "https://www.amazon.co.jp/",
+    "productType": "makeup"
   },
   {
     "id": 85,
@@ -2645,7 +2647,8 @@
     "icon": "💋",
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/roseroseshop/cabinet/compass1672726259.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/roseroseshop/cabinet/compass1672726259.jpg?_ex=300x300",
+    "productType": "makeup"
   },
   {
     "id": 101,
@@ -2799,7 +2802,8 @@
     "icon": "🍓",
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/laneige-r/cabinet/event/12815854/1212040001_0528.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/laneige-r/cabinet/event/12815854/1212040001_0528.jpg?_ex=300x300",
+    "productType": "makeup"
   },
   {
     "id": 107,
@@ -2849,7 +2853,8 @@
     ],
     "icon": "🤲",
     "origin": "日本",
-    "purchase": "https://www.amazon.co.jp/"
+    "purchase": "https://www.amazon.co.jp/",
+    "productType": "makeup"
   },
   {
     "id": 109,
@@ -2998,7 +3003,8 @@
     "icon": "👁️",
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/yayoi-cosme/cabinet/rakulogo/rakulogo7/ycsm154_01638.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/yayoi-cosme/cabinet/rakulogo/rakulogo7/ycsm154_01638.jpg?_ex=300x300",
+    "productType": "makeup"
   },
   {
     "id": 115,
@@ -3022,7 +3028,8 @@
     "icon": "✨",
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/rainmakers-beautyfarm/cabinet/item_page/cipicipi/10858254/2604-1r.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/rainmakers-beautyfarm/cabinet/item_page/cipicipi/10858254/2604-1r.jpg?_ex=300x300",
+    "productType": "makeup"
   },
   {
     "id": 116,
@@ -3626,7 +3633,8 @@
     "icon": "🤲",
     "origin": "フランス",
     "purchase": "https://www.amazon.co.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/cosmelink/cabinet/body3/3253581784761_cp.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/cosmelink/cabinet/body3/3253581784761_cp.jpg?_ex=300x300",
+    "productType": "makeup"
   },
   {
     "id": 139,
@@ -3752,7 +3760,8 @@
     "icon": "🎨",
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/dasique/cabinet/dasique_/12547564/imgrc0131461730.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/dasique/cabinet/dasique_/12547564/imgrc0131461730.jpg?_ex=300x300",
+    "productType": "makeup"
   },
   {
     "id": 144,
@@ -3964,7 +3973,8 @@
     "icon": "💋",
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/tsuruha/cabinet/shouhin73/10054928.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/tsuruha/cabinet/shouhin73/10054928.jpg?_ex=300x300",
+    "productType": "makeup"
   },
   {
     "id": 152,
@@ -4196,7 +4206,8 @@
     "icon": "💎",
     "origin": "イタリア",
     "purchase": "https://www.amazon.co.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/wish/cabinet/earth010/bv019_0001.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/wish/cabinet/earth010/bv019_0001.jpg?_ex=300x300",
+    "productType": "makeup"
   },
   {
     "id": 161,
@@ -4351,7 +4362,8 @@
     "icon": "🛁",
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/coniconi/cabinet/100jyou_2set.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/coniconi/cabinet/100jyou_2set.jpg?_ex=300x300",
+    "productType": "makeup"
   },
   {
     "id": 167,
@@ -4990,7 +5002,8 @@
     "icon": "💋",
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/asiabnc/cabinet/11939901/imgrc0102419553.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/asiabnc/cabinet/11939901/imgrc0102419553.jpg?_ex=300x300",
+    "productType": "makeup"
   },
   {
     "id": 191,
