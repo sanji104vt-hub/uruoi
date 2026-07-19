@@ -64,6 +64,46 @@ function prosConsData(p){
   return {pros,cons,fit:[...new Set(fit)].slice(0,4),unfit:unfit.slice(0,3)};
 }
 
+// ===== 一次情報バッジ（休眠コンポーネント）=====
+// src/products.json の商品オブジェクトに以下フィールドを追加すると、
+// 静的商品ページに「編集部の一次情報」ブロックが自動表示される。
+// 未設定の商品では何も表示されない（現状は全207商品で未設定＝表示なし＝仕様通り）。
+//
+// 入力例：
+//   {
+//     "id": 1,
+//     ...既存フィールド...,
+//     "editorPhoto": "https://moilum.asutelu.com/img/editorial/1-hand.jpg",
+//     "measuredData": { "pH": "5.5", "内容量": "150ml", "実売価格(2026-07時点)": "¥1,650" },
+//     "reviewedByEditor": true,
+//     "editorNote": "編集部で2週間使用。朝はやや重めに感じたが夜のみ使用で肌の落ち着きを感じた。"
+//   }
+// 4フィールドとも任意。一部だけの入力でも該当バッジ・該当ブロックのみ表示される。
+// SPA商品モーダル側にも同じロジックを実装済み（public/index.html の primarySourceHtml()）。
+// 表示を一致させるため、フィールドを追加する際は PRODUCTS 配列(public/index.html) にも同期のこと。
+function primarySourceHtml(p){
+  const hasPhoto = !!p.editorPhoto;
+  const hasMeasured = p.measuredData && typeof p.measuredData === "object" && Object.keys(p.measuredData).length > 0;
+  const hasReview = p.reviewedByEditor === true;
+  const hasNote = !!p.editorNote;
+  if (!hasPhoto && !hasMeasured && !hasReview && !hasNote) return "";
+  const badges = [];
+  if (hasPhoto)    badges.push('<span class="ps-badge">📸 編集部撮影</span>');
+  if (hasMeasured) badges.push('<span class="ps-badge">📏 実測データ</span>');
+  if (hasReview)   badges.push('<span class="ps-badge">✍️ 編集部使用レビュー</span>');
+  if (hasNote && !hasReview) badges.push('<span class="ps-badge">📝 編集部メモ</span>');
+  const measuredHtml = hasMeasured
+    ? `<dl class="ps-measured">${Object.entries(p.measuredData).map(([k,v]) => `<dt>${escHtml(k)}</dt><dd>${escHtml(v)}</dd>`).join("")}</dl>`
+    : "";
+  return `<div class="primary-source">
+    <div class="ps-header">🌱 編集部の一次情報 <span class="ps-badges">${badges.join("")}</span></div>
+    ${hasPhoto ? `<img class="ps-photo" src="${escAttr(p.editorPhoto)}" alt="編集部撮影 - ${escAttr(p.name)}" loading="lazy">` : ""}
+    ${measuredHtml}
+    ${hasNote ? `<p class="ps-note">${escHtml(p.editorNote)}</p>` : ""}
+    <div class="ps-disclaimer">※ 編集部が実際に確認・使用した一次情報です。個人の感想を含みます。</div>
+  </div>`;
+}
+
 function escHtml(s){
   return String(s == null ? "" : s).replace(/[<>&"']/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;","\"":"&quot;","'":"&#39;"}[c]));
 }
@@ -220,6 +260,16 @@ h1{font-size:clamp(22px,4vw,30px);line-height:1.45;margin-bottom:12px}
 .suit-label{font-size:13px;font-weight:700;color:var(--txt2);min-width:100px}
 .suit-chips{display:flex;gap:6px;flex-wrap:wrap}
 .suit-chip{background:var(--water);color:var(--accent);font-size:12px;padding:4px 10px;border-radius:20px;font-weight:600}
+.primary-source{background:#eef8f1;border:1px solid #cfe9d4;border-radius:14px;padding:16px 18px;margin-bottom:20px;color:#25553a}
+.ps-header{font-size:13px;font-weight:800;color:#1d4a2f;margin-bottom:10px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ps-badges{display:inline-flex;gap:6px;flex-wrap:wrap}
+.ps-badge{background:#fff;border:1px solid #cfe9d4;border-radius:12px;padding:2px 10px;font-size:11px;font-weight:700;color:#1d4a2f}
+.ps-photo{width:100%;max-width:360px;border-radius:10px;display:block;margin:8px 0;background:#fff;border:1px solid #cfe9d4}
+.ps-measured{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:8px 0;font-size:13px;background:#fff;border:1px solid #cfe9d4;border-radius:10px;padding:12px 14px}
+.ps-measured dt{color:#5c7d67;font-weight:700}
+.ps-measured dd{margin:0;color:#25553a;font-weight:600}
+.ps-note{margin:6px 0;font-size:13.5px;line-height:1.75;color:#25553a}
+.ps-disclaimer{font-size:11px;color:#5c7d67;margin-top:6px}
 .proscons{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}
 .proscons h2{font-size:16px;margin-bottom:14px}
 .pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
@@ -301,6 +351,7 @@ gtag('js',new Date());gtag('config','${GA4_ID}');
     ${Array.isArray(p.skin) && p.skin.length ? `<div class="suit-row"><span class="suit-label">適した肌タイプ</span><div class="suit-chips">${p.skin.map(s => `<span class="suit-chip">${escHtml(s)}</span>`).join("")}</div></div>` : ""}
     ${Array.isArray(p.concern) && p.concern.length ? `<div class="suit-row"><span class="suit-label">対応する悩み</span><div class="suit-chips">${p.concern.map(c => `<span class="suit-chip">${escHtml(c)}</span>`).join("")}</div></div>` : ""}
   </div>` : ""}
+  ${primarySourceHtml(p)}
   ${(() => {
     const pc = prosConsData(p);
     return `<div class="proscons">

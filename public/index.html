@@ -577,6 +577,17 @@ nav{display:flex;gap:4px}
 .pc-unfit{background:var(--bg3);border:1px solid var(--border)}
 .pc-unfit .pc-title{color:var(--txt2)}
 @media(max-width:600px){.pc-grid{grid-template-columns:1fr}}
+/* 一次情報バッジ（休眠、editorPhoto/measuredData/reviewedByEditor/editorNote が入った時のみ表示） */
+.primary-source{background:#eef8f1;border:1px solid #cfe9d4;border-radius:14px;padding:16px 18px;margin:16px 0;color:#25553a}
+.ps-header{font-size:13px;font-weight:800;color:#1d4a2f;margin-bottom:10px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ps-badges{display:inline-flex;gap:6px;flex-wrap:wrap}
+.ps-badge{background:#fff;border:1px solid #cfe9d4;border-radius:12px;padding:2px 10px;font-size:11px;font-weight:700;color:#1d4a2f}
+.ps-photo{width:100%;max-width:360px;border-radius:10px;display:block;margin:8px 0;background:#fff;border:1px solid #cfe9d4}
+.ps-measured{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:8px 0;font-size:13px;background:#fff;border:1px solid #cfe9d4;border-radius:10px;padding:12px 14px}
+.ps-measured dt{color:#5c7d67;font-weight:700}
+.ps-measured dd{margin:0;color:#25553a;font-weight:600}
+.ps-note{margin:6px 0;font-size:13.5px;line-height:1.75;color:#25553a}
+.ps-disclaimer{font-size:11px;color:#5c7d67;margin-top:6px}
 
 .ai-consult{max-width:680px}
 .chat-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;min-height:120px;max-height:420px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px}
@@ -2154,6 +2165,42 @@ function prosConsData(p){
   return {pros,cons,fit:[...new Set(fit)].slice(0,4),unfit:unfit.slice(0,3)};
 }
 
+// ===== 一次情報バッジ（休眠コンポーネント）=====
+// PRODUCTS配列(この下の const PRODUCTS=[...]) の商品オブジェクトに以下フィールドを追加すると、
+// 商品モーダルおよび静的商品ページに「編集部の一次情報」ブロックが自動表示される。
+// 未設定の商品では何も表示されない（現状は全207商品で未設定＝表示なし＝仕様通り）。
+//
+// 入力例（PRODUCTS配列の該当商品オブジェクトに追記する）：
+//   {
+//     ...既存フィールド...,
+//     editorPhoto: "https://moilum.asutelu.com/img/editorial/1-hand.jpg",
+//     measuredData: { "pH": "5.5", "内容量": "150ml", "実売価格(2026-07時点)": "¥1,650" },
+//     reviewedByEditor: true,
+//     editorNote: "編集部で2週間使用。朝はやや重めに感じたが夜のみ使用で肌の落ち着きを感じた。"
+//   }
+// 4フィールドとも任意。一部だけの入力でも該当バッジ・該当ブロックだけが表示される。
+// 静的商品ページ側にも同じロジックを移植済み（build-product-pages.mjs の primarySourceHtml()）。
+// SPA側とビルド側で表示が一致するよう、フィールドを追加する場合は src/products.json にも同期のこと。
+function primarySourceHtml(p){
+  const hasPhoto=!!p.editorPhoto;
+  const hasMeasured=p.measuredData&&typeof p.measuredData==="object"&&Object.keys(p.measuredData).length>0;
+  const hasReview=p.reviewedByEditor===true;
+  const hasNote=!!p.editorNote;
+  if(!hasPhoto&&!hasMeasured&&!hasReview&&!hasNote) return "";
+  const badges=[];
+  if(hasPhoto)    badges.push('<span class="ps-badge">📸 編集部撮影</span>');
+  if(hasMeasured) badges.push('<span class="ps-badge">📏 実測データ</span>');
+  if(hasReview)   badges.push('<span class="ps-badge">✍️ 編集部使用レビュー</span>');
+  if(hasNote&&!hasReview) badges.push('<span class="ps-badge">📝 編集部メモ</span>');
+  return `<div class="primary-source">
+    <div class="ps-header">🌱 編集部の一次情報 <span class="ps-badges">${badges.join("")}</span></div>
+    ${hasPhoto?`<img class="ps-photo" src="${p.editorPhoto}" alt="編集部撮影 - ${p.name}" loading="lazy">`:""}
+    ${hasMeasured?`<dl class="ps-measured">${Object.entries(p.measuredData).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>`:""}
+    ${hasNote?`<p class="ps-note">${p.editorNote}</p>`:""}
+    <div class="ps-disclaimer">※ 編集部が実際に確認・使用した一次情報です。個人の感想を含みます。</div>
+  </div>`;
+}
+
 function radarChartSvg(p){
   const s=productScores(p);
   const axes=[
@@ -2580,6 +2627,7 @@ function openDetail(id){
       <div style="font-size:11px;color:var(--txt3);margin-bottom:8px">※評価・レビュー数・価格・成分などからMoilumが自動算出した参考スコアです</div>
       ${radarChartSvg(p)}
     </div>
+    ${primarySourceHtml(p)}
     <div class="proscons">
       <div class="pc-grid">
         <div class="pc-box pc-pros">
