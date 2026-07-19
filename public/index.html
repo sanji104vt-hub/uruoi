@@ -1433,9 +1433,9 @@ nav{display:flex;gap:4px}
         </svg>
         <div class="brand-wordmark">Moi<span>lum</span><em>モイルム</em></div>
       </div>
-      <div class="hero-badge">207商品を徹底比較</div>
+      <div class="hero-badge" data-skincare-count>{count}商品を徹底比較</div>
       <h1 class="hero-title">濁りのない、<br><span>スキンケア比較</span>。</h1>
-      <p class="hero-sub">207商品を独自スコアで正直にレビュー。「向かない人」まで書きます。</p>
+      <p class="hero-sub" data-skincare-count>{count}商品を独自スコアで正直にレビュー。「向かない人」まで書きます。</p>
       <div class="hero-actions">
         <button class="hero-btn primary" onclick="showPage('diagnosis')">肌タイプ診断をはじめる</button>
         <button class="hero-btn ghost" onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'});document.getElementById('search').focus()">商品をさがす</button>
@@ -1922,6 +1922,20 @@ const PRODUCTS=[
   {"id": 206, "name": "CICA デイリースージングトナーパッド メガ", "brand": "VT Cosmetics", "category": "化粧水", "price": 2640, "rating": 4.5, "reviews": 2100, "skin": ["敏感肌", "混合肌"], "concern": ["肌荒れ・赤み", "毛穴の開き・黒ずみ"], "desc": "CICA配合の大容量トナーパッド。拭き取りで角質ケアと鎮静を同時に、コスパの良い韓国の人気品。", "keyIngredients": ["CICA", "パンテノール", "BHA"], "icon": "🍀", "origin": "韓国", "purchase": "https://www.qoo10.jp/", "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/neocosme/cabinet/12828955/compass1752039928.jpg?_ex=300x300"},
   {"id": 207, "name": "ビオレ おうちdeエステ 洗顔ジェル", "brand": "花王", "category": "洗顔", "price": 660, "rating": 4.3, "reviews": 3120, "skin": ["全肌質", "混合肌"], "concern": ["毛穴の開き・黒ずみ"], "desc": "マッサージしながら毛穴汚れをオフする洗顔ジェル。なめらかな肌に整えるプチプラのスペシャルケア。", "keyIngredients": ["温感ジェル", "グリセリン"], "icon": "♨️", "origin": "日本", "purchase": "https://www.amazon.co.jp/", "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/k-server/cabinet/imgdir110/4901301342904-sale_1.jpg?_ex=300x300"},
 ];
+
+// ===== 商品数の単一の真実の源(SSoT) =====
+// スキンケア商品数はここから算出。makeup productType が付与された商品は除外。
+// Hero/コラム本文/構造化データ等、数字表記が必要な箇所は data 属性/プレースホルダ
+// 経由で本定数を注入する（ハードコード禁止）。
+const SKINCARE_PRODUCTS = PRODUCTS.filter(p => p.productType !== "makeup");
+const SKINCARE_COUNT = SKINCARE_PRODUCTS.length;
+
+// DOMContentLoaded 時に data-skincare-count 属性を持つ要素の {count} を実数に置換
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("[data-skincare-count]").forEach(el => {
+    el.textContent = el.textContent.replace(/\{count\}/g, SKINCARE_COUNT);
+  });
+});
 
 const BRANDS=[
   {"name":"BULK HOMME","icon":"🧴","origin":"日本","desc":"メンズスキンケアの人気ブランド"},
@@ -4421,7 +4435,7 @@ const COLUMNS=[
     cat:"成分ガイド",
     title:"人気保湿成分を徹底比較｜セラミド・ヒアルロン酸・ナイアシンアミドの違い",
     excerpt:"よく聞く3大成分は、それぞれ役割が違います。何がどう違うのか、自分にはどれが合うのかを比較表でわかりやすく解説します。",
-    description:"セラミド・ヒアルロン酸・ナイアシンアミドは働きも向く肌質も別物です。3成分の役割を比較表で整理し、掲載207商品の実データから自分に合う選び方を解説。効果を実感しにくいケースや向かない人まで正直に書いた、Moilum編集部の成分比較ガイドです。",
+    description:"セラミド・ヒアルロン酸・ナイアシンアミドは働きも向く肌質も別物です。3成分の役割を比較表で整理し、掲載{{SKINCARE_COUNT}}商品の実データから自分に合う選び方を解説。効果を実感しにくいケースや向かない人まで正直に書いた、Moilum編集部の成分比較ガイドです。",
     readtime:"約8分",
     related:[1,2,36,6],
     body:`
@@ -4766,7 +4780,7 @@ const COLUMNS=[
       <p>乾燥肌×韓国コスメの攻略法をまとめます。成分は低分子ヒアルロン酸・パンテノール・スネイル・PDRNを目印に、テクスチャーはとろみ系を。買い方は正規流通で、試し方は「化粧水1本から・2週間観察」。運用は「夏はみずみずしい系、秋冬はこっくり系」の季節ローテーション。そして土台は国内敏感肌ブランドに任せて、韓国コスメは攻めの1本に絞るハイブリッド構成が、リスクと楽しさのバランスが最も良い形です。韓国コスメの世界は商品数が膨大で、全部を試すことは誰にもできません。だからこそ「自分の肌に合う系統」を早く見つけた人が勝ちです。この記事の4本は、その系統探しの出発点として自信を持っておすすめできる定番たちです。</p>
 
       <div class="col-cta">
-        <p>韓国コスメを含む掲載207商品から、あなたに合う1本を診断できます。</p>
+        <p>韓国コスメを含む掲載{{SKINCARE_COUNT}}商品から、あなたに合う1本を診断できます。</p>
         <button onclick="showPage('diagnosis')">肌タイプ診断で自分に合う韓国コスメを探す →</button>
       </div>
     `,
@@ -5501,7 +5515,7 @@ const COLUMNS=[
       <p>韓国コスメとの付き合い方をまとめます。強みは新成分のスピード・価格性能比・鎮静ケアの充実。選び方は成分×レビュー数×正規流通の3点チェック。買うなら公式ストアのセール活用。そして「お試し枠は常に1つまで」の自制。韓国コスメの魅力は、なんといっても「新しいものに出会うワクワク」です。その楽しさを長く味わうためにも、肌の土台は定番で守りながら、攻めの1本で冒険する——このバランス感覚さえあれば、トレンドの波を安全に乗りこなせます。この記事の4本は、いずれもブームを超えて定番化した実力派。最初の1本に迷ったら、自分の肌タイプ（脂性寄りならAnua、乾燥寄りならCOSRX）で選べば大きく外しません。</p>
 
       <div class="col-cta">
-        <p>韓国コスメを含む207商品から、あなたの悩みに合う1本を診断します。</p>
+        <p>韓国コスメを含む{{SKINCARE_COUNT}}商品から、あなたの悩みに合う1本を診断します。</p>
         <button onclick="showPage('diagnosis')">肌タイプ診断で自分に合う韓国コスメを探す →</button>
       </div>
     `,
@@ -5525,6 +5539,8 @@ function openColumn(id){
   document.getElementById("columnList").style.display="none";
   const art=document.getElementById("columnArticle");
   art.style.display="block";
+  // {{SKINCARE_COUNT}} プレースホルダを実数に置換（body/description両方）
+  const bodyWithCount=(c.body||"").replace(/\{\{SKINCARE_COUNT\}\}/g,SKINCARE_COUNT);
   const related=(c.related||[]).map(pid=>PRODUCTS.find(p=>p.id===pid)).filter(Boolean);
   // 関連商品を多めにレコメンド（同カテゴリ・同悩みも加えて最大8件）
   const extraRel=PRODUCTS.filter(p=>!related.some(r=>r.id===p.id)&&
@@ -5545,7 +5561,7 @@ function openColumn(id){
         <div>執筆：Moilum編集部（一行／個人運営） ・ ${c.readtime}</div>
         <div style="font-size:11.5px;color:var(--txt3);margin-top:4px">最終更新：${c.updated||"2026-07-18"} ／ 掲載商品データ基準日：2026-06 <a onclick="openInfo('about')" style="color:var(--accent);cursor:pointer;text-decoration:underline">運営者情報</a></div>
       </div>
-      ${c.body}
+      ${bodyWithCount}
       ${allRel.length?`<div class="related-products" style="margin-top:24px">
         <h2 style="font-size:15px;font-weight:800;margin-bottom:14px">この記事に関連する商品</h2>
         <div class="related-grid">

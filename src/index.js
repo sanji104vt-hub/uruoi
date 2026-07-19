@@ -13,6 +13,11 @@ import COLUMNS from "./columns.json";
 const SITE_ORIGIN = "https://moilum.asutelu.com";
 const OGP_IMAGE = SITE_ORIGIN + "/ogp-image.png";
 
+// 商品数の単一の真実の源(SSoT)。makeup productType は除外してカウント。
+// メタ description 等に {{SKINCARE_COUNT}} プレースホルダを含む場合は本値で置換する。
+const SKINCARE_COUNT = PRODUCTS.filter(p => p.productType !== "makeup").length;
+function substituteCount(s){ return String(s || "").replace(/\{\{SKINCARE_COUNT\}\}/g, SKINCARE_COUNT); }
+
 function escapeXml(s){
   return String(s).replace(/[<>&'"]/g, c=>({"<":"&lt;",">":"&gt;","&":"&amp;","'":"&apos;","\"":"&quot;"}[c]));
 }
@@ -21,8 +26,9 @@ function escapeXml(s){
 function rewriteColumnHead(response, c){
   const canonical = `${SITE_ORIGIN}/columns/${c.id}`;
   const title = `${c.title}｜Moilum スキンケアコラム`.slice(0, 68);
-  // SEO用description(120〜160字)を優先。無ければexcerptにフォールバック
-  const description = (c.description || c.excerpt).slice(0, 160);
+  // SEO用description(120〜160字)を優先。無ければexcerptにフォールバック。
+  // {{SKINCARE_COUNT}} プレースホルダを実数(SSoT)に置換してから注入する。
+  const description = substituteCount(c.description || c.excerpt).slice(0, 160);
   const articleJson = JSON.stringify({
     "@context":"https://schema.org",
     "@type":"Article",
