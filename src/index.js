@@ -76,6 +76,12 @@ function rewriteColumnHead(response, c){
 // /about/{slug} で公開している静的ページのallowlist（Workerリライト用）
 const ABOUT_SLUGS = new Set(["rating-policy", "sources", "changelog"]);
 
+// 統合・削除された商品IDから統合先IDへの 301 リダイレクトマップ。
+// 重複商品の統合時に旧URLを新URLに恒久的に転送する（SEOの被リンク集約用）。
+const PRODUCT_REDIRECTS = {
+  164: 53,   // Anua クレンジングオイル ヘチマ70 (完全同一商品として統合)
+};
+
 function buildSitemap(){
   const staticPaths = ["/","/brands","/ranking","/diagnosis","/column","/favorites","/about/rating-policy","/about/sources","/about/changelog"];
   const now = new Date().toISOString().slice(0,10);
@@ -142,6 +148,10 @@ export default {
     const productMatch = pathname.match(/^\/products\/(\d+)\/?$/);
     if (productMatch){
       const id = parseInt(productMatch[1], 10);
+      // 統合済み商品IDは統合先へ301恒久リダイレクト（旧URLの被リンクを新URLへ集約）
+      if (PRODUCT_REDIRECTS[id]){
+        return Response.redirect(`${SITE_ORIGIN}/products/${PRODUCT_REDIRECTS[id]}`, 301);
+      }
       const p = PRODUCTS.find(x => x.id === id);
       if (p){
         const rewriteUrl = new URL(request.url);
