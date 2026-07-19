@@ -1993,7 +1993,8 @@
     "icon": "🟤",
     "origin": "アメリカ",
     "purchase": "https://www.amazon.co.jp/",
-    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/esteelauder/cabinet/thumb/260615_es/77491pg4y01.jpg?_ex=300x300"
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/esteelauder/cabinet/thumb/260615_es/77491pg4y01.jpg?_ex=300x300",
+    "status": "previous_generation"
   },
   {
     "id": 76,
@@ -4287,31 +4288,6 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/at-life/cabinet/2021c/4971710523645.jpg?_ex=300x300"
-  },
-  {
-    "id": 164,
-    "name": "Anua クレンジングオイル ヘチマ70",
-    "brand": "Anua",
-    "category": "洗顔",
-    "price": 2640,
-    "rating": 4.5,
-    "reviews": 1432,
-    "skin": [
-      "脂性肌",
-      "混合肌"
-    ],
-    "concern": [
-      "毛穴の開き・黒ずみ"
-    ],
-    "desc": "ヘチマエキス配合で毛穴ケアできるクレンジングオイル。角栓・黒ずみをすっきり、韓国の人気品。",
-    "keyIngredients": [
-      "ヘチマエキス",
-      "ビタミンE",
-      "ホホバオイル"
-    ],
-    "icon": "🧽",
-    "origin": "韓国",
-    "purchase": "https://www.qoo10.jp/"
   },
   {
     "id": 165,

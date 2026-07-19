@@ -13,9 +13,13 @@ import COLUMNS from "./columns.json";
 const SITE_ORIGIN = "https://moilum.asutelu.com";
 const OGP_IMAGE = SITE_ORIGIN + "/ogp-image.png";
 
-// 商品数の単一の真実の源(SSoT)。makeup productType は除外してカウント。
+// 商品数の単一の真実の源(SSoT)。以下を除外してカウント:
+//   - productType === "makeup" (メイクアップ・ボディケア商品)
+//   - status === "previous_generation" (世代違い旧品)
 // メタ description 等に {{SKINCARE_COUNT}} プレースホルダを含む場合は本値で置換する。
-const SKINCARE_COUNT = PRODUCTS.filter(p => p.productType !== "makeup").length;
+const SKINCARE_COUNT = PRODUCTS.filter(p =>
+  p.productType !== "makeup" && p.status !== "previous_generation"
+).length;
 function substituteCount(s){ return String(s || "").replace(/\{\{SKINCARE_COUNT\}\}/g, SKINCARE_COUNT); }
 
 function escapeXml(s){
