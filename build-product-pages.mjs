@@ -198,9 +198,10 @@ gtag('js',new Date());gtag('config','${GA4_ID}');
       <span class="meta-val price">¥${(p.price || 0).toLocaleString()}<span class="price-note">（2026年6月時点）</span></span>
     </div>
     ${hasRating ? `<div class="meta-row">
-      <span class="meta-label">評価</span>
-      <span class="meta-val"><span class="rating">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5 - Math.round(p.rating))}</span> ${p.rating} <span style="color:var(--txt3);font-weight:500;font-size:12px">（${p.reviews.toLocaleString()}件）</span></span>
-    </div>` : ""}
+      <span class="meta-label">Moilum編集部評価</span>
+      <span class="meta-val"><span class="rating">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5 - Math.round(p.rating))}</span> ${p.rating} <span style="color:var(--txt3);font-weight:500;font-size:12px">（参考レビュー件数${p.reviews.toLocaleString()}件）</span></span>
+    </div>
+    <div style="font-size:11px;color:var(--txt3);line-height:1.6;padding:4px 0 10px">※編集部が独自に集計した参考値です。特定のECサイトの平均評価を転載したものではありません。<a href="/about/rating-policy" style="color:var(--accent)">算出基準</a></div>` : ""}
     <div class="meta-row">
       <span class="meta-label">カテゴリ</span>
       <span class="meta-val">${escHtml(p.category)}</span>
