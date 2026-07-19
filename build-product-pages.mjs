@@ -118,6 +118,24 @@ function buildBreadcrumbJsonLd(p){
   };
 }
 
+// サイト共通の Organization 情報。全ページ共通で出力するため定数化。
+const ORGANIZATION_JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Moilum",
+  "alternateName": "モイルム",
+  "url": SITE_ORIGIN + "/",
+  "logo": OGP_IMAGE,
+  "description": "スキンケア商品を肌タイプ・お悩み・予算で比較する、個人運営の比較メディア。",
+  "foundingDate": "2026",
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "email": "sanji.104vt@gmail.com",
+    "contactType": "customer support",
+    "availableLanguage": ["Japanese"]
+  }
+};
+
 function getRelatedProducts(p, all){
   // 同カテゴリで、自分以外の商品からrating順で最大3件
   return all
@@ -162,6 +180,7 @@ function buildProductHtml(p, all){
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
 <script type="application/ld+json">${JSON.stringify(productLd)}</script>
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
+<script type="application/ld+json">${JSON.stringify(ORGANIZATION_JSONLD)}</script>
 <style>
 :root{--base:#FBF9F6;--ink:#2B2622;--water:#DCEAEC;--deep:#B7CDD3;--iris-2:#D5E4E8;--accent:#7FA8B3;--border:#e3e9e5;--txt2:#5a6b6e;--txt3:#8fa3a7}
 *{box-sizing:border-box;margin:0;padding:0}

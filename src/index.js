@@ -33,6 +33,16 @@ function rewriteColumnHead(response, c){
     "publisher": {"@type":"Organization","name":"Moilum","logo":{"@type":"ImageObject","url": OGP_IMAGE}},
     "mainEntityOfPage": canonical
   });
+  // コラム個別ページ用 BreadcrumbList（トップ → スキンケアコラム → 記事タイトル）
+  const crumbJson = JSON.stringify({
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Moilum","item":SITE_ORIGIN+"/"},
+      {"@type":"ListItem","position":2,"name":"スキンケアコラム","item":SITE_ORIGIN+"/column"},
+      {"@type":"ListItem","position":3,"name":c.title,"item":canonical}
+    ]
+  });
   return new HTMLRewriter()
     .on("title", { element(el){ el.setInnerContent(title); } })
     .on('meta[name="description"]', { element(el){ el.setAttribute("content", description); } })
@@ -44,7 +54,10 @@ function rewriteColumnHead(response, c){
     .on('meta[name="twitter:description"]', { element(el){ el.setAttribute("content", description); } })
     .on("head", {
       element(el){
-        el.append(`<script type="application/ld+json" data-page-jsonld>${articleJson}</script>`, {html: true});
+        // Article と BreadcrumbList を追加注入。Organization はトップ index.html に
+        // 静的で入っており、このコラムページも同じindex.htmlをベースにするため二重注入不要。
+        el.append(`<script type="application/ld+json" data-page-jsonld="article">${articleJson}</script>`, {html: true});
+        el.append(`<script type="application/ld+json" data-page-jsonld="breadcrumb">${crumbJson}</script>`, {html: true});
       }
     })
     .transform(response);
