@@ -13,6 +13,57 @@ const GA4_ID = "G-BC0FBSZSWX";
 
 const products = JSON.parse(fs.readFileSync("src/products.json", "utf8"));
 
+// ===== SPA(public/index.html)の productScores / prosConsData と同一ロジック =====
+// 静的商品ページにもメリット/デメリット/向いている人/向いていない人を出すため、
+// 同じ関数を移植する(新規データ捏造なし、既存アルゴリズムをそのまま再利用)。
+function productScores(p){
+  const overall=Math.round(((p.rating-4.0)/0.9*4+1)*10)/10;
+  const popularity=Math.min(5,Math.round((Math.log10(p.reviews+1)/Math.log10(16000)*5)*10)/10);
+  const priceScore=Math.max(1,5-(Math.log10(p.price)-2.6)/(4.6-2.6)*4);
+  const cospa=Math.round(Math.min(5,(priceScore*0.7+p.rating/4.9*5*0.3))*10)/10;
+  let moist=2.8+(p.rating-4.2)*1.5;
+  const moistWords=["セラミド","ヒアルロン酸","保湿","スクワラン","コラーゲン","グリセリン","パンテノール"];
+  if((p.keyIngredients||[]).some(i=>moistWords.some(w=>i.includes(w)))) moist+=1.2;
+  if((p.concern||[]).includes("乾燥・かさつき")) moist+=0.5;
+  if(["保湿クリーム","化粧水"].includes(p.category)) moist+=0.3;
+  moist=Math.round(Math.min(5,Math.max(1,moist))*10)/10;
+  let mild=2.8+(p.rating-4.2)*1.2;
+  if((p.skin||[]).includes("敏感肌")) mild+=1.3;
+  const mildWords=["CICA","ツボクサ","パンテノール","アラントイン","ドクダミ","グリチルリチン"];
+  if((p.keyIngredients||[]).some(i=>mildWords.some(w=>i.includes(w)))) mild+=0.7;
+  if((p.concern||[]).includes("肌荒れ・赤み")) mild+=0.4;
+  mild=Math.round(Math.min(5,Math.max(1,mild))*10)/10;
+  return {overall,popularity,cospa,moist,mild};
+}
+function prosConsData(p){
+  const s=productScores(p);
+  const pros=[], cons=[], fit=[], unfit=[];
+  if(p.rating>=4.6) pros.push(`ユーザー評価が高い（★${p.rating}）`);
+  if(p.reviews>=4000) pros.push(`${Math.round(p.reviews/1000)}千件超のレビューで実績豊富`);
+  if(s.cospa>=4.3) pros.push("価格に対する満足度が高くコスパ良好");
+  if(s.moist>=4.5) pros.push("保湿力が高く乾燥対策に向く");
+  if(s.mild>=4.5) pros.push("低刺激で敏感肌でも使いやすい");
+  if(p.price<=1500) pros.push("手に取りやすい価格で続けやすい");
+  if((p.keyIngredients||[]).length>=4) pros.push("複数の有効成分を配合");
+  if(p.price>=8000) cons.push("価格が高めで継続にはコストがかかる");
+  if(s.mild<3.5) cons.push("敏感肌の人は刺激を感じる可能性");
+  if(p.reviews<1500) cons.push("レビュー件数がまだ少なめ");
+  if(s.cospa<3) cons.push("コスパ面では割高に感じる場合がある");
+  if(!pros.length) pros.push("バランスの取れた使い心地");
+  if(!cons.length) cons.push("特に大きな欠点は見当たらないが、肌との相性は個人差あり");
+  (p.skin||[]).forEach(sk=>{ if(sk!=="全肌質") fit.push(`${sk}の人`); });
+  if((p.skin||[]).includes("全肌質")) fit.push("肌質を選ばず使いたい人");
+  (p.concern||[]).slice(0,2).forEach(c=>fit.push(`${c}が気になる人`));
+  if(s.cospa>=4.3) fit.push("コスパを重視する人");
+  if(p.price>=8000) unfit.push("プチプラ重視の人");
+  if(s.mild<3.5) unfit.push("刺激にとても敏感な人");
+  const allSkin=["乾燥肌","脂性肌","混合肌","敏感肌","普通肌"];
+  const notFor=allSkin.filter(sk=>!(p.skin||[]).includes(sk)&&!(p.skin||[]).includes("全肌質"));
+  if(notFor.length&&notFor.length<=2) unfit.push(`${notFor.join("・")}の人には他の選択肢も`);
+  if(!unfit.length) unfit.push("特になし（幅広い人に使いやすい）");
+  return {pros,cons,fit:[...new Set(fit)].slice(0,4),unfit:unfit.slice(0,3)};
+}
+
 function escHtml(s){
   return String(s == null ? "" : s).replace(/[<>&"']/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;","\"":"&quot;","'":"&#39;"}[c]));
 }
@@ -150,6 +201,19 @@ h1{font-size:clamp(22px,4vw,30px);line-height:1.45;margin-bottom:12px}
 .suit-label{font-size:13px;font-weight:700;color:var(--txt2);min-width:100px}
 .suit-chips{display:flex;gap:6px;flex-wrap:wrap}
 .suit-chip{background:var(--water);color:var(--accent);font-size:12px;padding:4px 10px;border-radius:20px;font-weight:600}
+.proscons{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}
+.proscons h2{font-size:16px;margin-bottom:14px}
+.pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.pc-box{border-radius:12px;padding:14px;font-size:13.5px;line-height:1.7}
+.pc-box ul{margin:6px 0 0 18px;padding:0}
+.pc-box li{margin-bottom:4px}
+.pc-title{font-weight:700;font-size:13px;margin-bottom:2px}
+.pc-pros{background:#eefaf0;border:1px solid #cfe9d4;color:#25553a}
+.pc-cons{background:#fdf0ee;border:1px solid #f4d5cf;color:#8a4a3f}
+.pc-fit{background:#eff6fa;border:1px solid #d3e6f0;color:#2e5772}
+.pc-unfit{background:#fdf6ec;border:1px solid #f2e0c1;color:#8a6a2f}
+.pc-note{font-size:11px;color:var(--txt3);margin-top:6px;line-height:1.6}
+@media(max-width:480px){.pc-grid{grid-template-columns:1fr}}
 .pr-tag{display:inline-block;background:var(--txt3);color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px;letter-spacing:.5px;margin-right:6px;vertical-align:middle}
 .buy-note{font-size:12px;color:var(--txt3);margin:20px 0 10px}
 .buy-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:30px}
@@ -218,6 +282,33 @@ gtag('js',new Date());gtag('config','${GA4_ID}');
     ${Array.isArray(p.skin) && p.skin.length ? `<div class="suit-row"><span class="suit-label">適した肌タイプ</span><div class="suit-chips">${p.skin.map(s => `<span class="suit-chip">${escHtml(s)}</span>`).join("")}</div></div>` : ""}
     ${Array.isArray(p.concern) && p.concern.length ? `<div class="suit-row"><span class="suit-label">対応する悩み</span><div class="suit-chips">${p.concern.map(c => `<span class="suit-chip">${escHtml(c)}</span>`).join("")}</div></div>` : ""}
   </div>` : ""}
+  ${(() => {
+    const pc = prosConsData(p);
+    return `<div class="proscons">
+    <h2>メリット・デメリット / 向いている人・向かない人</h2>
+    <div class="pc-grid">
+      <div class="pc-box pc-pros">
+        <div class="pc-title">👍 メリット</div>
+        <ul>${pc.pros.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
+      </div>
+      <div class="pc-box pc-cons">
+        <div class="pc-title">👎 デメリット</div>
+        <ul>${pc.cons.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
+      </div>
+    </div>
+    <div class="pc-grid">
+      <div class="pc-box pc-fit">
+        <div class="pc-title">⭕ 向いている人</div>
+        <ul>${pc.fit.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
+      </div>
+      <div class="pc-box pc-unfit">
+        <div class="pc-title">△ 向かない人</div>
+        <ul>${pc.unfit.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
+      </div>
+    </div>
+    <div class="pc-note">※ Moilum編集部が商品データ（評価・レビュー数・価格・成分・対応肌タイプ）から自動集計した参考情報です。実際の使用感には個人差があります。</div>
+  </div>`;
+  })()}
   <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は2026年6月時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>
   <div class="buy-btns">
     <a class="buy-btn amazon" href="https://www.amazon.co.jp/s?k=${encodeURIComponent(p.brand + " " + p.name)}" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
