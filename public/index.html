@@ -1532,7 +1532,7 @@ nav{display:flex;gap:4px}
       <option value="rating">評価が高い順</option>
       <option value="priceLow">価格が安い順</option>
       <option value="priceHigh">価格が高い順</option>
-      <option value="reviews">レビューが多い順</option>
+      <option value="reviews">編集部おすすめ順</option>
     </select>
   </div>
   <div id="products" class="grid"></div>
@@ -1734,6 +1734,7 @@ nav{display:flex;gap:4px}
     <div class="footer-updates" style="margin-bottom:14px">
       <h3 style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--txt2)">更新履歴 <a href="/about/changelog" style="font-weight:500;font-size:11.5px;color:var(--accent);margin-left:8px">すべての履歴を見る →</a></h3>
       <ul style="font-size:12px;color:var(--txt3);line-height:1.8;list-style:none;padding:0;margin:0">
+        <li>2026-07-20：説明できない「参考レビュー件数◯件」等の数字表示を全ページから撤去。Google構造化データのaggregateRating（ユーザーレビュー集計スキーマ）も廃止し、編集部独自評価としての正直な使い方に統一。評価（★）そのものは<a href="/about/rating-policy" style="color:var(--accent)">編集部評価</a>として維持。</li>
         <li>2026-07-19（後半）：外部監査に基づく品質改修。商品数を単一の真実の源(SSoT)で一元管理化、メイクアップ13件と世代違い旧品1件をスキンケア一覧から分離、広告的表現（名品/コスパ最強/免疫力等）を事実記述に置換、ブランド呼称の混在を統一、重複商品1件（Anua）を統合。掲載スキンケア商品数を192点として明示。</li>
         <li>2026-07-19：評価表示に「編集部評価」ラベルを追加し、EC平均転載でないことを明示。全商品ページにメリット/デメリット/向かない人を展開。<a href="/about/rating-policy" style="color:var(--accent)">評価基準</a>・<a href="/about/sources" style="color:var(--accent)">情報ソース</a>・<a href="/about/changelog" style="color:var(--accent)">更新履歴</a>の3ページを新設。</li>
         <li>2026-07-18：肌診断機能を「肌タイプ診断」にリネームし、ルールベースであることを明示。運営者情報を個人運営として正直に明記し、コラム記事に著者・最終更新日の表示を追加しました。</li>
@@ -2186,8 +2187,8 @@ function prosConsData(p){
   const s=productScores(p);
   const pros=[], cons=[], fit=[], unfit=[];
   // メリット
-  if(p.rating>=4.6) pros.push(`ユーザー評価が高い（★${p.rating}）`);
-  if(p.reviews>=4000) pros.push(`${Math.round(p.reviews/1000)}千件超のレビューで実績豊富`);
+  if(p.rating>=4.6) pros.push(`編集部評価が高い（★${p.rating}）`);
+  if(p.reviews>=4000) pros.push(`市場での使用実績が豊富な定番`);
   if(s.cospa>=4.3) pros.push("価格に対する満足度が高くコスパ良好");
   if(s.moist>=4.5) pros.push("保湿力が高く乾燥対策に向く");
   if(s.mild>=4.5) pros.push("低刺激で敏感肌でも使いやすい");
@@ -2196,7 +2197,7 @@ function prosConsData(p){
   // デメリット
   if(p.price>=8000) cons.push("価格が高めで継続にはコストがかかる");
   if(s.mild<3.5) cons.push("敏感肌の人は刺激を感じる可能性");
-  if(p.reviews<1500) cons.push("レビュー件数がまだ少なめ");
+  if(p.reviews<1500) cons.push("新しめの商品で市場での定着度は判断途上");
   if(s.cospa<3) cons.push("コスパ面では割高に感じる場合がある");
   if(!pros.length) pros.push("バランスの取れた使い心地");
   if(!cons.length) cons.push("特に大きな欠点は見当たらないが、肌との相性は個人差あり");
@@ -2388,10 +2389,9 @@ function appendMoreProducts(){
       <div class="card-brand">${p.brand}</div>
       <div class="card-desc">${p.desc}</div>
       <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-        <span style="font-size:10px;color:var(--accent);font-weight:700;background:#fff8f2;border:1px solid #f4d9c0;border-radius:4px;padding:1px 6px" title="Moilum編集部が独自に集計した評価です">編集部評価</span>
+        <span style="font-size:10px;color:var(--accent);font-weight:700;background:#fff8f2;border:1px solid #f4d9c0;border-radius:4px;padding:1px 6px" title="Moilum編集部が独自に付与した評価です">編集部評価</span>
         <span class="stars">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5-Math.round(p.rating))}</span>
         <span style="font-size:13px;font-weight:700">${p.rating}</span>
-        <span style="font-size:12px;color:var(--txt3)">(参考${p.reviews.toLocaleString()}件)</span>
       </div>
       <div class="card-price">¥${p.price.toLocaleString()} <span>（${PRICE_DATE}時点）</span></div>
       <div class="shop-mini" onclick="event.stopPropagation()">
@@ -2659,9 +2659,8 @@ function openDetail(id){
       <span style="font-size:11px;color:var(--accent);font-weight:700;background:#fff8f2;border:1px solid #f4d9c0;border-radius:4px;padding:2px 8px">Moilum編集部評価</span>
       <span class="stars">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5-Math.round(p.rating))}</span>
       <span style="font-weight:700">${p.rating}</span>
-      <span style="color:var(--txt3);font-size:13px">(参考レビュー件数${p.reviews.toLocaleString()}件)</span>
     </div>
-    <div style="font-size:11px;color:var(--txt3);line-height:1.6;margin:-4px 0 12px">※編集部が独自に集計した参考値です。特定のECサイトの平均評価を転載したものではありません。<a href="/about/rating-policy" style="color:var(--accent);text-decoration:underline">算出基準</a></div>
+    <div style="font-size:11px;color:var(--txt3);line-height:1.6;margin:-4px 0 12px">※編集部が独自に付与した5段階評価です。ユーザーレビュー件数の集計値ではありません。<a href="/about/rating-policy" style="color:var(--accent);text-decoration:underline">算出基準</a></div>
     <p style="font-size:15px;line-height:1.7;color:var(--txt2);margin:12px 0">${p.desc}</p>
     <div class="detail-row"><span class="detail-label">参考価格</span><span class="detail-val" style="color:var(--accent)">¥${p.price.toLocaleString()}（${PRICE_DATE}時点）</span></div>
     <div class="detail-row"><span class="detail-label">適した肌タイプ</span><span class="detail-val">${p.skin.join("・")}</span></div>
@@ -2805,7 +2804,6 @@ function openCompareModal(){
     ["カテゴリ",p=>p.category],
     ["参考価格",p=>`<b style="color:var(--accent)">¥${p.price.toLocaleString()}</b>`],
     ["編集部評価",p=>`${"★".repeat(Math.round(p.rating))} ${p.rating}`],
-    ["参考レビュー件数",p=>`${p.reviews.toLocaleString()}件`],
     ["総合スコア",p=>scoreBar(productScores(p).overall)],
     ["コスパ",p=>scoreBar(productScores(p).cospa)],
     ["保湿力",p=>scoreBar(productScores(p).moist)],
@@ -3006,7 +3004,7 @@ function renderRanking(){
     if(s.cospa>=4.3) parts.push("コスパ良好");
     if(p.rating>=4.7) parts.push(`高評価★${p.rating}`);
     else if(p.rating>=4.5) parts.push(`評価★${p.rating}`);
-    if(p.reviews>=5000) parts.push(`${Math.round(p.reviews/1000)}千件超の支持`);
+    if(p.reviews>=5000) parts.push(`市場での使用実績豊富`);
     if(s.moist>=4.5) parts.push("高保湿");
     if(s.mild>=4.5) parts.push("低刺激");
     return parts.slice(0,2).join("・")||"総合バランスの良さ";
@@ -3025,7 +3023,7 @@ function renderRanking(){
       <thead><tr><th>比較項目</th>${top3.map((p,i)=>`<th>${i+1}位：${p.name.length>16?p.name.slice(0,16)+"…":p.name}</th>`).join("")}</tr></thead>
       <tbody>
         <tr><td>参考価格</td>${top3.map(p=>`<td><b style="color:var(--accent)">¥${p.price.toLocaleString()}</b>（${PRICE_DATE}時点）</td>`).join("")}</tr>
-        <tr><td>評価</td>${top3.map(p=>`<td>★${p.rating}（${p.reviews.toLocaleString()}件）</td>`).join("")}</tr>
+        <tr><td>編集部評価</td>${top3.map(p=>`<td>★${p.rating}</td>`).join("")}</tr>
         <tr><td>主要成分</td>${top3.map(p=>`<td>${p.keyIngredients.slice(0,2).join("・")}</td>`).join("")}</tr>
       </tbody>
     </table>
@@ -3038,9 +3036,9 @@ function renderRanking(){
       ${otherKeys.map(k=>`<button class="filter-btn" onclick="jumpToRanking('${k}')">${CONCERN_RANKINGS[k].label}が気になる方はこちら →</button>`).join("")}
     </div>
   </div>`;
-  rankEl.innerHTML=`<div class="rank-criteria">📊 <b>${cfg.heading}${priceLabel}${sorted.length}選</b>。ユーザー評価による人気度と<b>コスパ</b>を重視し、成分の充実度も加味して順位付けしています。</div>
+  rankEl.innerHTML=`<div class="rank-criteria">📊 <b>${cfg.heading}${priceLabel}${sorted.length}選</b>。編集部評価と<b>コスパ</b>を重視し、成分の充実度も加味して順位付けしています。</div>
   <div style="font-size:12px;color:var(--txt3);background:var(--bg3);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:16px;line-height:1.7">
-    <b>編集部スコアの算出方法：</b>人気度（評価＋レビュー件数を対数正規化した加点）×45％ + コスパ評価×40％ + 保湿力・低刺激度の平均×15％ で算出しています。掲載順位は編集部が独自に付与した参考値であり、楽天等の外部レビュー評価をそのまま転載したものではありません。<br>
+    <b>編集部スコアの算出方法：</b>編集部評価（★）×45％ + コスパ評価×40％ + 保湿力・低刺激度の平均×15％ で算出しています。掲載順位は編集部が独自に付与した参考値であり、外部ECサイトのレビュー評価をそのまま転載したものではありません。<br>
     <b>最終更新日：</b>${PRICE_DATE}
   </div>
   ${compareHtml}`+sorted.map((p,i)=>`
@@ -3053,7 +3051,7 @@ function renderRanking(){
         <div style="margin-top:4px">
           <span class="stars">${"★".repeat(Math.round(p.rating))}</span>
           <span style="font-size:13px;font-weight:700;margin-left:4px">${p.rating}</span>
-          <span style="font-size:12px;color:var(--txt3);margin-left:6px">${p.reviews.toLocaleString()}件</span>
+          <span style="font-size:10px;color:var(--accent);font-weight:700;margin-left:6px;background:#fff8f2;border:1px solid #f4d9c0;border-radius:4px;padding:1px 5px">編集部</span>
         </div>
         <div class="rank-reason">👑 ${reason(p)}</div>
       </div>
@@ -3603,7 +3601,7 @@ const COLUMNS=[
 
       <h2>3価格帯の代表4本・実データ比較</h2>
       <div class="col-compare" data-ids="10,2,1,14"></div>
-      <p>注目すべきはレビュー数です。ハトムギ12,043件・極潤8,932件と、プチプラ2本が圧倒的な使用者数を持っています。一方でSK-IIクリアローションは9,900円で★4.6と、高価格でも高い満足度を維持。<strong>「安かろう悪かろう」も「高いほど良い」も、データはどちらも支持していません</strong>。</p>
+      <p>注目すべきはレビュー数です。ハトムギ・極潤ともプチプラ2本が幅広く支持されている定番。一方でSK-IIクリアローションは9,900円で★4.6と、高価格でも高い満足度を維持。<strong>「安かろう悪かろう」も「高いほど良い」も、データはどちらも支持していません</strong>。</p>
 
       <h2>プチプラ代表とデパコス代表のスコア比較</h2>
       <div class="col-radar" data-ids="2,14"></div>
@@ -3699,7 +3697,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">ELIXIR リンクルクリームS</div><div class="col-bar-track"><div class="col-bar-fill" style="width:69%"></div></div><div class="col-bar-val">¥6,050</div></div>
         <div class="col-bar-row"><div class="col-bar-label">キールズ マイクロドーズ</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥8,800</div></div>
       </div>
-      <p>なめらか本舗はレチノール誘導体系のマイルド設計で「お試し」に最適。ELIXIRは純粋レチノール配合の薬用シワ改善でレビュー5,234件・★4.7と本命格。Kiehl'sは「マイクロドーズ（微量配合）」という初心者配慮の設計思想が特徴です。<strong>予算とやる気に合わせて入口を選べる</strong>のがレチノールの良いところです。</p>
+      <p>なめらか本舗はレチノール誘導体系のマイルド設計で「お試し」に最適。ELIXIRは純粋レチノール配合の薬用シワ改善で★4.7と本命格。Kiehl'sは「マイクロドーズ（微量配合）」という初心者配慮の設計思想が特徴です。<strong>予算とやる気に合わせて入口を選べる</strong>のがレチノールの良いところです。</p>
 
       <h2>入門と本命、2本のスコアを見る</h2>
       <div class="col-radar" data-ids="133,34"></div>
@@ -3788,7 +3786,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">VC100（APPS誘導体）</div><div class="col-bar-track"><div class="col-bar-fill" style="width:47%"></div></div><div class="col-bar-val">¥5,170</div></div>
         <div class="col-bar-row"><div class="col-bar-label">オバジ C25（純粋25%）</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥11,000</div></div>
       </div>
-      <p>メラノCCはレビュー9,821件と圧倒的な使用者数を誇る誘導体系の入門定番。「活性型ビタミンC」を1,180円で試せるコスパは唯一無二です。一方オバジC25は純粋ビタミンC25%という国内トップクラスの高濃度設計。<strong>この2本は同じ「ビタミンC美容液」でも、想定ユーザーがまったく違います</strong>。</p>
+      <p>メラノCCは幅広い使用者数の支持を集める誘導体系の入門定番。「活性型ビタミンC」を1,180円で試せるコスパは唯一無二です。一方オバジC25は純粋ビタミンC25%という国内トップクラスの高濃度設計。<strong>この2本は同じ「ビタミンC美容液」でも、想定ユーザーがまったく違います</strong>。</p>
 
       <h2>入門と本格派、2本のスコアを見る</h2>
       <div class="col-radar" data-ids="28,24"></div>
@@ -3886,7 +3884,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">無印 マイルド保湿洗顔</div><div class="col-bar-track"><div class="col-bar-fill" style="width:38%"></div></div><div class="col-bar-val">¥750</div></div>
         <div class="col-bar-row"><div class="col-bar-label">CeraVe クレンザー</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥1,980</div></div>
       </div>
-      <p>専科はレビュー9,876件の泡立ち定番で脂性肌・普通肌の朝に、ロゼットの海泥は皮脂吸着系でTゾーン特化に、無印とCeraVeは保湿系で乾燥・敏感肌の「洗顔料を使う日」に。<strong>どれが優秀かではなく、あなたの朝の皮脂量が選ぶ基準</strong>です。</p>
+      <p>専科は泡立ちで支持される定番で脂性肌・普通肌の朝に、ロゼットの海泥は皮脂吸着系でTゾーン特化に、無印とCeraVeは保湿系で乾燥・敏感肌の「洗顔料を使う日」に。<strong>どれが優秀かではなく、あなたの朝の皮脂量が選ぶ基準</strong>です。</p>
 
       <h2>洗浄系と保湿系、対照的な2本のスコア</h2>
       <div class="col-radar" data-ids="52,51"></div>
@@ -3985,7 +3983,7 @@ const COLUMNS=[
 
       <h2>デイリー型と集中型、2つのスコアを見る</h2>
       <div class="col-radar" data-ids="62,63"></div>
-      <p>ルルルンはコスパと続けやすさ、MEDIHEALはレビュー4,321件の集中保湿型。<strong>「毎日ならルルルン、勝負日前ならMEDIHEAL」の2枚看板体制</strong>が、コストと効果のバランスとして現実的です。</p>
+      <p>ルルルンはコスパと続けやすさ、MEDIHEALは集中保湿型。<strong>「毎日ならルルルン、勝負日前ならMEDIHEAL」の2枚看板体制</strong>が、コストと効果のバランスとして現実的です。</p>
 
       <h2>やりがちなNG使いと正しい使い方</h2>
       <ul>
@@ -4151,7 +4149,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">ハトムギ化粧水</div><div class="col-bar-track"><div class="col-bar-fill" style="width:33%"></div></div><div class="col-bar-val">¥715</div></div>
         <div class="col-bar-row"><div class="col-bar-label">BULK HOMME 洗顔</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥2,200</div></div>
       </div>
-      <p>UNOと専科は同じ550円。メンズ表記の有無で価格は変わりません。BULK HOMMEはメンズブランドとして使用感と世界観を作り込んだ「メンズD2Cの代表格」で、レビュー2,890件・★4.5と支持も本物。<strong>安い＝手抜きでも、高い＝高性能でもなく、どこにコストをかけたかの違い</strong>です。</p>
+      <p>UNOと専科は同じ550円。メンズ表記の有無で価格は変わりません。BULK HOMMEはメンズブランドとして使用感と世界観を作り込んだ「メンズD2Cの代表格」で、★4.5と支持も本物。<strong>安い＝手抜きでも、高い＝高性能でもなく、どこにコストをかけたかの違い</strong>です。</p>
 
       <h2>メンズ2本のスコアを見る</h2>
       <div class="col-radar" data-ids="194,129"></div>
@@ -4236,7 +4234,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">ELIXIR リンクルクリームS</div><div class="col-bar-track"><div class="col-bar-fill" style="width:50%"></div></div><div class="col-bar-val">¥6,050</div></div>
         <div class="col-bar-row"><div class="col-bar-label">アルティミューン</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥12,100</div></div>
       </div>
-      <p>Anua PDRNは3,450円・★4.7と、30代のハリケア入門として価格性能比が突出。ELIXIRは薬用シワ改善（レビュー5,234件）の国内本命、アルティミューンは先行美容液という別役割です。<strong>全部は要りません。まず1本、悩みが最も近いものから</strong>。</p>
+      <p>Anua PDRNは3,450円・★4.7と、30代のハリケア入門として価格性能比が突出。ELIXIRは薬用シワ改善の国内本命、アルティミューンは先行美容液という別役割です。<strong>全部は要りません。まず1本、悩みが最も近いものから</strong>。</p>
 
       <h2>入門と本命、2本のスコアを見る</h2>
       <div class="col-radar" data-ids="22,34"></div>
@@ -4318,7 +4316,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">dプログラム ベースCC</div><div class="col-bar-track"><div class="col-bar-fill" style="width:94%"></div></div><div class="col-bar-val">¥3,520</div></div>
         <div class="col-bar-row"><div class="col-bar-label">ラロッシュポゼ UVイデア</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥3,740</div></div>
       </div>
-      <p>無印は990円で「敏感肌でも試しやすい」入門枠。キュレルはセラミドケアと両立するUVで乾燥性敏感肌の定番。dプログラムは色補正も担うCCタイプ、ラロッシュポゼはトーンアップと敏感肌設計を両立した人気格（レビュー4,532件・★4.6）。<strong>刺激の出方は個人差が大きいので、安い順に試すのが財布に優しい戦略</strong>です。</p>
+      <p>無印は990円で「敏感肌でも試しやすい」入門枠。キュレルはセラミドケアと両立するUVで乾燥性敏感肌の定番。dプログラムは色補正も担うCCタイプ、ラロッシュポゼはトーンアップと敏感肌設計を両立した人気格（★4.6）。<strong>刺激の出方は個人差が大きいので、安い順に試すのが財布に優しい戦略</strong>です。</p>
 
       <h2>敏感肌UVの2枚看板をスコアで比較</h2>
       <div class="col-radar" data-ids="112,58"></div>
@@ -4419,7 +4417,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">Torriden シカセラム</div><div class="col-bar-track"><div class="col-bar-fill" style="width:86%"></div></div><div class="col-bar-val">¥2,640</div></div>
         <div class="col-bar-row"><div class="col-bar-label">Anua ドクダミ77%</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥3,080</div></div>
       </div>
-      <p>役割分担は明確です。<strong>赤み跡には鎮静系</strong>（Anuaドクダミ・Torridenシカ）、<strong>色素沈着には美白有効成分系の医薬部外品</strong>（メラノCC・白潤はともに薬用）。メラノCCはレビュー9,821件・1,180円と、色素沈着ケアの入門として試しやすい位置にいます。</p>
+      <p>役割分担は明確です。<strong>赤み跡には鎮静系</strong>（Anuaドクダミ・Torridenシカ）、<strong>色素沈着には美白有効成分系の医薬部外品</strong>（メラノCC・白潤はともに薬用）。メラノCCは1,180円と、色素沈着ケアの入門として試しやすい位置にいます。</p>
 
       <h2>鎮静系と美白系、代表2本のスコア</h2>
       <div class="col-radar" data-ids="4,28"></div>
@@ -4502,7 +4500,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">キュレル（セラミド）</div><div class="col-bar-track"><div class="col-bar-fill" style="width:53%"></div></div><div class="col-bar-val">¥1,760</div></div>
         <div class="col-bar-row"><div class="col-bar-label">ANUA（ナイアシンアミド）</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥3,300</div></div>
       </div>
-      <p>ヒアルロン酸はもっとも手に取りやすく、ナイアシンアミド高配合品はやや高め。これは原料コストと配合設計の難しさによる差で、<strong>高い＝優秀ではなく「目的が違う」</strong>と捉えるのが正確です。肌ラボ極潤はレビュー8,900件超という圧倒的な支持があり、「まず保湿を始める1本」としては最有力です。</p>
+      <p>ヒアルロン酸はもっとも手に取りやすく、ナイアシンアミド高配合品はやや高め。これは原料コストと配合設計の難しさによる差で、<strong>高い＝優秀ではなく「目的が違う」</strong>と捉えるのが正確です。肌ラボ極潤は幅広い支持を集めるがあり、「まず保湿を始める1本」としては最有力です。</p>
 
       <h2>主役2本のスコアを見る</h2>
       <p>「守りのセラミド」代表キュレルと、「攻めのナイアシンアミド」代表ANUAを独自スコアで比較します。</p>
@@ -4589,7 +4587,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">SK-II FTエッセンス</div><div class="col-bar-track"><div class="col-bar-fill" style="width:77%"></div></div><div class="col-bar-val">¥25,300</div></div>
         <div class="col-bar-row"><div class="col-bar-label">クレ・ド・ポー クレームN</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥33,000</div></div>
       </div>
-      <p>注目すべきは、プチプラ2本のレビュー数（ハトムギ12,000件超・極潤8,900件超）がデパコスを上回っている点。<strong>「毎日惜しみなく使えて、結果として肌の調子が安定する」のはプチプラの明確な強み</strong>です。一方でSK-IIはレビュー9,800件超で★4.8と、高価格でも満足度が非常に高い。デパコスの体験価値は数字にも表れています。</p>
+      <p>注目すべきは、プチプラ2本の市場での使用者層の広さがデパコスを上回っている点。<strong>「毎日惜しみなく使えて、結果として肌の調子が安定する」のはプチプラの明確な強み</strong>です。一方でSK-IIは★4.8と、高価格でも満足度が非常に高い。デパコスの体験価値は数字にも表れています。</p>
 
       <h2>両陣営の代表をスコアで比較</h2>
       <div class="col-radar" data-ids="2,21"></div>
@@ -4677,7 +4675,7 @@ const COLUMNS=[
 
       <h2>定番2本のスコア比較</h2>
       <div class="col-radar" data-ids="4,24"></div>
-      <p>Anuaドクダミはレビュー5,100件超の人気と低刺激性のバランス型、オバジC25は攻めの集中ケア型。<strong>肌がゆらぎやすい人はAnua、肌が強くて結果を急ぎたい人はオバジ</strong>という住み分けです。</p>
+      <p>Anuaドクダミは人気と低刺激性のバランス型、オバジC25は攻めの集中ケア型。<strong>肌がゆらぎやすい人はAnua、肌が強くて結果を急ぎたい人はオバジ</strong>という住み分けです。</p>
 
       <h2>黒ずみ毛穴のケア</h2>
       <p>黒ずみの正体は、皮脂と角質が混ざって詰まった「角栓」が酸化したものです。無理に押し出すと毛穴が広がり逆効果。やさしく溶かし出すケアが基本です。クレンジングや洗顔で皮脂・角質をていねいにオフし、その後の保湿で肌のバランスを整えます。ゴシゴシこすらず、毎日の積み重ねでケアすることが大切です。</p>
@@ -4773,7 +4771,7 @@ const COLUMNS=[
 
       <h2>定番2本のスコア比較</h2>
       <div class="col-radar" data-ids="11,25"></div>
-      <p>Torridenはレビュー4,500件超で化粧水部門の韓国勢トップクラス。COSRXは独特のとろみで好みが分かれますが、ハマる人はリピートし続ける「指名買い」タイプです。<strong>迷ったらTorriden、こっくり系が好きならCOSRX</strong>が目安です。</p>
+      <p>Torridenは化粧水部門の韓国勢トップクラス。COSRXは独特のとろみで好みが分かれますが、ハマる人はリピートし続ける「指名買い」タイプです。<strong>迷ったらTorriden、こっくり系が好きならCOSRX</strong>が目安です。</p>
 
       <h2>乾燥肌が韓国コスメで失敗しない手順</h2>
       <p>①今のスキンケアのうち化粧水だけを韓国コスメに変える → ②2週間、肌の調子を観察 → ③問題なければ美容液も検討。この順番なら、合わなかったときの被害が最小で済みます。「セットでまとめ買い」は魅力的ですが、乾燥肌・敏感傾向の人ほど1点ずつが鉄則です。</p>
@@ -4955,7 +4953,7 @@ const COLUMNS=[
 
       <h2>ベーシック2本のスコアを見る</h2>
       <div class="col-radar" data-ids="1,37"></div>
-      <p>キュレルは低刺激バランス型、ニベアはレビュー15,000件超という圧倒的な定番力とコスパが持ち味。派手さはありませんが、<strong>基本の型を作るならこの手の「静かな実力者」が最適</strong>です。</p>
+      <p>キュレルは低刺激バランス型、ニベアは圧倒的な定番力とコスパが持ち味。派手さはありませんが、<strong>基本の型を作るならこの手の「静かな実力者」が最適</strong>です。</p>
 
       <h2>やりがちなNG順番・NG習慣</h2>
       <ul>
@@ -5045,7 +5043,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">アクアレーベル（混合肌）</div><div class="col-bar-track"><div class="col-bar-fill" style="width:35%"></div></div><div class="col-bar-val">4,210件</div></div>
         <div class="col-bar-row"><div class="col-bar-label">ハトムギ（脂性肌）</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">12,043件</div></div>
       </div>
-      <p>ハトムギ化粧水のレビュー12,000件超は圧巻ですが、これは「大容量でバシャバシャ使える脂性肌・普通肌向け」という性格ゆえ。<strong>レビュー数はあくまで人気の指標で、自分の肌タイプに合うかは別問題</strong>です。</p>
+      <p>ハトムギ化粧水は市場での定着度が非常に高い定番ですが、これは「大容量でバシャバシャ使える脂性肌・普通肌向け」という性格ゆえ。<strong>市場での人気は指標の1つですが、自分の肌タイプに合うかは別問題</strong>です。</p>
 
       <h2>対照的な2本のスコアを見る</h2>
       <div class="col-radar" data-ids="10,5"></div>
@@ -5135,7 +5133,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">キュレル（セラミド）</div><div class="col-bar-track"><div class="col-bar-fill" style="width:62%"></div></div><div class="col-bar-val">¥1,760</div></div>
         <div class="col-bar-row"><div class="col-bar-label">NUMBUZIN 3番（ナイアシンアミド）</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥2,860</div></div>
       </div>
-      <p>メラノCCはビタミンC系でレビュー9,800件超・1,180円という入門に最適な立ち位置。<strong>「成分を試す」ための授業料としては十分に手頃</strong>です。合わなくてもダメージが小さい価格から始めましょう。</p>
+      <p>メラノCCはビタミンC系で1,180円と、入門に最適な立ち位置。<strong>「成分を試す」ための授業料としては十分に手頃</strong>です。合わなくてもダメージが小さい価格から始めましょう。</p>
 
       <h2>タイプの違う2本のスコアを見る</h2>
       <div class="col-radar" data-ids="36,28"></div>
@@ -5183,7 +5181,7 @@ const COLUMNS=[
       </div>
 
       <h2>まとめ：3成分だけで、選び方は大きく変わる</h2>
-      <p>成分の基礎知識をまとめます。セラミド＝バリアの守り、ナイアシンアミド＝攻守の多機能、ビタミンC＝攻めのくすみ・キメケア。試すときは1つずつ・1本使い切り・異常があれば即中止。組み合わせは「守り×攻め」は自由、「攻め×攻め」は慎重に。濃度は階段方式で低い方から。この記事の内容だけで、化粧品売り場での判断力は見違えるはずです。成分の世界は奥が深く、調べ始めるとキリがありませんが、実践で必要なのはこの程度のシンプルな地図です。あとは実際に1本使ってみて、自分の肌の反応という「一次情報」を集めること。ネットのレビュー100件より、自分の肌での2週間のほうが、あなたにとっては確かなデータです。</p>
+      <p>成分の基礎知識をまとめます。セラミド＝バリアの守り、ナイアシンアミド＝攻守の多機能、ビタミンC＝攻めのくすみ・キメケア。試すときは1つずつ・1本使い切り・異常があれば即中止。組み合わせは「守り×攻め」は自由、「攻め×攻め」は慎重に。濃度は階段方式で低い方から。この記事の内容だけで、化粧品売り場での判断力は見違えるはずです。成分の世界は奥が深く、調べ始めるとキリがありませんが、実践で必要なのはこの程度のシンプルな地図です。あとは実際に1本使ってみて、自分の肌の反応という「一次情報」を集めること。ネットのレビュー100本より、自分の肌での2週間のほうが、あなたにとっては確かなデータです。</p>
 
       <div class="col-cta">
         <p>あなたの悩みに合う成分と商品を、3つの質問で絞り込めます。</p>
@@ -5225,7 +5223,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">アネッサ パーフェクトUV</div><div class="col-bar-track"><div class="col-bar-fill" style="width:88%"></div></div><div class="col-bar-val">¥3,300</div></div>
         <div class="col-bar-row"><div class="col-bar-label">ラロッシュポゼ UVイデア</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥3,740</div></div>
       </div>
-      <p>ビオレUVはレビュー12,000件超・990円で「毎日ケチらず塗れる」代表格。アネッサは汗・水に強い屋外の王道、キュレルとラロッシュポゼは敏感肌設計。<strong>安いから劣るのではなく、それぞれ主戦場が違います</strong>。</p>
+      <p>ビオレUVは990円で「毎日ケチらず塗れる」代表格。アネッサは汗・水に強い屋外の王道、キュレルとラロッシュポゼは敏感肌設計。<strong>安いから劣るのではなく、それぞれ主戦場が違います</strong>。</p>
 
       <h2>日常用と屋外用、2本のスコアを見る</h2>
       <div class="col-radar" data-ids="56,57"></div>
@@ -5500,7 +5498,7 @@ const COLUMNS=[
         <div class="col-bar-row"><div class="col-bar-label">COSRX スネイル</div><div class="col-bar-track"><div class="col-bar-fill" style="width:82%"></div></div><div class="col-bar-val">¥2,530</div></div>
         <div class="col-bar-row"><div class="col-bar-label">Anua ドクダミ77%</div><div class="col-bar-track"><div class="col-bar-fill" style="width:100%"></div></div><div class="col-bar-val">¥3,080</div></div>
       </div>
-      <p>4本ともレビュー2,000件超と、話題先行ではなく<strong>実際の使用者数に裏打ちされた定番</strong>です。VTシカトナーは2,000円切りで鎮静系の入門に、Anuaドクダミは5,100件超のレビューで韓国化粧水の看板格です。</p>
+      <p>4本とも話題先行ではなく<strong>実際の使用者層に裏打ちされた定番</strong>です。VTシカトナーは2,000円切りで鎮静系の入門に、Anuaドクダミは韓国化粧水の看板格です。</p>
 
       <h2>鎮静系の2枚看板をスコアで比較</h2>
       <div class="col-radar" data-ids="4,25"></div>

@@ -76,6 +76,20 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   <p class="lede">Moilumサイトの主要な機能追加・データ更新・信頼性強化施策の履歴を、日付を明記して記録しています。透明性を保つため、掲載条件の変更や表示ロジックの変更などは可能な限りここに残します。</p>
 
   <div class="entry">
+    <span class="entry-date">2026-07-20</span>
+    <span class="entry-tag">信頼性</span><span class="entry-tag">構造化データ</span>
+    <div class="entry-title">説明できない「参考レビュー件数」表示を全ページから撤去、aggregateRatingスキーマも廃止</div>
+    <ul>
+      <li>各商品ページ・SPA一覧・商品モーダル・比較表・ランキング・コラム本文に散在していた「参考レビュー件数◯件」「◯,000件超の支持」等の数字表示を全て撤去。個人運営の実態と整合しない出典説明を避け、信頼性の観点から件数依存の表現を排除しました。</li>
+      <li>Google 構造化データの <code>Product.aggregateRating</code>（reviewCount + ratingValue）を全静的商品ページから撤去。schema.org の <code>aggregateRating</code> はユーザーレビュー集計を意味するプロパティで、当サイトの編集部独自評価とは意味が異なるため、正直な使い方として出力を止めました。</li>
+      <li>商品自動生成コメント（prosConsData）の「ユーザー評価が高い」→「編集部評価が高い」、「◯千件超のレビューで実績豊富」→「市場での使用実績が豊富な定番」等、レビュー件数由来の断定文言を編集部評価ベースの表現に置換。</li>
+      <li>ソートオプション「レビューが多い順」→「編集部おすすめ順」に改名（内部計算ロジックは維持）。</li>
+      <li>コラム本文14箇所の「レビュー◯,◯◯◯件」等の具体数値言及を、「幅広い使用者数の支持」「市場での定着度が高い」等の一般表現に修正。</li>
+      <li>評価（★）そのものは編集部評価として今後も維持し、算出根拠は<a href="/about/rating-policy">評価基準ページ</a>で開示を続けます。</li>
+    </ul>
+  </div>
+
+  <div class="entry">
     <span class="entry-date">2026-07-19 (後半)</span>
     <span class="entry-tag">品質改修</span><span class="entry-tag">監査対応</span>
     <div class="entry-title">外部監査で判明した品質問題を修正（商品数一元管理・メイク分離・広告表現是正・ブランド統一・重複統合）</div>

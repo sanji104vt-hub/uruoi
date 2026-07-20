@@ -38,8 +38,8 @@ function productScores(p){
 function prosConsData(p){
   const s=productScores(p);
   const pros=[], cons=[], fit=[], unfit=[];
-  if(p.rating>=4.6) pros.push(`ユーザー評価が高い（★${p.rating}）`);
-  if(p.reviews>=4000) pros.push(`${Math.round(p.reviews/1000)}千件超のレビューで実績豊富`);
+  if(p.rating>=4.6) pros.push(`編集部評価が高い（★${p.rating}）`);
+  if(p.reviews>=4000) pros.push(`市場での使用実績が豊富な定番`);
   if(s.cospa>=4.3) pros.push("価格に対する満足度が高くコスパ良好");
   if(s.moist>=4.5) pros.push("保湿力が高く乾燥対策に向く");
   if(s.mild>=4.5) pros.push("低刺激で敏感肌でも使いやすい");
@@ -47,7 +47,7 @@ function prosConsData(p){
   if((p.keyIngredients||[]).length>=4) pros.push("複数の有効成分を配合");
   if(p.price>=8000) cons.push("価格が高めで継続にはコストがかかる");
   if(s.mild<3.5) cons.push("敏感肌の人は刺激を感じる可能性");
-  if(p.reviews<1500) cons.push("レビュー件数がまだ少なめ");
+  if(p.reviews<1500) cons.push("新しめの商品で市場での定着度は判断途上");
   if(s.cospa<3) cons.push("コスパ面では割高に感じる場合がある");
   if(!pros.length) pros.push("バランスの取れた使い心地");
   if(!cons.length) cons.push("特に大きな欠点は見当たらないが、肌との相性は個人差あり");
@@ -133,16 +133,10 @@ function buildProductJsonLd(p){
       "url": p.purchase || `${SITE_ORIGIN}/products/${p.id}`
     };
   }
-  // aggregateRatingは実データがある商品にのみ出力（rating >0 && reviews > 0）
-  if (p.rating > 0 && p.reviews > 0){
-    obj.aggregateRating = {
-      "@type": "AggregateRating",
-      "ratingValue": p.rating,
-      "reviewCount": p.reviews,
-      "bestRating": 5,
-      "worstRating": 1
-    };
-  }
+  // aggregateRating は撤去。schema.org の aggregateRating は
+  // 「ユーザーレビューの集計」を意味するプロパティで、当サイトの
+  // 編集部独自評価とは意味が異なるため、正直な使い方として出力しない。
+  // 編集部評価は Product 説明文内および表示ラベル「Moilum編集部評価」で開示する。
   return obj;
 }
 
@@ -332,9 +326,9 @@ gtag('js',new Date());gtag('config','${GA4_ID}');
     </div>
     ${hasRating ? `<div class="meta-row">
       <span class="meta-label">Moilum編集部評価</span>
-      <span class="meta-val"><span class="rating">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5 - Math.round(p.rating))}</span> ${p.rating} <span style="color:var(--txt3);font-weight:500;font-size:12px">（参考レビュー件数${p.reviews.toLocaleString()}件）</span></span>
+      <span class="meta-val"><span class="rating">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5 - Math.round(p.rating))}</span> ${p.rating}</span>
     </div>
-    <div style="font-size:11px;color:var(--txt3);line-height:1.6;padding:4px 0 10px">※編集部が独自に集計した参考値です。特定のECサイトの平均評価を転載したものではありません。<a href="/about/rating-policy" style="color:var(--accent)">算出基準</a></div>` : ""}
+    <div style="font-size:11px;color:var(--txt3);line-height:1.6;padding:4px 0 10px">※編集部が独自に付与した5段階評価です。ユーザーレビュー件数の集計値ではありません。<a href="/about/rating-policy" style="color:var(--accent)">算出基準</a></div>` : ""}
     <div class="meta-row">
       <span class="meta-label">カテゴリ</span>
       <span class="meta-val">${escHtml(p.category)}</span>
@@ -419,7 +413,7 @@ for (const p of products){
   const html = buildProductHtml(p, products);
   fs.writeFileSync(path.join(outDir, `${p.id}.html`), html, "utf8");
   count++;
-  if (p.rating > 0 && p.reviews > 0) withAggRating++; else withoutAggRating++;
+  if (p.rating > 0) withAggRating++; else withoutAggRating++;
   if (p.image) withImage++;
 }
 
@@ -431,5 +425,5 @@ const max = Math.max(...sizes);
 
 console.log(`✓ 生成完了: ${count} 商品ページ`);
 console.log(`  ファイルサイズ: 平均 ${(avg/1024).toFixed(1)}KB / 最小 ${(min/1024).toFixed(1)}KB / 最大 ${(max/1024).toFixed(1)}KB`);
-console.log(`  aggregateRating出力: ${withAggRating} / 省略: ${withoutAggRating}`);
+console.log(`  編集部評価あり: ${withAggRating} / なし: ${withoutAggRating}（aggregateRatingスキーマは撤去済み）`);
 console.log(`  実写真あり: ${withImage} / SVGフォールバック: ${count - withImage}`);
