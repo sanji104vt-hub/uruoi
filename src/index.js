@@ -9,6 +9,7 @@
 
 import PRODUCTS from "./products.json";
 import COLUMNS from "./columns.json";
+import GUIDE_SLUGS from "./guides-slugs.json";
 
 const SITE_ORIGIN = "https://moilum.asutelu.com";
 const OGP_IMAGE = SITE_ORIGIN + "/ogp-image.png";
@@ -75,6 +76,8 @@ function rewriteColumnHead(response, c){
 
 // /about/{slug} で公開している静的ページのallowlist（Workerリライト用）
 const ABOUT_SLUGS = new Set(["rating-policy", "sources", "changelog"]);
+// /guides/{slug} で公開している悩み別ハブページの allowlist（生成物由来）
+const GUIDE_SLUG_SET = new Set(GUIDE_SLUGS);
 
 // 統合・削除された商品IDから統合先IDへの 301 リダイレクトマップ。
 // 重複商品の統合時に旧URLを新URLに恒久的に転送する（SEOの被リンク集約用）。
@@ -89,6 +92,9 @@ function buildSitemap(){
   for (const path of staticPaths){
     const priority = path === "/" ? "1.0" : "0.7";
     urls.push(`  <url><loc>${SITE_ORIGIN}${path}</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq><priority>${priority}</priority></url>`);
+  }
+  for (const slug of GUIDE_SLUGS){
+    urls.push(`  <url><loc>${SITE_ORIGIN}/guides/${escapeXml(slug)}</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>`);
   }
   for (const p of PRODUCTS){
     urls.push(`  <url><loc>${SITE_ORIGIN}/products/${p.id}</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`);
@@ -174,6 +180,20 @@ export default {
         return env.ASSETS.fetch(new Request(rewriteUrl, request));
       }
       // 該当なし → SPAトップにフォールバック
+      const fallbackUrl = new URL(request.url);
+      fallbackUrl.pathname = "/index.html";
+      return env.ASSETS.fetch(new Request(fallbackUrl, request));
+    }
+
+    // /guides/{slug} → /guides/{slug}.html リライト（悩み別ガイドページ）
+    const guideMatch = pathname.match(/^\/guides\/([a-z0-9-]+)\/?$/);
+    if (guideMatch){
+      const slug = guideMatch[1];
+      if (GUIDE_SLUG_SET.has(slug)){
+        const rewriteUrl = new URL(request.url);
+        rewriteUrl.pathname = `/guides/${slug}.html`;
+        return env.ASSETS.fetch(new Request(rewriteUrl, request));
+      }
       const fallbackUrl = new URL(request.url);
       fallbackUrl.pathname = "/index.html";
       return env.ASSETS.fetch(new Request(fallbackUrl, request));
