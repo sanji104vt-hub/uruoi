@@ -1479,6 +1479,7 @@ nav{display:flex;gap:4px}
       <button class="filter-btn" data-filter="日焼け止め" onclick="setFilter('日焼け止め',this)">日焼け止め</button>
       <button class="filter-btn" data-filter="パック・マスク" onclick="setFilter('パック・マスク',this)">マスク</button>
       <button class="filter-btn" data-filter="アイケア" onclick="setFilter('アイケア',this)">その他</button>
+      <button class="filter-btn" data-filter="mens" onclick="setFilter('mens',this)">メンズ</button>
     </div>
   </div>
   <div class="filter-panel">
@@ -1518,6 +1519,13 @@ nav{display:flex;gap:4px}
           <button class="chip" data-concern="ニキビ・吹き出物" onclick="setMultiFilter('concern','ニキビ・吹き出物',this)">ニキビ</button>
           <button class="chip" data-concern="シワ・たるみ" onclick="setMultiFilter('concern','シワ・たるみ',this)">シワ・たるみ</button>
           <button class="chip" data-concern="肌荒れ・赤み" onclick="setMultiFilter('concern','肌荒れ・赤み',this)">肌荒れ・赤み</button>
+        </div>
+      </div>
+      <div class="filter-row">
+        <div class="filter-label">対象</div>
+        <div class="filter-chips" id="audienceChips">
+          <button class="chip active" data-audience="all" onclick="setMultiFilter('audience','all',this)">すべて</button>
+          <button class="chip" data-audience="mens" onclick="setMultiFilter('audience','mens',this)">メンズ向け</button>
         </div>
       </div>
       <div style="text-align:right">
@@ -1566,11 +1574,12 @@ nav{display:flex;gap:4px}
 
 <div id="diagnosisPage" class="page">
   <div class="section-title">肌タイプ診断</div>
-  <p style="color:var(--txt2);margin-bottom:12px;font-size:14px">3つの質問（肌タイプ・お悩み・予算）から、当サイト掲載商品の中で条件に合うものを絞り込んでご紹介します。</p>
+  <p style="color:var(--txt2);margin-bottom:12px;font-size:14px">4つの質問（肌タイプ・お悩み・予算・対象）から、当サイト掲載商品の中で条件に合うものを絞り込んでご紹介します。</p>
   <div style="background:#fff8f2;border:1px solid #f4d9c0;border-radius:10px;padding:12px 14px;margin-bottom:24px;color:#7a5945;font-size:12.5px;line-height:1.7">
     <b>この診断について（透明性のお知らせ）</b><br>
     ・肌タイプと予算の条件マッチによるルールベース診断です。機械学習モデル（AI）による解析は行っていません。<br>
-    ・結果は Moilum 編集部が事前に整理した商品データに基づく参考情報で、<b>医学的診断・治療の助言ではありません</b>。肌トラブルが続く場合は皮膚科専門医にご相談ください。
+    ・結果は Moilum 編集部が事前に整理した商品データに基づく参考情報で、<b>医学的診断・治療の助言ではありません</b>。肌トラブルが続く場合は皮膚科専門医にご相談ください。<br>
+    ・「対象」の質問は掲載商品を「メンズ向け」等で絞り込むための任意フィルタです。医療的な性別判定ではなく、商品の主なターゲット層（メーカー訴求）に基づく参考区分です。「指定なし」を選ぶと従来と同じ全商品から絞り込みます。
   </div>
   <div class="diagnosis-form">
     <div class="q-block">
@@ -1601,6 +1610,13 @@ nav{display:flex;gap:4px}
         <button class="q-opt" data-val="2,000〜5,000円">2,000〜5,000円</button>
         <button class="q-opt" data-val="5,000〜10,000円">5,000〜10,000円</button>
         <button class="q-opt" data-val="10,000円以上">10,000円〜</button>
+      </div>
+    </div>
+    <div class="q-block">
+      <label>対象を教えてください（任意）</label>
+      <div class="q-options" id="q4">
+        <button class="q-opt active" data-val="any">特に指定なし</button>
+        <button class="q-opt" data-val="mens">メンズ向け商品を優先</button>
       </div>
     </div>
     <button class="diag-btn" onclick="diagnose()">診断を開始する →</button>
@@ -2370,7 +2386,7 @@ function productImage(p,big){
 }
 
 let currentFilter="all";
-let activeFilters={price:"all",skin:"all",concern:"all"};
+let activeFilters={price:"all",skin:"all",concern:"all",audience:"all"};
 let favorites=JSON.parse(localStorage.getItem("ulabo_fav")||"[]");
 let compareList=[];
 
@@ -2567,7 +2583,10 @@ function renderRecoFeed(){
 function applyFilters(){
   const q=document.getElementById("search").value.toLowerCase();
   let list=SKINCARE_PRODUCTS;
-  if(currentFilter==="アイケア") list=list.filter(p=>p.category==="アイケア");
+  // カテゴリボタン: "mens" は明確なメンズ商品のみを絞り込み(31件)、
+  // "アイケア" と他カテゴリは既存の p.category マッチ
+  if(currentFilter==="mens") list=list.filter(p=>p.audience==="mens");
+  else if(currentFilter==="アイケア") list=list.filter(p=>p.category==="アイケア");
   else if(currentFilter!=="all") list=list.filter(p=>p.category===currentFilter);
   if(q) list=list.filter(p=>
     p.name.toLowerCase().includes(q)||
@@ -2587,6 +2606,13 @@ function applyFilters(){
   // お悩みフィルター
   if(activeFilters.concern!=="all"){
     list=list.filter(p=>p.concern.includes(activeFilters.concern));
+  }
+  // 対象フィルター(audience): 「メンズ向け」選択時は mens + unisex を含む(排他ではなく包含)。
+  // 将来 "womens" を追加する場合も同様に unisex を包含する設計。
+  if(activeFilters.audience && activeFilters.audience!=="all"){
+    if(activeFilters.audience==="mens"){
+      list=list.filter(p=>p.audience==="mens"||p.audience==="unisex");
+    }
   }
   const sort=document.getElementById("sortSelect")?.value||"popular";
   list=[...list].sort((a,b)=>{
@@ -2626,7 +2652,7 @@ function setMultiFilter(type,val,btn){
 }
 
 function resetFilters(){
-  activeFilters={price:"all",skin:"all",concern:"all"};
+  activeFilters={price:"all",skin:"all",concern:"all",audience:"all"};
   document.querySelectorAll(".filter-chips").forEach(group=>{
     group.querySelectorAll(".chip").forEach((c,i)=>c.classList.toggle("active",i===0));
   });
@@ -3325,6 +3351,7 @@ function diagnose(){
   const skin=getSelected("q1");
   const concerns=getSelected("q2",true);
   const budget=getSelected("q3");
+  const audiencePref=getSelected("q4")||"any"; // "mens" or "any"(既定)
   if(!skin||!budget){alert("肌タイプと予算を選択してください");return}
 
   const resultEl=document.getElementById("diagResult");
@@ -3335,7 +3362,16 @@ function diagnose(){
     const budgetOk=budget==="～2,000円"?p.price<=2000:
       budget==="2,000〜5,000円"?p.price>2000&&p.price<=5000:
       budget==="5,000〜10,000円"?p.price>5000&&p.price<=10000:p.price>10000;
-    return skinMatch&&budgetOk;
+    // audience: "mens"優先時は mens + unisex を対象、"any"時は全商品(既定挙動を維持)
+    const audMatch=audiencePref==="mens"?(p.audience==="mens"||p.audience==="unisex"):true;
+    return skinMatch&&budgetOk&&audMatch;
+  }).sort((a,b)=>{
+    // "mens"優先時は mens ラベル付き商品を先頭にソート、次に編集部評価降順
+    if(audiencePref==="mens"){
+      const am=a.audience==="mens"?1:0, bm=b.audience==="mens"?1:0;
+      if(am!==bm) return bm-am;
+    }
+    return b.rating-a.rating;
   }).slice(0,4);
 
   const advice=buildDiagnosisAdvice(skin, concerns, budget);
