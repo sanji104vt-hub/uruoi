@@ -526,7 +526,7 @@ gtag('js',new Date());gtag('config','${GA4_ID}');
   </a>`).join("")}` : ""}
 
   <div class="diag-cta">
-    <p>あなたに合う1本を、3つの質問で絞り込めます。</p>
+    <p>あなたに合う1本を、4つの質問で絞り込めます。</p>
     <a class="diag-btn" href="/diagnosis">肌タイプ診断を試す →</a>
   </div>
 </article>
