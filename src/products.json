@@ -782,7 +782,12 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/kzstore/cabinet/amayahoo/10812595/imgrc0093645853.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorPhoto": "/images/editor/melano-cc-serum.jpg",
+    "editorPhotoAlt": "メラノCC 薬用しみ集中対策 美容液のパッケージ",
+    "editorNote": "プレミアム版と比較すると、編集部スタッフはこちらでは同じような実感は得られませんでした。まずは価格を抑えて試したい場合の入り口としては選びやすい一本です。",
+    "reviewedByEditor": true,
+    "editorReviewedAt": "2026-07-26"
   },
   {
     "id": 29,
@@ -3800,7 +3805,14 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/tsuruha/cabinet/syohin0/10179525.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorPhoto": "/images/editor/acnes-cream-wash.jpg",
+    "editorPhotoAlt": "メンソレータム アクネス 薬用クリーム洗顔のパッケージ",
+    "editorTexturePhoto": "/images/editor/acnes-cream-wash-texture.jpg",
+    "editorTexturePhotoAlt": "メンソレータム アクネス 薬用クリーム洗顔を手の甲に出したテクスチャ",
+    "editorNote": "香りがかなり独特で、好みが分かれる部分だと感じました。香りに敏感な方は店頭で確認してからの購入をおすすめします。",
+    "reviewedByEditor": true,
+    "editorReviewedAt": "2026-07-26"
   },
   {
     "id": 140,
@@ -4396,7 +4408,12 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/matsukiyo/cabinet/d0103/4987241198900_1.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorPhoto": "/images/editor/melano-cc-lotion.jpg",
+    "editorPhotoAlt": "メラノCC 薬用しみ対策 美白化粧水のパッケージ",
+    "editorNote": "同ブランドの美容液と合わせて使用しています。さらっとした使用感で、ベタつきが苦手な方にも使いやすい印象でした。",
+    "reviewedByEditor": true,
+    "editorReviewedAt": "2026-07-26"
   },
   {
     "id": 162,
@@ -5633,7 +5650,14 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/k-server/cabinet/imgdir110/4901301342904-sale_1.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorPhoto": "/images/editor/biore-ouchi-de-esthe-gel.jpg",
+    "editorPhotoAlt": "ビオレ おうちdeエステ 洗顔ジェルのパッケージ",
+    "editorTexturePhoto": "/images/editor/biore-ouchi-de-esthe-gel-texture.jpg",
+    "editorTexturePhotoAlt": "ビオレ おうちdeエステ 洗顔ジェルを手の甲に出したテクスチャ",
+    "editorNote": "鼻や顎のざらつきが、使用後にはっきり気にならなくなりました。洗い上がりの肌がなめらかになる感覚があり、ざらつきが気になる時期に使いやすい一本です。ジェルは炭配合で見た目が黒く、テクスチャはとろみのあるタイプです。",
+    "reviewedByEditor": true,
+    "editorReviewedAt": "2026-07-26"
   },
   {
     "id": 208,
@@ -6483,5 +6507,239 @@
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/sugartime/cabinet/kz/kzrt/kzrt-476.jpg?_ex=512x512",
     "audience": "mens",
     "id": 241
+  },
+  {
+    "id": 242,
+    "name": "KATAN Cica ダーマヒットセラム5 30g シカ ニードルショット 敏感肌",
+    "brand": "KATAN",
+    "category": "美容液",
+    "price": 4581,
+    "rating": 4.2,
+    "reviews": 0,
+    "skin": [
+      "敏感肌",
+      "混合肌"
+    ],
+    "concern": [
+      "肌荒れ・赤み",
+      "ニキビ・吹き出物"
+    ],
+    "desc": "ツボクサエキス(CICA)配合の韓国発の美容液。肌荒れが気になるときの鎮静ケア向けとして販売されているアイテム。",
+    "keyIngredients": [
+      "CICA(ツボクサエキス)",
+      "保湿成分"
+    ],
+    "icon": "🌿",
+    "origin": "韓国",
+    "purchase": "https://hb.afl.rakuten.co.jp/hgc/g00uqtyn.k90d6b92.g00uqtyn.k90d7cc0/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffortuness%2F20260608003546_110%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ffortuness%2Fi%2F10087537%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6",
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/fortuness/cabinet/r_2026060707/20260608003546_110_1.jpg?_ex=512x512",
+    "audience": "unisex",
+    "editorPhoto": "/images/editor/katan-cica-serum.jpg",
+    "editorPhotoAlt": "KATAN CICA DERMA HIT SERUM 5 のパッケージ",
+    "editorTexturePhoto": "/images/editor/katan-cica-serum-texture.jpg",
+    "editorTexturePhotoAlt": "KATAN CICA DERMA HIT SERUM 5 を手の甲に出したテクスチャ",
+    "editorNote": "塗るとかなりチクチクする刺激がありました。編集部スタッフは乾燥性の敏感肌ですが、刺激のわりに実感は得られませんでした。刺激に弱い方は、まず少量で試すことをおすすめします。",
+    "reviewedByEditor": true,
+    "editorReviewedAt": "2026-07-26"
+  },
+  {
+    "id": 243,
+    "name": "キュレル クリーム ジャー 90g ／医薬部外品 花王 潤浸保湿 セラミド 乾燥性",
+    "brand": "キュレル",
+    "category": "保湿クリーム",
+    "price": 1650,
+    "rating": 4.9,
+    "reviews": 138,
+    "skin": [
+      "敏感肌",
+      "乾燥肌"
+    ],
+    "concern": [
+      "乾燥・かさつき"
+    ],
+    "desc": "セラミドケア成分配合の保湿クリーム。全身に使える大容量ジャータイプで、低刺激設計をうたう乾燥肌向けの定番。",
+    "keyIngredients": [
+      "セラミド機能成分",
+      "ユーカリエキス",
+      "グリセリン"
+    ],
+    "icon": "🧴",
+    "origin": "日本",
+    "purchase": "https://hb.afl.rakuten.co.jp/hgc/g00s6cvn.k90d6ac5.g00s6cvn.k90d784c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnanohanadrg%2F4901301210708%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnanohanadrg%2Fi%2F10000101%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6",
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/nanohanadrg/cabinet/syohin/202101/4901301210708a.jpg?_ex=512x512",
+    "audience": "unisex",
+    "editorPhoto": "/images/editor/curel-moisture-cream-jar.jpg",
+    "editorPhotoAlt": "キュレル 潤浸保湿 クリーム(ジャータイプ)のパッケージ",
+    "editorNote": "もともと同ブランドのフェイスクリームを使っていましたが、コスパを優先してボディ用を顔にも流用しています。フェイス用のときに感じた肌の調子の良さは、ボディ用では同じようには感じませんでした。価格を最優先する場合の選択肢です。",
+    "reviewedByEditor": true,
+    "editorReviewedAt": "2026-07-26"
+  },
+  {
+    "id": 244,
+    "name": "メラノCC 薬用 しみ集中対策 プレミアム美容液 20ml",
+    "brand": "ロート製薬",
+    "category": "美容液",
+    "price": 1480,
+    "rating": 4.6,
+    "reviews": 121,
+    "skin": [
+      "普通肌",
+      "混合肌",
+      "脂性肌"
+    ],
+    "concern": [
+      "シミ・くすみ",
+      "ニキビ・吹き出物"
+    ],
+    "desc": "活性型ビタミンC配合の薬用美容液のプレミアム処方。メラニンの生成を抑え、しみ・そばかすを防ぐ医薬部外品。",
+    "keyIngredients": [
+      "活性型ビタミンC",
+      "ビタミンE誘導体",
+      "アルピニアホワイト"
+    ],
+    "icon": "🍋",
+    "origin": "日本",
+    "purchase": "https://hb.afl.rakuten.co.jp/hgc/g00tynxn.k90d6212.g00tynxn.k90d7982/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkzstore%2F4987241168583%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkzstore%2Fi%2F10000850%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6",
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/kzstore/cabinet/amayahoo/10812595/imgrc0099741317.jpg?_ex=512x512",
+    "audience": "unisex",
+    "editorPhoto": "/images/editor/melano-cc-premium-serum.jpg",
+    "editorPhotoAlt": "メラノCC 薬用しみ集中対策 プレミアム美容液のパッケージ",
+    "editorNote": "塗ったあとに顔がポカポカと温かくなる感覚があります。編集部スタッフの実感としては、通常版よりもこちらのほうが使用中の肌の調子が落ち着いていました。ただし温感があるため、刺激が気になる方は注意してください。",
+    "reviewedByEditor": true,
+    "editorReviewedAt": "2026-07-26"
+  },
+  {
+    "id": 245,
+    "name": "スキンライフ 薬用洗顔フォーム",
+    "brand": "牛乳石鹸",
+    "category": "洗顔",
+    "price": 466,
+    "rating": 4.2,
+    "reviews": 4,
+    "skin": [
+      "混合肌",
+      "脂性肌",
+      "敏感肌"
+    ],
+    "concern": [
+      "ニキビ・吹き出物",
+      "肌荒れ・赤み"
+    ],
+    "desc": "ニキビを防ぐ薬用洗顔フォーム。うるおいを守りながら余分な皮脂と汚れを落とす、プチプラの定番医薬部外品。",
+    "keyIngredients": [
+      "イソプロピルメチルフェノール",
+      "グリチルリチン酸2K",
+      "植物性うるおい成分"
+    ],
+    "icon": "🐄",
+    "origin": "日本",
+    "purchase": "https://hb.afl.rakuten.co.jp/hgc/g00r136n.k90d68ff.g00r136n.k90d7778/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4901525010245%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakuten24%2Fi%2F11103256%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6",
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakuten24/cabinet/245/4901525010245.jpg?_ex=512x512",
+    "audience": "unisex",
+    "editorPhoto": "/images/editor/skinlife-face-wash.jpg",
+    "editorPhotoAlt": "カウブランド スキンライフ 薬用洗顔フォームのパッケージ",
+    "editorTexturePhoto": "/images/editor/skinlife-face-wash-texture.jpg",
+    "editorTexturePhotoAlt": "カウブランド スキンライフ 薬用洗顔フォームを手の甲に出したテクスチャ",
+    "editorNote": "編集部スタッフが継続使用しているなかで、最も手応えを感じた洗顔料です。使い始めてから肌が荒れにくくなったと感じています。ただし、すでにできてしまったものへの実感はありませんでした。「予防として日々使う」位置づけの一本だと考えています。",
+    "reviewedByEditor": true,
+    "editorReviewedAt": "2026-07-26"
+  },
+  {
+    "id": 246,
+    "name": "ロート製薬 肌ラボ 極潤プレミアム 特濃 ヒアルロン乳液 140mL",
+    "brand": "ロート製薬",
+    "category": "保湿クリーム",
+    "price": 1157,
+    "rating": 4.2,
+    "reviews": 2,
+    "skin": [
+      "乾燥肌",
+      "普通肌"
+    ],
+    "concern": [
+      "乾燥・かさつき"
+    ],
+    "desc": "5種のヒアルロン酸配合の高保湿乳液。とろみのあるテクスチャで、乾燥しやすい肌にうるおいを与える設計。",
+    "keyIngredients": [
+      "5種のヒアルロン酸",
+      "スーパーヒアルロン酸",
+      "乳酸発酵ヒアルロン酸"
+    ],
+    "icon": "💧",
+    "origin": "日本",
+    "purchase": "https://hb.afl.rakuten.co.jp/hgc/g00ru0on.k90d69a9.g00ru0on.k90d7d57/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fat-life%2F4987241167029%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fat-life%2Fi%2F11981305%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6",
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/at-life/cabinet/2020c/4987241167029.jpg?_ex=512x512",
+    "audience": "unisex",
+    "editorPhoto": "/images/editor/hadalabo-gokujyun-premium-milk.jpg",
+    "editorPhotoAlt": "肌ラボ 極潤プレミアム ヒアルロン乳液のパッケージ",
+    "editorNote": "とろみのあるテクスチャで、保湿重視の乳液です。",
+    "reviewedByEditor": true,
+    "editorReviewedAt": "2026-07-26"
+  },
+  {
+    "id": 247,
+    "name": "クラシエ 肌美精 大人のニキビ対策 薬用美白化粧水 200mL 医薬部外品",
+    "brand": "クラシエ",
+    "category": "化粧水",
+    "price": 1028,
+    "rating": 4.6,
+    "reviews": 29,
+    "skin": [
+      "混合肌",
+      "乾燥肌"
+    ],
+    "concern": [
+      "ニキビ・吹き出物",
+      "シミ・くすみ"
+    ],
+    "desc": "大人ニキビと美白ケアを両立する薬用化粧水。ニキビを防ぎながら、メラニンの生成を抑えてしみ・そばかすを防ぐ医薬部外品。",
+    "keyIngredients": [
+      "トラネキサム酸",
+      "グリチルリチン酸2K",
+      "高純度ビタミンC誘導体"
+    ],
+    "icon": "🌸",
+    "origin": "日本",
+    "purchase": "https://hb.afl.rakuten.co.jp/hgc/g00ru0on.k90d69a9.g00ru0on.k90d7d57/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fat-life%2F4901417621726%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fat-life%2Fi%2F10115333%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6",
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/at-life/cabinet/ebase-a01/4901417621726.jpg?_ex=512x512",
+    "audience": "unisex",
+    "editorPhoto": "/images/editor/hadabisei-acne-lotion.jpg",
+    "editorPhotoAlt": "肌美精 大人のニキビ対策 薬用美白化粧水のパッケージ",
+    "editorNote": "同シリーズのクリームと合わせて使用しています。価格に対して保湿感がしっかりあり、乾燥しやすい冬場にも問題なく使えました。コスパ重視で選ぶ場合の候補です。",
+    "reviewedByEditor": true,
+    "editorReviewedAt": "2026-07-26"
+  },
+  {
+    "id": 248,
+    "name": "肌美精 大人のニキビ対策 薬用美白クリーム 50g 医薬部外品",
+    "brand": "クラシエ",
+    "category": "保湿クリーム",
+    "price": 855,
+    "rating": 4.2,
+    "reviews": 4,
+    "skin": [
+      "混合肌",
+      "乾燥肌"
+    ],
+    "concern": [
+      "ニキビ・吹き出物",
+      "シミ・くすみ"
+    ],
+    "desc": "大人ニキビと美白ケアを両立する薬用クリーム。うるおいを与えながらニキビを防ぎ、しみ・そばかすを防ぐ医薬部外品。",
+    "keyIngredients": [
+      "トラネキサム酸",
+      "グリチルリチン酸2K",
+      "高純度ビタミンC誘導体"
+    ],
+    "icon": "🌸",
+    "origin": "日本",
+    "purchase": "https://hb.afl.rakuten.co.jp/hgc/g00ru0on.k90d69a9.g00ru0on.k90d7d57/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fat-life%2F4901417621733-kksale%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fat-life%2Fi%2F10320058%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6",
+    "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/at-life/cabinet/ebase-a01/4901417621733.jpg?_ex=512x512",
+    "audience": "unisex",
+    "editorPhoto": "/images/editor/hadabisei-acne-cream.jpg",
+    "editorPhotoAlt": "肌美精 大人のニキビ対策 薬用美白クリームのパッケージ",
+    "editorNote": "同シリーズの化粧水とセットで使用。しっかり保湿されるので、この価格帯としては満足度が高いと感じました。冬場も使えています。",
+    "reviewedByEditor": true,
+    "editorReviewedAt": "2026-07-26"
   }
 ]

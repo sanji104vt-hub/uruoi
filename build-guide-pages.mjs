@@ -510,6 +510,8 @@ p{font-size:14.5px;color:var(--ink);margin-bottom:12px}
 .pcard-price{font-size:13px;font-weight:800;color:var(--accent)}
 .pcard-rating{font-size:11.5px;color:var(--txt2)}
 .pcard-badge{display:inline-block;font-size:10px;color:var(--accent);font-weight:700;background:#fff8f2;border:1px solid #f4d9c0;border-radius:4px;padding:1px 5px}
+/* 一次情報がある商品(編集部が実際に購入・使用)にのみ付くミニバッジ */
+.editor-used-badge{display:inline-flex;align-items:center;gap:3px;background:var(--water);border:1px solid var(--deep);color:var(--accent);font-size:9.5px;font-weight:800;padding:1px 6px;border-radius:10px;white-space:nowrap;letter-spacing:.2px}
 .not-for{background:#fdf6ec;border:1px solid #f2e0c1;border-radius:12px;padding:14px 18px;margin:10px 0;color:#8a6a2f;font-size:13.5px;line-height:1.8}
 .not-for h3{color:#7a5b25;margin-bottom:6px}
 .not-for ul{margin:4px 0 0 20px}
@@ -560,7 +562,7 @@ gtag('js',new Date());gtag('config','${GA4_ID}');
   <div class="product-grid">
     ${hits.map((p, i) => `<a class="pcard" href="/products/${p.id}">
       ${p.image ? `<img class="pcard-img" src="${escAttr(p.image)}" alt="${escAttr(p.name)}" loading="lazy">` : `<div class="pcard-noimg" aria-hidden="true">${escHtml(p.icon || "💧")}</div>`}
-      <div class="pcard-rank">${i < 3 ? "TOP" + (i + 1) : "#" + (i + 1)}</div>
+      <div class="pcard-rank">${i < 3 ? "TOP" + (i + 1) : "#" + (i + 1)}${p.reviewedByEditor === true ? ' <span class="editor-used-badge">📷 編集部使用</span>' : ""}</div>
       <div class="pcard-name">${escHtml(p.name)}</div>
       <div class="pcard-brand">${escHtml(p.brand)}${p.origin ? " ・ " + escHtml(p.origin) : ""}</div>
       <div class="pcard-meta">

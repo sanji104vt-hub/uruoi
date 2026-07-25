@@ -64,43 +64,49 @@ function prosConsData(p){
   return {pros,cons,fit:[...new Set(fit)].slice(0,4),unfit:unfit.slice(0,3)};
 }
 
-// ===== 一次情報バッジ（休眠コンポーネント）=====
+// ===== 一次情報コンポーネント（2026-07-26 に11商品で有効化）=====
 // src/products.json の商品オブジェクトに以下フィールドを追加すると、
 // 静的商品ページに「編集部の一次情報」ブロックが自動表示される。
-// 未設定の商品では何も表示されない（現状は全207商品で未設定＝表示なし＝仕様通り）。
+// フィールド未設定の商品では何も表示されない（現在は11商品のみ設定済み）。
 //
 // 入力例：
 //   {
-//     "id": 1,
+//     "id": 245,
 //     ...既存フィールド...,
-//     "editorPhoto": "https://moilum.asutelu.com/img/editorial/1-hand.jpg",
-//     "measuredData": { "pH": "5.5", "内容量": "150ml", "実売価格(2026-07時点)": "¥1,650" },
+//     "editorPhoto": "/images/editor/skinlife-face-wash.jpg",
+//     "editorPhotoAlt": "カウブランド スキンライフ 薬用洗顔フォームのパッケージ",
+//     "editorTexturePhoto": "/images/editor/skinlife-face-wash-texture.jpg",   // 任意
+//     "editorTexturePhotoAlt": "…を手の甲に出したテクスチャ",                   // 任意
+//     "editorNote": "編集部スタッフが継続使用しているなかで…",
 //     "reviewedByEditor": true,
-//     "editorNote": "編集部で2週間使用。朝はやや重めに感じたが夜のみ使用で肌の落ち着きを感じた。"
+//     "editorReviewedAt": "2026-07-26"
 //   }
-// 4フィールドとも任意。一部だけの入力でも該当バッジ・該当ブロックのみ表示される。
+// editorNote は編集部の実体験メモ。加筆・創作はせず、書かれた内容のみを表示する。
 // SPA商品モーダル側にも同じロジックを実装済み（public/index.html の primarySourceHtml()）。
 // 表示を一致させるため、フィールドを追加する際は PRODUCTS 配列(public/index.html) にも同期のこと。
 function primarySourceHtml(p){
   const hasPhoto = !!p.editorPhoto;
-  const hasMeasured = p.measuredData && typeof p.measuredData === "object" && Object.keys(p.measuredData).length > 0;
+  const hasTexture = !!p.editorTexturePhoto;
   const hasReview = p.reviewedByEditor === true;
   const hasNote = !!p.editorNote;
-  if (!hasPhoto && !hasMeasured && !hasReview && !hasNote) return "";
+  if (!hasPhoto && !hasTexture && !hasReview && !hasNote) return "";
   const badges = [];
-  if (hasPhoto)    badges.push('<span class="ps-badge">📸 編集部撮影</span>');
-  if (hasMeasured) badges.push('<span class="ps-badge">📏 実測データ</span>');
-  if (hasReview)   badges.push('<span class="ps-badge">✍️ 編集部使用レビュー</span>');
-  if (hasNote && !hasReview) badges.push('<span class="ps-badge">📝 編集部メモ</span>');
-  const measuredHtml = hasMeasured
-    ? `<dl class="ps-measured">${Object.entries(p.measuredData).map(([k,v]) => `<dt>${escHtml(k)}</dt><dd>${escHtml(v)}</dd>`).join("")}</dl>`
-    : "";
+  if (hasReview)   badges.push('<span class="ps-badge">📷 編集部が実際に使用</span>');
+  if (hasPhoto)    badges.push('<span class="ps-badge">編集部撮影</span>');
+  if (hasTexture)  badges.push('<span class="ps-badge">テクスチャ写真</span>');
+  if (hasNote && !hasReview) badges.push('<span class="ps-badge">編集部メモ</span>');
+  const reviewedAt = p.editorReviewedAt
+    ? String(p.editorReviewedAt).slice(0, 7).replace("-", "年") + "月"
+    : "2026年7月";
+  const photos = [];
+  if (hasPhoto) photos.push(`<figure class="ps-figure"><img class="ps-photo" src="${escAttr(p.editorPhoto)}" alt="${escAttr(p.editorPhotoAlt || p.name + "のパッケージ")}" loading="lazy" decoding="async"><figcaption>パッケージ</figcaption></figure>`);
+  if (hasTexture) photos.push(`<figure class="ps-figure"><img class="ps-photo" src="${escAttr(p.editorTexturePhoto)}" alt="${escAttr(p.editorTexturePhotoAlt || p.name + "のテクスチャ")}" loading="lazy" decoding="async"><figcaption>テクスチャ（手の甲）</figcaption></figure>`);
   return `<div class="primary-source">
     <div class="ps-header">🌱 編集部の一次情報 <span class="ps-badges">${badges.join("")}</span></div>
-    ${hasPhoto ? `<img class="ps-photo" src="${escAttr(p.editorPhoto)}" alt="編集部撮影 - ${escAttr(p.name)}" loading="lazy">` : ""}
-    ${measuredHtml}
+    ${photos.length ? `<div class="ps-photos">${photos.join("")}</div>` : ""}
     ${hasNote ? `<p class="ps-note">${escHtml(p.editorNote)}</p>` : ""}
-    <div class="ps-disclaimer">※ 編集部が実際に確認・使用した一次情報です。個人の感想を含みます。</div>
+    <div class="ps-meta">編集部が実際に購入・使用した商品です（${reviewedAt}時点）</div>
+    <div class="ps-disclaimer">※個人の感想であり、効果を保証するものではありません。</div>
   </div>`;
 }
 
@@ -254,16 +260,21 @@ h1{font-size:clamp(22px,4vw,30px);line-height:1.45;margin-bottom:12px}
 .suit-label{font-size:13px;font-weight:700;color:var(--txt2);min-width:100px}
 .suit-chips{display:flex;gap:6px;flex-wrap:wrap}
 .suit-chip{background:var(--water);color:var(--accent);font-size:12px;padding:4px 10px;border-radius:20px;font-weight:600}
-.primary-source{background:#eef8f1;border:1px solid #cfe9d4;border-radius:14px;padding:16px 18px;margin-bottom:20px;color:#25553a}
-.ps-header{font-size:13px;font-weight:800;color:#1d4a2f;margin-bottom:10px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+/* 一次情報ブロック: 配色は水鏡デザイントークン(--water/--deep/--accent/--ink)で統一 */
+.primary-source{background:linear-gradient(160deg,var(--water),var(--iris-2));border:1px solid var(--deep);border-radius:16px;padding:18px 20px;margin-bottom:22px;color:var(--ink)}
+.ps-header{font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .ps-badges{display:inline-flex;gap:6px;flex-wrap:wrap}
-.ps-badge{background:#fff;border:1px solid #cfe9d4;border-radius:12px;padding:2px 10px;font-size:11px;font-weight:700;color:#1d4a2f}
-.ps-photo{width:100%;max-width:360px;border-radius:10px;display:block;margin:8px 0;background:#fff;border:1px solid #cfe9d4}
-.ps-measured{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:8px 0;font-size:13px;background:#fff;border:1px solid #cfe9d4;border-radius:10px;padding:12px 14px}
-.ps-measured dt{color:#5c7d67;font-weight:700}
-.ps-measured dd{margin:0;color:#25553a;font-weight:600}
-.ps-note{margin:6px 0;font-size:13.5px;line-height:1.75;color:#25553a}
-.ps-disclaimer{font-size:11px;color:#5c7d67;margin-top:6px}
+.ps-badge{background:#fff;border:1px solid var(--deep);border-radius:12px;padding:2px 10px;font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap}
+.ps-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 12px}
+.ps-figure{margin:0}
+.ps-photo{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;display:block;background:#fff;border:1px solid var(--deep)}
+.ps-figure figcaption{font-size:11px;color:var(--txt3);margin-top:5px;text-align:center}
+.ps-note{margin:10px 0 8px;font-size:13.5px;line-height:1.85;color:var(--ink)}
+.ps-meta{font-size:11.5px;color:var(--txt2);font-weight:600;margin-top:8px}
+.ps-disclaimer{font-size:11px;color:var(--txt3);margin-top:3px}
+@media(max-width:600px){.ps-photos{grid-template-columns:1fr;gap:10px}}
+/* 関連商品カードの「編集部使用」ミニバッジ */
+.editor-used-badge{display:inline-flex;align-items:center;gap:3px;background:var(--water);border:1px solid var(--deep);color:var(--accent);font-size:10px;font-weight:800;padding:1px 7px;border-radius:10px;white-space:nowrap;margin-bottom:4px}
 .proscons{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}
 .proscons h2{font-size:16px;margin-bottom:14px}
 .pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
@@ -383,6 +394,7 @@ gtag('js',new Date());gtag('config','${GA4_ID}');
     <h2>同じカテゴリのおすすめ</h2>
     <div class="rel-grid">
       ${related.map(r => `<a class="rel-card" href="/products/${r.id}">
+        ${r.reviewedByEditor === true ? '<span class="editor-used-badge">📷 編集部使用</span>' : ""}
         ${r.image ? `<img class="rel-img" src="${escAttr(r.image)}" alt="${escAttr(r.name)}" loading="lazy">` : `<div class="rel-noimg" aria-hidden="true">${escHtml(r.icon || "💧")}</div>`}
         <div class="rel-name">${escHtml(r.name)}</div>
         <div class="rel-brand">${escHtml(r.brand)}</div>

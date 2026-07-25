@@ -64,16 +64,21 @@ h1{font-size:clamp(22px,4vw,30px);line-height:1.45;margin-bottom:12px}
 .suit-label{font-size:13px;font-weight:700;color:var(--txt2);min-width:100px}
 .suit-chips{display:flex;gap:6px;flex-wrap:wrap}
 .suit-chip{background:var(--water);color:var(--accent);font-size:12px;padding:4px 10px;border-radius:20px;font-weight:600}
-.primary-source{background:#eef8f1;border:1px solid #cfe9d4;border-radius:14px;padding:16px 18px;margin-bottom:20px;color:#25553a}
-.ps-header{font-size:13px;font-weight:800;color:#1d4a2f;margin-bottom:10px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+/* 一次情報ブロック: 配色は水鏡デザイントークン(--water/--deep/--accent/--ink)で統一 */
+.primary-source{background:linear-gradient(160deg,var(--water),var(--iris-2));border:1px solid var(--deep);border-radius:16px;padding:18px 20px;margin-bottom:22px;color:var(--ink)}
+.ps-header{font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .ps-badges{display:inline-flex;gap:6px;flex-wrap:wrap}
-.ps-badge{background:#fff;border:1px solid #cfe9d4;border-radius:12px;padding:2px 10px;font-size:11px;font-weight:700;color:#1d4a2f}
-.ps-photo{width:100%;max-width:360px;border-radius:10px;display:block;margin:8px 0;background:#fff;border:1px solid #cfe9d4}
-.ps-measured{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:8px 0;font-size:13px;background:#fff;border:1px solid #cfe9d4;border-radius:10px;padding:12px 14px}
-.ps-measured dt{color:#5c7d67;font-weight:700}
-.ps-measured dd{margin:0;color:#25553a;font-weight:600}
-.ps-note{margin:6px 0;font-size:13.5px;line-height:1.75;color:#25553a}
-.ps-disclaimer{font-size:11px;color:#5c7d67;margin-top:6px}
+.ps-badge{background:#fff;border:1px solid var(--deep);border-radius:12px;padding:2px 10px;font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap}
+.ps-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 12px}
+.ps-figure{margin:0}
+.ps-photo{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:10px;display:block;background:#fff;border:1px solid var(--deep)}
+.ps-figure figcaption{font-size:11px;color:var(--txt3);margin-top:5px;text-align:center}
+.ps-note{margin:10px 0 8px;font-size:13.5px;line-height:1.85;color:var(--ink)}
+.ps-meta{font-size:11.5px;color:var(--txt2);font-weight:600;margin-top:8px}
+.ps-disclaimer{font-size:11px;color:var(--txt3);margin-top:3px}
+@media(max-width:600px){.ps-photos{grid-template-columns:1fr;gap:10px}}
+/* 関連商品カードの「編集部使用」ミニバッジ */
+.editor-used-badge{display:inline-flex;align-items:center;gap:3px;background:var(--water);border:1px solid var(--deep);color:var(--accent);font-size:10px;font-weight:800;padding:1px 7px;border-radius:10px;white-space:nowrap;margin-bottom:4px}
 .proscons{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}
 .proscons h2{font-size:16px;margin-bottom:14px}
 .pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
@@ -187,21 +192,24 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   <div class="related">
     <h2>同じカテゴリのおすすめ</h2>
     <div class="rel-grid">
-      <a class="rel-card" href="/products/39">
+      <a class="rel-card" href="/products/243">
+        <span class="editor-used-badge">📷 編集部使用</span>
+        <img class="rel-img" src="https://thumbnail.image.rakuten.co.jp/@0_mall/nanohanadrg/cabinet/syohin/202101/4901301210708a.jpg?_ex=512x512" alt="キュレル クリーム ジャー 90g ／医薬部外品 花王 潤浸保湿 セラミド 乾燥性" loading="lazy">
+        <div class="rel-name">キュレル クリーム ジャー 90g ／医薬部外品 花王 潤浸保湿 セラミド 乾燥性</div>
+        <div class="rel-brand">キュレル</div>
+        <div class="rel-price">¥1,650</div>
+      </a><a class="rel-card" href="/products/39">
+        
         <img class="rel-img" src="https://thumbnail.image.rakuten.co.jp/@0_mall/aestura-japan/cabinet/thum/creamthumbnail.jpg?_ex=300x300" alt="AESTURA アトバリア365 クリーム" loading="lazy">
         <div class="rel-name">AESTURA アトバリア365 クリーム</div>
         <div class="rel-brand">AESTURA</div>
         <div class="rel-price">¥3,300</div>
       </a><a class="rel-card" href="/products/188">
+        
         <img class="rel-img" src="https://thumbnail.image.rakuten.co.jp/@0_mall/treasurebeauty/cabinet/item/123/12310043_1.jpg?_ex=300x300" alt="ドゥ・ラ・メール クレーム ドゥ・ラ・メール" loading="lazy">
         <div class="rel-name">ドゥ・ラ・メール クレーム ドゥ・ラ・メール</div>
         <div class="rel-brand">ドゥ・ラ・メール</div>
         <div class="rel-price">¥38,500</div>
-      </a><a class="rel-card" href="/products/231">
-        <img class="rel-img" src="https://thumbnail.image.rakuten.co.jp/@0_mall/rakuten24/cabinet/272/4901301306272.jpg?_ex=512x512" alt="ニベアメン アクティブエイジクリーム" loading="lazy">
-        <div class="rel-name">ニベアメン アクティブエイジクリーム</div>
-        <div class="rel-brand">ニベアメン</div>
-        <div class="rel-price">¥2,142</div>
       </a>
     </div>
   </div>

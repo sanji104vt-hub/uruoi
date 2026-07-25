@@ -577,17 +577,23 @@ nav{display:flex;gap:4px}
 .pc-unfit{background:var(--bg3);border:1px solid var(--border)}
 .pc-unfit .pc-title{color:var(--txt2)}
 @media(max-width:600px){.pc-grid{grid-template-columns:1fr}}
-/* 一次情報バッジ（休眠、editorPhoto/measuredData/reviewedByEditor/editorNote が入った時のみ表示） */
-.primary-source{background:#eef8f1;border:1px solid #cfe9d4;border-radius:14px;padding:16px 18px;margin:16px 0;color:#25553a}
-.ps-header{font-size:13px;font-weight:800;color:#1d4a2f;margin-bottom:10px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+/* 一次情報ブロック（editorPhoto/editorTexturePhoto/reviewedByEditor/editorNote が入った商品のみ表示）
+   配色は水鏡デザイントークン（--water/--deep/--accent/--ink）で統一 */
+.primary-source{background:linear-gradient(160deg,var(--water),var(--iris-2));border:1px solid var(--deep);border-radius:var(--radius);padding:18px 20px;margin:18px 0;color:var(--txt)}
+.dark .primary-source{background:var(--bg3);border-color:var(--border2)}
+.ps-header{font-size:13.5px;font-weight:800;color:var(--txt);margin-bottom:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .ps-badges{display:inline-flex;gap:6px;flex-wrap:wrap}
-.ps-badge{background:#fff;border:1px solid #cfe9d4;border-radius:12px;padding:2px 10px;font-size:11px;font-weight:700;color:#1d4a2f}
-.ps-photo{width:100%;max-width:360px;border-radius:10px;display:block;margin:8px 0;background:#fff;border:1px solid #cfe9d4}
-.ps-measured{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;margin:8px 0;font-size:13px;background:#fff;border:1px solid #cfe9d4;border-radius:10px;padding:12px 14px}
-.ps-measured dt{color:#5c7d67;font-weight:700}
-.ps-measured dd{margin:0;color:#25553a;font-weight:600}
-.ps-note{margin:6px 0;font-size:13.5px;line-height:1.75;color:#25553a}
-.ps-disclaimer{font-size:11px;color:#5c7d67;margin-top:6px}
+.ps-badge{background:var(--bg2);border:1px solid var(--deep);border-radius:12px;padding:2px 10px;font-size:11px;font-weight:700;color:var(--accent);white-space:nowrap}
+.ps-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:10px 0 12px}
+.ps-figure{margin:0}
+.ps-photo{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--radius-sm);display:block;background:var(--bg2);border:1px solid var(--deep)}
+.ps-figure figcaption{font-size:11px;color:var(--txt3);margin-top:5px;text-align:center}
+.ps-note{margin:10px 0 8px;font-size:13.5px;line-height:1.85;color:var(--txt)}
+.ps-meta{font-size:11.5px;color:var(--txt2);font-weight:600;margin-top:8px}
+.ps-disclaimer{font-size:11px;color:var(--txt3);margin-top:3px}
+@media(max-width:600px){.ps-photos{grid-template-columns:1fr;gap:10px}}
+/* 商品カード等に付く「編集部使用」ミニバッジ */
+.editor-used-badge{display:inline-flex;align-items:center;gap:3px;background:var(--water);border:1px solid var(--deep);color:var(--accent);font-size:10px;font-weight:800;padding:1px 7px;border-radius:10px;white-space:nowrap;letter-spacing:.2px}
 
 .ai-consult{max-width:680px}
 .chat-box{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;min-height:120px;max-height:420px;overflow-y:auto;margin-bottom:12px;display:flex;flex-direction:column;gap:10px}
@@ -1480,6 +1486,7 @@ nav{display:flex;gap:4px}
       <button class="filter-btn" data-filter="パック・マスク" onclick="setFilter('パック・マスク',this)">マスク</button>
       <button class="filter-btn" data-filter="アイケア" onclick="setFilter('アイケア',this)">その他</button>
       <button class="filter-btn" data-filter="mens" onclick="setFilter('mens',this)">メンズ</button>
+      <button class="filter-btn" data-filter="editor-used" onclick="setFilter('editor-used',this)" title="編集部が実際に購入・使用し、写真と使用感を掲載している商品">📷 編集部使用</button>
     </div>
   </div>
   <div class="filter-panel">
@@ -1750,6 +1757,7 @@ nav{display:flex;gap:4px}
     <div class="footer-updates" style="margin-bottom:14px">
       <h3 style="font-size:13px;font-weight:700;margin-bottom:8px;color:var(--txt2)">更新履歴 <a href="/about/changelog" style="font-weight:500;font-size:11.5px;color:var(--accent);margin-left:8px">すべての履歴を見る →</a></h3>
       <ul style="font-size:12px;color:var(--txt3);line-height:1.8;list-style:none;padding:0;margin:0">
+        <li>2026-07-26：編集部が実際に購入・使用した11商品について、自分で撮影した写真と使用感メモの掲載を開始しました。「刺激が強かった」「実感が得られなかった」等の率直な内容もそのまま掲載しています。上部の「📷 編集部使用」から一覧できます（<a href="/about/sources" style="color:var(--accent)">情報ソース</a>）。</li>
         <li>2026-07-20：説明できない「参考レビュー件数◯件」等の数字表示を全ページから撤去。Google構造化データのaggregateRating（ユーザーレビュー集計スキーマ）も廃止し、編集部独自評価としての正直な使い方に統一。評価（★）そのものは<a href="/about/rating-policy" style="color:var(--accent)">編集部評価</a>として維持。</li>
         <li>2026-07-19（後半）：外部監査に基づく品質改修。商品数を単一の真実の源(SSoT)で一元管理化、メイクアップ13件と世代違い旧品1件をスキンケア一覧から分離、広告的表現（名品/コスパ最強/免疫力等）を事実記述に置換、ブランド呼称の混在を統一、重複商品1件（Anua）を統合。掲載スキンケア商品数を192点として明示。</li>
         <li>2026-07-19：評価表示に「編集部評価」ラベルを追加し、EC平均転載でないことを明示。全商品ページにメリット/デメリット/向かない人を展開。<a href="/about/rating-policy" style="color:var(--accent)">評価基準</a>・<a href="/about/sources" style="color:var(--accent)">情報ソース</a>・<a href="/about/changelog" style="color:var(--accent)">更新履歴</a>の3ページを新設。</li>
@@ -1791,7 +1799,7 @@ const PRODUCTS=[
   {"id":25,"name":"COSRX アドバンス スネイル 96 ムチンパワーエッセンス","brand":"COSRX","category":"美容液","price":2530,"rating":4.6,"reviews":4321,"skin":["乾燥肌","敏感肌","普通肌"],"concern":["乾燥・かさつき","肌荒れ・赤み"],"desc":"かたつむり分泌液96%配合。高保湿でなめらかなテクスチャー、肌をしっとり弾力のある状態に整えます。","keyIngredients":["カタツムリ分泌液96%","ナイアシンアミド","アデノシン"],"icon":"🐌","origin":"韓国","purchase":"https://www.qoo10.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/cosrx-official/cabinet/08656682/08685832/imgrc0114160405.jpg?_ex=300x300","audience":"unisex"},
   {"id":26,"name":"Beauty of Joseon グロウセラム 米+アルブチン","brand":"Beauty of Joseon","category":"美容液","price":1980,"rating":4.6,"reviews":5643,"skin":["普通肌","乾燥肌","混合肌"],"concern":["シミ・くすみ","乾燥・かさつき"],"desc":"米ぬか発酵エキス＋アルブチン配合。くすみケアとうるおいを両立する韓国の人気プチプラ美容液。","keyIngredients":["米ぬか発酵エキス","アルブチン","ナイアシンアミド"],"icon":"🌾","origin":"韓国","purchase":"https://www.qoo10.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/theshopkorea/cabinet/09468238/10317504/imgrc0094198757.jpg?_ex=300x300","audience":"unisex"},
   {"id":27,"name":"資生堂 アルティミューン パワライジングコンセントレート III","brand":"資生堂","category":"美容液","price":12100,"rating":4.7,"reviews":4532,"skin":["全肌質","普通肌"],"concern":["シワ・たるみ","肌荒れ・赤み"],"desc":"肌のバリア機能に着目した先行美容液。うるおいで肌コンディションを整えるロングセラー。","keyIngredients":["イムジェネロール","アカヤジオウ根エキス","グリセリン"],"icon":"🔴","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/erume-de-beaute/cabinet/05996230/utm-3n_600.jpg?_ex=300x300","audience":"unisex"},
-  {"id":28,"name":"メラノCC 薬用しみ集中対策 美容液","brand":"ロート製薬","category":"美容液","price":1180,"rating":4.4,"reviews":9821,"skin":["普通肌","脂性肌"],"concern":["シミ・くすみ","ニキビ・吹き出物"],"desc":"活性型ビタミンC配合のプチプラ美容液。シミ・ニキビ跡の集中ケアに、コスパ抜群の定番品。","keyIngredients":["活性型ビタミンC","ビタミンE","グリチルリチン酸"],"icon":"🍊","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/kzstore/cabinet/amayahoo/10812595/imgrc0093645853.jpg?_ex=300x300","audience":"unisex"},
+  {"id":28,"name":"メラノCC 薬用しみ集中対策 美容液","brand":"ロート製薬","category":"美容液","price":1180,"rating":4.4,"reviews":9821,"skin":["普通肌","脂性肌"],"concern":["シミ・くすみ","ニキビ・吹き出物"],"desc":"活性型ビタミンC配合のプチプラ美容液。シミ・ニキビ跡の集中ケアに、コスパ抜群の定番品。","keyIngredients":["活性型ビタミンC","ビタミンE","グリチルリチン酸"],"icon":"🍊","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/kzstore/cabinet/amayahoo/10812595/imgrc0093645853.jpg?_ex=300x300","audience":"unisex","editorPhoto":"/images/editor/melano-cc-serum.jpg","editorPhotoAlt":"メラノCC 薬用しみ集中対策 美容液のパッケージ","editorNote":"プレミアム版と比較すると、編集部スタッフはこちらでは同じような実感は得られませんでした。まずは価格を抑えて試したい場合の入り口としては選びやすい一本です。","reviewedByEditor":true,"editorReviewedAt":"2026-07-26"},
   {"id":29,"name":"Torriden ダイブイン セラム","brand":"Torriden","category":"美容液","price":2640,"rating":4.5,"reviews":2341,"skin":["敏感肌","混合肌","脂性肌"],"concern":["乾燥・かさつき","肌荒れ・赤み"],"desc":"低分子ヒアルロン酸でうるおいを届ける軽いテクスチャーのセラム。ベタつかず脂性肌にもおすすめ。","keyIngredients":["低分子ヒアルロン酸","パンテノール","ベタイン"],"icon":"🌊","origin":"韓国","purchase":"https://www.qoo10.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/torriden-official/cabinet/10992200/10992201/imgrc0093753773.jpg?_ex=300x300","audience":"unisex"},
   {"id":30,"name":"イニスフリー ブラックティー ユースセラム","brand":"イニスフリー","category":"美容液","price":3810,"rating":4.5,"reviews":1654,"skin":["乾燥肌","普通肌"],"concern":["シワ・たるみ","乾燥・かさつき"],"desc":"発酵茶葉由来Rコンセントレート配合。乾燥くすみやハリ低下にアプローチするエイジングケア美容液。","keyIngredients":["発酵茶葉エキス","ヒアルロン酸","アミノ酸"],"icon":"🍵","origin":"韓国","purchase":"https://www.qoo10.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/innisfree-official/cabinet/09973004/12935610/13071927/imgrc0122127029.jpg?_ex=300x300","audience":"unisex"},
   {"id":31,"name":"VINTORTE アクアハイドロセラム","brand":"ヴァントルテ","category":"美容液","price":4180,"rating":4.4,"reviews":876,"skin":["乾燥肌","敏感肌"],"concern":["乾燥・かさつき","シワ・たるみ"],"desc":"5種のヒアルロン酸とセラミド配合。天然ミネラル由来のとろみセラムで集中保湿。","keyIngredients":["ヒアルロン酸","セラミド","ナイアシンアミド"],"icon":"💧","origin":"日本","purchase":"https://www.amazon.co.jp/","audience":"unisex"},
@@ -1902,7 +1910,7 @@ const PRODUCTS=[
   {"id":136,"name":"KISO ヒアルロン酸 原液","brand":"KISO","category":"美容液","price":1430,"rating":4.3,"reviews":1234,"skin":["乾燥肌","普通肌"],"concern":["乾燥・かさつき"],"desc":"国産の高純度ヒアルロン酸原液。手持ちのスキンケアにプラスして保湿力を底上げするブースター。","keyIngredients":["ヒアルロン酸Na","加水分解ヒアルロン酸"],"icon":"💧","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/kiso/cabinet/raku/k04/k04_pp_new.jpg?_ex=300x300","audience":"unisex"},
   {"id":137,"name":"Saborino 目ざまシート","brand":"スタイリングライフ","category":"パック・マスク","price":1320,"rating":4.4,"reviews":5432,"skin":["全肌質","混合肌"],"concern":["乾燥・かさつき"],"desc":"朝の60秒で洗顔・スキンケア・保湿が完了する朝用マスク。忙しい朝の時短ケアに人気の定番品。","keyIngredients":["ハトムギ種子エキス","オレンジ果実エキス","ヒアルロン酸"],"icon":"⏰","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/lifeplaza01/cabinet/2024419/4515061190233-1.jpg?_ex=300x300","audience":"unisex"},
   {"id":138,"name":"ロクシタン シア ハンドクリーム","brand":"ロクシタン","category":"アイケア","price":1540,"rating":4.6,"reviews":8765,"skin":["全肌質","乾燥肌"],"concern":["乾燥・かさつき"],"desc":"シアバター20%配合の濃密ハンドクリーム。乾燥した手肌をしっとり保湿、ギフトにも人気の定番。","keyIngredients":["シアバター20%","ハチミツ","ココナッツオイル"],"icon":"🤲","origin":"フランス","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/cosmelink/cabinet/body3/3253581784761_cp.jpg?_ex=300x300","productType":"makeup","audience":"unisex"},
-  {"id":139,"name":"メンソレータム アクネス 薬用クリーム洗顔","brand":"ロート製薬","category":"洗顔","price":660,"rating":4.2,"reviews":2341,"skin":["脂性肌","混合肌"],"concern":["ニキビ・吹き出物","毛穴の開き・黒ずみ"],"desc":"ニキビを防ぐ薬用クリーム洗顔。アクネ菌を殺菌しながら、うるおいを守って洗い上げるプチプラ品。","keyIngredients":["イソプロピルメチルフェノール","ビタミンC誘導体"],"icon":"🧼","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/tsuruha/cabinet/syohin0/10179525.jpg?_ex=300x300","audience":"unisex"},
+  {"id":139,"name":"メンソレータム アクネス 薬用クリーム洗顔","brand":"ロート製薬","category":"洗顔","price":660,"rating":4.2,"reviews":2341,"skin":["脂性肌","混合肌"],"concern":["ニキビ・吹き出物","毛穴の開き・黒ずみ"],"desc":"ニキビを防ぐ薬用クリーム洗顔。アクネ菌を殺菌しながら、うるおいを守って洗い上げるプチプラ品。","keyIngredients":["イソプロピルメチルフェノール","ビタミンC誘導体"],"icon":"🧼","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/tsuruha/cabinet/syohin0/10179525.jpg?_ex=300x300","audience":"unisex","editorPhoto":"/images/editor/acnes-cream-wash.jpg","editorPhotoAlt":"メンソレータム アクネス 薬用クリーム洗顔のパッケージ","editorTexturePhoto":"/images/editor/acnes-cream-wash-texture.jpg","editorTexturePhotoAlt":"メンソレータム アクネス 薬用クリーム洗顔を手の甲に出したテクスチャ","editorNote":"香りがかなり独特で、好みが分かれる部分だと感じました。香りに敏感な方は店頭で確認してからの購入をおすすめします。","reviewedByEditor":true,"editorReviewedAt":"2026-07-26"},
   {"id":140,"name":"THREE バランシング SO オイル","brand":"THREE","category":"美容液","price":6600,"rating":4.5,"reviews":765,"skin":["乾燥肌","普通肌"],"concern":["乾燥・かさつき","シワ・たるみ"],"desc":"天然由来成分100%のブースターオイル。スキンケア前に使ってうるおいとなめらかさを高める。","keyIngredients":["スクワラン","植物オイル","エッセンシャルオイル"],"icon":"🌿","origin":"日本","purchase":"https://www.amazon.co.jp/","audience":"unisex"},
   {"id":141,"name":"ハーバー 高品位スクワラン","brand":"ハーバー","category":"美容液","price":2750,"rating":4.6,"reviews":4321,"skin":["乾燥肌","敏感肌"],"concern":["乾燥・かさつき"],"desc":"純度99.9%のスクワランオイル。1滴で肌をしっとりなめらかに整える無添加の美容オイル定番。","keyIngredients":["スクワラン99.9%"],"icon":"💧","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/rakuten24/cabinet/009/4534551101009.jpg?_ex=300x300","audience":"unisex"},
   {"id":142,"name":"コーセー 米肌 活潤リフト クリーム","brand":"コーセー","category":"保湿クリーム","price":6600,"rating":4.5,"reviews":1543,"skin":["乾燥肌","普通肌"],"concern":["シワ・たるみ","乾燥・かさつき"],"desc":"ライスパワーNo.11＋ハリ成分配合のエイジングケアクリーム。ふっくらハリのある肌へ導く。","keyIngredients":["ライスパワーNo.11","コラーゲン","ヒアルロン酸"],"icon":"🍚","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/powerfullworld/cabinet/10196786/10645907/imgrc0121646480.jpg?_ex=300x300","audience":"unisex"},
@@ -1924,7 +1932,7 @@ const PRODUCTS=[
   {"id":158,"name":"ONE THING ドクダミエキス","brand":"ONE THING","category":"化粧水","price":1320,"rating":4.4,"reviews":2103,"skin":["敏感肌","脂性肌","混合肌"],"concern":["肌荒れ・赤み","ニキビ・吹き出物"],"desc":"ドクダミ単一成分の化粧水。シンプル処方で肌を鎮静、手持ちのケアに足せる韓国の人気原液トナー。","keyIngredients":["ドクダミエキス"],"icon":"🌿","origin":"韓国","purchase":"https://www.qoo10.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/jtradeshop/cabinet/07183685/07183688/imgrc0085580767.jpg?_ex=300x300","audience":"unisex"},
   {"id":159,"name":"HAKU メラノフォーカスEV","brand":"資生堂","category":"美容液","price":11000,"rating":4.6,"reviews":3210,"skin":["普通肌","混合肌"],"concern":["シミ・くすみ"],"desc":"4MSK＋トラネキサム酸配合の薬用美白美容液。シミの発生を多角的に防ぐ、美白ケアの実力派。","keyIngredients":["4MSK","m-トラネキサム酸","Dメラノ"],"icon":"🤍","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/yayoi-cosme/cabinet/rakulogo/rakulogo6/ycsm154_00162.jpg?_ex=300x300","audience":"unisex"},
   {"id":160,"name":"Bulgari オムニア クリスタリン ボディローション","brand":"ブルガリ","category":"保湿クリーム","price":4400,"rating":4.3,"reviews":543,"skin":["全肌質","乾燥肌"],"concern":["乾燥・かさつき"],"desc":"上品な香りをまとえる全身用ボディローション。しっとりなめらかな肌に整える、ギフト人気の高級品。","keyIngredients":["シアバター","植物エキス"],"icon":"💎","origin":"イタリア","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/wish/cabinet/earth010/bv019_0001.jpg?_ex=300x300","productType":"makeup","audience":"unisex"},
-  {"id":161,"name":"ロート製薬 メラノCC 薬用しみ対策 美白化粧水","brand":"ロート製薬","category":"化粧水","price":990,"rating":4.4,"reviews":5432,"skin":["普通肌","脂性肌"],"concern":["シミ・くすみ","毛穴の開き・黒ずみ"],"desc":"ビタミンC＋アルピニアホワイト配合の薬用美白化粧水。さっぱりした使い心地でシミ予防、プチプラ。","keyIngredients":["ビタミンC誘導体","アルピニアホワイト","グリチルリチン酸"],"icon":"🍊","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/matsukiyo/cabinet/d0103/4987241198900_1.jpg?_ex=300x300","audience":"unisex"},
+  {"id":161,"name":"ロート製薬 メラノCC 薬用しみ対策 美白化粧水","brand":"ロート製薬","category":"化粧水","price":990,"rating":4.4,"reviews":5432,"skin":["普通肌","脂性肌"],"concern":["シミ・くすみ","毛穴の開き・黒ずみ"],"desc":"ビタミンC＋アルピニアホワイト配合の薬用美白化粧水。さっぱりした使い心地でシミ予防、プチプラ。","keyIngredients":["ビタミンC誘導体","アルピニアホワイト","グリチルリチン酸"],"icon":"🍊","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/matsukiyo/cabinet/d0103/4987241198900_1.jpg?_ex=300x300","audience":"unisex","editorPhoto":"/images/editor/melano-cc-lotion.jpg","editorPhotoAlt":"メラノCC 薬用しみ対策 美白化粧水のパッケージ","editorNote":"同ブランドの美容液と合わせて使用しています。さらっとした使用感で、ベタつきが苦手な方にも使いやすい印象でした。","reviewedByEditor":true,"editorReviewedAt":"2026-07-26"},
   {"id":162,"name":"OLAY レチノール24 ナイトモイスチャライザー","brand":"オレイ","category":"保湿クリーム","price":3980,"rating":4.4,"reviews":2341,"skin":["普通肌","乾燥肌"],"concern":["シワ・たるみ","乾燥・かさつき"],"desc":"レチノール＋ナイアシンアミド配合の夜用クリーム。翌朝のなめらかさとハリをサポートする実力派。","keyIngredients":["レチノール","ナイアシンアミド","ペプチド"],"icon":"🌙","origin":"アメリカ","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/womensfitness/cabinet/item/zy_14001-16000/zy-14453.jpg?_ex=300x300","audience":"unisex"},
   {"id":163,"name":"コーセー ジュレーム ヘアマスク","brand":"コーセー","category":"パック・マスク","price":1320,"rating":4.3,"reviews":2103,"skin":["全肌質"],"concern":["乾燥・かさつき"],"desc":"傷んだ髪を集中補修するヘアマスク。アミノ酸配合でしっとりまとまる髪へ導くヘアケアアイテム。","keyIngredients":["アミノ酸","アルガンオイル","ハチミツ"],"icon":"💇","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/at-life/cabinet/2021c/4971710523645.jpg?_ex=300x300","audience":"unisex"},
   {"id":165,"name":"ファンケル ディープクリア洗顔パウダー","brand":"ファンケル","category":"洗顔","price":1980,"rating":4.5,"reviews":3210,"skin":["全肌質","混合肌"],"concern":["毛穴の開き・黒ずみ"],"desc":"酵素＋吸着泥配合の洗顔パウダー。毛穴の黒ずみ・角栓をオフしながら、うるおいを守って洗い上げる。","keyIngredients":["プロテアーゼ","モロッコ溶岩クレイ","ヒアルロン酸"],"icon":"🧴","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/rakuten24-cosmetics/cabinet/344/4908049568344.jpg?_ex=300x300","audience":"unisex"},
@@ -1969,7 +1977,7 @@ const PRODUCTS=[
   {"id":204,"name":"Torriden ソルベ クリーム","brand":"Torriden","category":"保湿クリーム","price":2860,"rating":4.5,"reviews":1230,"skin":["乾燥肌","混合肌"],"concern":["乾燥・かさつき"],"desc":"とろけるソルベのようなテクスチャーの保湿クリーム。低分子ヒアルロン酸でみずみずしくうるおう韓国品。","keyIngredients":["低分子ヒアルロン酸","パンテノール","セラミド"],"icon":"🍧","origin":"韓国","purchase":"https://www.qoo10.jp/","audience":"unisex"},
   {"id":205,"name":"d プログラム 薬用 アクネケア エッセンス","brand":"資生堂","category":"美容液","price":3850,"rating":4.4,"reviews":1340,"skin":["敏感肌","混合肌"],"concern":["ニキビ・吹き出物","肌荒れ・赤み"],"desc":"敏感肌のための薬用ニキビケア美容液。うるおいを与えながら繰り返すニキビ・肌荒れを防ぐ。","keyIngredients":["トラネキサム酸","グリチルリチン酸","ヒアルロン酸"],"icon":"🛡️","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/matsuya-cosme/cabinet/img/45142549536791808.jpg?_ex=300x300","audience":"unisex"},
   {"id":206,"name":"CICA デイリースージングトナーパッド メガ","brand":"VT Cosmetics","category":"化粧水","price":2640,"rating":4.5,"reviews":2100,"skin":["敏感肌","混合肌"],"concern":["肌荒れ・赤み","毛穴の開き・黒ずみ"],"desc":"CICA配合の大容量トナーパッド。拭き取りで角質ケアと鎮静を同時に、コスパの良い韓国の人気品。","keyIngredients":["CICA","パンテノール","BHA"],"icon":"🍀","origin":"韓国","purchase":"https://www.qoo10.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/neocosme/cabinet/12828955/compass1752039928.jpg?_ex=300x300","audience":"unisex"},
-  {"id":207,"name":"ビオレ おうちdeエステ 洗顔ジェル","brand":"花王","category":"洗顔","price":660,"rating":4.3,"reviews":3120,"skin":["全肌質","混合肌"],"concern":["毛穴の開き・黒ずみ"],"desc":"マッサージしながら毛穴汚れをオフする洗顔ジェル。なめらかな肌に整えるプチプラのスペシャルケア。","keyIngredients":["温感ジェル","グリセリン"],"icon":"♨️","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/k-server/cabinet/imgdir110/4901301342904-sale_1.jpg?_ex=300x300","audience":"unisex"},
+  {"id":207,"name":"ビオレ おうちdeエステ 洗顔ジェル","brand":"花王","category":"洗顔","price":660,"rating":4.3,"reviews":3120,"skin":["全肌質","混合肌"],"concern":["毛穴の開き・黒ずみ"],"desc":"マッサージしながら毛穴汚れをオフする洗顔ジェル。なめらかな肌に整えるプチプラのスペシャルケア。","keyIngredients":["温感ジェル","グリセリン"],"icon":"♨️","origin":"日本","purchase":"https://www.amazon.co.jp/","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/k-server/cabinet/imgdir110/4901301342904-sale_1.jpg?_ex=300x300","audience":"unisex","editorPhoto":"/images/editor/biore-ouchi-de-esthe-gel.jpg","editorPhotoAlt":"ビオレ おうちdeエステ 洗顔ジェルのパッケージ","editorTexturePhoto":"/images/editor/biore-ouchi-de-esthe-gel-texture.jpg","editorTexturePhotoAlt":"ビオレ おうちdeエステ 洗顔ジェルを手の甲に出したテクスチャ","editorNote":"鼻や顎のざらつきが、使用後にはっきり気にならなくなりました。洗い上がりの肌がなめらかになる感覚があり、ざらつきが気になる時期に使いやすい一本です。ジェルは炭配合で見た目が黒く、テクスチャはとろみのあるタイプです。","reviewedByEditor":true,"editorReviewedAt":"2026-07-26"},
   {"id":208,"name":"オルビス ミスター3ステップセット フォーミングウォッシュ エッセンスローション","brand":"ORBIS Mr.","category":"化粧水","price":6490,"rating":4.6,"reviews":97,"skin":["混合肌","脂性肌"],"concern":["乾燥・かさつき"],"desc":"ORBIS Mr.のメンズ向け化粧水。皮脂と乾燥のバランスに配慮した設計で、朝晩のケアに使いやすい定番のひとつ。","keyIngredients":["保湿成分"],"icon":"💧","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00txe1n.k90d643f.g00txe1n.k90d7f06/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Forbis-shop%2Fset_o0075%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Forbis-shop%2Fi%2F10000520%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/orbis-shop/cabinet/orbis_prd/event/set_o0075_2607mt02.jpg?_ex=512x512","audience":"mens"},
   {"id":209,"name":"UNO スキンセラムウォーター f 化粧水 200mL","brand":"UNO","category":"化粧水","price":3401,"rating":4.2,"reviews":0,"skin":["混合肌","脂性肌"],"concern":["乾燥・かさつき"],"desc":"UNOのメンズ向け化粧水。皮脂と乾燥のバランスに配慮した設計で、朝晩のケアに使いやすい定番のひとつ。","keyIngredients":["保湿成分"],"icon":"💧","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00qn2hn.k90d6551.g00qn2hn.k90d7132/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fauc-ulmax%2Fdk-4550516494672_3%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fauc-ulmax%2Fi%2F12235712%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/auc-ulmax/cabinet/zg109/4550516494672.jpg?_ex=512x512","audience":"mens"},
   {"id":210,"name":"ニベアメン アクティブエイジローション","brand":"ニベアメン","category":"化粧水","price":1806,"rating":4.6,"reviews":20,"skin":["混合肌","脂性肌"],"concern":["シワ・たるみ"],"desc":"ニベアメンのメンズ向け化粧水。皮脂と乾燥のバランスに配慮した設計で、朝晩のケアに使いやすい定番のひとつ。","keyIngredients":["保湿成分"],"icon":"💧","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00r136n.k90d68ff.g00r136n.k90d7778/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4901301379337%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakuten24%2Fi%2F10997678%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/rakuten24/cabinet/337/4901301379337.jpg?_ex=512x512","audience":"mens"},
@@ -2003,7 +2011,14 @@ const PRODUCTS=[
   {"name":"ニベアメン センシティブ クール アフターシェーブバーム","brand":"ニベアメン","category":"アフターシェーブ","price":2659,"rating":4.2,"reviews":0,"skin":["混合肌","脂性肌"],"concern":["肌荒れ・赤み"],"desc":"ニベアメンのメンズ向けアフターシェーブローション。皮脂と乾燥のバランスに配慮した設計で、朝晩のケアに使いやすい定番のひとつ。","keyIngredients":["保湿成分"],"icon":"💈","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00uhdan.k90d6a5e.g00uhdan.k90d7b78/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcmga%2Fwm-01610%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fcmga%2Fi%2F10022061%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/cmga/cabinet/item/wm_00000-02000/wm-01610.jpg?_ex=512x512","audience":"mens","id":238},
   {"name":"ギャツビー プレシェーブ ローション","brand":"GATSBY","category":"アフターシェーブ","price":587,"rating":4.4,"reviews":49,"skin":["混合肌","脂性肌"],"concern":["肌荒れ・赤み"],"desc":"GATSBYのメンズ向けアフターシェーブローション。皮脂と乾燥のバランスに配慮した設計で、朝晩のケアに使いやすい定番のひとつ。","keyIngredients":["保湿成分"],"icon":"💈","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00r136n.k90d68ff.g00r136n.k90d7778/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2Fa001223385013%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakuten24%2Fi%2F10021254%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/rakuten24/cabinet/296/45048296.jpg?_ex=512x512","audience":"mens","id":239},
   {"name":"POLA ポーラ ギャラントムII アフターシェーブローション 180ml 男性用","brand":"POLA","category":"アフターシェーブ","price":3730,"rating":4.2,"reviews":0,"skin":["混合肌","脂性肌"],"concern":["肌荒れ・赤み"],"desc":"POLAのメンズ向けアフターシェーブローション。皮脂と乾燥のバランスに配慮した設計で、朝晩のケアに使いやすい定番のひとつ。","keyIngredients":["保湿成分"],"icon":"💈","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00url9n.k90d63c6.g00url9n.k90d758b/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fcosmelifeshop%2F4953923319161-1%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fcosmelifeshop%2Fi%2F10003379%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/cosmelifeshop/cabinet/marason-1/4953923319161-1.jpg?_ex=512x512","audience":"mens","id":240},
-  {"name":"ロート スキンアクア ネクスタ シールド セラム UV ミルク 50ml","brand":"ロート製薬","category":"日焼け止め","price":1662,"rating":4.2,"reviews":3,"skin":["混合肌","脂性肌"],"concern":["シミ・くすみ"],"desc":"ロート製薬のメンズ向け日焼け止め。皮脂と乾燥のバランスに配慮した設計で、朝晩のケアに使いやすい定番のひとつ。","keyIngredients":["保湿成分"],"icon":"☀️","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00scoyn.k90d614d.g00scoyn.k90d74c7/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsugartime%2Fkzrt-476%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsugartime%2Fi%2F10135048%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/sugartime/cabinet/kz/kzrt/kzrt-476.jpg?_ex=512x512","audience":"mens","id":241}
+  {"name":"ロート スキンアクア ネクスタ シールド セラム UV ミルク 50ml","brand":"ロート製薬","category":"日焼け止め","price":1662,"rating":4.2,"reviews":3,"skin":["混合肌","脂性肌"],"concern":["シミ・くすみ"],"desc":"ロート製薬のメンズ向け日焼け止め。皮脂と乾燥のバランスに配慮した設計で、朝晩のケアに使いやすい定番のひとつ。","keyIngredients":["保湿成分"],"icon":"☀️","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00scoyn.k90d614d.g00scoyn.k90d74c7/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fsugartime%2Fkzrt-476%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fsugartime%2Fi%2F10135048%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/sugartime/cabinet/kz/kzrt/kzrt-476.jpg?_ex=512x512","audience":"mens","id":241},
+  {"id":242,"name":"KATAN Cica ダーマヒットセラム5 30g シカ ニードルショット 敏感肌","brand":"KATAN","category":"美容液","price":4581,"rating":4.2,"reviews":0,"skin":["敏感肌","混合肌"],"concern":["肌荒れ・赤み","ニキビ・吹き出物"],"desc":"ツボクサエキス(CICA)配合の韓国発の美容液。肌荒れが気になるときの鎮静ケア向けとして販売されているアイテム。","keyIngredients":["CICA(ツボクサエキス)","保湿成分"],"icon":"🌿","origin":"韓国","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00uqtyn.k90d6b92.g00uqtyn.k90d7cc0/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Ffortuness%2F20260608003546_110%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Ffortuness%2Fi%2F10087537%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/fortuness/cabinet/r_2026060707/20260608003546_110_1.jpg?_ex=512x512","audience":"unisex","editorPhoto":"/images/editor/katan-cica-serum.jpg","editorPhotoAlt":"KATAN CICA DERMA HIT SERUM 5 のパッケージ","editorTexturePhoto":"/images/editor/katan-cica-serum-texture.jpg","editorTexturePhotoAlt":"KATAN CICA DERMA HIT SERUM 5 を手の甲に出したテクスチャ","editorNote":"塗るとかなりチクチクする刺激がありました。編集部スタッフは乾燥性の敏感肌ですが、刺激のわりに実感は得られませんでした。刺激に弱い方は、まず少量で試すことをおすすめします。","reviewedByEditor":true,"editorReviewedAt":"2026-07-26"},
+  {"id":243,"name":"キュレル クリーム ジャー 90g ／医薬部外品 花王 潤浸保湿 セラミド 乾燥性","brand":"キュレル","category":"保湿クリーム","price":1650,"rating":4.9,"reviews":138,"skin":["敏感肌","乾燥肌"],"concern":["乾燥・かさつき"],"desc":"セラミドケア成分配合の保湿クリーム。全身に使える大容量ジャータイプで、低刺激設計をうたう乾燥肌向けの定番。","keyIngredients":["セラミド機能成分","ユーカリエキス","グリセリン"],"icon":"🧴","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00s6cvn.k90d6ac5.g00s6cvn.k90d784c/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fnanohanadrg%2F4901301210708%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fnanohanadrg%2Fi%2F10000101%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/nanohanadrg/cabinet/syohin/202101/4901301210708a.jpg?_ex=512x512","audience":"unisex","editorPhoto":"/images/editor/curel-moisture-cream-jar.jpg","editorPhotoAlt":"キュレル 潤浸保湿 クリーム(ジャータイプ)のパッケージ","editorNote":"もともと同ブランドのフェイスクリームを使っていましたが、コスパを優先してボディ用を顔にも流用しています。フェイス用のときに感じた肌の調子の良さは、ボディ用では同じようには感じませんでした。価格を最優先する場合の選択肢です。","reviewedByEditor":true,"editorReviewedAt":"2026-07-26"},
+  {"id":244,"name":"メラノCC 薬用 しみ集中対策 プレミアム美容液 20ml","brand":"ロート製薬","category":"美容液","price":1480,"rating":4.6,"reviews":121,"skin":["普通肌","混合肌","脂性肌"],"concern":["シミ・くすみ","ニキビ・吹き出物"],"desc":"活性型ビタミンC配合の薬用美容液のプレミアム処方。メラニンの生成を抑え、しみ・そばかすを防ぐ医薬部外品。","keyIngredients":["活性型ビタミンC","ビタミンE誘導体","アルピニアホワイト"],"icon":"🍋","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00tynxn.k90d6212.g00tynxn.k90d7982/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fkzstore%2F4987241168583%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fkzstore%2Fi%2F10000850%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/kzstore/cabinet/amayahoo/10812595/imgrc0099741317.jpg?_ex=512x512","audience":"unisex","editorPhoto":"/images/editor/melano-cc-premium-serum.jpg","editorPhotoAlt":"メラノCC 薬用しみ集中対策 プレミアム美容液のパッケージ","editorNote":"塗ったあとに顔がポカポカと温かくなる感覚があります。編集部スタッフの実感としては、通常版よりもこちらのほうが使用中の肌の調子が落ち着いていました。ただし温感があるため、刺激が気になる方は注意してください。","reviewedByEditor":true,"editorReviewedAt":"2026-07-26"},
+  {"id":245,"name":"スキンライフ 薬用洗顔フォーム","brand":"牛乳石鹸","category":"洗顔","price":466,"rating":4.2,"reviews":4,"skin":["混合肌","脂性肌","敏感肌"],"concern":["ニキビ・吹き出物","肌荒れ・赤み"],"desc":"ニキビを防ぐ薬用洗顔フォーム。うるおいを守りながら余分な皮脂と汚れを落とす、プチプラの定番医薬部外品。","keyIngredients":["イソプロピルメチルフェノール","グリチルリチン酸2K","植物性うるおい成分"],"icon":"🐄","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00r136n.k90d68ff.g00r136n.k90d7778/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4901525010245%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakuten24%2Fi%2F11103256%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/rakuten24/cabinet/245/4901525010245.jpg?_ex=512x512","audience":"unisex","editorPhoto":"/images/editor/skinlife-face-wash.jpg","editorPhotoAlt":"カウブランド スキンライフ 薬用洗顔フォームのパッケージ","editorTexturePhoto":"/images/editor/skinlife-face-wash-texture.jpg","editorTexturePhotoAlt":"カウブランド スキンライフ 薬用洗顔フォームを手の甲に出したテクスチャ","editorNote":"編集部スタッフが継続使用しているなかで、最も手応えを感じた洗顔料です。使い始めてから肌が荒れにくくなったと感じています。ただし、すでにできてしまったものへの実感はありませんでした。「予防として日々使う」位置づけの一本だと考えています。","reviewedByEditor":true,"editorReviewedAt":"2026-07-26"},
+  {"id":246,"name":"ロート製薬 肌ラボ 極潤プレミアム 特濃 ヒアルロン乳液 140mL","brand":"ロート製薬","category":"保湿クリーム","price":1157,"rating":4.2,"reviews":2,"skin":["乾燥肌","普通肌"],"concern":["乾燥・かさつき"],"desc":"5種のヒアルロン酸配合の高保湿乳液。とろみのあるテクスチャで、乾燥しやすい肌にうるおいを与える設計。","keyIngredients":["5種のヒアルロン酸","スーパーヒアルロン酸","乳酸発酵ヒアルロン酸"],"icon":"💧","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00ru0on.k90d69a9.g00ru0on.k90d7d57/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fat-life%2F4987241167029%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fat-life%2Fi%2F11981305%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/at-life/cabinet/2020c/4987241167029.jpg?_ex=512x512","audience":"unisex","editorPhoto":"/images/editor/hadalabo-gokujyun-premium-milk.jpg","editorPhotoAlt":"肌ラボ 極潤プレミアム ヒアルロン乳液のパッケージ","editorNote":"とろみのあるテクスチャで、保湿重視の乳液です。","reviewedByEditor":true,"editorReviewedAt":"2026-07-26"},
+  {"id":247,"name":"クラシエ 肌美精 大人のニキビ対策 薬用美白化粧水 200mL 医薬部外品","brand":"クラシエ","category":"化粧水","price":1028,"rating":4.6,"reviews":29,"skin":["混合肌","乾燥肌"],"concern":["ニキビ・吹き出物","シミ・くすみ"],"desc":"大人ニキビと美白ケアを両立する薬用化粧水。ニキビを防ぎながら、メラニンの生成を抑えてしみ・そばかすを防ぐ医薬部外品。","keyIngredients":["トラネキサム酸","グリチルリチン酸2K","高純度ビタミンC誘導体"],"icon":"🌸","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00ru0on.k90d69a9.g00ru0on.k90d7d57/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fat-life%2F4901417621726%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fat-life%2Fi%2F10115333%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/at-life/cabinet/ebase-a01/4901417621726.jpg?_ex=512x512","audience":"unisex","editorPhoto":"/images/editor/hadabisei-acne-lotion.jpg","editorPhotoAlt":"肌美精 大人のニキビ対策 薬用美白化粧水のパッケージ","editorNote":"同シリーズのクリームと合わせて使用しています。価格に対して保湿感がしっかりあり、乾燥しやすい冬場にも問題なく使えました。コスパ重視で選ぶ場合の候補です。","reviewedByEditor":true,"editorReviewedAt":"2026-07-26"},
+  {"id":248,"name":"肌美精 大人のニキビ対策 薬用美白クリーム 50g 医薬部外品","brand":"クラシエ","category":"保湿クリーム","price":855,"rating":4.2,"reviews":4,"skin":["混合肌","乾燥肌"],"concern":["ニキビ・吹き出物","シミ・くすみ"],"desc":"大人ニキビと美白ケアを両立する薬用クリーム。うるおいを与えながらニキビを防ぎ、しみ・そばかすを防ぐ医薬部外品。","keyIngredients":["トラネキサム酸","グリチルリチン酸2K","高純度ビタミンC誘導体"],"icon":"🌸","origin":"日本","purchase":"https://hb.afl.rakuten.co.jp/hgc/g00ru0on.k90d69a9.g00ru0on.k90d7d57/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fat-life%2F4901417621733-kksale%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Fat-life%2Fi%2F10320058%2F&rafcid=wsc_i_is_6e52c157-bc4a-4984-b6d4-2eee68af45d6","image":"https://thumbnail.image.rakuten.co.jp/@0_mall/at-life/cabinet/ebase-a01/4901417621733.jpg?_ex=512x512","audience":"unisex","editorPhoto":"/images/editor/hadabisei-acne-cream.jpg","editorPhotoAlt":"肌美精 大人のニキビ対策 薬用美白クリームのパッケージ","editorNote":"同シリーズの化粧水とセットで使用。しっかり保湿されるので、この価格帯としては満足度が高いと感じました。冬場も使えています。","reviewedByEditor":true,"editorReviewedAt":"2026-07-26"}
 ];
 
 // ===== 商品数の単一の真実の源(SSoT) =====
@@ -2266,39 +2281,54 @@ function prosConsData(p){
   return {pros,cons,fit:[...new Set(fit)].slice(0,4),unfit:unfit.slice(0,3)};
 }
 
-// ===== 一次情報バッジ（休眠コンポーネント）=====
+// ===== 一次情報コンポーネント（2026-07-26 に11商品で有効化）=====
 // PRODUCTS配列(この下の const PRODUCTS=[...]) の商品オブジェクトに以下フィールドを追加すると、
 // 商品モーダルおよび静的商品ページに「編集部の一次情報」ブロックが自動表示される。
-// 未設定の商品では何も表示されない（現状は全207商品で未設定＝表示なし＝仕様通り）。
+// フィールド未設定の商品では何も表示されない（現在は11商品のみ設定済み）。
 //
 // 入力例（PRODUCTS配列の該当商品オブジェクトに追記する）：
 //   {
 //     ...既存フィールド...,
-//     editorPhoto: "https://moilum.asutelu.com/img/editorial/1-hand.jpg",
-//     measuredData: { "pH": "5.5", "内容量": "150ml", "実売価格(2026-07時点)": "¥1,650" },
+//     editorPhoto: "/images/editor/skinlife-face-wash.jpg",
+//     editorPhotoAlt: "カウブランド スキンライフ 薬用洗顔フォームのパッケージ",
+//     editorTexturePhoto: "/images/editor/skinlife-face-wash-texture.jpg",   // 任意
+//     editorTexturePhotoAlt: "…を手の甲に出したテクスチャ",                   // 任意
+//     editorNote: "編集部スタッフが継続使用しているなかで…",
 //     reviewedByEditor: true,
-//     editorNote: "編集部で2週間使用。朝はやや重めに感じたが夜のみ使用で肌の落ち着きを感じた。"
+//     editorReviewedAt: "2026-07-26"
 //   }
-// 4フィールドとも任意。一部だけの入力でも該当バッジ・該当ブロックだけが表示される。
+// editorNote は編集部の実体験メモ。加筆・創作はせず、書かれた内容のみを表示する。
 // 静的商品ページ側にも同じロジックを移植済み（build-product-pages.mjs の primarySourceHtml()）。
 // SPA側とビルド側で表示が一致するよう、フィールドを追加する場合は src/products.json にも同期のこと。
+// 商品カード等に付ける小さな「編集部使用」バッジ。
+// reviewedByEditor が true の商品(=編集部が実際に購入・使用した11商品)にのみ表示される。
+function editorUsedBadge(p){
+  return p&&p.reviewedByEditor===true
+    ? '<span class="editor-used-badge" title="編集部が実際に購入・使用した商品です">📷 編集部使用</span>'
+    : "";
+}
+
 function primarySourceHtml(p){
   const hasPhoto=!!p.editorPhoto;
-  const hasMeasured=p.measuredData&&typeof p.measuredData==="object"&&Object.keys(p.measuredData).length>0;
+  const hasTexture=!!p.editorTexturePhoto;
   const hasReview=p.reviewedByEditor===true;
   const hasNote=!!p.editorNote;
-  if(!hasPhoto&&!hasMeasured&&!hasReview&&!hasNote) return "";
+  if(!hasPhoto&&!hasTexture&&!hasReview&&!hasNote) return "";
   const badges=[];
-  if(hasPhoto)    badges.push('<span class="ps-badge">📸 編集部撮影</span>');
-  if(hasMeasured) badges.push('<span class="ps-badge">📏 実測データ</span>');
-  if(hasReview)   badges.push('<span class="ps-badge">✍️ 編集部使用レビュー</span>');
-  if(hasNote&&!hasReview) badges.push('<span class="ps-badge">📝 編集部メモ</span>');
+  if(hasReview)   badges.push('<span class="ps-badge">📷 編集部が実際に使用</span>');
+  if(hasPhoto)    badges.push('<span class="ps-badge">編集部撮影</span>');
+  if(hasTexture)  badges.push('<span class="ps-badge">テクスチャ写真</span>');
+  if(hasNote&&!hasReview) badges.push('<span class="ps-badge">編集部メモ</span>');
+  const reviewedAt=p.editorReviewedAt?String(p.editorReviewedAt).slice(0,7).replace("-","年")+"月":"2026年7月";
+  const photos=[];
+  if(hasPhoto) photos.push(`<figure class="ps-figure"><img class="ps-photo" src="${p.editorPhoto}" alt="${p.editorPhotoAlt||p.name+"のパッケージ"}" loading="lazy" decoding="async"><figcaption>パッケージ</figcaption></figure>`);
+  if(hasTexture) photos.push(`<figure class="ps-figure"><img class="ps-photo" src="${p.editorTexturePhoto}" alt="${p.editorTexturePhotoAlt||p.name+"のテクスチャ"}" loading="lazy" decoding="async"><figcaption>テクスチャ（手の甲）</figcaption></figure>`);
   return `<div class="primary-source">
     <div class="ps-header">🌱 編集部の一次情報 <span class="ps-badges">${badges.join("")}</span></div>
-    ${hasPhoto?`<img class="ps-photo" src="${p.editorPhoto}" alt="編集部撮影 - ${p.name}" loading="lazy">`:""}
-    ${hasMeasured?`<dl class="ps-measured">${Object.entries(p.measuredData).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>`:""}
+    ${photos.length?`<div class="ps-photos">${photos.join("")}</div>`:""}
     ${hasNote?`<p class="ps-note">${p.editorNote}</p>`:""}
-    <div class="ps-disclaimer">※ 編集部が実際に確認・使用した一次情報です。個人の感想を含みます。</div>
+    <div class="ps-meta">編集部が実際に購入・使用した商品です（${reviewedAt}時点）</div>
+    <div class="ps-disclaimer">※個人の感想であり、効果を保証するものではありません。</div>
   </div>`;
 }
 
@@ -2431,8 +2461,11 @@ function appendMoreProducts(){
         ${i<3?`<span class="card-rank-badge">🏆 ${i+1}位</span>`:""}
         ${productImage(p)}
       </div>
-      <div style="display:flex;justify-content:space-between;align-items:flex-start">
-        <span class="card-tag">${p.category}</span>
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:6px">
+        <span style="display:flex;gap:5px;flex-wrap:wrap;align-items:center">
+          <span class="card-tag">${p.category}</span>
+          ${editorUsedBadge(p)}
+        </span>
         <span style="font-size:24px">${p.icon}</span>
       </div>
       <a href="/products/${p.id}" class="card-name-link" onclick="event.preventDefault();navigateToProduct(${p.id})"><div class="card-name">${p.name}</div></a>
@@ -2583,9 +2616,11 @@ function renderRecoFeed(){
 function applyFilters(){
   const q=document.getElementById("search").value.toLowerCase();
   let list=SKINCARE_PRODUCTS;
-  // カテゴリボタン: "mens" は明確なメンズ商品のみを絞り込み(31件)、
+  // カテゴリボタン: "mens" は明確なメンズ商品のみを絞り込み、
+  // "editor-used" は編集部が実際に購入・使用した一次情報つき商品のみ、
   // "アイケア" と他カテゴリは既存の p.category マッチ
   if(currentFilter==="mens") list=list.filter(p=>p.audience==="mens");
+  else if(currentFilter==="editor-used") list=list.filter(p=>p.reviewedByEditor===true);
   else if(currentFilter==="アイケア") list=list.filter(p=>p.category==="アイケア");
   else if(currentFilter!=="all") list=list.filter(p=>p.category===currentFilter);
   if(q) list=list.filter(p=>
@@ -2813,7 +2848,7 @@ function relatedProductsHtml(p){
     <div class="related-grid">
       ${rel.map(r=>`<div class="related-card" onclick="openDetail(${r.id})">
         ${r.image?`<img src="${r.image}" alt="${r.name}" loading="lazy">`:`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${r.icon}</div>`}
-        <div class="rc-name">${r.name}</div>
+        ${editorUsedBadge(r)}<div class="rc-name">${r.name}</div>
         <div class="rc-price">¥${r.price.toLocaleString()}</div>
       </div>`).join("")}
     </div>
@@ -2942,7 +2977,7 @@ function openBrandStory(name){
       const variant=cardVariant(p,-1);
       return `<div class="card ${variant}" onclick="openDetail(${p.id})">
         <div class="card-img">${productImage(p)}</div>
-        <span class="card-tag">${p.category}</span>
+        <span class="card-tag">${p.category}</span>${editorUsedBadge(p)}
         <div class="card-name">${p.name}</div>
         <div class="card-brand">${p.brand}</div>
         <div class="card-price">¥${p.price.toLocaleString()}</div>
@@ -2952,7 +2987,7 @@ function openBrandStory(name){
     <div class="grid">${rest.map(p=>`
       <div class="card" onclick="openDetail(${p.id})">
         <div class="card-img">${productImage(p)}</div>
-        <span class="card-tag">${p.category}</span>
+        <span class="card-tag">${p.category}</span>${editorUsedBadge(p)}
         <div class="card-name">${p.name}</div>
         <div class="card-price">¥${p.price.toLocaleString()}</div>
       </div>`).join("")}</div>`:""}
@@ -3398,8 +3433,10 @@ function diagnose(){
       ${recommended.length?`<div class="grid">${recommended.map(p=>`
         <div class="card" onclick="openDetail(${p.id})">
           <div class="card-img">${productImage(p)}</div>
-          <div style="display:flex;justify-content:space-between">
-            <span class="card-tag">${p.category}</span>
+          <div style="display:flex;justify-content:space-between;gap:6px">
+            <span style="display:flex;gap:5px;flex-wrap:wrap;align-items:center">
+              <span class="card-tag">${p.category}</span>${editorUsedBadge(p)}
+            </span>
             <span style="font-size:24px">${p.icon}</span>
           </div>
           <div class="card-name">${p.name}</div>
@@ -6116,7 +6153,7 @@ function openColumn(id){
         <div class="related-grid">
           ${allRel.map(p=>`<div class="related-card" onclick="closeColumnToProduct(${p.id})">
             ${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${p.icon}</div>`}
-            <div class="rc-name">${p.name}</div>
+            ${editorUsedBadge(p)}<div class="rc-name">${p.name}</div>
             <div class="rc-price">¥${p.price.toLocaleString()}</div>
           </div>`).join("")}
         </div>
@@ -6148,7 +6185,7 @@ function renderSectionRecs(){
       <div class="related-grid">
         ${items.map(r=>`<div class="related-card" onclick="closeColumnToProduct(${r.id})">
           ${r.image?`<img src="${r.image}" alt="${r.name}" loading="lazy">`:`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${r.icon}</div>`}
-          <div class="rc-name">${r.name}</div>
+          ${editorUsedBadge(r)}<div class="rc-name">${r.name}</div>
           <div class="rc-price">¥${r.price.toLocaleString()}</div>
         </div>`).join("")}
       </div>`;
