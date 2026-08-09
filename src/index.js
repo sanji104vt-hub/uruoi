@@ -1,10 +1,11 @@
 // Cloudflare Worker: SEO用個別URL対応
 // - "/products/{id}" → /products/{id}.html (静的ビルド済み軽量HTML)
-// - "/columns/{slug}" → /index.html (SPA側でルーティング)
+// - "/columns/{slug}" → /columns/{slug}.html (静的ビルド済み軽量HTML)
 // - "/sitemap.xml" → 動的生成 (PRODUCTS + COLUMNS + 静的ページ)
 // - それ以外 → 静的アセットを素通し
 //
-// 軽量商品ページは build-product-pages.mjs で事前生成し public/products/*.html に配置済み。
+// 軽量商品ページは build-product-pages.mjs、軽量コラムページは build-column-pages.mjs で
+// 事前生成し public/products/*.html / public/columns/*.html に配置済み。
 // Sillage の /public/columns/{slug}.html と同パターン。
 
 import PRODUCTS from "./products.json";
@@ -12,66 +13,9 @@ import COLUMNS from "./columns.json";
 import GUIDE_SLUGS from "./guides-slugs.json";
 
 const SITE_ORIGIN = "https://moilum.asutelu.com";
-const OGP_IMAGE = SITE_ORIGIN + "/ogp-image.png";
-
-// 商品数の単一の真実の源(SSoT)。以下を除外してカウント:
-//   - productType === "makeup" (メイクアップ・ボディケア商品)
-//   - status === "previous_generation" (世代違い旧品)
-// メタ description 等に {{SKINCARE_COUNT}} プレースホルダを含む場合は本値で置換する。
-const SKINCARE_COUNT = PRODUCTS.filter(p =>
-  p.productType !== "makeup" && p.status !== "previous_generation"
-).length;
-function substituteCount(s){ return String(s || "").replace(/\{\{SKINCARE_COUNT\}\}/g, SKINCARE_COUNT); }
 
 function escapeXml(s){
   return String(s).replace(/[<>&'"]/g, c=>({"<":"&lt;",">":"&gt;","&":"&amp;","'":"&apos;","\"":"&quot;"}[c]));
-}
-
-// SPA(index.html)のheadを書き換えてコラム個別URL用にする
-function rewriteColumnHead(response, c){
-  const canonical = `${SITE_ORIGIN}/columns/${c.id}`;
-  const title = `${c.title}｜Moilum スキンケアコラム`.slice(0, 68);
-  // SEO用description(120〜160字)を優先。無ければexcerptにフォールバック。
-  // {{SKINCARE_COUNT}} プレースホルダを実数(SSoT)に置換してから注入する。
-  const description = substituteCount(c.description || c.excerpt).slice(0, 160);
-  const articleJson = JSON.stringify({
-    "@context":"https://schema.org",
-    "@type":"Article",
-    "headline": c.title,
-    "description": description,
-    "articleSection": c.cat,
-    "author": {"@type":"Organization","name":"Moilum編集部"},
-    "publisher": {"@type":"Organization","name":"Moilum","logo":{"@type":"ImageObject","url": OGP_IMAGE}},
-    "mainEntityOfPage": canonical
-  });
-  // コラム個別ページ用 BreadcrumbList（トップ → スキンケアコラム → 記事タイトル）
-  const crumbJson = JSON.stringify({
-    "@context":"https://schema.org",
-    "@type":"BreadcrumbList",
-    "itemListElement":[
-      {"@type":"ListItem","position":1,"name":"Moilum","item":SITE_ORIGIN+"/"},
-      {"@type":"ListItem","position":2,"name":"スキンケアコラム","item":SITE_ORIGIN+"/column"},
-      {"@type":"ListItem","position":3,"name":c.title,"item":canonical}
-    ]
-  });
-  return new HTMLRewriter()
-    .on("title", { element(el){ el.setInnerContent(title); } })
-    .on('meta[name="description"]', { element(el){ el.setAttribute("content", description); } })
-    .on('link[rel="canonical"]', { element(el){ el.setAttribute("href", canonical); } })
-    .on('meta[property="og:title"]', { element(el){ el.setAttribute("content", title); } })
-    .on('meta[property="og:description"]', { element(el){ el.setAttribute("content", description); } })
-    .on('meta[property="og:url"]', { element(el){ el.setAttribute("content", canonical); } })
-    .on('meta[name="twitter:title"]', { element(el){ el.setAttribute("content", title); } })
-    .on('meta[name="twitter:description"]', { element(el){ el.setAttribute("content", description); } })
-    .on("head", {
-      element(el){
-        // Article と BreadcrumbList を追加注入。Organization はトップ index.html に
-        // 静的で入っており、このコラムページも同じindex.htmlをベースにするため二重注入不要。
-        el.append(`<script type="application/ld+json" data-page-jsonld="article">${articleJson}</script>`, {html: true});
-        el.append(`<script type="application/ld+json" data-page-jsonld="breadcrumb">${crumbJson}</script>`, {html: true});
-      }
-    })
-    .transform(response);
 }
 
 // /about/{slug} で公開している静的ページのallowlist（Workerリライト用）
@@ -199,15 +143,24 @@ export default {
       return env.ASSETS.fetch(new Request(fallbackUrl, request));
     }
 
-    // /columns/{slug} → SPA本体の head を書き換えて返す
+    // /columns/{slug}.html が直接共有された場合は、正規の拡張子なしURLへ301転送
+    const columnHtmlMatch = pathname.match(/^\/columns\/([a-z0-9-]+)\.html$/);
+    if (columnHtmlMatch){
+      const slug = columnHtmlMatch[1];
+      if (COLUMNS.some(x => x.id === slug)){
+        return Response.redirect(`${SITE_ORIGIN}/columns/${slug}`, 301);
+      }
+    }
+
+    // /columns/{slug} → 軽量な静的コラムページへ内部リライト
     const columnMatch = pathname.match(/^\/columns\/([a-z0-9-]+)\/?$/);
     if (columnMatch){
       const slug = columnMatch[1];
       const c = COLUMNS.find(x => x.id === slug);
       if (c){
-        const indexReq = new Request(SITE_ORIGIN + "/index.html", { method: "GET" });
-        const indexRes = await env.ASSETS.fetch(indexReq);
-        return rewriteColumnHead(new Response(indexRes.body, indexRes), c);
+        const rewriteUrl = new URL(request.url);
+        rewriteUrl.pathname = `/columns/${slug}.html`;
+        return env.ASSETS.fetch(new Request(rewriteUrl, request));
       }
       // 該当スラッグなし: トップにフォールバック
       const fallbackUrl = new URL(request.url);

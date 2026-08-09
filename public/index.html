@@ -6388,6 +6388,12 @@ renderRecoFeed();
   // 初回ロード時、URLパスから該当ページを自動で開く（Workerで差し替えたheadと整合させる）
   if (window.location.pathname !== "/" && window.location.pathname !== ""){
     openFromPath(window.location.pathname);
+  }else{
+    // 軽量コラムなど外部ページのCTAから、SPA内の指定画面を直接開く。
+    const requestedPage=new URLSearchParams(window.location.search).get("page");
+    if(["products","brands","ranking","diagnosis","column","karte","favorites"].includes(requestedPage)){
+      showPage(requestedPage);
+    }
   }
   // h1重複解消: コラム/商品個別URLで着地した場合、SPA共通Hero見出し(h1)をdivに変換する。
   // クローラーがレンダリング後のDOMを見たとき、ページの主題h1が記事タイトル1つだけになる。
