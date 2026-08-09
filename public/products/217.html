@@ -119,6 +119,7 @@ footer a{color:var(--accent);margin-right:14px}
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
+gtag('event','product_detail_view',{product_id:"217",product_name:"メンズビオレ 泡タイプ洗顔 つめかえ",product_category:"洗顔",value:880,currency:'JPY'});
 </script>
 </head>
 <body>
@@ -185,9 +186,9 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   </div>
   <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は2026年6月時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>
   <div class="buy-btns">
-    <a class="buy-btn amazon" href="https://www.amazon.co.jp/s?k=%E3%83%A1%E3%83%B3%E3%82%BA%E3%83%93%E3%82%AA%E3%83%AC%20%E3%83%A1%E3%83%B3%E3%82%BA%E3%83%93%E3%82%AA%E3%83%AC%20%E6%B3%A1%E3%82%BF%E3%82%A4%E3%83%97%E6%B4%97%E9%A1%94%20%E3%81%A4%E3%82%81%E3%81%8B%E3%81%88" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
-    <a class="buy-btn rakuten" href="https://hb.afl.rakuten.co.jp/hgc/54ebba1a.f0b1f403.54ebba1b.9f0abc5f/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2583%25A1%25E3%2583%25B3%25E3%2582%25BA%25E3%2583%2593%25E3%2582%25AA%25E3%2583%25AC%2520%25E3%2583%25A1%25E3%2583%25B3%25E3%2582%25BA%25E3%2583%2593%25E3%2582%25AA%25E3%2583%25AC%2520%25E6%25B3%25A1%25E3%2582%25BF%25E3%2582%25A4%25E3%2583%2597%25E6%25B4%2597%25E9%25A1%2594%2520%25E3%2581%25A4%25E3%2582%2581%25E3%2581%258B%25E3%2581%2588%2F" rel="nofollow sponsored noopener" target="_blank">楽天で見る</a>
-    <a class="buy-btn qoo10" href="https://www.qoo10.jp/s/?keyword=%E3%83%A1%E3%83%B3%E3%82%BA%E3%83%93%E3%82%AA%E3%83%AC%20%E3%83%A1%E3%83%B3%E3%82%BA%E3%83%93%E3%82%AA%E3%83%AC%20%E6%B3%A1%E3%82%BF%E3%82%A4%E3%83%97%E6%B4%97%E9%A1%94%20%E3%81%A4%E3%82%81%E3%81%8B%E3%81%88" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
+    <a class="buy-btn amazon" data-shop="amazon" href="https://www.amazon.co.jp/s?k=%E3%83%A1%E3%83%B3%E3%82%BA%E3%83%93%E3%82%AA%E3%83%AC%20%E3%83%A1%E3%83%B3%E3%82%BA%E3%83%93%E3%82%AA%E3%83%AC%20%E6%B3%A1%E3%82%BF%E3%82%A4%E3%83%97%E6%B4%97%E9%A1%94%20%E3%81%A4%E3%82%81%E3%81%8B%E3%81%88" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
+    <a class="buy-btn rakuten" data-shop="rakuten" href="https://af.moshimo.com/af/c/click?a_id=5738711&amp;p_id=54&amp;pc_id=54&amp;pl_id=616&amp;url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F94474%2F" rel="nofollow sponsored noopener" referrerpolicy="no-referrer-when-downgrade" target="_blank">楽天で見る</a>
+    <a class="buy-btn qoo10" data-shop="qoo10" href="https://www.qoo10.jp/s/?keyword=%E3%83%A1%E3%83%B3%E3%82%BA%E3%83%93%E3%82%AA%E3%83%AC%20%E3%83%A1%E3%83%B3%E3%82%BA%E3%83%93%E3%82%AA%E3%83%AC%20%E6%B3%A1%E3%82%BF%E3%82%A4%E3%83%97%E6%B4%97%E9%A1%94%20%E3%81%A4%E3%82%81%E3%81%8B%E3%81%88" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
   </div>
   <div class="related">
     <h2>同じカテゴリのおすすめ</h2>
@@ -219,5 +220,12 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   <div><a href="/">運営者情報</a><a href="/">プライバシーポリシー</a><a href="/">アフィリエイトについて</a></div>
   <p style="margin-top:10px">© Moilum</p>
 </footer>
+<script>
+document.querySelectorAll('.buy-btn[data-shop]').forEach(function(link){
+  link.addEventListener('click',function(){
+    gtag('event','affiliate_click',{shop:this.dataset.shop,product_id:"217",product_name:"メンズビオレ 泡タイプ洗顔 つめかえ",product_category:"洗顔",value:880,currency:'JPY'});
+  });
+});
+</script>
 </body>
 </html>

@@ -119,6 +119,7 @@ footer a{color:var(--accent);margin-right:14px}
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
+gtag('event','product_detail_view',{product_id:"220",product_name:"バルクオム BULKHOMME THE REPAIR LOTION 100ml ＋",product_category:"化粧水",value:5899,currency:'JPY'});
 </script>
 </head>
 <body>
@@ -181,9 +182,9 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   </div>
   <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は2026年6月時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>
   <div class="buy-btns">
-    <a class="buy-btn amazon" href="https://www.amazon.co.jp/s?k=BULK%20HOMME%20%E3%83%90%E3%83%AB%E3%82%AF%E3%82%AA%E3%83%A0%20BULKHOMME%20THE%20REPAIR%20LOTION%20100ml%20%EF%BC%8B" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
-    <a class="buy-btn rakuten" href="https://hb.afl.rakuten.co.jp/hgc/54ebba1a.f0b1f403.54ebba1b.9f0abc5f/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2FBULK%2520HOMME%2520%25E3%2583%2590%25E3%2583%25AB%25E3%2582%25AF%25E3%2582%25AA%25E3%2583%25A0%2520BULKHOMME%2520THE%2520REPAIR%2520LOTION%2520100ml%2520%25EF%25BC%258B%2F" rel="nofollow sponsored noopener" target="_blank">楽天で見る</a>
-    <a class="buy-btn qoo10" href="https://www.qoo10.jp/s/?keyword=BULK%20HOMME%20%E3%83%90%E3%83%AB%E3%82%AF%E3%82%AA%E3%83%A0%20BULKHOMME%20THE%20REPAIR%20LOTION%20100ml%20%EF%BC%8B" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
+    <a class="buy-btn amazon" data-shop="amazon" href="https://www.amazon.co.jp/s?k=BULK%20HOMME%20%E3%83%90%E3%83%AB%E3%82%AF%E3%82%AA%E3%83%A0%20BULKHOMME%20THE%20REPAIR%20LOTION%20100ml%20%EF%BC%8B" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
+    <a class="buy-btn rakuten" data-shop="rakuten" href="https://af.moshimo.com/af/c/click?a_id=5738711&amp;p_id=54&amp;pc_id=54&amp;pl_id=616&amp;url=https%3A%2F%2Fitem.rakuten.co.jp%2Fkurasio-en%2Fbh-rl1em1-1%2F" rel="nofollow sponsored noopener" referrerpolicy="no-referrer-when-downgrade" target="_blank">楽天で見る</a>
+    <a class="buy-btn qoo10" data-shop="qoo10" href="https://www.qoo10.jp/s/?keyword=BULK%20HOMME%20%E3%83%90%E3%83%AB%E3%82%AF%E3%82%AA%E3%83%A0%20BULKHOMME%20THE%20REPAIR%20LOTION%20100ml%20%EF%BC%8B" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
   </div>
   <div class="related">
     <h2>同じカテゴリのおすすめ</h2>
@@ -215,5 +216,12 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   <div><a href="/">運営者情報</a><a href="/">プライバシーポリシー</a><a href="/">アフィリエイトについて</a></div>
   <p style="margin-top:10px">© Moilum</p>
 </footer>
+<script>
+document.querySelectorAll('.buy-btn[data-shop]').forEach(function(link){
+  link.addEventListener('click',function(){
+    gtag('event','affiliate_click',{shop:this.dataset.shop,product_id:"220",product_name:"バルクオム BULKHOMME THE REPAIR LOTION 100ml ＋",product_category:"化粧水",value:5899,currency:'JPY'});
+  });
+});
+</script>
 </body>
 </html>

@@ -119,6 +119,7 @@ footer a{color:var(--accent);margin-right:14px}
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
+gtag('event','product_detail_view',{product_id:"99",product_name:"無印良品 エイジングケア美容液",product_category:"美容液",value:1990,currency:'JPY'});
 </script>
 </head>
 <body>
@@ -185,9 +186,9 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   </div>
   <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は2026年6月時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>
   <div class="buy-btns">
-    <a class="buy-btn amazon" href="https://www.amazon.co.jp/s?k=%E7%84%A1%E5%8D%B0%E8%89%AF%E5%93%81%20%E7%84%A1%E5%8D%B0%E8%89%AF%E5%93%81%20%E3%82%A8%E3%82%A4%E3%82%B8%E3%83%B3%E3%82%B0%E3%82%B1%E3%82%A2%E7%BE%8E%E5%AE%B9%E6%B6%B2" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
-    <a class="buy-btn rakuten" href="https://hb.afl.rakuten.co.jp/hgc/54ebba1a.f0b1f403.54ebba1b.9f0abc5f/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E7%2584%25A1%25E5%258D%25B0%25E8%2589%25AF%25E5%2593%2581%2520%25E7%2584%25A1%25E5%258D%25B0%25E8%2589%25AF%25E5%2593%2581%2520%25E3%2582%25A8%25E3%2582%25A4%25E3%2582%25B8%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25B1%25E3%2582%25A2%25E7%25BE%258E%25E5%25AE%25B9%25E6%25B6%25B2%2F" rel="nofollow sponsored noopener" target="_blank">楽天で見る</a>
-    <a class="buy-btn qoo10" href="https://www.qoo10.jp/s/?keyword=%E7%84%A1%E5%8D%B0%E8%89%AF%E5%93%81%20%E7%84%A1%E5%8D%B0%E8%89%AF%E5%93%81%20%E3%82%A8%E3%82%A4%E3%82%B8%E3%83%B3%E3%82%B0%E3%82%B1%E3%82%A2%E7%BE%8E%E5%AE%B9%E6%B6%B2" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
+    <a class="buy-btn amazon" data-shop="amazon" href="https://www.amazon.co.jp/s?k=%E7%84%A1%E5%8D%B0%E8%89%AF%E5%93%81%20%E7%84%A1%E5%8D%B0%E8%89%AF%E5%93%81%20%E3%82%A8%E3%82%A4%E3%82%B8%E3%83%B3%E3%82%B0%E3%82%B1%E3%82%A2%E7%BE%8E%E5%AE%B9%E6%B6%B2" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
+    <a class="buy-btn rakuten" data-shop="rakuten" href="https://af.moshimo.com/af/c/click?a_id=5738711&amp;p_id=54&amp;pc_id=54&amp;pl_id=616&amp;url=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E7%2584%25A1%25E5%258D%25B0%25E8%2589%25AF%25E5%2593%2581%2520%25E7%2584%25A1%25E5%258D%25B0%25E8%2589%25AF%25E5%2593%2581%2520%25E3%2582%25A8%25E3%2582%25A4%25E3%2582%25B8%25E3%2583%25B3%25E3%2582%25B0%25E3%2582%25B1%25E3%2582%25A2%25E7%25BE%258E%25E5%25AE%25B9%25E6%25B6%25B2%2F" rel="nofollow sponsored noopener" referrerpolicy="no-referrer-when-downgrade" target="_blank">楽天で見る</a>
+    <a class="buy-btn qoo10" data-shop="qoo10" href="https://www.qoo10.jp/s/?keyword=%E7%84%A1%E5%8D%B0%E8%89%AF%E5%93%81%20%E7%84%A1%E5%8D%B0%E8%89%AF%E5%93%81%20%E3%82%A8%E3%82%A4%E3%82%B8%E3%83%B3%E3%82%B0%E3%82%B1%E3%82%A2%E7%BE%8E%E5%AE%B9%E6%B6%B2" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
   </div>
   <div class="related">
     <h2>同じカテゴリのおすすめ</h2>
@@ -219,5 +220,12 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   <div><a href="/">運営者情報</a><a href="/">プライバシーポリシー</a><a href="/">アフィリエイトについて</a></div>
   <p style="margin-top:10px">© Moilum</p>
 </footer>
+<script>
+document.querySelectorAll('.buy-btn[data-shop]').forEach(function(link){
+  link.addEventListener('click',function(){
+    gtag('event','affiliate_click',{shop:this.dataset.shop,product_id:"99",product_name:"無印良品 エイジングケア美容液",product_category:"美容液",value:1990,currency:'JPY'});
+  });
+});
+</script>
 </body>
 </html>

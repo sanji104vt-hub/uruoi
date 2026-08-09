@@ -2144,8 +2144,11 @@ const AFFILIATE={
   amazonTag:"",
   // 楽天アフィリエイトID（例 "1a2b3c4d.5e6f7g8h.1a2b3c4e.9i0j1k2l"）
   rakutenId:"54ebba1a.f0b1f403.54ebba1b.9f0abc5f",
-  // もしもアフィリエイト：Amazon/楽天をまとめて使う場合のa_id等（任意）
-  moshimoAId:"",
+  // もしもアフィリエイト：楽天市場プロモーションの商品リンク用ID
+  moshimoAId:"5738711",
+  moshimoRakutenPId:"54",
+  moshimoRakutenPcId:"54",
+  moshimoRakutenPlId:"616",
   // どのショップのボタンを表示するか
   showAmazon:true,
   showRakuten:true,
@@ -2179,13 +2182,39 @@ function amazonLink(p){
   const base=`https://www.amazon.co.jp/s?k=${kw}`;
   return AFFILIATE.amazonTag?`${base}&tag=${AFFILIATE.amazonTag}`:base;
 }
-function rakutenLink(p){
+// もしも管理画面で個別発行済みの商品リンク。未発行URLを推測で上書きしない。
+const MOSHIMO_RAKUTEN_LINKS={
+  161:"https://af.moshimo.com/af/c/click?a_id=5738711&p_id=54&pc_id=54&pl_id=616&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4987241198924%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakuten24%2Fi%2F11351028%2F"
+};
+function rakutenDestination(p){
+  try{
+    const purchase=new URL(p.purchase||"");
+    if(purchase.hostname==="item.rakuten.co.jp") return purchase.href;
+    if(purchase.hostname==="hb.afl.rakuten.co.jp"){
+      const direct=purchase.searchParams.get("pc");
+      if(direct) return direct;
+    }
+  }catch(e){}
   const kw=encodeURIComponent(p.brand+" "+p.name);
-  const search=`https://search.rakuten.co.jp/search/mall/${kw}/`;
-  if(AFFILIATE.rakutenId){
-    return `https://hb.afl.rakuten.co.jp/hgc/${AFFILIATE.rakutenId}/?pc=${encodeURIComponent(search)}&m=${encodeURIComponent(search)}`;
+  return `https://search.rakuten.co.jp/search/mall/${kw}/`;
+}
+function rakutenLink(p){
+  if(MOSHIMO_RAKUTEN_LINKS[p.id]) return MOSHIMO_RAKUTEN_LINKS[p.id];
+  const destination=rakutenDestination(p);
+  if(AFFILIATE.moshimoAId){
+    const query=new URLSearchParams({
+      a_id:AFFILIATE.moshimoAId,
+      p_id:AFFILIATE.moshimoRakutenPId,
+      pc_id:AFFILIATE.moshimoRakutenPcId,
+      pl_id:AFFILIATE.moshimoRakutenPlId,
+      url:destination
+    });
+    return `https://af.moshimo.com/af/c/click?${query.toString()}`;
   }
-  return search;
+  if(AFFILIATE.rakutenId){
+    return `https://hb.afl.rakuten.co.jp/hgc/${AFFILIATE.rakutenId}/?pc=${encodeURIComponent(destination)}&m=${encodeURIComponent(destination)}`;
+  }
+  return destination;
 }
 function qoo10Link(p){
   const kw=encodeURIComponent(p.brand+" "+p.name);
@@ -2193,6 +2222,11 @@ function qoo10Link(p){
 }
 
 // クリック計測（簡易・localStorage集計）
+function trackEvent(name,params={}){
+  try{
+    if(typeof gtag==="function") gtag("event",name,params);
+  }catch(e){}
+}
 function trackClick(shop,id){
   try{
     const k="ulabo_clicks";
@@ -2206,6 +2240,14 @@ function goAffiliate(shop,id){
   const p=PRODUCTS.find(x=>x.id===id);
   if(!p) return;
   trackClick(shop,id);
+  trackEvent("affiliate_click",{
+    shop,
+    product_id:String(p.id),
+    product_name:p.name,
+    product_category:p.category,
+    value:p.price,
+    currency:"JPY"
+  });
   const url=shop==="amazon"?amazonLink(p):shop==="rakuten"?rakutenLink(p):qoo10Link(p);
   window.open(url,"_blank","noopener");
 }
@@ -2722,6 +2764,13 @@ function openDetail(id){
   }catch(e){}
   setTimeout(renderRecoFeed,50);
   if(!p) return;
+  trackEvent("product_detail_view",{
+    product_id:String(p.id),
+    product_name:p.name,
+    product_category:p.category,
+    value:p.price,
+    currency:"JPY"
+  });
   // 構造化データ：Product + offers（価格取得日をpriceValidUntilに連動）
   setJsonLd("jsonld-product",{
     "@context":"https://schema.org",
@@ -2877,6 +2926,12 @@ function addToCompare(id){
   if(compareList.includes(id)){alert("すでに追加済みです");return}
   if(compareList.length>=3){alert("比較できるのは最大3商品です");return}
   compareList.push(id);
+  const p=PRODUCTS.find(x=>x.id===id);
+  trackEvent("compare_add",{
+    product_id:String(id),
+    product_name:p?.name||"",
+    compare_count:compareList.length
+  });
   updateCompareBar();
 }
 function removeFromCompare(id){compareList=compareList.filter(x=>x!==id);updateCompareBar()}
@@ -2894,6 +2949,10 @@ function updateCompareBar(){
 function openCompareModal(){
   if(compareList.length<2){alert("2商品以上選択してください");return}
   const ps=compareList.map(id=>PRODUCTS.find(x=>x.id===id));
+  trackEvent("compare_view",{
+    compare_count:ps.length,
+    product_ids:ps.map(p=>p.id).join(",")
+  });
   const img=p=>p.image?`<img src="${p.image}" alt="${p.name}" style="width:100%;height:80px;object-fit:contain;background:#fff;border-radius:6px">`:`<div style="height:80px;display:flex;align-items:center;justify-content:center;font-size:32px">${p.icon}</div>`;
   const rows=[
     ["カテゴリ",p=>p.category],
@@ -3389,6 +3448,13 @@ function diagnose(){
   const audiencePref=getSelected("q4")||"any"; // "mens" or "any"(既定)
   if(!skin||!budget){alert("肌タイプと予算を選択してください");return}
 
+  trackEvent("diagnosis_complete",{
+    skin_type:skin,
+    budget,
+    concern_count:concerns.length,
+    audience:audiencePref
+  });
+
   const resultEl=document.getElementById("diagResult");
   resultEl.style.display="block";
 
@@ -3511,11 +3577,13 @@ function downloadShareImage(){
   link.download="moilum-diagnosis.png";
   link.href=canvas.toDataURL("image/png");
   link.click();
+  trackEvent("diagnosis_share",{method:"download"});
 }
 
 function shareTo(target){
   const url="https://moilum.asutelu.com/";
   const text="Moilumの無料肌診断で、自分に合うスキンケアが見つかった！";
+  trackEvent("diagnosis_share",{method:target});
   if(target==="x"){
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=Moilum,スキンケア`,"_blank");
   } else if(target==="line"){
@@ -3538,6 +3606,7 @@ function showPage(name){
   document.getElementById(name+"Page").classList.add("active");
   const idx=["products","brands","ranking","diagnosis","column","karte","favorites"].indexOf(name);
   document.querySelectorAll(".nav-btn")[idx]?.classList.add("active");
+  if(name==="diagnosis") trackEvent("diagnosis_start",{source:window.location.pathname});
   if(name==="brands") renderBrands();
   if(name==="ranking") renderRanking();
   if(name==="column") renderColumnList();
@@ -4786,7 +4855,7 @@ const COLUMNS=[
 
       <h2>黒ずみ毛穴のケア</h2>
       <p>黒ずみの正体は、皮脂と角質が混ざって詰まった「角栓」が酸化したものです。無理に押し出すと毛穴が広がり逆効果。やさしく溶かし出すケアが基本です。クレンジングや洗顔で皮脂・角質をていねいにオフし、その後の保湿で肌のバランスを整えます。ゴシゴシこすらず、毎日の積み重ねでケアすることが大切です。</p>
-      <div class="section-rec" data-ids="53,164,4"></div>
+      <div class="section-rec" data-ids="53,54,4"></div>
 
       <h2>開き毛穴のケア</h2>
       <p>開き毛穴は、過剰な皮脂が主な原因です。皮脂を取りすぎると、かえって肌が皮脂を出そうとするため、「落としすぎない・保湿する」のバランスが鍵になります。ナイアシンアミドやビタミンCなど、皮脂やキメにアプローチする成分配合のアイテムが向いています。</p>
@@ -6122,6 +6191,8 @@ function renderColumnList(){
 function openColumn(id){
   const c=COLUMNS.find(x=>x.id===id);
   if(!c) return;
+  columnReadTracking={id:c.id,title:c.title,read75:false};
+  trackEvent("column_view",{column_id:c.id,column_title:c.title,column_category:c.cat});
   document.getElementById("columnList").style.display="none";
   const art=document.getElementById("columnArticle");
   art.style.display="block";
@@ -6174,6 +6245,23 @@ function openColumn(id){
   renderColumnExtras();
   window.scrollTo({top:0,behavior:"smooth"});
 }
+
+let columnReadTracking={id:null,title:"",read75:false};
+function trackColumnReadDepth(){
+  if(!columnReadTracking.id||columnReadTracking.read75) return;
+  const article=document.querySelector("#columnArticle .article");
+  if(!article||article.offsetParent===null) return;
+  const rect=article.getBoundingClientRect();
+  const viewed=Math.min(rect.height,Math.max(0,window.innerHeight-rect.top));
+  if(rect.height>0&&viewed/rect.height>=0.75){
+    columnReadTracking.read75=true;
+    trackEvent("column_scroll_75",{
+      column_id:columnReadTracking.id,
+      column_title:columnReadTracking.title
+    });
+  }
+}
+window.addEventListener("scroll",trackColumnReadDepth,{passive:true});
 
 // コラム本文の .section-rec マーカーに、data-ids の商品カードを描画（PRODUCTSから動的生成）
 function renderSectionRecs(){
@@ -6266,6 +6354,14 @@ renderRecoFeed();
   }
   // クリック経由の遷移：pushStateしてから該当の画面を開く（SPA挙動を維持）
   window.navigateToProduct=function(id){
+    const p=PRODUCTS.find(x=>x.id===id);
+    if(/^\/columns\//.test(window.location.pathname)){
+      trackEvent("product_link_click",{
+        product_id:String(id),
+        product_name:p?.name||"",
+        source_column:window.location.pathname.split("/")[2]||""
+      });
+    }
     try{
       const url="/products/"+encodeURIComponent(id);
       if (window.location.pathname !== url) history.pushState({productId:id}, "", url);

@@ -119,6 +119,7 @@ footer a{color:var(--accent);margin-right:14px}
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
+gtag('event','product_detail_view',{product_id:"242",product_name:"KATAN Cica ダーマヒットセラム5 30g シカ ニードルショット 敏感肌",product_category:"美容液",value:4581,currency:'JPY'});
 </script>
 </head>
 <body>
@@ -187,9 +188,9 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   </div>
   <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は2026年6月時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>
   <div class="buy-btns">
-    <a class="buy-btn amazon" href="https://www.amazon.co.jp/s?k=KATAN%20KATAN%20Cica%20%E3%83%80%E3%83%BC%E3%83%9E%E3%83%92%E3%83%83%E3%83%88%E3%82%BB%E3%83%A9%E3%83%A05%2030g%20%E3%82%B7%E3%82%AB%20%E3%83%8B%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%20%E6%95%8F%E6%84%9F%E8%82%8C" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
-    <a class="buy-btn rakuten" href="https://hb.afl.rakuten.co.jp/hgc/54ebba1a.f0b1f403.54ebba1b.9f0abc5f/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2FKATAN%2520KATAN%2520Cica%2520%25E3%2583%2580%25E3%2583%25BC%25E3%2583%259E%25E3%2583%2592%25E3%2583%2583%25E3%2583%2588%25E3%2582%25BB%25E3%2583%25A9%25E3%2583%25A05%252030g%2520%25E3%2582%25B7%25E3%2582%25AB%2520%25E3%2583%258B%25E3%2583%25BC%25E3%2583%2589%25E3%2583%25AB%25E3%2582%25B7%25E3%2583%25A7%25E3%2583%2583%25E3%2583%2588%2520%25E6%2595%258F%25E6%2584%259F%25E8%2582%258C%2F" rel="nofollow sponsored noopener" target="_blank">楽天で見る</a>
-    <a class="buy-btn qoo10" href="https://www.qoo10.jp/s/?keyword=KATAN%20KATAN%20Cica%20%E3%83%80%E3%83%BC%E3%83%9E%E3%83%92%E3%83%83%E3%83%88%E3%82%BB%E3%83%A9%E3%83%A05%2030g%20%E3%82%B7%E3%82%AB%20%E3%83%8B%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%20%E6%95%8F%E6%84%9F%E8%82%8C" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
+    <a class="buy-btn amazon" data-shop="amazon" href="https://www.amazon.co.jp/s?k=KATAN%20KATAN%20Cica%20%E3%83%80%E3%83%BC%E3%83%9E%E3%83%92%E3%83%83%E3%83%88%E3%82%BB%E3%83%A9%E3%83%A05%2030g%20%E3%82%B7%E3%82%AB%20%E3%83%8B%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%20%E6%95%8F%E6%84%9F%E8%82%8C" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
+    <a class="buy-btn rakuten" data-shop="rakuten" href="https://af.moshimo.com/af/c/click?a_id=5738711&amp;p_id=54&amp;pc_id=54&amp;pl_id=616&amp;url=https%3A%2F%2Fitem.rakuten.co.jp%2Ffortuness%2F20260608003546_110%2F" rel="nofollow sponsored noopener" referrerpolicy="no-referrer-when-downgrade" target="_blank">楽天で見る</a>
+    <a class="buy-btn qoo10" data-shop="qoo10" href="https://www.qoo10.jp/s/?keyword=KATAN%20KATAN%20Cica%20%E3%83%80%E3%83%BC%E3%83%9E%E3%83%92%E3%83%83%E3%83%88%E3%82%BB%E3%83%A9%E3%83%A05%2030g%20%E3%82%B7%E3%82%AB%20%E3%83%8B%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88%20%E6%95%8F%E6%84%9F%E8%82%8C" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
   </div>
   <div class="related">
     <h2>同じカテゴリのおすすめ</h2>
@@ -221,5 +222,12 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   <div><a href="/">運営者情報</a><a href="/">プライバシーポリシー</a><a href="/">アフィリエイトについて</a></div>
   <p style="margin-top:10px">© Moilum</p>
 </footer>
+<script>
+document.querySelectorAll('.buy-btn[data-shop]').forEach(function(link){
+  link.addEventListener('click',function(){
+    gtag('event','affiliate_click',{shop:this.dataset.shop,product_id:"242",product_name:"KATAN Cica ダーマヒットセラム5 30g シカ ニードルショット 敏感肌",product_category:"美容液",value:4581,currency:'JPY'});
+  });
+});
+</script>
 </body>
 </html>

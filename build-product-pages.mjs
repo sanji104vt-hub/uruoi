@@ -10,6 +10,10 @@ const SITE_ORIGIN = "https://moilum.asutelu.com";
 const OGP_IMAGE = SITE_ORIGIN + "/ogp-image.png";
 const GSC_VERIFICATION = "UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q";
 const GA4_ID = "G-BC0FBSZSWX";
+const MOSHIMO_RAKUTEN = { aId: "5738711", pId: "54", pcId: "54", plId: "616" };
+const MOSHIMO_RAKUTEN_LINKS = new Map([
+  [161, "https://af.moshimo.com/af/c/click?a_id=5738711&p_id=54&pc_id=54&pl_id=616&url=https%3A%2F%2Fitem.rakuten.co.jp%2Frakuten24%2F4987241198924%2F&m=http%3A%2F%2Fm.rakuten.co.jp%2Frakuten24%2Fi%2F11351028%2F"]
+]);
 
 const products = JSON.parse(fs.readFileSync("src/products.json", "utf8"));
 
@@ -117,6 +121,30 @@ function escAttr(s){ return escHtml(s); }
 function truncate(s, n){
   const str = String(s || "");
   return str.length > n ? str.slice(0, n - 1) + "…" : str;
+}
+
+function rakutenDestination(p){
+  try{
+    const purchase = new URL(p.purchase || "");
+    if (purchase.hostname === "item.rakuten.co.jp") return purchase.href;
+    if (purchase.hostname === "hb.afl.rakuten.co.jp"){
+      const direct = purchase.searchParams.get("pc");
+      if (direct) return direct;
+    }
+  }catch{}
+  return "https://search.rakuten.co.jp/search/mall/" + encodeURIComponent(p.brand + " " + p.name) + "/";
+}
+
+function moshimoRakutenLink(p){
+  if (MOSHIMO_RAKUTEN_LINKS.has(p.id)) return MOSHIMO_RAKUTEN_LINKS.get(p.id);
+  const query = new URLSearchParams({
+    a_id: MOSHIMO_RAKUTEN.aId,
+    p_id: MOSHIMO_RAKUTEN.pId,
+    pc_id: MOSHIMO_RAKUTEN.pcId,
+    pl_id: MOSHIMO_RAKUTEN.plId,
+    url: rakutenDestination(p)
+  });
+  return "https://af.moshimo.com/af/c/click?" + query.toString();
 }
 
 function buildProductJsonLd(p){
@@ -315,6 +343,7 @@ footer a{color:var(--accent);margin-right:14px}
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','${GA4_ID}');
+gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},product_name:${JSON.stringify(p.name)},product_category:${JSON.stringify(p.category)},value:${Number(p.price)||0},currency:'JPY'});
 </script>
 </head>
 <body>
@@ -386,9 +415,9 @@ gtag('js',new Date());gtag('config','${GA4_ID}');
   })()}
   <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は2026年6月時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>
   <div class="buy-btns">
-    <a class="buy-btn amazon" href="https://www.amazon.co.jp/s?k=${encodeURIComponent(p.brand + " " + p.name)}" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
-    <a class="buy-btn rakuten" href="https://hb.afl.rakuten.co.jp/hgc/54ebba1a.f0b1f403.54ebba1b.9f0abc5f/?pc=${encodeURIComponent("https://search.rakuten.co.jp/search/mall/" + encodeURIComponent(p.brand + " " + p.name) + "/")}" rel="nofollow sponsored noopener" target="_blank">楽天で見る</a>
-    <a class="buy-btn qoo10" href="https://www.qoo10.jp/s/?keyword=${encodeURIComponent(p.brand + " " + p.name)}" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
+    <a class="buy-btn amazon" data-shop="amazon" href="https://www.amazon.co.jp/s?k=${encodeURIComponent(p.brand + " " + p.name)}" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
+    <a class="buy-btn rakuten" data-shop="rakuten" href="${escAttr(moshimoRakutenLink(p))}" rel="nofollow sponsored noopener" referrerpolicy="no-referrer-when-downgrade" target="_blank">楽天で見る</a>
+    <a class="buy-btn qoo10" data-shop="qoo10" href="https://www.qoo10.jp/s/?keyword=${encodeURIComponent(p.brand + " " + p.name)}" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
   </div>
   ${related.length ? `<div class="related">
     <h2>同じカテゴリのおすすめ</h2>
@@ -408,6 +437,13 @@ gtag('js',new Date());gtag('config','${GA4_ID}');
   <div><a href="/">運営者情報</a><a href="/">プライバシーポリシー</a><a href="/">アフィリエイトについて</a></div>
   <p style="margin-top:10px">© Moilum</p>
 </footer>
+<script>
+document.querySelectorAll('.buy-btn[data-shop]').forEach(function(link){
+  link.addEventListener('click',function(){
+    gtag('event','affiliate_click',{shop:this.dataset.shop,product_id:${JSON.stringify(String(p.id))},product_name:${JSON.stringify(p.name)},product_category:${JSON.stringify(p.category)},value:${Number(p.price)||0},currency:'JPY'});
+  });
+});
+</script>
 </body>
 </html>
 `;

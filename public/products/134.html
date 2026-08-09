@@ -119,6 +119,7 @@ footer a{color:var(--accent);margin-right:14px}
 <script>
 window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}
 gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
+gtag('event','product_detail_view',{product_id:"134",product_name:"ロート製薬 50の恵 養潤液",product_category:"化粧水",value:1320,currency:'JPY'});
 </script>
 </head>
 <body>
@@ -185,9 +186,9 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   </div>
   <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は2026年6月時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>
   <div class="buy-btns">
-    <a class="buy-btn amazon" href="https://www.amazon.co.jp/s?k=%E3%83%AD%E3%83%BC%E3%83%88%E8%A3%BD%E8%96%AC%20%E3%83%AD%E3%83%BC%E3%83%88%E8%A3%BD%E8%96%AC%2050%E3%81%AE%E6%81%B5%20%E9%A4%8A%E6%BD%A4%E6%B6%B2" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
-    <a class="buy-btn rakuten" href="https://hb.afl.rakuten.co.jp/hgc/54ebba1a.f0b1f403.54ebba1b.9f0abc5f/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2588%25E8%25A3%25BD%25E8%2596%25AC%2520%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2588%25E8%25A3%25BD%25E8%2596%25AC%252050%25E3%2581%25AE%25E6%2581%25B5%2520%25E9%25A4%258A%25E6%25BD%25A4%25E6%25B6%25B2%2F" rel="nofollow sponsored noopener" target="_blank">楽天で見る</a>
-    <a class="buy-btn qoo10" href="https://www.qoo10.jp/s/?keyword=%E3%83%AD%E3%83%BC%E3%83%88%E8%A3%BD%E8%96%AC%20%E3%83%AD%E3%83%BC%E3%83%88%E8%A3%BD%E8%96%AC%2050%E3%81%AE%E6%81%B5%20%E9%A4%8A%E6%BD%A4%E6%B6%B2" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
+    <a class="buy-btn amazon" data-shop="amazon" href="https://www.amazon.co.jp/s?k=%E3%83%AD%E3%83%BC%E3%83%88%E8%A3%BD%E8%96%AC%20%E3%83%AD%E3%83%BC%E3%83%88%E8%A3%BD%E8%96%AC%2050%E3%81%AE%E6%81%B5%20%E9%A4%8A%E6%BD%A4%E6%B6%B2" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
+    <a class="buy-btn rakuten" data-shop="rakuten" href="https://af.moshimo.com/af/c/click?a_id=5738711&amp;p_id=54&amp;pc_id=54&amp;pl_id=616&amp;url=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2588%25E8%25A3%25BD%25E8%2596%25AC%2520%25E3%2583%25AD%25E3%2583%25BC%25E3%2583%2588%25E8%25A3%25BD%25E8%2596%25AC%252050%25E3%2581%25AE%25E6%2581%25B5%2520%25E9%25A4%258A%25E6%25BD%25A4%25E6%25B6%25B2%2F" rel="nofollow sponsored noopener" referrerpolicy="no-referrer-when-downgrade" target="_blank">楽天で見る</a>
+    <a class="buy-btn qoo10" data-shop="qoo10" href="https://www.qoo10.jp/s/?keyword=%E3%83%AD%E3%83%BC%E3%83%88%E8%A3%BD%E8%96%AC%20%E3%83%AD%E3%83%BC%E3%83%88%E8%A3%BD%E8%96%AC%2050%E3%81%AE%E6%81%B5%20%E9%A4%8A%E6%BD%A4%E6%B6%B2" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
   </div>
   <div class="related">
     <h2>同じカテゴリのおすすめ</h2>
@@ -219,5 +220,12 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   <div><a href="/">運営者情報</a><a href="/">プライバシーポリシー</a><a href="/">アフィリエイトについて</a></div>
   <p style="margin-top:10px">© Moilum</p>
 </footer>
+<script>
+document.querySelectorAll('.buy-btn[data-shop]').forEach(function(link){
+  link.addEventListener('click',function(){
+    gtag('event','affiliate_click',{shop:this.dataset.shop,product_id:"134",product_name:"ロート製薬 50の恵 養潤液",product_category:"化粧水",value:1320,currency:'JPY'});
+  });
+});
+</script>
 </body>
 </html>
