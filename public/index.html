@@ -2350,6 +2350,14 @@ function editorUsedBadge(p){
     : "";
 }
 
+function escapeGeneratedAttr(value){
+  return String(value==null?"":value).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+}
+function generatedImageTag(src,alt,attributes=""){
+  if(!src) return "";
+  return '<img src="'+escapeGeneratedAttr(src)+'" alt="'+escapeGeneratedAttr(alt)+'"'+(attributes?' '+attributes:'')+'>';
+}
+
 function primarySourceHtml(p){
   const hasPhoto=!!p.editorPhoto;
   const hasTexture=!!p.editorTexturePhoto;
@@ -2363,8 +2371,8 @@ function primarySourceHtml(p){
   if(hasNote&&!hasReview) badges.push('<span class="ps-badge">編集部メモ</span>');
   const reviewedAt=p.editorReviewedAt?String(p.editorReviewedAt).slice(0,7).replace("-","年")+"月":"2026年7月";
   const photos=[];
-  if(hasPhoto) photos.push(`<figure class="ps-figure"><img class="ps-photo" src="${p.editorPhoto}" alt="${p.editorPhotoAlt||p.name+"のパッケージ"}" loading="lazy" decoding="async"><figcaption>パッケージ</figcaption></figure>`);
-  if(hasTexture) photos.push(`<figure class="ps-figure"><img class="ps-photo" src="${p.editorTexturePhoto}" alt="${p.editorTexturePhotoAlt||p.name+"のテクスチャ"}" loading="lazy" decoding="async"><figcaption>テクスチャ（手の甲）</figcaption></figure>`);
+  if(hasPhoto) photos.push(`<figure class="ps-figure">${generatedImageTag(p.editorPhoto,p.editorPhotoAlt||p.name+"のパッケージ",'class="ps-photo" loading="lazy" decoding="async"')}<figcaption>パッケージ</figcaption></figure>`);
+  if(hasTexture) photos.push(`<figure class="ps-figure">${generatedImageTag(p.editorTexturePhoto,p.editorTexturePhotoAlt||p.name+"のテクスチャ",'class="ps-photo" loading="lazy" decoding="async"')}<figcaption>テクスチャ（手の甲）</figcaption></figure>`);
   return `<div class="primary-source">
     <div class="ps-header">🌱 編集部の一次情報 <span class="ps-badges">${badges.join("")}</span></div>
     ${photos.length?`<div class="ps-photos">${photos.join("")}</div>`:""}
@@ -2417,7 +2425,7 @@ function productImage(p,big){
   // 楽天APIで取得した実写真があればそれを表示（無ければ下のSVGイラストにフォールバック）
   if(p.image){
     const ih=big?220:150;
-    return `<img src="${p.image}" alt="${p.name}" loading="lazy" style="width:100%;height:${ih}px;object-fit:contain;background:#fff;border-radius:8px">`;
+    return generatedImageTag(p.image,p.name,`loading="lazy" style="width:100%;height:${ih}px;object-fit:contain;background:#fff;border-radius:8px"`);
   }
   const[c1,c2]=CAT_COLORS[p.category]||["#aaa","#eee"];
   const h=big?160:120;
@@ -2477,6 +2485,23 @@ let renderedCount=0;
 const PAGE_SIZE=24;
 const FLAG_MAP={"日本":"🇯🇵","韓国":"🇰🇷","フランス":"🇫🇷","アメリカ":"🇺🇸","ドイツ":"🇩🇪","台湾":"🇹🇼","カナダ":"🇨🇦","モロッコ":"🇲🇦","イタリア":"🇮🇹"};
 
+// Googleが配信ソース内のJavaScriptテンプレート文字列をURLとして誤抽出しないよう、
+// raw HTMLには安全なhref="/"だけを置き、描画後に実在ID/slugを検証してURLを設定する。
+function hydrateInternalLinks(root=document){
+  root.querySelectorAll("a[data-product-link-id]").forEach(a=>{
+    const id=Number(a.dataset.productLinkId);
+    if(Number.isSafeInteger(id)&&PRODUCTS.some(p=>p.id===id)){
+      a.setAttribute("href","/products/"+encodeURIComponent(String(id)));
+    }
+  });
+  root.querySelectorAll("a[data-column-link-slug]").forEach(a=>{
+    const slug=String(a.dataset.columnLinkSlug||"");
+    if(/^[a-z0-9-]+$/.test(slug)&&COLUMNS.some(c=>c.id===slug)){
+      a.setAttribute("href","/columns/"+encodeURIComponent(slug));
+    }
+  });
+}
+
 function render(list){
   const el=document.getElementById("products");
   currentList=list;
@@ -2497,7 +2522,7 @@ function appendMoreProducts(){
     const i=renderedCount+localI;
     const variant=cardVariant(p,i);
     return `
-    <div class="card ${variant}" onclick="navigateToProduct(${p.id})">
+    <div class="card ${variant}" onclick="navigateToProduct(${p["id"]})">
       <div class="card-img">
         ${flag[p.origin]?`<span class="origin-flag">${flag[p.origin]} ${p.origin}</span>`:""}
         ${i<3?`<span class="card-rank-badge">🏆 ${i+1}位</span>`:""}
@@ -2510,7 +2535,7 @@ function appendMoreProducts(){
         </span>
         <span style="font-size:24px">${p.icon}</span>
       </div>
-      <a href="/products/${p.id}" class="card-name-link" onclick="event.preventDefault();navigateToProduct(${p.id})"><div class="card-name">${p.name}</div></a>
+      <a href="/" data-product-link-id="${Number(p.id)}" class="card-name-link" onclick="event.preventDefault();navigateToProduct(${p["id"]})"><div class="card-name">${p.name}</div></a>
       <div class="card-brand">${p.brand}</div>
       <div class="card-desc">${p.desc}</div>
       <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
@@ -2520,17 +2545,18 @@ function appendMoreProducts(){
       </div>
       <div class="card-price">¥${p.price.toLocaleString()} <span>（${PRICE_DATE}時点）</span></div>
       <div class="shop-mini" onclick="event.stopPropagation()">
-        ${AFFILIATE.showAmazon?`<button class="sm-amazon" onclick="goAffiliate('amazon',${p.id})">Amazon</button>`:""}
-        ${AFFILIATE.showRakuten?`<button class="sm-rakuten" onclick="goAffiliate('rakuten',${p.id})">楽天</button>`:""}
-        ${AFFILIATE.showQoo10?`<button class="sm-qoo10" onclick="goAffiliate('qoo10',${p.id})">Qoo10</button>`:""}
+        ${AFFILIATE.showAmazon?`<button class="sm-amazon" onclick="goAffiliate('amazon',${p["id"]})">Amazon</button>`:""}
+        ${AFFILIATE.showRakuten?`<button class="sm-rakuten" onclick="goAffiliate('rakuten',${p["id"]})">楽天</button>`:""}
+        ${AFFILIATE.showQoo10?`<button class="sm-qoo10" onclick="goAffiliate('qoo10',${p["id"]})">Qoo10</button>`:""}
       </div>
       <div class="card-footer" onclick="event.stopPropagation()">
-        <button class="btn btn-secondary" onclick="addToCompare(${p.id})">比較に追加</button>
-        <button class="btn-fav ${favorites.includes(p.id)?'active':''}" onclick="toggleFav(${p.id},this)">♡</button>
+        <button class="btn btn-secondary" onclick="addToCompare(${p["id"]})">比較に追加</button>
+        <button class="btn-fav ${favorites.includes(p.id)?'active':''}" onclick="toggleFav(${p["id"]},this)">♡</button>
       </div>
     </div>`;
   }).join("");
   el.insertAdjacentHTML("beforeend", html);
+  hydrateInternalLinks(el);
   renderedCount+=slice.length;
   updateScrollSentinelVisibility();
 }
@@ -2578,7 +2604,7 @@ function updateScrollSentinelVisibility(){
 
 // 小サムネイル
 function productThumb(p){
-  if(p.image) return `<img class="side-rank-thumb" src="${p.image}" alt="${p.name}" loading="lazy">`;
+  if(p.image) return generatedImageTag(p.image,p.name,'class="side-rank-thumb" loading="lazy"');
   return `<div class="side-rank-thumb" style="display:flex;align-items:center;justify-content:center;font-size:20px">${p.icon}</div>`;
 }
 
@@ -2592,7 +2618,7 @@ function renderSidebar(){
     <div class="side-card">
       <h4>🏆 人気ランキング TOP5</h4>
       ${top5.map((p,i)=>`
-        <div class="side-rank" onclick="openDetail(${p.id})">
+        <div class="side-rank" onclick="openDetail(${p["id"]})">
           <div class="side-rank-num ${i<3?'top':''}">${i+1}</div>
           ${productThumb(p)}
           <div class="side-rank-info">
@@ -2645,8 +2671,8 @@ function renderRecoFeed(){
     </div>
     <div class="reco-scroll">
       ${top.map(p=>`
-        <div class="reco-card" onclick="openDetail(${p.id})">
-          ${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:`<div class="reco-emoji">${p.icon}</div>`}
+        <div class="reco-card" onclick="openDetail(${p["id"]})">
+          ${p.image?generatedImageTag(p.image,p.name,'loading="lazy"'):`<div class="reco-emoji">${p.icon}</div>`}
           <div class="reco-name">${p.name}</div>
           <div class="reco-brand">${p.brand}</div>
           <div class="reco-price">¥${p.price.toLocaleString()}</div>
@@ -2850,13 +2876,13 @@ function openDetail(id){
         <span style="font-size:12px;color:var(--txt3)">以下は広告リンクです。掲載価格は${PRICE_DATE}時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</span>
       </div>
       <div class="shop-btns">
-        ${AFFILIATE.showAmazon?`<button class="shop-btn amazon" onclick="goAffiliate('amazon',${p.id})">Amazonで見る</button>`:""}
-        ${AFFILIATE.showRakuten?`<button class="shop-btn rakuten" onclick="goAffiliate('rakuten',${p.id})">楽天で見る</button>`:""}
-        ${AFFILIATE.showQoo10?`<button class="shop-btn qoo10" onclick="goAffiliate('qoo10',${p.id})">Qoo10で見る</button>`:""}
+        ${AFFILIATE.showAmazon?`<button class="shop-btn amazon" onclick="goAffiliate('amazon',${p["id"]})">Amazonで見る</button>`:""}
+        ${AFFILIATE.showRakuten?`<button class="shop-btn rakuten" onclick="goAffiliate('rakuten',${p["id"]})">楽天で見る</button>`:""}
+        ${AFFILIATE.showQoo10?`<button class="shop-btn qoo10" onclick="goAffiliate('qoo10',${p["id"]})">Qoo10で見る</button>`:""}
       </div>
       <div style="display:flex;gap:8px;margin-top:10px">
-        <button class="btn btn-secondary" onclick="addToCompare(${p.id})" style="flex:1">比較に追加</button>
-        <button class="btn btn-secondary" onclick="addToCollection(${p.id})" style="flex:1">📁 リストに追加</button>
+        <button class="btn btn-secondary" onclick="addToCompare(${p["id"]})" style="flex:1">比較に追加</button>
+        <button class="btn btn-secondary" onclick="addToCollection(${p["id"]})" style="flex:1">📁 リストに追加</button>
       </div>
     </div>
     ${relatedProductsHtml(p)}
@@ -2896,7 +2922,7 @@ function relatedProductsHtml(p){
     <h3>こちらもおすすめ</h3>
     <div class="related-grid">
       ${rel.map(r=>`<div class="related-card" onclick="openDetail(${r.id})">
-        ${r.image?`<img src="${r.image}" alt="${r.name}" loading="lazy">`:`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${r.icon}</div>`}
+        ${r.image?generatedImageTag(r.image,r.name,'loading="lazy"'):`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${r.icon}</div>`}
         ${editorUsedBadge(r)}<div class="rc-name">${r.name}</div>
         <div class="rc-price">¥${r.price.toLocaleString()}</div>
       </div>`).join("")}
@@ -2953,7 +2979,7 @@ function openCompareModal(){
     compare_count:ps.length,
     product_ids:ps.map(p=>p.id).join(",")
   });
-  const img=p=>p.image?`<img src="${p.image}" alt="${p.name}" style="width:100%;height:80px;object-fit:contain;background:#fff;border-radius:6px">`:`<div style="height:80px;display:flex;align-items:center;justify-content:center;font-size:32px">${p.icon}</div>`;
+  const img=p=>p.image?generatedImageTag(p.image,p.name,'style="width:100%;height:80px;object-fit:contain;background:#fff;border-radius:6px"'):`<div style="height:80px;display:flex;align-items:center;justify-content:center;font-size:32px">${p.icon}</div>`;
   const rows=[
     ["カテゴリ",p=>p.category],
     ["参考価格",p=>`<b style="color:var(--accent)">¥${p.price.toLocaleString()}</b>`],
@@ -2975,7 +3001,7 @@ function openCompareModal(){
       <tbody>${rows.map(([label,fn])=>`
         <tr><td style="color:var(--txt3);font-weight:600">${label}</td>${ps.map(p=>`<td>${fn(p)}</td>`).join("")}</tr>
       `).join("")}
-      <tr><td style="color:var(--txt3);font-weight:600">購入</td>${ps.map(p=>`<td><button class="sm-rakuten" style="border:none;color:#fff;padding:7px 10px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer" onclick="goAffiliate('rakuten',${p.id})">楽天で見る</button></td>`).join("")}</tr>
+      <tr><td style="color:var(--txt3);font-weight:600">購入</td>${ps.map(p=>`<td><button class="sm-rakuten" style="border:none;color:#fff;padding:7px 10px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer" onclick="goAffiliate('rakuten',${p["id"]})">楽天で見る</button></td>`).join("")}</tr>
       </tbody>
     </table></div>
     <p style="font-size:12px;color:var(--txt3);margin-top:12px">※スコアはMoilum独自の参考値。参考価格は${PRICE_DATE}時点。最新価格は各販売サイトでご確認ください。</p>
@@ -3034,7 +3060,7 @@ function openBrandStory(name){
     <h3 class="brand-section-h">🏆 このブランドの代表商品</h3>
     <div class="grid">${top3.map(p=>{
       const variant=cardVariant(p,-1);
-      return `<div class="card ${variant}" onclick="openDetail(${p.id})">
+      return `<div class="card ${variant}" onclick="openDetail(${p["id"]})">
         <div class="card-img">${productImage(p)}</div>
         <span class="card-tag">${p.category}</span>${editorUsedBadge(p)}
         <div class="card-name">${p.name}</div>
@@ -3044,7 +3070,7 @@ function openBrandStory(name){
     }).join("")}</div>
     ${rest.length?`<h3 class="brand-section-h">その他の商品（${rest.length}件）</h3>
     <div class="grid">${rest.map(p=>`
-      <div class="card" onclick="openDetail(${p.id})">
+      <div class="card" onclick="openDetail(${p["id"]})">
         <div class="card-img">${productImage(p)}</div>
         <span class="card-tag">${p.category}</span>${editorUsedBadge(p)}
         <div class="card-name">${p.name}</div>
@@ -3196,11 +3222,11 @@ function renderRanking(){
     <b>最終更新日：</b>${PRICE_DATE}
   </div>
   ${compareHtml}`+sorted.map((p,i)=>`
-    <div class="ranking-item" onclick="navigateToProduct(${p.id})">
+    <div class="ranking-item" onclick="navigateToProduct(${p["id"]})">
       <div class="rank-num ${i===0?'gold':i===1?'silver':i===2?'bronze':''}">${i+1}</div>
       <div style="font-size:28px">${p.icon}</div>
       <div class="rank-info">
-        <a href="/products/${p.id}" class="rank-name-link" onclick="event.preventDefault();navigateToProduct(${p.id})"><div class="rank-name">${p.name}</div></a>
+        <a href="/" data-product-link-id="${Number(p.id)}" class="rank-name-link" onclick="event.preventDefault();navigateToProduct(${p["id"]})"><div class="rank-name">${p.name}</div></a>
         <div class="rank-sub">${p.brand} · ¥${p.price.toLocaleString()}</div>
         <div style="margin-top:4px">
           <span class="stars">${"★".repeat(Math.round(p.rating))}</span>
@@ -3210,6 +3236,7 @@ function renderRanking(){
         <div class="rank-reason">👑 ${reason(p)}</div>
       </div>
     </div>`).join("")+crossLinksHtml;
+  hydrateInternalLinks(rankEl);
   // 構造化データ：ItemList（表示中のランキング上位10件。編集部スコアを独自の評価値として扱い、外部レビュー評価は転載しない）
   setJsonLd("jsonld-itemlist-ranking",{
     "@context":"https://schema.org",
@@ -3279,7 +3306,7 @@ function renderKarte(){
             <div class="ke-date">${dateStr}</div>
             <div class="ke-body">
               <div class="ke-skin">${k.skin}タイプ${k.concerns&&k.concerns.length?` ・ ${k.concerns.slice(0,2).join("・")}`:""}</div>
-              ${recNames.length?`<div class="ke-recs">${recNames.map(p=>`<span class="ke-rec" onclick="openDetail(${p.id})">${p.icon} ${p.name.slice(0,16)}</span>`).join("")}</div>`:""}
+              ${recNames.length?`<div class="ke-recs">${recNames.map(p=>`<span class="ke-rec" onclick="openDetail(${p["id"]})">${p.icon} ${p.name.slice(0,16)}</span>`).join("")}</div>`:""}
             </div>
           </div>`;
         }).join("")}
@@ -3313,8 +3340,8 @@ function renderKarte(){
     historyHtml=`<div class="karte-section">
       <h3>👀 最近チェックした商品</h3>
       <div class="reco-scroll">
-        ${items.map(p=>`<div class="reco-card" onclick="openDetail(${p.id})">
-          ${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:`<div class="reco-emoji">${p.icon}</div>`}
+        ${items.map(p=>`<div class="reco-card" onclick="openDetail(${p["id"]})">
+          ${p.image?generatedImageTag(p.image,p.name,'loading="lazy"'):`<div class="reco-emoji">${p.icon}</div>`}
           <div class="reco-name">${p.name}</div>
           <div class="reco-price">¥${p.price.toLocaleString()}</div>
         </div>`).join("")}
@@ -3392,9 +3419,9 @@ function renderCollections(){
         <button class="cc-delete" onclick="deleteCollection('${c.id}')">削除</button>
       </div>
       ${items.length?`<div class="reco-scroll">
-        ${items.map(p=>`<div class="reco-card" style="position:relative" onclick="openDetail(${p.id})">
-          <span class="cc-remove" onclick="event.stopPropagation();removeFromCollection('${c.id}',${p.id})">×</span>
-          ${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:`<div class="reco-emoji">${p.icon}</div>`}
+        ${items.map(p=>`<div class="reco-card" style="position:relative" onclick="openDetail(${p["id"]})">
+          <span class="cc-remove" onclick="event.stopPropagation();removeFromCollection('${c.id}',${p["id"]})">×</span>
+          ${p.image?generatedImageTag(p.image,p.name,'loading="lazy"'):`<div class="reco-emoji">${p.icon}</div>`}
           <div class="reco-name">${p.name}</div>
           <div class="reco-price">¥${p.price.toLocaleString()}</div>
         </div>`).join("")}
@@ -3497,7 +3524,7 @@ function diagnose(){
     <div style="margin-top:20px">
       <div style="font-size:15px;font-weight:700;margin-bottom:14px">あなたの条件に合う候補商品${recommended.length?"":"（該当なし）"}</div>
       ${recommended.length?`<div class="grid">${recommended.map(p=>`
-        <div class="card" onclick="openDetail(${p.id})">
+        <div class="card" onclick="openDetail(${p["id"]})">
           <div class="card-img">${productImage(p)}</div>
           <div style="display:flex;justify-content:space-between;gap:6px">
             <span style="display:flex;gap:5px;flex-wrap:wrap;align-items:center">
@@ -3567,7 +3594,11 @@ function renderShareImage(skin, concerns, recommended){
   ctx.fillText("moilum.asutelu.com",300,600);
   // プレビュー表示
   const preview=document.getElementById("sharePreview");
-  preview.innerHTML=`<img src="${canvas.toDataURL('image/png')}" style="max-width:300px;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.15);display:block">`;
+  const previewImage=document.createElement("img");
+  previewImage.src=canvas.toDataURL("image/png");
+  previewImage.alt="肌タイプ診断結果のシェア画像";
+  previewImage.style.cssText="max-width:300px;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,.15);display:block";
+  preview.replaceChildren(previewImage);
 }
 
 function downloadShareImage(){
@@ -6181,12 +6212,13 @@ function renderColumnList(){
   document.getElementById("columnArticle").style.display="none";
   document.getElementById("columnList").style.display="grid";
   document.getElementById("columnList").innerHTML=COLUMNS.map(c=>`
-    <div class="column-card" onclick="navigateToColumn('${c.id}')">
+    <div class="column-card" onclick="navigateToColumn('${c["id"]}')">
       <div class="ctag">${c.cat}</div>
-      <a href="/columns/${c.id}" class="column-title-link" onclick="event.preventDefault();navigateToColumn('${c.id}')"><div class="col-card-title">${c.title}</div></a>
+      <a href="/" data-column-link-slug="${String(c.id)}" class="column-title-link" onclick="event.preventDefault();navigateToColumn('${c["id"]}')"><div class="col-card-title">${c.title}</div></a>
       <p>${c.excerpt}</p>
       <div class="readtime">📖 ${c.readtime}</div>
     </div>`).join("");
+  hydrateInternalLinks(document.getElementById("columnList"));
 }
 function openColumn(id){
   const c=COLUMNS.find(x=>x.id===id);
@@ -6222,8 +6254,8 @@ function openColumn(id){
       ${allRel.length?`<div class="related-products" style="margin-top:24px">
         <h2 style="font-size:15px;font-weight:800;margin-bottom:14px">この記事に関連する商品</h2>
         <div class="related-grid">
-          ${allRel.map(p=>`<div class="related-card" onclick="closeColumnToProduct(${p.id})">
-            ${p.image?`<img src="${p.image}" alt="${p.name}" loading="lazy">`:`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${p.icon}</div>`}
+          ${allRel.map(p=>`<div class="related-card" onclick="closeColumnToProduct(${p["id"]})">
+            ${p.image?generatedImageTag(p.image,p.name,'loading="lazy"'):`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${p.icon}</div>`}
             ${editorUsedBadge(p)}<div class="rc-name">${p.name}</div>
             <div class="rc-price">¥${p.price.toLocaleString()}</div>
           </div>`).join("")}
@@ -6233,9 +6265,9 @@ function openColumn(id){
       ${moreArticles.length?`<div class="more-articles">
         <h2 style="font-size:17px;font-weight:800;margin-bottom:16px">📚 あわせて読みたい記事</h2>
         <div class="more-articles-grid">
-          ${moreArticles.map(mc=>`<div class="ma-card" onclick="navigateToColumn('${mc.id}')">
+          ${moreArticles.map(mc=>`<div class="ma-card" onclick="navigateToColumn('${mc["id"]}')">
             <span class="ma-cat">${mc.cat}</span>
-            <a href="/columns/${mc.id}" class="ma-title-link" onclick="event.preventDefault();navigateToColumn('${mc.id}')"><div class="ma-title">${mc.title}</div></a>
+            <a href="/" data-column-link-slug="${String(mc.id)}" class="ma-title-link" onclick="event.preventDefault();navigateToColumn('${mc["id"]}')"><div class="ma-title">${mc.title}</div></a>
             <div class="ma-excerpt">${mc.excerpt}</div>
           </div>`).join("")}
         </div>
@@ -6272,7 +6304,7 @@ function renderSectionRecs(){
     el.innerHTML=`<div class="section-rec-label">🧴 このセクションでおすすめの商品</div>
       <div class="related-grid">
         ${items.map(r=>`<div class="related-card" onclick="closeColumnToProduct(${r.id})">
-          ${r.image?`<img src="${r.image}" alt="${r.name}" loading="lazy">`:`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${r.icon}</div>`}
+          ${r.image?generatedImageTag(r.image,r.name,'loading="lazy"'):`<div style="height:90px;display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff;border-radius:6px;margin-bottom:6px">${r.icon}</div>`}
           ${editorUsedBadge(r)}<div class="rc-name">${r.name}</div>
           <div class="rc-price">¥${r.price.toLocaleString()}</div>
         </div>`).join("")}
@@ -6295,7 +6327,7 @@ function renderColumnExtras(){
     el.innerHTML=`<div class="col-table-wrap"><table class="col-table">
       <thead><tr><th>商品名</th><th>参考価格</th><th>評価</th><th>主要成分</th><th>向く肌タイプ</th></tr></thead>
       <tbody>${items.map(p=>`<tr>
-        <td><a href="/products/${p.id}" onclick="event.preventDefault();navigateToProduct(${p.id})">${p.name}</a><div style="font-size:11px;color:var(--txt3);font-weight:400;margin-top:2px">${p.brand}</div></td>
+        <td><a href="/" data-product-link-id="${Number(p.id)}" onclick="event.preventDefault();navigateToProduct(${p["id"]})">${p.name}</a><div style="font-size:11px;color:var(--txt3);font-weight:400;margin-top:2px">${p.brand}</div></td>
         <td class="ct-price">¥${p.price.toLocaleString()}</td>
         <td class="ct-rating">★${p.rating}<div style="font-size:11px;color:var(--txt3)">${p.reviews.toLocaleString()}件</div></td>
         <td style="font-size:12px">${p.keyIngredients.slice(0,3).join("、")}</td>
@@ -6316,6 +6348,7 @@ function renderColumnExtras(){
       <p style="font-size:11px;color:var(--txt3);text-align:center;margin-top:8px">※スコアは評価・価格・成分などからMoilumが独自算出した参考値です</p>
     </div>`;
   });
+  hydrateInternalLinks(document.getElementById("columnArticle"));
 }
 
 if(localStorage.getItem("ulabo_dark")==="1") document.body.classList.add("dark");
