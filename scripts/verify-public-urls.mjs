@@ -8,8 +8,10 @@ const publicDir = path.join(root, "public");
 const siteOrigin = "https://moilum.asutelu.com";
 const products = JSON.parse(fs.readFileSync(path.join(root, "src", "products.json"), "utf8"));
 const columns = JSON.parse(fs.readFileSync(path.join(root, "src", "columns.json"), "utf8"));
+const guideSlugs = JSON.parse(fs.readFileSync(path.join(root, "src", "guides-slugs.json"), "utf8"));
 const productIds = new Set(products.map(product => String(product.id)));
 const columnSlugs = new Set(columns.map(column => String(column.id)));
+const guideSlugSet = new Set(guideSlugs.map(String));
 
 const files = [];
 function walk(directory) {
@@ -85,6 +87,25 @@ function checkJsonLdUrls(file, value, key = "root") {
   }
 }
 
+function ordinaryAnchorHrefs(source) {
+  const content = source
+    .replace(/<script\b[\s\S]*?<\/script>/gi, "")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, "");
+  return [...content.matchAll(/<a\b[^>]*\bhref\s*=\s*(["'])(.*?)\1[^>]*>/gis)].map(match => match[2]);
+}
+
+function internalPathname(href) {
+  if (!href || href === "#" || /^javascript:/i.test(href)) return null;
+  try {
+    const url = new URL(href, siteOrigin);
+    if (url.origin !== siteOrigin) return null;
+    const pathname = url.pathname.replace(/\/$/, "") || "/";
+    return pathname;
+  } catch {
+    return null;
+  }
+}
+
 for (const file of files) {
   const source = fs.readFileSync(file, "utf8");
 
@@ -106,6 +127,9 @@ for (const file of files) {
     const attributePattern = /\b(href|src|content)\s*=\s*(["'])(.*?)\2/gis;
     for (const match of source.matchAll(attributePattern)) {
       const [, name, , value] = match;
+      if (name.toLowerCase() === "href" && /^javascript:/i.test(value)) {
+        fail(file, `javascript: のhrefは禁止です: ${value}`);
+      }
       const looksLikeUrl = /^(?:https?:\/\/|\/|\.\/|\.\.\/|data:)/i.test(value)
         || /\$\{|\[object Object\]/i.test(value);
       if (looksLikeUrl) checkUrl(file, value, `${name}属性`);
@@ -142,8 +166,13 @@ const indexSource = fs.readFileSync(path.join(publicDir, "index.html"), "utf8");
 if (!indexSource.includes("data-product-link-id=")) fail(path.join(publicDir, "index.html"), "商品リンクの安全なID属性がありません");
 if (!indexSource.includes("data-column-link-slug=")) fail(path.join(publicDir, "index.html"), "コラムリンクの安全なslug属性がありません");
 if (!indexSource.includes("function hydrateInternalLinks(")) fail(path.join(publicDir, "index.html"), "内部リンクの展開処理がありません");
+for (const match of indexSource.matchAll(/<a\b[^>]*onclick=(["'])[^"']*navigateToProduct\([^"']*\1[^>]*>/gi)) {
+  if (!/\bdata-product-link-id=/i.test(match[0]) || !/\bhref=/i.test(match[0])) {
+    fail(path.join(publicDir, "index.html"), `商品遷移アンカーに通常href展開用IDがありません: ${match[0].slice(0, 120)}`);
+  }
+}
 
-const requiredNavLinks = ["/brands", "/ranking", "/diagnosis", "/columns", "/favorites"];
+const requiredNavLinks = ["/products", "/brands", "/ranking", "/diagnosis", "/columns", "/favorites"];
 for (const href of requiredNavLinks) {
   if (!indexSource.includes(`class="nav-btn`) || !indexSource.includes(`href="${href}"`)) {
     fail(path.join(publicDir, "index.html"), `メインナビに実リンク ${href} がありません`);
@@ -151,6 +180,7 @@ for (const href of requiredNavLinks) {
 }
 
 const hubExpectations = [
+  { route:"/products", file:"products.html", indexable:true },
   { route:"/columns", file:"columns.html", indexable:true },
   { route:"/brands", file:"brands.html", indexable:true },
   { route:"/ranking", file:"ranking.html", indexable:true },
@@ -190,6 +220,31 @@ for (const slug of columnSlugs) {
   }
 }
 
+const productHubFile = path.join(publicDir, "hubs", "products.html");
+const productHubSource = fs.readFileSync(productHubFile, "utf8");
+const productHubIds = ordinaryAnchorHrefs(productHubSource).map(href => internalPathname(href)?.match(/^\/products\/(\d+)$/)?.[1]).filter(Boolean);
+const uniqueProductHubIds = new Set(productHubIds);
+if (productHubIds.length !== productIds.size) fail(productHubFile, `商品リンクは1商品1本である必要があります: ${productHubIds.length}/${productIds.size}`);
+if (uniqueProductHubIds.size !== productIds.size) fail(productHubFile, `商品ハブの実在商品リンクが不足しています: ${uniqueProductHubIds.size}/${productIds.size}`);
+for (const id of productIds) {
+  if (!uniqueProductHubIds.has(id)) fail(productHubFile, `商品ハブに通常リンクがありません: ${id}`);
+}
+if (!productHubSource.includes(`全${products.length}件`) || !productHubSource.includes(`${products.length}商品を表示中`)) {
+  fail(productHubFile, "商品総数がSSoTから生成された表示を確認できません");
+}
+
+const rootProductIds = new Set(ordinaryAnchorHrefs(indexSource).map(href => internalPathname(href)?.match(/^\/products\/(\d+)$/)?.[1]).filter(Boolean));
+if (!rootProductIds.size) fail(path.join(publicDir, "index.html"), "トップ初期HTMLに実商品への通常リンクがありません");
+const skincareIds = new Set(products.filter(product => product.productType !== "makeup" && product.status !== "previous_generation").map(product => String(product.id)));
+const brandsFile = path.join(publicDir, "hubs", "brands.html");
+const brandProductIds = new Set(ordinaryAnchorHrefs(fs.readFileSync(brandsFile, "utf8")).map(href => internalPathname(href)?.match(/^\/products\/(\d+)$/)?.[1]).filter(Boolean));
+for (const id of skincareIds) {
+  if (!brandProductIds.has(id)) fail(brandsFile, `ブランド一覧に現在比較対象商品の通常リンクがありません: ${id}`);
+}
+const rankingFile = path.join(publicDir, "hubs", "ranking.html");
+const rankingProductLinks = ordinaryAnchorHrefs(fs.readFileSync(rankingFile, "utf8")).filter(href => /^\/products\/\d+\/?$/.test(href));
+if (rankingProductLinks.length !== 50) fail(rankingFile, `ランキングの商品リンク数が50件ではありません: ${rankingProductLinks.length}`);
+
 for (const product of products) {
   const file = path.join(publicDir, "products", `${product.id}.html`);
   const source = fs.readFileSync(file, "utf8");
@@ -203,6 +258,69 @@ for (const column of columns) {
   if (canonical !== `${siteOrigin}/columns/${column.id}`) fail(file, `コラムself canonicalが不正です: ${canonical || "なし"}`);
   if (/href="\/column\/?"/i.test(source) || source.includes(`${siteOrigin}/column"`)) fail(file, "旧 /column へのリンクが残っています");
 }
+for (const slug of guideSlugs) {
+  const file = path.join(publicDir, "guides", `${slug}.html`);
+  if (!fs.existsSync(file)) {
+    fail(file, `ガイドHTMLがありません: ${slug}`);
+    continue;
+  }
+  const source = fs.readFileSync(file, "utf8");
+  const canonical = source.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1];
+  if (canonical !== `${siteOrigin}/guides/${slug}`) fail(file, `ガイドself canonicalが不正です: ${canonical || "なし"}`);
+}
+
+const routeFiles = new Map([
+  ["/", path.join(publicDir, "index.html")],
+  ["/products", path.join(publicDir, "hubs", "products.html")],
+  ["/columns", path.join(publicDir, "hubs", "columns.html")],
+  ["/brands", path.join(publicDir, "hubs", "brands.html")],
+  ["/ranking", path.join(publicDir, "hubs", "ranking.html")],
+  ["/diagnosis", path.join(publicDir, "hubs", "diagnosis.html")]
+]);
+for (const id of productIds) routeFiles.set(`/products/${id}`, path.join(publicDir, "products", `${id}.html`));
+for (const slug of columnSlugs) routeFiles.set(`/columns/${slug}`, path.join(publicDir, "columns", `${slug}.html`));
+for (const slug of guideSlugSet) routeFiles.set(`/guides/${slug}`, path.join(publicDir, "guides", `${slug}.html`));
+
+const graph = new Map();
+const incoming = new Map([...routeFiles.keys()].map(route => [route, 0]));
+for (const [route, file] of routeFiles) {
+  if (!fs.existsSync(file)) {
+    fail(file, `index対象ルートのHTMLがありません: ${route}`);
+    graph.set(route, new Set());
+    continue;
+  }
+  const targets = new Set(ordinaryAnchorHrefs(fs.readFileSync(file, "utf8")).map(internalPathname).filter(pathname => pathname && routeFiles.has(pathname)));
+  graph.set(route, targets);
+  for (const target of targets) incoming.set(target, (incoming.get(target) || 0) + 1);
+}
+
+const depth = new Map([["/", 0]]);
+const queue = ["/"];
+while (queue.length) {
+  const route = queue.shift();
+  for (const target of graph.get(route) || []) {
+    if (!depth.has(target)) {
+      depth.set(target, depth.get(route) + 1);
+      queue.push(target);
+    }
+  }
+}
+const indexTargets = [
+  "/products", "/columns", "/brands", "/ranking", "/diagnosis",
+  ...[...productIds].map(id => `/products/${id}`),
+  ...[...columnSlugs].map(slug => `/columns/${slug}`),
+  ...[...guideSlugSet].map(slug => `/guides/${slug}`)
+];
+for (const route of indexTargets) {
+  if (!depth.has(route)) fail(routeFiles.get(route), `トップから通常リンクだけで到達できません: ${route}`);
+  if ((incoming.get(route) || 0) === 0) fail(routeFiles.get(route), `通常内部リンクが0本の孤立ページです: ${route}`);
+}
+const productDepths = [...productIds].map(id => depth.get(`/products/${id}`)).filter(Number.isFinite);
+const unreachableProductCount = productIds.size - productDepths.length;
+const maxProductDepth = productDepths.length ? Math.max(...productDepths) : Infinity;
+const averageProductDepth = productDepths.length ? productDepths.reduce((sum, value) => sum + value, 0) / productDepths.length : Infinity;
+if (unreachableProductCount) fail(productHubFile, `トップから到達不能の商品があります: ${unreachableProductCount}件`);
+if (maxProductDepth > 2) fail(productHubFile, `商品への最大クリック深度が2を超えています: ${maxProductDepth}`);
 
 const workerFile = path.join(root, "src", "index.js");
 const workerSource = fs.readFileSync(workerFile, "utf8");
@@ -211,7 +329,7 @@ if (!staticPathsMatch) {
   fail(workerFile, "sitemapの静的URL一覧を解析できません");
 } else {
   const staticPaths = JSON.parse(staticPathsMatch[1]);
-  for (const route of ["/columns", "/brands", "/ranking", "/diagnosis"]) {
+  for (const route of ["/products", "/columns", "/brands", "/ranking", "/diagnosis"]) {
     if (!staticPaths.includes(route)) fail(workerFile, `sitemapに ${route} がありません`);
   }
   for (const forbidden of ["/column", "/favorites"]) {
@@ -221,7 +339,7 @@ if (!staticPathsMatch) {
 if (!workerSource.includes('pathname === "/column"') || !workerSource.includes('`${SITE_ORIGIN}/columns`')) {
   fail(workerFile, "/column から /columns への301ルートがありません");
 }
-for (const route of ["/columns", "/brands", "/ranking", "/diagnosis", "/favorites"]) {
+for (const route of ["/products", "/columns", "/brands", "/ranking", "/diagnosis", "/favorites"]) {
   if (!workerSource.includes(`"${route}"`)) fail(workerFile, `Workerに ${route} ルートがありません`);
 }
 
@@ -236,8 +354,11 @@ if (errors.length) {
 
 console.log("公開ファイルURL検査: OK");
 console.log(`対象ファイル: ${files.length}件`);
-console.log(`商品データ: ${productIds.size}件 / コラムデータ: ${columnSlugs.size}件`);
+console.log(`商品データ: ${productIds.size}件 / コラムデータ: ${columnSlugs.size}件 / ガイドデータ: ${guideSlugSet.size}件`);
 console.log(`確認した実在商品リンク: ${internalLinks.products.size}ID`);
 console.log(`確認した実在コラムリンク: ${internalLinks.columns.size}slug`);
 console.log(`JSON-LD: ${jsonLdCount}件 / インラインJavaScript: ${inlineScriptCount}件`);
-console.log(`専用一覧ページ: ${hubExpectations.length}件 / indexable: 4件 / noindex: 1件`);
+console.log(`専用一覧ページ: ${hubExpectations.length}件 / indexable: 5件 / noindex: 1件`);
+console.log(`商品ハブ通常リンク: ${productHubIds.length}件 / ユニーク商品: ${uniqueProductHubIds.size}件`);
+console.log(`トップ初期HTMLの実商品リンク: ${rootProductIds.size}件`);
+console.log(`内部リンクグラフ: 商品到達 ${productDepths.length}/${productIds.size}件 / 孤立 ${unreachableProductCount}件 / 最大深度 ${maxProductDepth} / 平均深度 ${averageProductDepth.toFixed(2)}`);

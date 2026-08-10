@@ -180,7 +180,7 @@ function buildBreadcrumbJsonLd(p){
     "@type": "BreadcrumbList",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Moilum", "item": SITE_ORIGIN + "/" },
-      { "@type": "ListItem", "position": 2, "name": p.category, "item": SITE_ORIGIN + "/" },
+      { "@type": "ListItem", "position": 2, "name": "商品一覧", "item": SITE_ORIGIN + "/products" },
       { "@type": "ListItem", "position": 3, "name": p.name, "item": `${SITE_ORIGIN}/products/${p.id}` }
     ]
   };
@@ -352,7 +352,7 @@ gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},p
 </header>
 <div class="pr-banner">本サイトはアフィリエイト広告（Amazon・楽天・Qoo10等）を利用しています。商品の選定・評価は編集部が独自に行っています。価格・在庫は各販売サイトでご確認ください。</div>
 <article>
-  <nav class="crumb"><a href="/">ホーム</a><span class="sep">›</span><span>${escHtml(p.category)}</span><span class="sep">›</span><span>${escHtml(truncate(p.name, 26))}</span></nav>
+  <nav class="crumb"><a href="/">ホーム</a><span class="sep">›</span><a href="/products">商品一覧</a><span class="sep">›</span><span>${escHtml(truncate(p.name, 26))}</span></nav>
   <span class="cat-tag">${escHtml(p.category)}</span>
   <h1>${escHtml(p.name)}</h1>
   <div class="brand">${escHtml(p.brand)}${p.origin ? " ・ " + escHtml(p.origin) : ""}</div>
@@ -431,7 +431,7 @@ gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},p
       </a>`).join("")}
     </div>
   </div>` : ""}
-  <a class="backhome" href="/">← 商品一覧に戻る</a>
+  <a class="backhome" href="/products">← 商品一覧に戻る</a>
 </article>
 <footer>
   <div><a href="/">運営者情報</a><a href="/">プライバシーポリシー</a><a href="/">アフィリエイトについて</a></div>

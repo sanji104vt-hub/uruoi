@@ -6,7 +6,10 @@ const GSC_VERIFICATION = "UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q";
 const GA4_ID = "G-BC0FBSZSWX";
 const products = JSON.parse(fs.readFileSync("src/products.json", "utf8"));
 const columns = JSON.parse(fs.readFileSync("src/columns.json", "utf8"));
+const guideSlugs = JSON.parse(fs.readFileSync("src/guides-slugs.json", "utf8"));
 const skincare = products.filter(p => p.productType !== "makeup" && p.status !== "previous_generation");
+const relatedCategoryProducts = products.filter(p => p.productType === "makeup");
+const previousGenerationProducts = products.filter(p => p.status === "previous_generation");
 const outputDir = path.join("public", "hubs");
 
 fs.mkdirSync(outputDir, { recursive: true });
@@ -25,15 +28,20 @@ function truncate(value, max = 120){
 function productLink(product, label = product.name){
   return `<a href="/products/${encodeURIComponent(product.id)}">${esc(label)}</a>`;
 }
+function guideTitle(slug){
+  const source = fs.readFileSync(path.join("public", "guides", `${slug}.html`), "utf8");
+  return source.match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1]?.replace(/<[^>]+>/g, "").trim() || slug;
+}
 
 const css = `
 :root{--base:#FBF9F6;--ink:#2B2622;--water:#DCEAEC;--deep:#B7CDD3;--iris-1:#E8D5E0;--iris-2:#D5E4E8;--iris-3:#E4E8D5;--line:rgba(43,38,34,.12);--shadow:0 8px 32px rgba(43,38,34,.06);--serif:"Zen Old Mincho",serif;--sans:"Zen Kaku Gothic New",sans-serif}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--base);color:var(--ink);font-family:var(--sans);line-height:1.8}a{color:#385d68;text-underline-offset:3px}a:hover{color:#243f47}header{position:sticky;top:0;z-index:10;background:rgba(251,249,246,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}.header-inner{max-width:1180px;margin:auto;padding:12px 20px;display:flex;align-items:center;gap:22px}.logo{font:700 24px var(--serif);color:var(--ink);text-decoration:none;white-space:nowrap}.logo span{color:#668891}nav{display:flex;gap:8px;overflow-x:auto;padding:2px}.nav-link{display:inline-flex;align-items:center;min-height:44px;padding:8px 12px;border-radius:12px;text-decoration:none;white-space:nowrap;color:var(--ink);font-size:14px}.nav-link:hover,.nav-link.active{background:var(--water);color:var(--ink)}main{max-width:1120px;margin:auto;padding:52px 20px 80px}.hero{padding:42px;border-radius:24px;background:linear-gradient(135deg,var(--base),var(--water) 70%,var(--iris-2));margin-bottom:34px}h1,h2,h3{font-family:var(--serif);line-height:1.45}h1{font-size:clamp(30px,5vw,48px);margin:0 0 14px}h2{font-size:25px;margin:42px 0 18px}.lead{max-width:760px;margin:0;color:#52666b}.note{padding:16px 18px;border-left:4px solid var(--deep);background:#fff;border-radius:0 14px 14px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}.card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}.card h2,.card h3{margin:0 0 10px;font-size:20px}.meta{font-size:13px;color:#65777c}.pill{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--water);font-size:12px;margin:0 5px 7px 0}.product-link{display:flex;align-items:center;gap:10px;min-height:44px;margin-top:9px;padding:8px 10px;border-radius:12px;background:var(--base);text-decoration:none}.product-link:hover{background:var(--water)}.icon{font-size:25px}.price{font-family:"Cormorant",serif;font-size:19px}.section-nav{display:flex;gap:8px;overflow-x:auto;margin:20px 0 32px}.section-nav a{min-height:44px;display:inline-flex;align-items:center;padding:7px 12px;background:#fff;border:1px solid var(--line);border-radius:12px;text-decoration:none;white-space:nowrap}.ranking-list{counter-reset:rank;display:grid;gap:10px}.rank-row{counter-increment:rank;display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:12px;padding:14px;background:#fff;border:1px solid var(--line);border-radius:14px}.rank-row:before{content:counter(rank);font:italic 28px "Cormorant",serif;color:#67838b;text-align:center}.rank-row a{font-weight:700}.search{width:100%;min-height:48px;border:1px solid var(--deep);border-radius:14px;padding:10px 14px;font:inherit;background:#fff;margin-bottom:22px}.question{padding:22px;background:#fff;border:1px solid var(--line);border-radius:16px;margin:16px 0}.question h2{font-size:20px;margin:0 0 14px}.options{display:flex;gap:10px;flex-wrap:wrap}.option,.primary{min-height:44px;padding:9px 15px;border:1px solid var(--deep);border-radius:12px;background:#fff;color:var(--ink);font:500 14px var(--sans);cursor:pointer}.option[aria-pressed="true"]{background:var(--water);border-color:#668891}.primary{background:#385d68;color:#fff;border-color:#385d68;font-size:16px}.result{margin-top:25px}.empty{padding:28px;border:1px dashed var(--deep);border-radius:16px;text-align:center;color:#65777c}.footer{background:var(--water);padding:34px 20px;text-align:center;font-size:13px}.footer a{margin:0 8px}.sr-status{margin:12px 0;color:#52666b}@media(max-width:768px){.header-inner{align-items:flex-start;flex-direction:column;gap:6px;padding:9px 14px}.header-inner nav{width:100%}main{padding:28px 14px 60px}.hero{padding:28px 22px}.grid{grid-template-columns:1fr}.rank-row{grid-template-columns:36px minmax(0,1fr)}.rank-row .price{grid-column:2}.card{padding:17px}}
+.directory-controls{position:sticky;top:70px;z-index:5;padding:16px;margin:24px 0;background:rgba(251,249,246,.96);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.directory-controls .search{margin:0 0 12px}.filter-row{display:flex;gap:8px;flex-wrap:wrap}.filter-chip{min-height:44px;padding:8px 13px;border:1px solid var(--deep);border-radius:999px;background:#fff;color:var(--ink);font:500 13px var(--sans);cursor:pointer}.filter-chip[aria-pressed="true"]{background:var(--water);border-color:#668891}.price-filter{min-height:44px;padding:8px 12px;border:1px solid var(--deep);border-radius:12px;background:#fff;color:var(--ink);font:inherit}.product-category{scroll-margin-top:160px}.product-category h2{display:flex;align-items:baseline;gap:10px;border-bottom:1px solid var(--line);padding-bottom:8px}.product-category h2 span{font:500 15px "Cormorant",serif;color:#65777c}.product-directory-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(245px,1fr));gap:14px}.product-directory-card{display:flex;flex-direction:column;min-height:100%;background:#fff;border:1px solid var(--line);border-radius:16px;padding:17px;box-shadow:var(--shadow)}.product-directory-card h3{font-size:17px;margin:7px 0}.product-directory-card .description{font-size:13px;color:#52666b;flex:1}.product-directory-card .product-cta{display:inline-flex;align-items:center;justify-content:center;min-height:44px;margin-top:12px;padding:8px 12px;border-radius:12px;background:var(--water);font-weight:700;text-decoration:none}.status-pill{background:var(--iris-1)}.guide-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}.guide-list a{display:flex;align-items:center;min-height:44px;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:12px;text-decoration:none}.brand-more{margin-top:10px}.brand-more summary{min-height:44px;display:flex;align-items:center;cursor:pointer;color:#385d68;font-weight:700}.brand-more .product-link{margin-left:8px}@media(max-width:768px){.product-directory-grid{grid-template-columns:1fr}.directory-controls{position:static}}
 `;
 
 function navigation(active){
   const items = [
-    ["/", "商品"], ["/brands", "ブランド"], ["/ranking", "ランキング"],
+    ["/products", "商品"], ["/brands", "ブランド"], ["/ranking", "ランキング"],
     ["/diagnosis", "肌診断"], ["/columns", "コラム"], ["/favorites", "お気に入り"]
   ];
   return `<header><div class="header-inner"><a class="logo" href="/">Moi<span>lum</span></a><nav aria-label="メインナビゲーション">${items.map(([href,label]) => `<a class="nav-link${active === href ? " active" : ""}" href="${href}">${label}</a>`).join("")}</nav></div></header>`;
@@ -63,6 +71,29 @@ const breadcrumb = (name, pathName) => ({
   ]
 });
 
+const categoryGroups = [...new Set(products.map(product => product.category))].map(category => [
+  category,
+  products.filter(product => product.category === category)
+]);
+const directoryCard = product => {
+  const searchText = [product.name, product.brand, product.category, ...(product.skin || []), ...(product.concern || []), ...(product.keyIngredients || [])].join(" ").toLowerCase();
+  const status = product.status === "previous_generation"
+    ? `<span class="pill status-pill">前世代情報</span>`
+    : product.productType === "makeup" ? `<span class="pill status-pill">関連カテゴリ</span>` : "";
+  return `<article class="product-directory-card" data-product-id="${esc(product.id)}" data-category="${esc(product.category)}" data-audience="${esc(product.audience || "unisex")}" data-price="${Number(product.price || 0)}" data-search="${esc(searchText)}"><div><span class="pill">${esc(product.category)}</span>${status}</div><h3>${esc(product.name)}</h3><p class="meta">${esc(product.brand)}・編集部評価 ${esc(product.rating)}</p><p class="price">参考価格 ¥${yen(product.price)}</p><p class="description">${esc(truncate(product.desc, 105))}</p><a class="product-cta" href="/products/${encodeURIComponent(product.id)}" aria-label="${esc(product.name)}の詳細を見る">商品詳細を見る</a></article>`;
+};
+const productSections = categoryGroups.map(([category, items], index) => `<section class="product-category" data-product-section id="product-category-${index + 1}"><h2>${esc(category)} <span>${items.length}商品</span></h2><div class="product-directory-grid">${items.map(directoryCard).join("")}</div></section>`).join("");
+const guideLinks = guideSlugs.map(slug => `<a href="/guides/${encodeURIComponent(slug)}">${esc(guideTitle(slug))}</a>`).join("");
+const productDirectoryScript = `let directoryCategory="all";let directoryMensOnly=false;const directorySearch=document.getElementById("productDirectorySearch");const directoryPrice=document.getElementById("productDirectoryPrice");const directoryStatus=document.getElementById("productDirectoryStatus");function applyDirectoryFilters(){const q=directorySearch.value.trim().toLowerCase();const price=directoryPrice.value;let shown=0;document.querySelectorAll(".product-directory-card").forEach(function(card){const amount=Number(card.dataset.price);const priceMatch=price==="all"||(price==="under2000"&&amount<2000)||(price==="2000to5000"&&amount>=2000&&amount<5000)||(price==="5000to10000"&&amount>=5000&&amount<10000)||(price==="over10000"&&amount>=10000);const visible=(directoryCategory==="all"||card.dataset.category===directoryCategory)&&(!directoryMensOnly||card.dataset.audience==="mens")&&priceMatch&&(!q||card.dataset.search.includes(q));card.hidden=!visible;if(visible)shown+=1;});document.querySelectorAll("[data-product-section]").forEach(function(section){section.hidden=!section.querySelector(".product-directory-card:not([hidden])");});directoryStatus.textContent=shown+"商品を表示中";}document.querySelectorAll("[data-directory-category]").forEach(function(button){button.addEventListener("click",function(){directoryCategory=this.dataset.directoryCategory;document.querySelectorAll("[data-directory-category]").forEach(function(item){item.setAttribute("aria-pressed",String(item===button));});applyDirectoryFilters();});});document.getElementById("productDirectoryMens").addEventListener("click",function(){directoryMensOnly=!directoryMensOnly;this.setAttribute("aria-pressed",String(directoryMensOnly));applyDirectoryFilters();});directorySearch.addEventListener("input",applyDirectoryFilters);directoryPrice.addEventListener("change",applyDirectoryFilters);`;
+page({
+  file:"products.html", pathName:"/products", active:"/products",
+  title:`スキンケア商品一覧｜${products.length}商品をカテゴリ・肌悩み・価格で比較｜Moilum`,
+  description:`Moilumの商品データ全${products.length}件を、実在する${categoryGroups.length}カテゴリ別に掲載。ブランド、参考価格、編集部評価、肌悩みから商品詳細を比較できます。`,
+  body:`<section class="hero"><h1>スキンケア商品一覧</h1><p class="lead">化粧水・美容液・洗顔など、商品データ全${products.length}件を実在カテゴリ別に整理しました。各商品名から、評価根拠や向く人・向かない人を確認できます。</p></section><p class="note">トップページの現在比較対象は${skincare.length}件です。この一覧には、関連カテゴリ${relatedCategoryProducts.length}件と前世代情報${previousGenerationProducts.length}件も区別して含め、全商品ページへの入口を用意しています。</p><nav class="section-nav" aria-label="商品カテゴリ">${categoryGroups.map(([category,items],index)=>`<a href="#product-category-${index + 1}">${esc(category)}（${items.length}）</a>`).join("")}</nav><section class="directory-controls" aria-label="商品を絞り込む"><label for="productDirectorySearch">商品名・ブランド・成分・肌悩みで検索</label><input id="productDirectorySearch" class="search" type="search" placeholder="例：セラミド、乾燥肌、キュレル"><div class="filter-row"><button class="filter-chip" type="button" data-directory-category="all" aria-pressed="true">全カテゴリ</button>${categoryGroups.map(([category])=>`<button class="filter-chip" type="button" data-directory-category="${esc(category)}" aria-pressed="false">${esc(category)}</button>`).join("")}<button id="productDirectoryMens" class="filter-chip" type="button" aria-pressed="false">メンズ向け</button><label><span class="meta">価格帯 </span><select id="productDirectoryPrice" class="price-filter"><option value="all">価格すべて</option><option value="under2000">2,000円未満</option><option value="2000to5000">2,000〜4,999円</option><option value="5000to10000">5,000〜9,999円</option><option value="over10000">10,000円以上</option></select></label></div><p id="productDirectoryStatus" class="sr-status" aria-live="polite">${products.length}商品を表示中</p></section>${productSections}<section><h2>肌悩み・条件別ガイド</h2><p class="meta">商品選びの基準から絞り込みたい方はこちら。</p><div class="guide-list">${guideLinks}</div></section>`,
+  jsonLd:[breadcrumb("スキンケア商品一覧", "/products"), {"@context":"https://schema.org","@type":"CollectionPage","name":"スキンケア商品一覧","url":SITE_ORIGIN + "/products","mainEntity":{"@type":"ItemList","numberOfItems":products.length}}],
+  script:productDirectoryScript
+});
+
 const columnCards = columns.map(column => `<article class="card"><span class="pill">${esc(column.cat || "コラム")}</span><h2><a href="/columns/${encodeURIComponent(column.id)}">${esc(column.title)}</a></h2><p>${esc(column.excerpt || column.description)}</p><p class="meta">記事を読む →</p></article>`).join("");
 page({
   file:"columns.html", pathName:"/columns", active:"/columns",
@@ -75,7 +106,11 @@ page({
 const brands = [...new Map(skincare.map(p => [p.brand, []])).entries()];
 for (const product of skincare) brands.find(([brand]) => brand === product.brand)[1].push(product);
 brands.sort((a,b) => b[1].length - a[1].length || a[0].localeCompare(b[0], "ja"));
-const brandCards = brands.map(([brand, items]) => `<section class="card brand-card" data-search="${esc((brand + " " + items.map(p=>p.name).join(" ")).toLowerCase())}"><h2>${esc(brand)}</h2><p class="meta">掲載 ${items.length}商品${items[0]?.origin ? `・${esc(items[0].origin)}` : ""}</p>${items.slice(0,3).map(p => `<a class="product-link" href="/products/${encodeURIComponent(p.id)}"><span class="icon">${esc(p.icon || "💧")}</span><span>${esc(p.name)}<br><small>参考価格 ¥${yen(p.price)}・評価 ${esc(p.rating)}</small></span></a>`).join("")}</section>`).join("");
+const brandCards = brands.map(([brand, items]) => {
+  const productRows = list => list.map(p => `<a class="product-link" href="/products/${encodeURIComponent(p.id)}"><span class="icon">${esc(p.icon || "💧")}</span><span>${esc(p.name)}<br><small>参考価格 ¥${yen(p.price)}・評価 ${esc(p.rating)}</small></span></a>`).join("");
+  const remaining = items.slice(3);
+  return `<section class="card brand-card" data-search="${esc((brand + " " + items.map(p=>p.name).join(" ")).toLowerCase())}"><h2>${esc(brand)}</h2><p class="meta">掲載 ${items.length}商品${items[0]?.origin ? `・${esc(items[0].origin)}` : ""}</p>${productRows(items.slice(0,3))}${remaining.length ? `<details class="brand-more"><summary>残り${remaining.length}商品を見る</summary>${productRows(remaining)}</details>` : ""}</section>`;
+}).join("");
 const brandSearchScript = `const input=document.getElementById("brandSearch");const status=document.getElementById("brandStatus");input.addEventListener("input",function(){const q=this.value.trim().toLowerCase();let shown=0;document.querySelectorAll(".brand-card").forEach(function(card){const visible=!q||card.dataset.search.includes(q);card.hidden=!visible;if(visible)shown+=1;});status.textContent=shown+"ブランドを表示中";});`;
 page({
   file:"brands.html", pathName:"/brands", active:"/brands",
@@ -143,5 +178,18 @@ page({
   body:`<section class="hero"><h1>お気に入り商品</h1><p class="lead">この端末のブラウザに保存した商品を表示します。保存内容はサーバーへ送信されません。</p></section><p id="favoriteCount" class="sr-status" aria-live="polite">読み込み中…</p><section id="favoriteGrid" class="grid"></section><p class="note" style="margin-top:28px">コレクションの作成・編集は、<a href="/?page=favorites">従来のお気に入り管理画面</a>から利用できます。</p>`,
   jsonLd:[], script:favoritesScript
 });
+
+const homeFeatured = [...skincare].sort((a,b) => rankScore(b) - rankScore(a) || b.reviews - a.reviews).slice(0, 8);
+const homeFeaturedBlock = `<!-- HOME_PRODUCT_LINKS_START -->
+  <section class="home-product-links" aria-labelledby="homeFeaturedTitle">
+    <div class="home-product-links-head"><div><span class="home-product-links-kicker">FEATURED PRODUCTS</span><h2 id="homeFeaturedTitle">まず比較したい8商品</h2></div><a class="home-products-all" href="/products">全${products.length}商品を見る →</a></div>
+    <div class="home-product-links-grid">${homeFeatured.map(product => `<article><span>${esc(product.category)}</span><h3><a href="/products/${encodeURIComponent(product.id)}">${esc(product.name)}</a></h3><p>${esc(product.brand)}・編集部評価 ${esc(product.rating)}・参考価格 ¥${yen(product.price)}</p></article>`).join("")}</div>
+  </section>
+  <!-- HOME_PRODUCT_LINKS_END -->`;
+const indexPath = path.join("public", "index.html");
+const indexSource = fs.readFileSync(indexPath, "utf8");
+const homeMarkerPattern = /<!-- HOME_PRODUCT_LINKS_START -->[\s\S]*?<!-- HOME_PRODUCT_LINKS_END -->/;
+if (!homeMarkerPattern.test(indexSource)) throw new Error("public/index.html にHOME_PRODUCT_LINKSマーカーがありません");
+fs.writeFileSync(indexPath, indexSource.replace(homeMarkerPattern, homeFeaturedBlock), "utf8");
 
 console.log(`SEO hub pages generated: columns=${columns.length}, brands=${brands.length}, products=${products.length}, skincare=${skincare.length}`);

@@ -414,6 +414,12 @@ nav{display:flex;gap:4px}
 .ql{flex:none;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:14px 18px;min-width:78px;font-size:12px;font-weight:600;color:var(--txt2);cursor:pointer;transition:all .2s}
 .ql:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);box-shadow:var(--card-shadow)}
 .ql-ic{font-size:24px}
+/* ===== 初期HTMLでも辿れる注目商品リンク ===== */
+.home-product-links{margin:20px 0 32px;padding:24px;background:linear-gradient(135deg,var(--bg2),var(--water));border:1px solid var(--border);border-radius:20px;box-shadow:var(--card-shadow)}
+.home-product-links-head{display:flex;justify-content:space-between;align-items:end;gap:18px;margin-bottom:16px}.home-product-links-head h2{font-family:var(--font-heading);font-size:22px;margin:2px 0}.home-product-links-kicker{font-family:var(--font-score);font-size:12px;letter-spacing:.16em;color:var(--txt3)}
+.home-products-all{display:inline-flex;align-items:center;min-height:44px;color:var(--accent);font-size:13px;font-weight:700;text-decoration:none;white-space:nowrap}
+.home-product-links-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.home-product-links-grid article{background:rgba(255,255,255,.8);border:1px solid var(--border);border-radius:14px;padding:13px}.home-product-links-grid article>span{font-size:10px;color:var(--txt3)}.home-product-links-grid h3{font-size:13px;line-height:1.5;margin:4px 0}.home-product-links-grid h3 a{color:var(--txt);text-decoration:none}.home-product-links-grid h3 a:hover{text-decoration:underline}.home-product-links-grid p{font-size:10px;color:var(--txt3);line-height:1.5}
+@media(max-width:768px){.home-product-links{padding:18px 14px}.home-product-links-head{align-items:flex-start}.home-product-links-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 /* ===== サイドバーレイアウト ===== */
 .layout-with-sidebar{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start}
 .main-col{min-width:0}
@@ -1401,7 +1407,7 @@ nav{display:flex;gap:4px}
 </div></noscript>
 
 <header>
-  <a class="logo" href="/" onclick="return navigatePage(event,'products')" style="cursor:pointer;text-decoration:none">
+  <a class="logo" href="/" onclick="return navigateHome(event)" style="cursor:pointer;text-decoration:none">
     <svg class="logo-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
       <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0%" class="brand-stop-1"/><stop offset="100%" class="brand-stop-2"/>
@@ -1412,7 +1418,7 @@ nav{display:flex;gap:4px}
     <span class="logo-text">Moi<span class="logo-accent">lum</span></span>
   </a>
   <nav>
-    <a class="nav-btn active" data-page="products" href="/" onclick="return navigatePage(event,'products')">商品</a>
+    <a class="nav-btn active" data-page="products" href="/products" onclick="return navigatePage(event,'products')">商品</a>
     <a class="nav-btn" data-page="brands" href="/brands" onclick="return navigatePage(event,'brands')">ブランド</a>
     <a class="nav-btn" data-page="ranking" href="/ranking" onclick="return navigatePage(event,'ranking')">ランキング</a>
     <a class="nav-btn" data-page="diagnosis" href="/diagnosis" onclick="return navigatePage(event,'diagnosis')">肌診断</a>
@@ -1472,6 +1478,12 @@ nav{display:flex;gap:4px}
     <button class="ql" onclick="quickCat('洗顔')"><span class="ql-ic">🧼</span>洗顔</button>
     <button class="ql" onclick="quickCat('パック・マスク')"><span class="ql-ic">🎭</span>マスク</button>
   </div>
+  <!-- HOME_PRODUCT_LINKS_START -->
+  <section class="home-product-links" aria-labelledby="homeFeaturedTitle">
+    <div class="home-product-links-head"><div><span class="home-product-links-kicker">FEATURED PRODUCTS</span><h2 id="homeFeaturedTitle">まず比較したい8商品</h2></div><a class="home-products-all" href="/products">全247商品を見る →</a></div>
+    <div class="home-product-links-grid"><article><span>保湿クリーム</span><h3><a href="/products/243">キュレル クリーム ジャー 90g ／医薬部外品 花王 潤浸保湿 セラミド 乾燥性</a></h3><p>キュレル・編集部評価 4.9・参考価格 ¥1,650</p></article><article><span>化粧水</span><h3><a href="/products/214">化粧水・敏感肌用・高保湿タイプ 400ml</a></h3><p>無印良品・編集部評価 4.8・参考価格 ¥1,190</p></article><article><span>洗顔</span><h3><a href="/products/233">OXY ディープウォッシュ 130g</a></h3><p>OXY・編集部評価 4.8・参考価格 ¥498</p></article><article><span>洗顔</span><h3><a href="/products/216">ギャツビー フェイシャルウォッシュ パーフェクトスクラブ</a></h3><p>GATSBY・編集部評価 4.8・参考価格 ¥632</p></article><article><span>オールインワン</span><h3><a href="/products/225">ウーノ バイタルクリームパーフェクション fA 90g 男性化粧品 フェイス用</a></h3><p>UNO・編集部評価 4.9・参考価格 ¥1,738</p></article><article><span>化粧水</span><h3><a href="/products/4">Anua ドクダミ77% スージングトナー</a></h3><p>Anua・編集部評価 4.7・参考価格 ¥3,080</p></article><article><span>日焼け止め</span><h3><a href="/products/56">ビオレUV アクアリッチ ウォータリーエッセンス</a></h3><p>花王・編集部評価 4.6・参考価格 ¥990</p></article><article><span>保湿クリーム</span><h3><a href="/products/39">AESTURA アトバリア365 クリーム</a></h3><p>AESTURA・編集部評価 4.7・参考価格 ¥3,300</p></article></div>
+  </section>
+  <!-- HOME_PRODUCT_LINKS_END -->
   <div class="section-title">スキンケア商品一覧</div>
   <div class="layout-with-sidebar">
     <div class="main-col">
@@ -3632,7 +3644,16 @@ document.querySelectorAll(".q-opt").forEach(btn=>{
   });
 });
 
-const PAGE_PATHS={products:"/",brands:"/brands",ranking:"/ranking",diagnosis:"/diagnosis",column:"/columns",karte:"/?page=karte",favorites:"/favorites"};
+const PAGE_PATHS={products:"/products",brands:"/brands",ranking:"/ranking",diagnosis:"/diagnosis",column:"/columns",karte:"/?page=karte",favorites:"/favorites"};
+function navigateHome(event){
+  if(event&&(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)) return true;
+  if(event) event.preventDefault();
+  try{
+    if(window.location.pathname+window.location.search!=="/") history.pushState({page:"products"},"","/");
+  }catch(e){}
+  showPage("products");
+  return false;
+}
 function navigatePage(event,name){
   if(event&&(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)) return true;
   if(event) event.preventDefault();
@@ -3672,7 +3693,7 @@ function showPage(name){
     });
     if(bcUI){
       bcUI.style.display="block";
-      bcUI.innerHTML=`<a href="/" onclick="return navigatePage(event,'products')">ホーム</a><span class="bc-sep">›</span><span>${PAGE_LABELS[name]||name}</span>`;
+      bcUI.innerHTML=`<a href="/" onclick="return navigateHome(event)">ホーム</a><span class="bc-sep">›</span><span>${PAGE_LABELS[name]||name}</span>`;
     }
   }
 }
@@ -6378,7 +6399,7 @@ renderRecoFeed();
 // 初回HTTPレスポンス時点でheadは正しく差し替え済み。ここではJS側の表示状態を該当ページに合わせる。
 (function(){
   function openFromPath(pathname){
-    const pageRoutes={"/brands":"brands","/ranking":"ranking","/diagnosis":"diagnosis","/columns":"column","/favorites":"favorites"};
+    const pageRoutes={"/products":"products","/brands":"brands","/ranking":"ranking","/diagnosis":"diagnosis","/columns":"column","/favorites":"favorites"};
     const pageName=pageRoutes[pathname.replace(/\/$/,"")];
     if(pageName){
       showPage(pageName);
