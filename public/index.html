@@ -2040,7 +2040,8 @@ function updateFilterBadge(){
   toggle.innerHTML='🔍 詳しく絞り込む'+(n>0?`<span class="filter-badge">${n}</span>`:"");
 }
 
-document.getElementById("search").oninput=applyFilters;
+const searchInput=document.getElementById("search");
+if(searchInput) searchInput.oninput=applyFilters;
 
 function quickCat(cat){
   currentFilter=cat;
