@@ -60,7 +60,7 @@ console.log(missing === 0 ? `  ✓ 参照画像 ${imgCount}件すべて存在` :
 // 静的商品ページの出力確認
 console.log("\n=== 静的商品ページの一次情報ブロック ===");
 const files = fs.readdirSync("public/products").filter(f => f.endsWith(".html"));
-const withBlock = files.filter(f => fs.readFileSync("public/products/" + f, "utf8").includes('class="primary-source"'));
+const withBlock = files.filter(f => fs.readFileSync("public/products/" + f, "utf8").includes("編集部が実際に購入・使用した商品です"));
 console.log(`  一次情報ブロックあり : ${withBlock.length}件 / 全${files.length}件`);
 console.log(withBlock.length === 11 ? "  ✓ 11件のみ表示(仕様通り)" : `  ❌ 11件であるべき`);
 const ids = withBlock.map(f => Number(f.replace(".html",""))).sort((a,b)=>a-b);
@@ -71,7 +71,7 @@ const withoutSample = files.filter(f => !withBlock.includes(f)).slice(0, 5);
 console.log("\n=== 一次情報なし商品での非表示確認(サンプル5件) ===");
 for (const f of withoutSample){
   const c = fs.readFileSync("public/products/" + f, "utf8");
-  const hasBlock = c.includes('class="primary-source"');
+  const hasBlock = c.includes("編集部が実際に購入・使用した商品です");
   const hasBadge = c.includes("editor-used-badge");
   console.log(`  ${f}: block=${hasBlock ? "❌表示" : "✓非表示"} / 自身のバッジ=${hasBadge ? "(関連商品に有)" : "✓なし"}`);
 }

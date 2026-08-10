@@ -68,12 +68,17 @@ function checkUrl(file, value, context) {
     return;
   }
 
-  let pathname = "";
-  try { pathname = new URL(value, siteOrigin).pathname; }
+  let url;
+  try { url = new URL(value, siteOrigin); }
   catch { return; }
+  const pathname = url.pathname;
   if (pathname.split("/").some(segment => /^(?:undefined|null)$/i.test(segment))) {
     fail(file, `${context} に無効なパス要素: ${value}`);
   }
+
+  // 外部公式サイトにも /products/{slug} があるため、実商品IDの検査は
+  // Moilum内部リンクにだけ適用する。
+  if (url.origin !== siteOrigin) return;
 
   const productMatch = pathname.match(/^\/products\/([^/]+)\/?$/);
   if (productMatch) {

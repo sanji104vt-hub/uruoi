@@ -37,6 +37,15 @@ function productScores(p){
   return {editorial,affordability,dryFit,sensitiveFit};
 }
 function prosConsData(p){
+  const evidence = p.editorialEvidence;
+  if (evidence && evidence.decision) {
+    return {
+      pros: (evidence.officialFeatures || []).slice(0, 3),
+      cons: (evidence.comparisonPoints || []).slice(0, 3),
+      fit: (evidence.decision.chooseWhen || []).slice(0, 4),
+      unfit: (evidence.decision.compareWhen || []).slice(0, 4)
+    };
+  }
   const s=productScores(p);
   const pros=[], cons=[], fit=[], unfit=[];
   if(p.rating>=4.6) pros.push(`Moilum編集部評価が高い（★${p.rating}）`);
@@ -119,6 +128,80 @@ function escAttr(s){ return escHtml(s); }
 function truncate(s, n){
   const str = String(s || "");
   return str.length > n ? str.slice(0, n - 1) + "…" : str;
+}
+
+const SPEC_LABELS = {
+  manufacturerCategory: "メーカー分類",
+  contentAmount: "内容量",
+  classification: "製品区分",
+  activeIngredients: "有効成分",
+  keyIngredients: "公式掲載の主な成分",
+  usage: "使用方法・使用量",
+  manufacturerTarget: "メーカーが示す対象",
+  freeFrom: "不使用表示",
+  fragrance: "香料",
+  colorant: "着色料",
+  alcohol: "アルコール",
+  tests: "試験表示",
+  acidity: "pH・酸性度",
+  countryOfOrigin: "原産国",
+  spf: "SPF",
+  pa: "PA",
+  waterResistance: "耐水性",
+  removal: "落とし方",
+  wetHands: "ぬれた手",
+  eyelashExtensions: "まつげエクステ",
+  variants: "タイプ展開",
+  release: "発売情報",
+  renewal: "リニューアル",
+  releaseStatus: "販売世代",
+  refillCompatibility: "レフィル互換性",
+  afterOpening: "開封後の目安",
+  duration: "使用期間の目安",
+  container: "容器",
+  pumpAmount: "1プッシュ量",
+  caution: "公式の注意事項",
+  saleName: "販売名",
+  officialProductName: "公式商品名",
+  oil: "オイル",
+};
+
+const SOURCE_TYPE_LABELS = {
+  "official-product": "メーカー・ブランド公式商品ページ",
+  "official-brand": "メーカー・ブランド公式情報",
+  "official-pdf": "メーカー公式PDF",
+  "official-press-release": "メーカー・正規販売元公式発表",
+  "official-successor": "メーカー公式の現行・後継商品情報"
+};
+
+function displayValue(value){
+  if (Array.isArray(value)) return value.join("、");
+  if (value && typeof value === "object") return Object.values(value).join("、");
+  return String(value == null ? "" : value);
+}
+
+function editorialEvidenceHtml(p, all){
+  const evidence = p.editorialEvidence;
+  if (!evidence) return "";
+  const specs = Object.entries(evidence.specs || {}).filter(([, value]) => displayValue(value));
+  const candidates = (evidence.comparisonCandidates || [])
+    .map(item => ({ ...item, product: all.find(product => product.id === item.id) }))
+    .filter(item => item.product);
+  const verified = String(evidence.verifiedAt || "").replace(/^(\d{4})-(\d{2})-(\d{2})$/, "$1年$2月$3日");
+  const priceChecked = String(evidence.referencePriceCheckedAt || "").replace(/^(\d{4})-(\d{2})$/, "$1年$2月");
+  return `<section class="evidence" aria-labelledby="evidence-title">
+    <h2 id="evidence-title">公式情報で確認した仕様</h2>
+    ${specs.length ? `<dl class="spec-table">${specs.map(([key, value]) => `<div class="spec-row"><dt>${escHtml(SPEC_LABELS[key] || key)}</dt><dd>${escHtml(displayValue(value))}</dd></div>`).join("")}</dl>` : ""}
+    ${(evidence.officialFeatures || []).length ? `<div class="evidence-block"><h3>公式情報から確認できる特徴</h3><ul>${evidence.officialFeatures.map(item => `<li>${escHtml(item)}</li>`).join("")}</ul></div>` : ""}
+    ${(evidence.comparisonPoints || []).length ? `<div class="evidence-block"><h3>この商品を比較するときのポイント</h3><ul>${evidence.comparisonPoints.map(item => `<li>${escHtml(item)}</li>`).join("")}</ul></div>` : ""}
+    ${candidates.length ? `<div class="evidence-block"><h3>実データから選んだ比較候補</h3><div class="compare-links">${candidates.map(({ product, reason }) => `<a class="compare-link" href="/products/${product.id}"><span class="compare-name">${escHtml(product.name)}</span><span class="compare-meta">${escHtml(product.category)}・参考価格 ¥${(product.price || 0).toLocaleString()}</span><span class="compare-reason">${escHtml(reason)}</span></a>`).join("")}</div></div>` : ""}
+    ${evidence.decision ? `<div class="decision-grid">
+      <div class="decision-box choose"><h3>候補にしやすいケース</h3><ul>${(evidence.decision.chooseWhen || []).map(item => `<li>${escHtml(item)}</li>`).join("")}</ul></div>
+      <div class="decision-box compare"><h3>別候補も比較したいケース</h3><ul>${(evidence.decision.compareWhen || []).map(item => `<li>${escHtml(item)}</li>`).join("")}</ul></div>
+    </div>` : ""}
+    ${(evidence.sourceLimitations || []).length ? `<div class="source-limit"><strong>情報上の注意</strong><ul>${evidence.sourceLimitations.map(item => `<li>${escHtml(item)}</li>`).join("")}</ul></div>` : ""}
+    <div class="sources"><h3>根拠となる公式情報源</h3><ul>${(evidence.sources || []).map(source => `<li><a href="${escAttr(source.url)}" rel="noopener" target="_blank">${escHtml(source.title)}</a><span>${escHtml(SOURCE_TYPE_LABELS[source.type] || source.type)}</span></li>`).join("")}</ul><p>商品情報確認：${escHtml(verified)}${priceChecked ? ` ／ 参考価格確認：${escHtml(priceChecked)}` : ""}</p></div>
+  </section>`.replace(/^[ \t]+$/gm, "");
 }
 
 function rakutenDestination(p){
@@ -210,14 +293,21 @@ function getRelatedProducts(p, all){
 }
 
 function buildProductHtml(p, all){
-  const title = truncate(`${p.name}｜${p.brand}｜Moilum`, 68);
-  const desc = truncate(`${p.name}（${p.brand}）を独自スコアで比較。参考価格 ¥${(p.price || 0).toLocaleString()}／カテゴリ ${p.category}。${p.desc || ""}`, 156);
+  const evidence = p.editorialEvidence;
+  const title = truncate(evidence ? `${p.name}の公式仕様・比較ポイント｜Moilum` : `${p.name}｜${p.brand}｜Moilum`, 68);
+  const desc = truncate(evidence
+    ? `${p.name}（${p.brand}）の公式仕様と比較候補を確認。${(evidence.officialFeatures || [p.desc || ""])[0]} 参考価格 ${(p.price || 0).toLocaleString()}円。`
+    : `${p.name}（${p.brand}）を独自スコアで比較。参考価格 ¥${(p.price || 0).toLocaleString()}／カテゴリ ${p.category}。${p.desc || ""}`, 156);
   const canonical = `${SITE_ORIGIN}/products/${p.id}`;
   const ogImage = p.image || OGP_IMAGE;
   const related = getRelatedProducts(p, all);
   const productLd = buildProductJsonLd(p);
   const crumbLd = buildBreadcrumbJsonLd(p);
   const hasRating = p.rating > 0;
+  const verifiedIngredientValue = evidence?.specs?.keyIngredients || evidence?.specs?.activeIngredients;
+  const displayIngredients = evidence
+    ? (verifiedIngredientValue ? [displayValue(verifiedIngredientValue)] : [])
+    : (Array.isArray(p.keyIngredients) ? p.keyIngredients : []);
 
   return `<!DOCTYPE html>
 <html lang="ja">
@@ -285,7 +375,18 @@ h1{font-size:clamp(22px,4vw,30px);line-height:1.45;margin-bottom:12px}
 .suit-label{font-size:13px;font-weight:700;color:var(--txt2);min-width:100px}
 .suit-chips{display:flex;gap:6px;flex-wrap:wrap}
 .suit-chip{background:var(--water);color:var(--accent);font-size:12px;padding:4px 10px;border-radius:20px;font-weight:600}
-/* 一次情報ブロック: 配色は水鏡デザイントークン(--water/--deep/--accent/--ink)で統一 */
+${evidence ? `.evidence{background:#fff;border:1px solid var(--deep);border-radius:16px;padding:22px;margin-bottom:24px}
+.evidence>h2{font-size:19px;margin-bottom:16px}
+.spec-table{border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:22px}
+.spec-row{display:grid;grid-template-columns:minmax(120px,32%) 1fr;border-bottom:1px solid var(--border);font-size:13px}
+.spec-row:last-child{border-bottom:0}.spec-row dt{background:var(--water);padding:10px 12px;font-weight:700;color:var(--txt2)}.spec-row dd{padding:10px 12px;margin:0}
+.evidence-block{margin-top:20px}.evidence-block h3,.sources h3,.decision-box h3{font-size:15px;margin-bottom:9px}.evidence-block ul,.decision-box ul,.source-limit ul{padding-left:20px;font-size:13.5px}.evidence-block li,.decision-box li,.source-limit li{margin-bottom:6px}
+.compare-links{display:grid;gap:10px}.compare-link{display:grid;gap:3px;border:1px solid var(--deep);border-radius:12px;padding:12px 14px;background:linear-gradient(145deg,#fff,var(--water));transition:transform .15s,box-shadow .2s}.compare-link:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(43,38,34,.07)}
+.compare-name{font-weight:700;font-size:13px}.compare-meta{font-size:11px;color:var(--txt3)}.compare-reason{font-size:12px;color:var(--txt2)}
+.decision-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:22px}.decision-box{border-radius:12px;padding:14px}.decision-box.choose{background:var(--water);border:1px solid var(--deep)}.decision-box.compare{background:#fbf7f2;border:1px solid #e6d9cb}
+.source-limit{margin-top:18px;padding:12px 14px;border-left:4px solid var(--deep);background:var(--base);font-size:12px}.source-limit strong{display:block;margin-bottom:4px}
+.sources{margin-top:24px;padding-top:18px;border-top:1px solid var(--border)}.sources ul{list-style:none;padding:0}.sources li{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px solid var(--border);font-size:12px}.sources li a{color:var(--accent);text-decoration:underline}.sources li span{color:var(--txt3);text-align:right}.sources p{font-size:11px;color:var(--txt3);margin-top:10px}
+@media(max-width:600px){.spec-row{grid-template-columns:1fr}.spec-row dt{padding-bottom:4px}.spec-row dd{padding-top:4px}.decision-grid{grid-template-columns:1fr}.sources li{display:block}.sources li span{display:block;text-align:left;margin-top:2px}}\n` : ""}/* 一次情報ブロック: 配色は水鏡デザイントークン(--water/--deep/--accent/--ink)で統一 */
 .primary-source{background:linear-gradient(160deg,var(--water),var(--iris-2));border:1px solid var(--deep);border-radius:16px;padding:18px 20px;margin-bottom:22px;color:var(--ink)}
 .ps-header{font-size:13.5px;font-weight:800;color:var(--ink);margin-bottom:12px;display:flex;flex-wrap:wrap;align-items:center;gap:8px}
 .ps-badges{display:inline-flex;gap:6px;flex-wrap:wrap}
@@ -373,9 +474,9 @@ gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},p
     ${p.origin ? `<div class="meta-row"><span class="meta-label">原産国</span><span class="meta-val">${escHtml(p.origin)}</span></div>` : ""}
   </div>
   <div class="desc">${escHtml(p.desc || "")}</div>
-  ${Array.isArray(p.keyIngredients) && p.keyIngredients.length ? `<div class="ingredients">
+${displayIngredients.length ? `  <div class="ingredients">
     <h2>主要成分</h2>
-    <div class="ing-list">${p.keyIngredients.map(i => `<span class="ing-item">${escHtml(i)}</span>`).join("")}</div>
+    <div class="ing-list">${displayIngredients.map(i => `<span class="ing-item">${escHtml(i)}</span>`).join("")}</div>
   </div>` : ""}
   ${(Array.isArray(p.skin) && p.skin.length) || (Array.isArray(p.concern) && p.concern.length) ? `<div class="suitability">
     <h2>掲載データ上の候補条件</h2>
@@ -383,7 +484,7 @@ gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},p
     ${Array.isArray(p.concern) && p.concern.length ? `<div class="suit-row"><span class="suit-label">掲載悩み分類</span><div class="suit-chips">${p.concern.map(c => `<span class="suit-chip">${escHtml(c)}</span>`).join("")}</div></div>` : ""}
   </div>` : ""}
   ${primarySourceHtml(p)}
-  ${(() => {
+  ${editorialEvidenceHtml(p, all)}${p.editorialEvidence ? "" : (() => {
     const pc = prosConsData(p);
     return `<div class="proscons">
     <h2>掲載データから確認できる点・確認できない点</h2>
@@ -416,7 +517,7 @@ gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},p
     <a class="buy-btn rakuten" data-shop="rakuten" href="${escAttr(moshimoRakutenLink(p))}" rel="nofollow sponsored noopener" referrerpolicy="no-referrer-when-downgrade" target="_blank">楽天で見る</a>
     <a class="buy-btn qoo10" data-shop="qoo10" href="https://www.qoo10.jp/s/?keyword=${encodeURIComponent(p.brand + " " + p.name)}" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
   </div>
-  ${related.length ? `<div class="related">
+${related.length ? `  <div class="related">
     <h2>同じカテゴリのおすすめ</h2>
     <div class="rel-grid">
       ${related.map(r => `<a class="rel-card" href="/products/${r.id}">

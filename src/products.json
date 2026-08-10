@@ -78,7 +78,62 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/mujirushi-ryohin/cabinet/item26/4548076448341.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-successor",
+          "title": "無印良品 化粧水 敏感肌用 高保湿",
+          "url": "https://www.muji.com/jp/ja/store/cmdty/detail/4550583434991",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "化粧水",
+        "contentAmount": "現行品は300mL",
+        "usage": "洗顔後、手またはコットンで使用",
+        "fragrance": "現行品は無香料",
+        "tests": "現行品はアレルギーテスト・スティンギングテスト済み（すべての人に反応が起きないわけではない）"
+      },
+      "officialFeatures": [
+        "公式に確認できた現行品は、セラミドと5種のアミノ酸を配合した敏感肌用化粧水です。",
+        "手で使う場合とコットンで使う場合の目安量が公式ページに分けて示されています。"
+      ],
+      "comparisonPoints": [
+        "掲載画像と商品名は旧仕様の可能性があるため、購入前に容量とJANを確認する必要があります。",
+        "敏感肌向け化粧水のなかで、現行品の300mL容量と価格帯を比較する商品です。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "現行の無印良品・敏感肌用化粧水を候補にする",
+          "無香料仕様や容量を公式情報で確認して選びたい"
+        ],
+        "compareWhen": [
+          "医薬部外品の肌荒れ防止有効成分を重視する",
+          "旧400mL仕様と現行300mL仕様を区別して購入したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 1,
+          "reason": "同じ敏感肌向け化粧水として、医薬部外品かどうかを比較"
+        },
+        {
+          "id": 5,
+          "reason": "同価格帯の敏感肌向け保湿化粧水として比較"
+        },
+        {
+          "id": 12,
+          "reason": "さらに価格を抑えた高保湿化粧水として比較"
+        }
+      ],
+      "sourceLimitations": [
+        "公式確認先は現行300mL品です。掲載中の『高保湿タイプ』旧仕様と成分・容量を同一視していません。"
+      ]
+    }
   },
   {
     "id": 4,
@@ -259,7 +314,7 @@
       "乾燥・かさつき",
       "ニキビ・吹き出物"
     ],
-    "desc": "ハトムギエキス配合のさっぱり大容量化粧水。たっぷり使えて高コスパで全身に使える定番品。",
+    "desc": "ハトムギエキスを保湿成分として配合した500mLの化粧水。顔とからだに使え、アルコール・香料・着色料を使わない仕様です。",
     "keyIngredients": [
       "ハトムギエキス",
       "グリセリン"
@@ -268,7 +323,66 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/at-life/cabinet/d/19882561_0.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-brand",
+          "title": "ナチュリエ 公式サイト",
+          "url": "https://www.naturie-net.jp/",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-product",
+          "title": "ナチュリエ 商品バリエーション",
+          "url": "https://www.naturie-net.jp/variation",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "化粧水",
+        "contentAmount": "500mL",
+        "freeFrom": "香料・着色料・オイル・界面活性剤不使用",
+        "alcohol": "アルコールフリー",
+        "usage": "顔・からだに使用可能。重ねづけやローションパックにも使用可能",
+        "tests": "ノンコメドジェニックテスト済み（すべての人にニキビのもとができないわけではない）"
+      },
+      "officialFeatures": [
+        "500mLの容量があり、顔だけでなく全身にも使えるとメーカーが案内しています。",
+        "ハトムギエキスを保湿成分として配合し、アルコール・香料・着色料を使わない仕様です。"
+      ],
+      "comparisonPoints": [
+        "化粧水1本の価格だけでなく、500mLという容量を含めて比較できます。",
+        "医薬部外品ではなく、日常の水分補給用化粧水として比較する位置づけです。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "顔とからだに共用できる大容量化粧水を探している",
+          "アルコール・香料・着色料の有無を確認して選びたい"
+        ],
+        "compareWhen": [
+          "肌荒れ防止の有効成分を明示した医薬部外品が必要",
+          "少量ボトルや、とろみのある高保湿タイプを優先したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 12,
+          "reason": "同じ1,000円以下の化粧水として容量としっとり感を比較"
+        },
+        {
+          "id": 2,
+          "reason": "同価格帯のヒアルロン酸系化粧水として比較"
+        },
+        {
+          "id": 89,
+          "reason": "同ブランドの保湿ジェルと、化粧水・ジェルの役割を比較"
+        }
+      ]
+    }
   },
   {
     "id": 11,
@@ -455,7 +569,60 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/r-kojima/cabinet/n0000000766/4987241168446_1.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "肌ラボ 白潤プレミアム 薬用浸透美白化粧水",
+          "url": "https://www.shop.rohto.co.jp/category/skincare/hadalabo/shirojyun-premium/168446.html",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "薬用美白化粧水",
+        "contentAmount": "170mL",
+        "classification": "医薬部外品",
+        "activeIngredients": "トラネキサム酸、グリチルリチン酸2K",
+        "freeFrom": "香料・着色料・鉱物油・アルコール・パラベン不使用",
+        "acidity": "弱酸性"
+      },
+      "officialFeatures": [
+        "美白有効成分トラネキサム酸と抗炎症有効成分グリチルリチン酸2Kを配合した医薬部外品です。",
+        "2種のヒアルロン酸をうるおい成分として配合しています。"
+      ],
+      "comparisonPoints": [
+        "同価格帯の化粧水のなかで、医薬部外品の有効成分が明示されている点が比較軸です。",
+        "香料やアルコールなどの不使用項目を公式表示で確認できます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "医薬部外品の美白化粧水を1,000円前後で比較したい",
+          "トラネキサム酸配合を条件にしている"
+        ],
+        "compareWhen": [
+          "ビタミンCを主軸にした化粧水を探している",
+          "さっぱりした大容量化粧水を優先したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 161,
+          "reason": "同価格帯の薬用美白化粧水として有効成分を比較"
+        },
+        {
+          "id": 9,
+          "reason": "同価格帯の薬用化粧水として目的を比較"
+        },
+        {
+          "id": 247,
+          "reason": "美白とニキビ予防を掲げる別の医薬部外品として比較"
+        }
+      ]
+    }
   },
   {
     "id": 18,
@@ -499,7 +666,7 @@
       "乾燥・かさつき",
       "シワ・たるみ"
     ],
-    "desc": "濃密なとろみで肌をうるおいで満たす保湿化粧水。コラーゲン産生をサポートしハリを与えます。",
+    "desc": "とろみのある保湿化粧水。掲載品は旧名称のため、現行DEWローションとは容量・タイプ・処方世代を分けて確認します。",
     "keyIngredients": [
       "ヒアルロン酸",
       "コラーゲン",
@@ -509,7 +676,62 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/ksheep1/cabinet/img23/4973167251997.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-successor",
+          "title": "DEW ローション",
+          "url": "https://www.kanebo-cosmetics.jp/dew/products/dew/lotion/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "化粧水",
+        "contentAmount": "現行品は150mL",
+        "variants": "さっぱり・しっとり・とてもしっとりの3種",
+        "usage": "1回2プッシュが目安",
+        "fragrance": "グリーンフローラルの香り"
+      },
+      "officialFeatures": [
+        "公式で確認できた現行ローションは、使用感の異なる3タイプから選ぶ設計です。",
+        "現行品はヒアルロン酸Naなどを含む保湿成分複合体を採用しています。"
+      ],
+      "comparisonPoints": [
+        "使用感の3タイプ展開があるため、商品名だけでなくタイプ表示まで確認して比較する必要があります。",
+        "同ブランドの上位ローションとは価格帯とラインが異なります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "とろみ系の保湿化粧水をタイプ別に比較したい",
+          "ポンプ式で1回量の目安が示された商品を探している"
+        ],
+        "compareWhen": [
+          "無香料を条件にしている",
+          "掲載中の旧世代品と現行品を同じ処方だとみなして購入したくない"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 167,
+          "reason": "同ブランド上位ラインの化粧水として価格差を比較"
+        },
+        {
+          "id": 18,
+          "reason": "同価格帯の保湿化粧水として主な保湿設計を比較"
+        },
+        {
+          "id": 5,
+          "reason": "より低価格の敏感肌向け保湿化粧水として比較"
+        }
+      ],
+      "sourceLimitations": [
+        "公式確認先は現行『DEW ローション』です。掲載中の旧名称品へ現行処方を転記していません。"
+      ]
+    }
   },
   {
     "id": 20,
@@ -580,7 +802,7 @@
       "乾燥・かさつき",
       "シワ・たるみ"
     ],
-    "desc": "注目成分PDRNとヒアルロン酸・コラーゲン配合。水のようなテクスチャーで使い続けると肌がもちもちに。",
+    "desc": "DNA-Na、ヒアルロン酸、加水分解コラーゲンを組み合わせた30mL美容液。化粧水後にスポイト1回分を使う設計です。",
     "keyIngredients": [
       "PDRN",
       "ヒアルロン酸",
@@ -590,7 +812,60 @@
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/anuajapan/cabinet/11288031/pdrn_mainthumb.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "Anua PDRN ヒアルロン酸カプセル100セラム",
+          "url": "https://anuashop.jp/products/side0011",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "美容液",
+        "contentAmount": "30mL",
+        "keyIngredients": "DNA-Na、ヒアルロン酸、加水分解コラーゲン",
+        "usage": "化粧水後、スポイト1回分を顔になじませる",
+        "freeFrom": "人工色素・人工香料不使用",
+        "afterOpening": "開封後6か月"
+      },
+      "officialFeatures": [
+        "DNA-Na、ヒアルロン酸、加水分解コラーゲンを組み合わせた美容液です。",
+        "商品名の『100』は成分濃度ではなく、メーカーが説明するカプセル設計の呼称です。"
+      ],
+      "comparisonPoints": [
+        "PDRN系美容液では、由来・併用成分・内容量を分けて比較する必要があります。",
+        "30mLで、化粧水後にスポイト1回分を使う案内です。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "PDRN系とヒアルロン酸系を同時に比較したい",
+          "人工色素・人工香料の不使用表示を確認して選びたい"
+        ],
+        "compareWhen": [
+          "PDRNの配合濃度を数値で比較したい",
+          "より低価格のヒアルロン酸美容液を優先したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 23,
+          "reason": "同じPDRN系美容液として併用成分と価格を比較"
+        },
+        {
+          "id": 29,
+          "reason": "同価格帯のヒアルロン酸系美容液として比較"
+        },
+        {
+          "id": 104,
+          "reason": "価格を抑えたヒアルロン酸系美容液として比較"
+        }
+      ]
+    }
   },
   {
     "id": 23,
@@ -607,17 +882,78 @@
       "シワ・たるみ",
       "乾燥・かさつき"
     ],
-    "desc": "サーモン由来PDRN10,000ppm配合。ピンク色のとろみセラムでコラーゲン合成をサポート、ハリツヤ肌へ。",
+    "desc": "PDRNに5種のペプチドとナイアシンアミドを組み合わせた30mL美容液。国内外の公式表示差を確認して比較します。",
     "keyIngredients": [
       "PDRN",
-      "コラーゲン",
+      "5種のペプチド",
       "ナイアシンアミド"
     ],
     "icon": "🩷",
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/apr-japan/cabinet/11138410/11146955/imgrc0117678338.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "MEDICUBE PDRN ピンクペプチドセラム",
+          "url": "https://themedicube.jp/products/pdrn-pinkpeptideserum",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-product",
+          "title": "Medicube Rose PDRN Pink Peptide Serum",
+          "url": "https://medicube.us/products/rose-pdrn-pink-peptide-serum",
+          "scope": "overseas"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "美容液",
+        "contentAmount": "30mL",
+        "keyIngredients": "PDRN、5種のペプチド、ナイアシンアミド、アデノシン",
+        "colorant": "人工着色料不使用",
+        "tests": "メーカーの低刺激性・皮膚科テスト表示あり（適合を保証するものではない）"
+      },
+      "officialFeatures": [
+        "公式で確認できたRose PDRN版は、PDRNに5種のペプチドとナイアシンアミドを組み合わせています。",
+        "ピンク色は人工着色料によるものではないとメーカーが案内しています。"
+      ],
+      "comparisonPoints": [
+        "同じPDRN系でも、Anua品とは併用成分と価格が異なります。",
+        "国内公式ページは画像中心のため、成分数値は海外公式の同名品と版を確認して読む必要があります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "PDRNとペプチドを組み合わせた美容液を比較したい",
+          "30mLのPDRN系美容液で選びたい"
+        ],
+        "compareWhen": [
+          "国内公式だけで全仕様を確認できる商品を優先したい",
+          "価格を抑えたPDRN系美容液を探している"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 22,
+          "reason": "同じ30mLのPDRN系美容液として併用成分と価格を比較"
+        },
+        {
+          "id": 29,
+          "reason": "保湿目的の同価格帯美容液として比較"
+        },
+        {
+          "id": 121,
+          "reason": "別アプローチの韓国美容液として比較"
+        }
+      ],
+      "sourceLimitations": [
+        "国内公式ページは詳細の多くが画像です。海外公式の同名Rose PDRN版と国内流通品の表示差は購入時に確認してください。"
+      ]
+    }
   },
   {
     "id": 24,
@@ -644,7 +980,60 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/granbeautyon-line/cabinet/3000off2/ghjghj.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "オバジ C25セラム ネオ",
+          "url": "https://www.shop.rohto.co.jp/category/skincare/obagi/obagi-c/199891.html",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "美容液",
+        "contentAmount": "12mL",
+        "classification": "化粧品",
+        "keyIngredients": "アスコルビン酸、トコフェロール",
+        "fragrance": "香料配合",
+        "alcohol": "エタノール配合"
+      },
+      "officialFeatures": [
+        "ピュアビタミンCを主成分として掲げる12mLの美容液です。",
+        "成分表示にはエタノールと香料が含まれるため、不使用を条件にする場合は比較が必要です。"
+      ],
+      "comparisonPoints": [
+        "同ブランドのC10と、濃度名・価格・内容量を比較できます。",
+        "医薬部外品のメラノCCとは製品分類と有効成分表示の考え方が異なります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "オバジCシリーズの上位濃度名を比較している",
+          "12mLの集中型美容液を候補にする"
+        ],
+        "compareWhen": [
+          "エタノールや香料の不使用を条件にしている",
+          "医薬部外品の承認効能を重視して選びたい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 32,
+          "reason": "同ブランドのC10として濃度名と価格を比較"
+        },
+        {
+          "id": 28,
+          "reason": "低価格の薬用ビタミンC美容液として比較"
+        },
+        {
+          "id": 123,
+          "reason": "別ブランドのビタミンC系美容液として比較"
+        }
+      ]
+    }
   },
   {
     "id": 25,
@@ -744,11 +1133,11 @@
       "シミ・くすみ",
       "ニキビ・吹き出物"
     ],
-    "desc": "活性型ビタミンC配合のプチプラ美容液。シミ・ニキビ跡の集中ケアに、コスパ抜群の定番品。",
+    "desc": "活性型ビタミンCなど4つの有効成分を配合した20mLの薬用美白美容液。化粧水後に全顔または部分使いできます。",
     "keyIngredients": [
       "活性型ビタミンC",
-      "ビタミンE",
-      "グリチルリチン酸"
+      "ビタミンE誘導体",
+      "グリチルリチン酸ジカリウム"
     ],
     "icon": "🍊",
     "origin": "日本",
@@ -759,7 +1148,67 @@
     "editorPhotoAlt": "メラノCC 薬用しみ集中対策 美容液のパッケージ",
     "editorNote": "プレミアム版と比較すると、編集部スタッフはこちらでは同じような実感は得られませんでした。まずは価格を抑えて試したい場合の入り口としては選びやすい一本です。",
     "reviewedByEditor": true,
-    "editorReviewedAt": "2026-07-26"
+    "editorReviewedAt": "2026-07-26",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "メラノCC 薬用 しみ 集中対策 美容液",
+          "url": "https://jp.rohto.com/melanocc/essence/",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-brand",
+          "title": "メラノCC 美容液 使い方・ラインアップ",
+          "url": "https://jp.rohto.com/melanocc/promotion/essence/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "薬用美白美容液",
+        "contentAmount": "20mL",
+        "classification": "医薬部外品",
+        "activeIngredients": "アスコルビン酸、トコフェロール酢酸エステル、イソプロピルメチルフェノール、グリチルリチン酸ジカリウム",
+        "usage": "化粧水後、気になる部分または顔全体に使用。1回4〜5滴が目安",
+        "container": "滴下式チューブ"
+      },
+      "officialFeatures": [
+        "活性型ビタミンCとビタミンE誘導体を有効成分として配合した医薬部外品です。",
+        "1回4〜5滴を目安に、化粧水後の全顔または部分使いが案内されています。",
+        "標準品とプレミアム品は有効成分・うるおい成分の構成が異なります。"
+      ],
+      "comparisonPoints": [
+        "同ブランドのプレミアム版とは価格差だけでなく、有効成分とビタミンC誘導体の構成を比較できます。",
+        "オバジCシリーズとは医薬部外品か化粧品か、内容量、価格帯が異なります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "1,000円台の薬用ビタミンC美容液から比較したい",
+          "滴下式で部分使いと全顔使用を選びたい"
+        ],
+        "compareWhen": [
+          "編集部スタッフが使ったプレミアム版との違いを重視する",
+          "高価格帯のビタミンC美容液も含めて比較したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 244,
+          "reason": "同ブランドのプレミアム版として有効成分構成と価格を比較"
+        },
+        {
+          "id": 32,
+          "reason": "オバジC10として製品分類・価格帯を比較"
+        },
+        {
+          "id": 161,
+          "reason": "同ブランドの薬用美白化粧水として使用順序を比較"
+        }
+      ]
+    }
   },
   {
     "id": 29,
@@ -814,7 +1263,57 @@
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/innisfree-official/cabinet/09973004/12935610/13071927/imgrc0122127029.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "イニスフリー ブラックティー ユース セラム",
+          "url": "https://www.innisfree.jp/products/black-tea-youth-serum-1566",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "美容液",
+        "keyIngredients": "チャ葉エキス由来Rコンセントレート",
+        "usage": "適量を顔全体になじませ、必要に応じて重ねづけ"
+      },
+      "officialFeatures": [
+        "発酵茶葉由来の独自保湿成分Rコンセントレートを軸にした美容液です。",
+        "メーカーは乾燥によるくすみ、うるおい、ハリ感をケア目的として案内しています。"
+      ],
+      "comparisonPoints": [
+        "夜用を想起させる商品群と比べ、公式では使用時間を夜だけに限定していません。",
+        "同価格帯の韓国美容液と、主軸成分と肌悩み分類を比較できます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "発酵茶葉由来の保湿成分を軸に比較したい",
+          "乾燥によるくすみとハリ不足を同時に比較したい"
+        ],
+        "compareWhen": [
+          "成分濃度が数値で明示された美容液を探している",
+          "無香料を必須条件にしている"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 127,
+          "reason": "発酵系の夜用美容液候補として価格と設計を比較"
+        },
+        {
+          "id": 75,
+          "reason": "高価格帯の夜ケア美容液として比較"
+        },
+        {
+          "id": 99,
+          "reason": "価格を抑えたエイジングケア美容液として比較"
+        }
+      ]
+    }
   },
   {
     "id": 31,
@@ -963,7 +1462,7 @@
       "毛穴の開き・黒ずみ",
       "シミ・くすみ"
     ],
-    "desc": "ナイアシンアミドとビタミン配合。キメを整え、つるんとなめらかな肌に導く韓国人気セラム。",
+    "desc": "国内公式で50mLと確認できる、numbuzinの3番・キメケア美容液。確認できない成分濃度や使用感は断定しません。",
     "keyIngredients": [
       "ナイアシンアミド",
       "ビタミンC",
@@ -973,7 +1472,60 @@
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/roseroseshop/cabinet/12126483/imgrc0130642583.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "numbuzin 3番 すべすべキメケアセラム",
+          "url": "https://numbuzin.jp/product/3%E7%95%AA-%E3%81%99%E3%81%B9%E3%81%99%E3%81%B9%E3%82%AD%E3%83%A1%E3%82%B1%E3%82%A2%E3%82%BB%E3%83%A9%E3%83%A0/20/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "美容液",
+        "contentAmount": "50mL",
+        "countryOfOrigin": "韓国"
+      },
+      "officialFeatures": [
+        "国内公式で確認できる商品名は『3番 すべすべキメケアセラム』で、内容量は50mLです。",
+        "国内公式ページは『キメケア』を商品識別の中心にしています。"
+      ],
+      "comparisonPoints": [
+        "国内公式のテキスト情報が限られるため、成分名を断定せず容量・価格・カテゴリで比較します。",
+        "同ブランドの5番美容液とは商品番号とケア目的が異なります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "50mLの韓国美容液を容量込みで比較したい",
+          "numbuzinの3番・キメケアを探している"
+        ],
+        "compareWhen": [
+          "主要成分を国内公式テキストで詳しく確認して選びたい",
+          "ビタミンCやナイアシンアミドの濃度を数値比較したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 77,
+          "reason": "同ブランド5番として商品番号ごとの目的を比較"
+        },
+        {
+          "id": 25,
+          "reason": "同価格帯の韓国美容液として容量と主軸を比較"
+        },
+        {
+          "id": 103,
+          "reason": "低価格のナイアシンアミド美容液候補として比較"
+        }
+      ],
+      "sourceLimitations": [
+        "国内公式の商品詳細は画像中心です。確認できない成分濃度や使用感は掲載していません。"
+      ]
+    }
   },
   {
     "id": 37,
@@ -989,7 +1541,7 @@
     "concern": [
       "乾燥・かさつき"
     ],
-    "desc": "青缶で有名な定番保湿クリーム。顔・体・全身に使える濃厚保湿、価格帯に対する評価が高いロングセラー。",
+    "desc": "169gの顔・からだ用保湿クリーム。スクワランとホホバオイルを保湿成分として配合しています。",
     "keyIngredients": [
       "スクワラン",
       "ホホバオイル",
@@ -999,7 +1551,66 @@
     "origin": "ドイツ",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/rakuten24/cabinet/201/16201.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "ニベアクリーム 大缶",
+          "url": "https://www.nivea.co.jp/products/nivea-japan/all-purpose-creams/%E3%83%8B%E3%83%99%E3%82%A2%E3%82%AF%E3%83%AA%E3%83%BC%E3%83%A0-%E5%A4%A7%E7%BC%B6",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-brand",
+          "title": "ニベアクリームの仕様",
+          "url": "https://www.nivea.co.jp/highlights/youcan",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "全身用クリーム",
+        "contentAmount": "169g",
+        "keyIngredients": "スクワラン、ホホバオイル",
+        "usage": "顔・からだに使用可能",
+        "colorant": "着色料不使用",
+        "tests": "ノンコメドジェニックテスト済み（すべての人にニキビのもとができないわけではない）"
+      },
+      "officialFeatures": [
+        "169gの大缶で、顔だけでなく身体にも使用できるクリームです。",
+        "スクワランとホホバオイルを保湿成分として配合しています。"
+      ],
+      "comparisonPoints": [
+        "顔専用クリームではなく全身用である点を、同価格帯の顔用ジェルと分けて比較します。",
+        "容器サイズと使用部位の広さが価格比較の前提になります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "顔と身体に共用できる大容量クリームを探している",
+          "1,000円以下の保湿剤から比較したい"
+        ],
+        "compareWhen": [
+          "医薬部外品の肌荒れ防止成分を重視する",
+          "顔用として成分・使用量が細かく示された商品を優先する"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 145,
+          "reason": "顔・身体に使える低価格の乳液として剤形を比較"
+        },
+        {
+          "id": 41,
+          "reason": "顔用保湿クリームとして用途を比較"
+        },
+        {
+          "id": 89,
+          "reason": "同価格帯の保湿ジェルとして使用感の種類を比較"
+        }
+      ]
+    }
   },
   {
     "id": 38,
@@ -1017,7 +1628,7 @@
       "シワ・たるみ",
       "シミ・くすみ"
     ],
-    "desc": "資生堂フラグシップクリーム。独自複合成分でハリ・弾力・透明感にアプローチする最上位ラインのクリーム。",
+    "desc": "掲載名は旧世代の可能性がある高価格帯クリーム。現行ラ・クレームは夜用の医薬部外品で、購入時に世代確認が必要です。",
     "keyIngredients": [
       "レチノール",
       "ナイアシンアミド",
@@ -1027,7 +1638,62 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/yotsubadrug/cabinet/imgrc0112637782.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-successor",
+          "title": "クレ・ド・ポー ボーテ ラ・クレーム",
+          "url": "https://www.cledepeau-beaute.com/jp/products/skincare/creams/H071.html",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "夜用クリーム",
+        "contentAmount": "現行品は30g",
+        "classification": "医薬部外品",
+        "activeIngredients": "レチノール酢酸エステル、トラネキサム酸、4MSK、酢酸DL-α-トコフェロール",
+        "usage": "夜の手入れの最後に使用"
+      },
+      "officialFeatures": [
+        "公式で確認できる現行品は、夜用の医薬部外品クリームです。",
+        "現行品には複数の有効成分が明示され、レフィルも用意されています。"
+      ],
+      "comparisonPoints": [
+        "高価格帯クリームでは、医薬部外品か化粧品かと有効成分表示を比較できます。",
+        "掲載中のN表記品と現行品は世代が異なる可能性があるため、購入時は名称と容器を確認します。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "医薬部外品の夜用クリームを高価格帯で比較したい",
+          "レフィル対応を含めて継続方法を比較したい"
+        ],
+        "compareWhen": [
+          "掲載中の旧世代名と現行処方を明確に区別したい",
+          "価格を抑えた保湿クリームから選びたい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 142,
+          "reason": "同じエイジングケア系クリームとして価格と分類を比較"
+        },
+        {
+          "id": 188,
+          "reason": "同じ高価格帯クリームとして製品分類を比較"
+        },
+        {
+          "id": 34,
+          "reason": "レチノール系の医薬部外品として剤形を比較"
+        }
+      ],
+      "sourceLimitations": [
+        "公式確認先は現行『ラ・クレーム』です。掲載中の『ラ クレームN』へ現行処方をそのまま転記していません。"
+      ]
+    }
   },
   {
     "id": 39,
@@ -1044,7 +1710,7 @@
       "乾燥・かさつき",
       "肌荒れ・赤み"
     ],
-    "desc": "皮膚科学に基づくセラミド配合の保湿クリーム。バリア機能をサポートし敏感肌を365日守ります。",
+    "desc": "高密度セラミドカプセルを特徴とする80mLの保湿クリーム。国内公式では乾燥肌・敏感肌向けとして案内されています。",
     "keyIngredients": [
       "セラミド",
       "パンテノール",
@@ -1054,7 +1720,65 @@
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/aestura-japan/cabinet/thum/creamthumbnail.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "AESTURA アトバリア365 クリーム",
+          "url": "https://jp.aestura.com/products/atobarrier365-cream",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-product",
+          "title": "AESTURA ATOBARRIER365 Cream",
+          "url": "https://int.aestura.com/products/atobarrier365-cream",
+          "scope": "overseas"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "保湿クリーム",
+        "contentAmount": "80mL",
+        "keyIngredients": "セラミドカプセル",
+        "manufacturerTarget": "乾燥肌・敏感肌向けとして案内",
+        "tests": "メーカーの低刺激性テスト表示あり（適合を保証するものではない）"
+      },
+      "officialFeatures": [
+        "高密度セラミドカプセルを特徴とする80mLの保湿クリームです。",
+        "国内公式は乾燥肌・敏感肌向けの保湿ケアとして位置づけています。"
+      ],
+      "comparisonPoints": [
+        "セラミド系クリームでは、医薬部外品か化粧品か、内容量、価格を比較できます。",
+        "同価格帯の敏感肌向けクリームと、メーカーが示す対象・試験表示を比べられます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "セラミドカプセルを特徴とする80mLクリームを比較したい",
+          "乾燥肌・敏感肌向けの公式表示を確認して選びたい"
+        ],
+        "compareWhen": [
+          "医薬部外品の有効成分を重視する",
+          "国内メーカーの無香料表示を必須にする"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 40,
+          "reason": "同じセラミドケア系クリームとして分類と内容量を比較"
+        },
+        {
+          "id": 97,
+          "reason": "同価格帯のセラミド系美容液として剤形を比較"
+        },
+        {
+          "id": 45,
+          "reason": "同価格帯の敏感肌向けクリームとして比較"
+        }
+      ]
+    }
   },
   {
     "id": 40,
@@ -1081,7 +1805,70 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/sundrug/cabinet/202512_1/4901301236210.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "キュレル 潤浸保湿 フェイスクリーム",
+          "url": "https://www.kao-kirei.com/ja/item/kbb/curel/4901301423221/",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-brand",
+          "title": "キュレル フェイスクリーム",
+          "url": "https://www.kao-kirei.com/ja/official/curel/special/facecream/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "フェイスクリーム",
+        "contentAmount": "通常品40g（公式セット情報で確認）",
+        "classification": "医薬部外品",
+        "activeIngredients": "アラントイン",
+        "keyIngredients": "セラミド機能成分、ユーカリエキス",
+        "freeFrom": "無香料・無着色・アルコールフリー",
+        "acidity": "弱酸性",
+        "tests": "アレルギーテスト・乾燥性敏感肌の協力によるパッチテスト済み（すべての人に反応が起きないわけではない）",
+        "usage": "化粧水・乳液後、直径約2cmを目安に使用"
+      },
+      "officialFeatures": [
+        "肌荒れ防止有効成分アラントインを配合した医薬部外品です。",
+        "セラミド機能成分とユーカリエキスを保湿成分として配合しています。",
+        "無香料・無着色・アルコールフリーの仕様が公式に明示されています。"
+      ],
+      "comparisonPoints": [
+        "セラミド系クリームでは、医薬部外品の有効成分と40gの内容量を比較軸にできます。",
+        "AESTURA品とは製品分類、容量、メーカーが示す試験表示が異なります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "無香料・無着色・アルコールフリーを公式表示で確認したい",
+          "肌荒れ防止有効成分を含む医薬部外品を選びたい"
+        ],
+        "compareWhen": [
+          "より大容量のセラミド系クリームを探している",
+          "顔と身体に共用できる商品を優先する"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 39,
+          "reason": "同じセラミドケア系クリームとして分類と容量を比較"
+        },
+        {
+          "id": 42,
+          "reason": "同ブランドのエイジングケアクリームとして目的を比較"
+        },
+        {
+          "id": 243,
+          "reason": "同ブランドの顔・身体用クリームとして用途を比較"
+        }
+      ]
+    }
   },
   {
     "id": 41,
@@ -1308,7 +2095,7 @@
     "concern": [
       "毛穴の開き・黒ずみ"
     ],
-    "desc": "うるおいを守りながらメイクをすっきり落とすクレンジングオイル。まつエクOK、無添加処方。",
+    "desc": "120mLのオイルタイプのメイク落とし。ぬれた手でも使え、一般的なグルーのまつげエクステにも使用条件が示されています。",
     "keyIngredients": [
       "エイジングケアオイル",
       "ヒアルロン酸"
@@ -1317,7 +2104,59 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/fancl-shop/cabinet/item-img/3500-3999_2/3721-31_2603.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "ファンケル マイルドクレンジング オイル",
+          "url": "https://www.fancl.co.jp/beauty/micle/index.html?scid=Mai-Aut-D_625_01",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "メイク落とし",
+        "contentAmount": "120mL",
+        "usage": "適量をメイクとなじませ、水またはぬるま湯で洗い流す",
+        "wetHands": "ぬれた手でも使用可能",
+        "eyelashExtensions": "一般的なグルーのまつげエクステに使用可能（条件は公式注意事項を確認）"
+      },
+      "officialFeatures": [
+        "120mLのオイルタイプのメイク落としで、ぬれた手でも使えると案内されています。",
+        "一般的なグルーを使ったまつげエクステでの使用条件が公式ページに明示されています。"
+      ],
+      "comparisonPoints": [
+        "同価格帯のクレンジングオイルと、内容量・ぬれた手での使用可否を比較できます。",
+        "洗顔料ではなくメイク落としなので、同じ『洗顔』カテゴリ内でも用途を分けて選ぶ必要があります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "ぬれた手で使えるオイルクレンジングを探している",
+          "120mL前後・2,000円前後で比較したい"
+        ],
+        "compareWhen": [
+          "泡洗顔だけを探している",
+          "香り付きのクレンジングオイルを選びたい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 168,
+          "reason": "同価格帯のオイルクレンジングとして内容量と香りを比較"
+        },
+        {
+          "id": 135,
+          "reason": "DHCの薬用オイルクレンジングとして分類と容量を比較"
+        },
+        {
+          "id": 50,
+          "reason": "より低価格のオイルメイク落としとして比較"
+        }
+      ]
+    }
   },
   {
     "id": 50,
@@ -1486,7 +2325,7 @@
     "concern": [
       "シミ・くすみ"
     ],
-    "desc": "SPF50+ PA++++。みずみずしいエッセンスタイプで白浮きせず、化粧下地にも使える定番日焼け止め。",
+    "desc": "SPF50+・PA++++、UV耐水性★★の顔・からだ用日焼け止め。70gのエッセンスタイプで化粧下地にも使えます。",
     "keyIngredients": [
       "ヒアルロン酸",
       "ローヤルゼリーエキス"
@@ -1495,7 +2334,64 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/drugkirin/cabinet/imgdir03/b2825170041092968c_1.gif?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "ビオレUV アクアリッチ ウォータリーエッセンス",
+          "url": "https://www.kao-kirei.com/ja/item/khg/bioresarasarauv/4901301447647/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "顔・からだ用日やけ止め",
+        "contentAmount": "70g",
+        "spf": "SPF50+",
+        "pa": "PA++++",
+        "waterResistance": "UV耐水性★★・スーパーウォータープルーフ",
+        "usage": "顔・からだに使用。化粧下地としても使用可能",
+        "removal": "通常の洗浄料で落とせる",
+        "fragrance": "ホワイトミュゲの香り",
+        "colorant": "合成着色料不使用"
+      },
+      "officialFeatures": [
+        "SPF50+・PA++++、UV耐水性★★の顔・からだ用日焼け止めです。",
+        "70gのエッセンスタイプで、化粧下地としても使えると案内されています。",
+        "通常の洗浄料で落とせる仕様です。"
+      ],
+      "comparisonPoints": [
+        "同じSPF50+・PA++++でも、耐水性表示、剤形、容量を比較できます。",
+        "同価格帯のUV乳液とは、エッセンスか乳液か、香りの有無を比べられます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "SPF50+・PA++++とUV耐水性★★を条件にしている",
+          "顔と身体に共用できる70gタイプを探している"
+        ],
+        "compareWhen": [
+          "無香料を必須にしている",
+          "医薬部外品のスキンケアベースを探している"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 109,
+          "reason": "同ブランドの高耐久UVエッセンスとして比較"
+        },
+        {
+          "id": 110,
+          "reason": "同じSPF50+・PA++++帯のジェルUVとして比較"
+        },
+        {
+          "id": 203,
+          "reason": "同価格帯のUV乳液として剤形と付加機能を比較"
+        }
+      ]
+    }
   },
   {
     "id": 57,
@@ -1653,7 +2549,67 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/cochume1234/cabinet/12269442/imgrc0100235373.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "ルルルンプレシャス GREEN（バランス）旧仕様",
+          "url": "https://lululun.com/shop/products/pg4fb-2111",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-successor",
+          "title": "ルルルンプレシャス GREEN（Glow Up）",
+          "url": "https://lululun.com/shop/products/LUAA091101",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "フェイスマスク",
+        "contentAmount": "掲載世代は32枚。現行Glow Upも32枚/560mLと7枚/150mL",
+        "usage": "毎日の化粧水代わりのフェイスマスクとして案内",
+        "renewal": "現行Glow Upは2025年11月発売"
+      },
+      "officialFeatures": [
+        "掲載中のバランス版は32枚入りとして公式旧商品ページで確認できます。",
+        "2025年11月に現行のGlow Upへ更新されており、旧版と現行版は区別が必要です。"
+      ],
+      "comparisonPoints": [
+        "毎日使う大容量マスクでは、枚数だけでなく世代・1枚あたり液量・価格を比較します。",
+        "CICAやビタミンC系の大容量マスクとは、主なケア目的が異なります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "旧バランス版32枚を商品名まで確認して探している",
+          "毎日の化粧水代わりに使う大容量マスクを比較したい"
+        ],
+        "compareWhen": [
+          "現行Glow Upの処方・パッケージを希望する",
+          "CICAやビタミンCを主軸にしたマスクを探している"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 65,
+          "reason": "同じ大容量デイリーマスクとして主軸成分を比較"
+        },
+        {
+          "id": 66,
+          "reason": "ビタミンC系の大容量マスクとして比較"
+        },
+        {
+          "id": 64,
+          "reason": "個包装寄りのシートマスクとして使い方を比較"
+        }
+      ],
+      "sourceLimitations": [
+        "掲載商品は旧『バランス』です。現行『Glow Up』の処方を旧版へ転記していません。"
+      ]
+    }
   },
   {
     "id": 63,
@@ -1696,7 +2652,7 @@
       "シミ・くすみ",
       "乾燥・かさつき"
     ],
-    "desc": "黒真珠エキス配合の台湾人気シートマスク。透明感を引き出すうるおいケア、お手頃価格。",
+    "desc": "W真珠エキス、パイナップル果実エキス、アルニカ花エキスを組み合わせた台湾発のシートマスク。",
     "keyIngredients": [
       "黒真珠エキス",
       "ヒアルロン酸"
@@ -1705,7 +2661,64 @@
     "origin": "台湾",
     "purchase": "https://www.qoo10.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/sundrug/cabinet/33/4713575123802.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "我的美麗日記 黒真珠マスク",
+          "url": "https://www.mybeautydiary-jp.com/lineup/blackpearl.html",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-brand",
+          "title": "我的美麗日記 商品ラインアップ",
+          "url": "https://www.mybeautydiary-jp.com/lineup/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "シートマスク",
+        "keyIngredients": "W真珠エキス、パイナップル果実エキス、アルニカ花エキス",
+        "manufacturerTarget": "公式ラインアップでは全肌質向けとして表示",
+        "countryOfOrigin": "台湾"
+      },
+      "officialFeatures": [
+        "W真珠エキスに、パイナップル果実エキスとアルニカ花エキスを組み合わせたシートマスクです。",
+        "国内公式ラインアップでは全肌質向けとして分類されています。"
+      ],
+      "comparisonPoints": [
+        "大容量の毎日用マスクとは、個包装・使用頻度・価格の見方が異なります。",
+        "同価格帯では、保湿中心かCICA・ビタミンCなどの成分軸かを比較できます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "台湾ブランドのシートマスクを公式成分で比較したい",
+          "真珠由来エキスを主軸にした商品を探している"
+        ],
+        "compareWhen": [
+          "毎日使う大容量ボックス型を優先する",
+          "国内公式で枚数・液量まで一画面で確認したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 62,
+          "reason": "32枚の大容量マスクとして使用頻度と価格を比較"
+        },
+        {
+          "id": 63,
+          "reason": "同価格帯の保湿系シートマスクとして比較"
+        },
+        {
+          "id": 65,
+          "reason": "CICA系のデイリーマスクとして主軸を比較"
+        }
+      ]
+    }
   },
   {
     "id": 65,
@@ -1988,7 +3001,7 @@
       "シワ・たるみ",
       "シミ・くすみ"
     ],
-    "desc": "夜の修復に着目した茶色いボトルのロングセラー美容液。うるおいとハリで翌朝の肌コンディションを整える設計。",
+    "desc": "エスティ ローダーの夜用美容液の前世代品。現行SMR コンプレックスとは商品名・処方世代を区別して比較します。",
     "keyIngredients": [
       "クロノラックス",
       "ヒアルロン酸",
@@ -1999,7 +3012,60 @@
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/esteelauder/cabinet/thumb/260615_es/77491pg4y01.jpg?_ex=300x300",
     "status": "previous_generation",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-successor",
+          "title": "エスティ ローダー アドバンス ナイト リペア SMR コンプレックス",
+          "url": "https://www.esteelauder.jp/product/689/77491/product-catalog/skincare/repair-serum/advanced-night-repair/synchronized-multi-recovery-complex",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "美容液",
+        "releaseStatus": "掲載品は前世代。現行品はSMR コンプレックス",
+        "usage": "現行品は化粧水後に使用"
+      },
+      "officialFeatures": [
+        "この掲載品は前世代として管理しており、公式で販売中の同系統品はSMR コンプレックスです。",
+        "現行品の仕様や成分を前世代品の事実として扱わない構成にしています。"
+      ],
+      "comparisonPoints": [
+        "最優先の比較対象は同名系統の現行SMR コンプレックスです。",
+        "前世代品を購入する場合は、商品名・容量・販売元を確認する必要があります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "前世代品と現行品の違いを確認するために参照する",
+          "手元の商品名が前世代表記か確認したい"
+        ],
+        "compareWhen": [
+          "現行のメーカー販売品を選びたい",
+          "公式で現在の成分・使用方法まで確認できる商品を優先する"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 178,
+          "reason": "同系統の現行SMR コンプレックスとして最優先で比較"
+        },
+        {
+          "id": 127,
+          "reason": "同じ夜ケア系美容液として価格帯を比較"
+        },
+        {
+          "id": 70,
+          "reason": "高価格帯の保湿美容液として比較"
+        }
+      ],
+      "sourceLimitations": [
+        "掲載品は前世代です。公式確認先は現行品であり、現行処方を旧品へ転記していません。"
+      ]
+    }
   },
   {
     "id": 76,
@@ -2173,7 +3239,7 @@
       "乾燥・かさつき",
       "肌荒れ・赤み"
     ],
-    "desc": "敏感肌向け拭き取りクレンジングウォーター。こすらずメイクオフ、肌に優しいフランスの定番品。",
+    "desc": "コットンに含ませて使う、洗い流し不要の敏感肌向けクレンジングウォーター。複数容量が公式に案内されています。",
     "keyIngredients": [
       "精製水",
       "キュウリ果実エキス"
@@ -2182,7 +3248,65 @@
     "origin": "フランス",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/cosmetch/cabinet/31/2300000002324.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-brand",
+          "title": "ビオデルマ よくある質問",
+          "url": "https://www.bioderma.jp/pages/faq",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-brand",
+          "title": "ビオデルマ 価格改定商品一覧",
+          "url": "https://www.bioderma.jp/pages/news_price",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "クレンジングウォーター",
+        "contentAmount": "100mL・250mL・500mLの公式掲載あり",
+        "usage": "コットンに含ませてメイクを落とす。洗い流し不要",
+        "manufacturerTarget": "敏感肌向けライン",
+        "countryOfOrigin": "フランス"
+      },
+      "officialFeatures": [
+        "コットンで使う洗い流し不要のクレンジングウォーターです。",
+        "公式価格表では複数容量が確認でき、用途や使用量に合わせて比較できます。"
+      ],
+      "comparisonPoints": [
+        "オイルクレンジングとは、洗い流しの要否と使用する道具が異なります。",
+        "同ブランドのシカ系クリームとは同じ敏感肌ラインでも役割が異なります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "洗い流し不要のクレンジングウォーターを探している",
+          "100mLから500mLまで容量を比較したい"
+        ],
+        "compareWhen": [
+          "コットンを使わないクレンジングを希望する",
+          "オイルタイプで濃いメイクを落としたい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 49,
+          "reason": "オイルクレンジングとして使用手順を比較"
+        },
+        {
+          "id": 201,
+          "reason": "泡洗顔としてクレンジング後の工程を比較"
+        },
+        {
+          "id": 149,
+          "reason": "同ブランドの敏感肌向け保湿クリームとして役割を比較"
+        }
+      ]
+    }
   },
   {
     "id": 83,
@@ -2394,7 +3518,7 @@
   },
   {
     "id": 91,
-    "name": "キールズ クリーミー アイ トリートメント アボカド",
+    "name": "キールズ アイ トリートメント AV",
     "brand": "キールズ",
     "category": "アイケア",
     "price": 4290,
@@ -2407,17 +3531,68 @@
       "乾燥・かさつき",
       "シワ・たるみ"
     ],
-    "desc": "アボカドオイル配合のアイクリーム。目もとの乾燥をしっとりケア、なめらかなテクスチャー。",
+    "desc": "アボカドオイル、シアバター、ビタミンEを保湿成分として配合したアイクリーム。朝晩に米粒大が使用目安です。",
     "keyIngredients": [
       "アボカドオイル",
       "シアバター",
-      "βカロチン"
+      "ビタミンE"
     ],
     "icon": "🥑",
     "origin": "アメリカ",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/cosmedenet-dx/cabinet/item/0191/kl00015_1.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "キールズ アイ トリートメント AV",
+          "url": "https://www.kiehls.jp/skincare/face-product/face-eye/creamy-eye-treatment-with-avocado/3700194714413.html",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "アイクリーム",
+        "contentAmount": "14g・28g",
+        "keyIngredients": "アボカドオイル、シアバター、ビタミンE",
+        "usage": "朝晩、洗顔・化粧水後に米粒大を目元へ使用"
+      },
+      "officialFeatures": [
+        "アボカドオイル、シアバター、ビタミンEを保湿成分として配合したアイクリームです。",
+        "14gと28gがあり、朝晩に米粒大を使う目安が公式に示されています。"
+      ],
+      "comparisonPoints": [
+        "アイケアでは、容量だけでなく使用量と朝晩使用の可否を比較できます。",
+        "レチノール系やニードル系のアイケアとは主軸成分と注意事項が異なります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "アボカドオイル系の保湿アイクリームを探している",
+          "14gと28gから容量を選びたい"
+        ],
+        "compareWhen": [
+          "レチノールを主軸にした目元ケアを探している",
+          "ニードル系の使用感を前提に選びたい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 185,
+          "reason": "別成分軸のアイクリームとして比較"
+        },
+        {
+          "id": 181,
+          "reason": "バクチオール系アイセラムとして主軸成分を比較"
+        },
+        {
+          "id": 67,
+          "reason": "ニードル系アイクリームとして使用上の特徴を比較"
+        }
+      ]
+    }
   },
   {
     "id": 92,
@@ -2512,7 +3687,7 @@
       "乾燥・かさつき",
       "肌荒れ・赤み"
     ],
-    "desc": "プロポリスエキス配合のミスト化粧水。メイクの上からうるおいチャージ、韓国の皮膚科学コスメ。",
+    "desc": "プロポリスエキスを保湿成分として配合した100mLのミスト化粧水。メイクの上からも使用できます。",
     "keyIngredients": [
       "プロポリスエキス",
       "ハチミツ",
@@ -2522,7 +3697,58 @@
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/sara-style/cabinet/cosme-fragrance/cosme/korean02/cnp0512_01.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "CNP プロP ミスト",
+          "url": "https://cnp-laboratory.jp/item/99/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "ミスト化粧水",
+        "contentAmount": "100mL",
+        "keyIngredients": "プロポリスエキス（保湿成分）",
+        "usage": "メイクの上からも使用可能"
+      },
+      "officialFeatures": [
+        "プロポリスエキスを保湿成分として配合した100mLのミスト化粧水です。",
+        "きめ細かなミストで、メイクの上からも使用できると案内されています。"
+      ],
+      "comparisonPoints": [
+        "通常のボトル化粧水とは、ミスト容器と携帯・重ねづけ用途が比較軸です。",
+        "同ブランドのアンプルとは、化粧水か美容液かを分けて比較します。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "メイクの上から使えるミスト化粧水を探している",
+          "プロポリスエキス配合の化粧水を比較したい"
+        ],
+        "compareWhen": [
+          "アルコールや香料などの不使用表示を必須にする",
+          "同成分軸の濃縮美容液を探している"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 87,
+          "reason": "同じミスト化粧水として容量と価格を比較"
+        },
+        {
+          "id": 186,
+          "reason": "同ブランドのプロポリス系美容液として剤形を比較"
+        },
+        {
+          "id": 10,
+          "reason": "大容量の通常化粧水として用途を比較"
+        }
+      ]
+    }
   },
   {
     "id": 96,
@@ -3079,7 +4305,7 @@
       "乾燥・かさつき",
       "シワ・たるみ"
     ],
-    "desc": "化粧水・乳液・美容液・クリーム・パックの5役オールインワンゲル。これ一つでうるおいケア完了。",
+    "desc": "掲載品は旧名称。現行EXはグリチルリチン酸2Kを有効成分とする薬用保湿ゲルで、50g・100g・200gがあります。",
     "keyIngredients": [
       "ヒアルロン酸",
       "コラーゲン",
@@ -3089,7 +4315,62 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/rouge-yao/cabinet/dr/12010746/12020837/20250818moisu-200.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-successor",
+          "title": "薬用アクアコラーゲンゲル スーパーモイスチャーEX",
+          "url": "https://www.ci-labo.com/shop/item/SkinCare/AquaCollagengel/00112094.html",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "薬用保湿ゲル",
+        "contentAmount": "現行品は50g・100g・200g",
+        "classification": "医薬部外品",
+        "activeIngredients": "グリチルリチン酸2K",
+        "usage": "洗顔後、朝はパール2粒程度、夜はさくらんぼ1粒程度が目安"
+      },
+      "officialFeatures": [
+        "公式で確認できる現行EXは、グリチルリチン酸2Kを有効成分とする薬用保湿ゲルです。",
+        "容量は50g・100g・200gがあり、朝夜で使用量の目安が異なります。"
+      ],
+      "comparisonPoints": [
+        "オールインワン系では、医薬部外品か、容量、1回量を比較できます。",
+        "掲載中の旧名称品と現行EXは世代を区別して確認する必要があります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "洗顔後に使う薬用保湿ゲルを容量別に比較したい",
+          "肌荒れ防止有効成分を重視する"
+        ],
+        "compareWhen": [
+          "旧商品と現行EXの処方を同じものとして選びたくない",
+          "化粧水・乳液を別々に組み立てたい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 118,
+          "reason": "同価格帯のオールインワンジェルとして分類を比較"
+        },
+        {
+          "id": 89,
+          "reason": "低価格の保湿ジェルとして用途を比較"
+        },
+        {
+          "id": 120,
+          "reason": "同価格帯以下の保湿クリームとして剤形を比較"
+        }
+      ],
+      "sourceLimitations": [
+        "公式確認先は現行EXです。掲載中の旧名称品へ現行処方を転記していません。"
+      ]
+    }
   },
   {
     "id": 118,
@@ -3223,7 +4504,59 @@
     "origin": "フランス",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/tokitomecosme/cabinet/main-10/3337875816847-1a.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "ラ ロッシュ ポゼ シカプラスト リペアクリーム B5+",
+          "url": "https://www.laroche-posay.jp/product/cicaplast-baume-b5.html",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "保湿クリーム",
+        "contentAmount": "40mL",
+        "keyIngredients": "パンテノールB5、マデカッソシド、トリビオーマ",
+        "manufacturerTarget": "乾燥などで不安定な肌向けとして案内",
+        "caution": "美容施術後は肌が通常の状態に戻ってから使用"
+      },
+      "officialFeatures": [
+        "パンテノールB5、マデカッソシドなどを配合した40mLの保湿クリームです。",
+        "美容施術後は肌が通常の状態に戻ってから使うよう公式の注意事項があります。"
+      ],
+      "comparisonPoints": [
+        "シカ系保湿では、医薬部外品か化粧品か、施術後の注意表示を比較します。",
+        "同価格帯のセラミド系クリームとは主軸成分が異なります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "パンテノール・マデカッソシド系の保湿クリームを比較したい",
+          "40mL前後の顔用クリームを探している"
+        ],
+        "compareWhen": [
+          "美容施術直後に使う製品を探している",
+          "医薬部外品の有効成分を優先したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 39,
+          "reason": "セラミド系の敏感肌向けクリームとして主軸を比較"
+        },
+        {
+          "id": 40,
+          "reason": "国内医薬部外品の保湿クリームとして分類を比較"
+        },
+        {
+          "id": 149,
+          "reason": "同系統のシカ系クリームとしてブランドと価格を比較"
+        }
+      ]
+    }
   },
   {
     "id": 123,
@@ -3552,7 +4885,7 @@
     "concern": [
       "毛穴の開き・黒ずみ"
     ],
-    "desc": "オリーブバージンオイル配合のクレンジングオイル。濃いメイクもなじませて落とし、うるおいを残す定番。",
+    "desc": "オリーブ由来オイルを特徴とする薬用クレンジングオイル。掲載品と現行リニューブライト版は世代を分けて確認します。",
     "keyIngredients": [
       "オリーブバージンオイル",
       "ローズマリーエキス",
@@ -3562,7 +4895,68 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/dhcshop/cabinet/8000000300.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-brand",
+          "title": "DHC 薬用ディープクレンジングオイル",
+          "url": "https://top.dhc.co.jp/contents/skin/deepcleansing/",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-pdf",
+          "title": "DHC 薬用ディープクレンジングオイル 公式資料",
+          "url": "https://top.dhc.co.jp/contents/guide/newsrelease/pdf/130702.pdf",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "薬用クレンジングオイル",
+        "contentAmount": "120mL・200mLの公式資料あり",
+        "classification": "医薬部外品",
+        "keyIngredients": "オリーブバージンオイル",
+        "freeFrom": "公式資料では無香料・無着色・パラベンフリー・鉱物油不使用"
+      },
+      "officialFeatures": [
+        "オリーブ由来のフロール・デ・アセイテを特徴とする薬用クレンジングオイルです。",
+        "公式資料では120mLと200mLの容量が確認できます。"
+      ],
+      "comparisonPoints": [
+        "同価格帯のオイルクレンジングとは、医薬部外品か、容量、香りの有無を比較できます。",
+        "現行のリニューブライト版とは名称・価格・処方世代を確認する必要があります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "オリーブ由来オイルを軸にした薬用クレンジングを比較したい",
+          "120mL・200mLの容量違いを選びたい"
+        ],
+        "compareWhen": [
+          "現行リニューブライト版を探している",
+          "ぬれた手での使用条件を明確に比較したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 49,
+          "reason": "同価格帯のオイルクレンジングとして使用条件を比較"
+        },
+        {
+          "id": 168,
+          "reason": "香り付きオイルクレンジングとして比較"
+        },
+        {
+          "id": 50,
+          "reason": "より低価格のオイルメイク落としとして比較"
+        }
+      ],
+      "sourceLimitations": [
+        "掲載名は旧来品です。現行リニューブライト版とは商品名と仕様を区別してください。"
+      ]
+    }
   },
   {
     "id": 136,
@@ -3740,7 +5134,7 @@
       "シワ・たるみ",
       "乾燥・かさつき"
     ],
-    "desc": "ライスパワーNo.11＋ハリ成分配合のエイジングケアクリーム。ふっくらハリのある肌へ導く。",
+    "desc": "ライスパワーNo.11を保湿成分として配合した40gのクリーム。朝晩、手入れの最後にパール粒大を使う設計です。",
     "keyIngredients": [
       "ライスパワーNo.11",
       "コラーゲン",
@@ -3750,7 +5144,62 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/powerfullworld/cabinet/10196786/10645907/imgrc0121646480.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "米肌 活潤リフトクリーム",
+          "url": "https://maihada.jp/site/g/gPREC/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "クリーム",
+        "contentAmount": "40g",
+        "classification": "化粧品",
+        "keyIngredients": "ライスパワーNo.11（保湿成分）",
+        "usage": "朝晩、パール粒大を手入れの最後に使用",
+        "freeFrom": "無香料・無着色・鉱物油フリー",
+        "acidity": "弱酸性",
+        "tests": "アレルギーテスト済み（すべての人に反応が起きないわけではない）"
+      },
+      "officialFeatures": [
+        "ライスパワーNo.11を保湿成分として配合した40gのクリームです。",
+        "乾燥による小じわを目立たなくする効能評価試験済みと公式に表示されています。"
+      ],
+      "comparisonPoints": [
+        "同ブランドの肌潤改善エッセンスは医薬部外品ですが、このクリームは化粧品です。",
+        "価格比較では40gの容量と朝晩の使用量を含めて確認できます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "ライスパワーNo.11を保湿成分として含むクリームを比較したい",
+          "無香料・無着色の仕様を公式表示で確認したい"
+        ],
+        "compareWhen": [
+          "水分保持能改善の有効成分を持つ医薬部外品を求める",
+          "低価格の保湿クリームを優先する"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 177,
+          "reason": "同ブランドの医薬部外品美容液として分類を比較"
+        },
+        {
+          "id": 42,
+          "reason": "同価格帯以下のエイジングケアクリームとして比較"
+        },
+        {
+          "id": 117,
+          "reason": "薬用オールインワンゲルとして剤形を比較"
+        }
+      ]
+    }
   },
   {
     "id": 143,
@@ -4055,7 +5504,7 @@
     "concern": [
       "乾燥・かさつき"
     ],
-    "desc": "無香料・無着色の天然ホホバオイル。顔・体・髪に使える万能保湿オイル、コスパ抜群のロングセラー。",
+    "desc": "ホホバ種子油を化粧用に精製したオイル。顔・身体・髪などに使え、現行200mL品は1プッシュ約0.5ccです。",
     "keyIngredients": [
       "ホホバ種子油"
     ],
@@ -4063,7 +5512,62 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/mujirushi-ryohin/cabinet/item43/4550584085376.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "無印良品 ホホバオイル",
+          "url": "https://www.muji.com/jp/ja/store/cmdty/detail/4550584085369",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "化粧用オイル",
+        "contentAmount": "200mL（確認した現行ページ）",
+        "keyIngredients": "ホホバ種子油",
+        "usage": "顔・身体・髪・頭皮・爪・マッサージに使用可能",
+        "pumpAmount": "1プッシュ約0.5cc"
+      },
+      "officialFeatures": [
+        "ホホバの種子から搾ったオイルを化粧用に精製した単一成分の商品です。",
+        "確認した現行200mL品は1プッシュ約0.5ccで、顔・身体・髪などに使用できます。"
+      ],
+      "comparisonPoints": [
+        "購入時は掲載価格と容量の組み合わせを確認し、200mL現行品と小容量品を混同しないことが重要です。",
+        "スクワラン100%のオイルとは原料と価格帯を比較できます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "顔・身体・髪に共用できるホホバ種子油を探している",
+          "単一成分の化粧用オイルを比較したい"
+        ],
+        "compareWhen": [
+          "掲載価格と200mL現行品の価格差が気になる",
+          "スクワランなど別の単一オイルを選びたい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 141,
+          "reason": "単一成分のスクワランオイルとして原料と価格を比較"
+        },
+        {
+          "id": 140,
+          "reason": "複合フェイスオイルとして成分構成を比較"
+        },
+        {
+          "id": 46,
+          "reason": "同じ保湿目的のスクワランクリームとして剤形を比較"
+        }
+      ],
+      "sourceLimitations": [
+        "公式確認先は現行200mL品です。掲載参考価格が別容量由来の可能性があるため、購入先で容量を確認してください。"
+      ]
+    }
   },
   {
     "id": 155,
@@ -4132,7 +5636,7 @@
       "シミ・くすみ",
       "乾燥・かさつき"
     ],
-    "desc": "和漢植物エキス配合のロングセラー化粧水。みずみずしくうるおい、透明感を目指す定番の1本。",
+    "desc": "掲載品は旧世代の可能性がある雪肌精の化粧水。2024年刷新の現行薬用ローションとは処方・容量を分けて確認します。",
     "keyIngredients": [
       "ハトムギエキス",
       "トウキエキス",
@@ -4142,7 +5646,62 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/lifeplaza01/cabinet/2024807/skkisei-lition200.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-successor",
+          "title": "薬用雪肌精 ブライトニング エッセンス ローション",
+          "url": "https://maison.kose.co.jp/site/sekkisei/g/gMTSE/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "薬用化粧水",
+        "contentAmount": "現行品は200mL・350mL",
+        "classification": "医薬部外品",
+        "activeIngredients": "グリチルレチン酸ステアリルW",
+        "renewal": "2024年に現行ブライトニング エッセンス ローションへ刷新"
+      },
+      "officialFeatures": [
+        "公式で現在確認できる雪肌精の化粧水は、2024年刷新の薬用ブライトニング エッセンス ローションです。",
+        "現行品は200mLと350mLがあり、医薬部外品として有効成分が明示されています。"
+      ],
+      "comparisonPoints": [
+        "掲載中の商品名・画像が旧世代の場合、現行品の有効成分や容量をそのまま当てはめないことが重要です。",
+        "同価格帯の薬用化粧水と、世代・有効成分・容量を比較できます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "雪肌精の旧品と2024年現行品の区別を確認したい",
+          "現行の薬用化粧水を容量別に比較したい"
+        ],
+        "compareWhen": [
+          "掲載中の旧品そのものの公式成分表が必要",
+          "1,000円台の薬用美白化粧水を優先したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 79,
+          "reason": "同ブランドの別ライン化粧水として比較"
+        },
+        {
+          "id": 17,
+          "reason": "低価格の薬用美白化粧水として比較"
+        },
+        {
+          "id": 161,
+          "reason": "ビタミンC系の薬用美白化粧水として比較"
+        }
+      ],
+      "sourceLimitations": [
+        "公式確認先は2024年刷新の現行品です。掲載中の旧世代品へ現行処方を転記していません。"
+      ]
+    }
   },
   {
     "id": 158,
@@ -4184,7 +5743,7 @@
     "concern": [
       "シミ・くすみ"
     ],
-    "desc": "4MSK＋トラネキサム酸配合の薬用美白美容液。シミの発生を多角的に防ぐ、美白ケアの実力派。",
+    "desc": "HAKUの薬用美白美容液の前世代EV。現行メラノフォーカスIVとの違いとレフィル互換性を確認して選ぶ商品です。",
     "keyIngredients": [
       "4MSK",
       "m-トラネキサム酸",
@@ -4194,7 +5753,66 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/yayoi-cosme/cabinet/rakulogo/rakulogo6/ycsm154_00162.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-successor",
+          "title": "HAKU メラノフォーカスIV",
+          "url": "https://www.shiseido.co.jp/haku/lineup/melanofocusiv/",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-brand",
+          "title": "HAKU よくある質問",
+          "url": "https://www.shiseido.co.jp/haku/faq/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "薬用美白美容液",
+        "releaseStatus": "EVは前世代。現行はメラノフォーカスIV",
+        "refillCompatibility": "公式FAQでEV・IVの本体とレフィル互換性を案内"
+      },
+      "officialFeatures": [
+        "メラノフォーカスEVは前世代で、公式の現行品はメラノフォーカスIVです。",
+        "公式FAQにはEVとIVの本体・レフィル互換性が明記されています。"
+      ],
+      "comparisonPoints": [
+        "最優先は現行IVとの世代比較で、現行処方をEVへ転記しないことが重要です。",
+        "薬用美白美容液では有効成分だけでなく、世代とレフィル互換性も購入判断になります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "手元のEV本体と現行レフィルの互換性を確認したい",
+          "前世代と現行品を区別して比較したい"
+        ],
+        "compareWhen": [
+          "現行IVの有効成分・価格で選びたい",
+          "低価格の薬用美白美容液を優先したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 93,
+          "reason": "同価格帯の薬用美白美容液として比較"
+        },
+        {
+          "id": 24,
+          "reason": "高濃度名を掲げるビタミンC美容液として分類を比較"
+        },
+        {
+          "id": 244,
+          "reason": "低価格の薬用ビタミンC美容液として比較"
+        }
+      ],
+      "sourceLimitations": [
+        "公式確認先は現行IVとFAQです。IVの処方を前世代EVの仕様として掲載していません。"
+      ]
+    }
   },
   {
     "id": 160,
@@ -4336,7 +5954,7 @@
     "id": 166,
     "name": "HotTab 重炭酸入浴剤",
     "brand": "HotTab",
-    "category": "保湿クリーム",
+    "category": "入浴剤",
     "price": 2750,
     "rating": 4.4,
     "skin": [
@@ -4346,17 +5964,80 @@
     "concern": [
       "乾燥・かさつき"
     ],
-    "desc": "重炭酸イオンが溶け込む入浴剤。温浴効果を高めて全身ぽかぽか、乾燥肌のボディケアにも人気。",
+    "desc": "重炭酸湯に使う医薬部外品の入浴剤。公式CLASSICは90錠で、160Lに3錠・36〜41℃で15分以上が使用目安です。",
     "keyIngredients": [
-      "重炭酸イオン",
-      "ビタミンC"
+      "炭酸水素ナトリウム",
+      "炭酸ナトリウム"
     ],
     "icon": "🛁",
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/coniconi/cabinet/100jyou_2set.jpg?_ex=300x300",
     "productType": "makeup",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "薬用 HOT TAB CLASSIC",
+          "url": "https://tansan-kenko.com/products/MCL090000/",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-product",
+          "title": "HOT TAB WELLNESS",
+          "url": "https://tansan-kenko.com/products/WEL/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "薬用入浴剤",
+        "contentAmount": "CLASSICは90錠",
+        "classification": "医薬部外品",
+        "activeIngredients": "炭酸水素ナトリウム、炭酸ナトリウム",
+        "usage": "160Lに3錠、36〜41℃で15分以上の入浴を案内",
+        "freeFrom": "香料・着色料不使用"
+      },
+      "officialFeatures": [
+        "スキンケアクリームではなく、重炭酸湯に使う医薬部外品の入浴剤です。",
+        "公式のCLASSICは160Lに3錠、36〜41℃で15分以上の入浴を案内しています。",
+        "香料・着色料を使わない仕様です。"
+      ],
+      "comparisonPoints": [
+        "顔用保湿クリームとは用途が異なり、入浴後の保湿剤と組み合わせて検討する関連商品です。",
+        "購入時は90錠・100錠など商品名と錠数を確認する必要があります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "無香料・無着色の薬用入浴剤を探している",
+          "1回3錠の使用量を含めて入浴剤のコストを比較したい"
+        ],
+        "compareWhen": [
+          "顔用・身体用の塗る保湿剤を探している",
+          "掲載画像の100錠品と公式CLASSIC 90錠の違いを確認できない"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 145,
+          "reason": "入浴後に使う顔・身体用乳液として役割を比較"
+        },
+        {
+          "id": 128,
+          "reason": "身体用ミルクローションとして入浴後ケアを比較"
+        },
+        {
+          "id": 138,
+          "reason": "部分用の保湿クリームとして用途を比較"
+        }
+      ],
+      "sourceLimitations": [
+        "掲載名はシリーズ総称で、公式確認したCLASSICは90錠です。購入先の錠数・販売名を確認してください。"
+      ]
+    }
   },
   {
     "id": 167,
@@ -4400,7 +6081,7 @@
       "毛穴の開き・黒ずみ",
       "乾燥・かさつき"
     ],
-    "desc": "@cosmeベストコスメ総合大賞を連続受賞したクレンジングオイル。毛穴汚れや古い角質をオフし、アロマの香りで癒されながらメイクオフできます。",
+    "desc": "掲載品は旧アロマタイプ。現行品は175mLで、アロマ・無香・ローズの3タイプから選べるクレンジングオイルです。",
     "keyIngredients": [
       "ロックローズオイル",
       "アルガンオイル",
@@ -4410,7 +6091,67 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/attenir/cabinet/thum/166011_main_2605.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "アテニア スキンクリア クレンズ オイル",
+          "url": "https://www.attenir.co.jp/item/1662-47",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-brand",
+          "title": "スキンクリア クレンズ オイル 特設ページ",
+          "url": "https://www.attenir.co.jp/special/cleanse/index.html",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "クレンジングオイル",
+        "contentAmount": "現行品は175mL",
+        "usage": "夜に使用し約2か月分の目安",
+        "fragrance": "アロマ・無香・ローズの3タイプ"
+      },
+      "officialFeatures": [
+        "現行品は175mLで、夜の使用で約2か月分の目安が示されています。",
+        "香りはアロマ・無香・ローズの3タイプから選べます。"
+      ],
+      "comparisonPoints": [
+        "掲載中の旧アロマタイプと現行品は世代を確認して比較する必要があります。",
+        "同価格帯のオイルクレンジングとは、内容量と香りの選択肢を比較できます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "香りを3タイプから選べるクレンジングオイルを探している",
+          "175mLで使用期間の目安がある商品を比較したい"
+        ],
+        "compareWhen": [
+          "掲載中の旧世代品そのものを探している",
+          "無香料以外の仕様も避けたい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 49,
+          "reason": "同価格帯のオイルクレンジングとして容量と使用条件を比較"
+        },
+        {
+          "id": 135,
+          "reason": "薬用オイルクレンジングとして分類を比較"
+        },
+        {
+          "id": 50,
+          "reason": "より低価格のオイルメイク落としとして比較"
+        }
+      ],
+      "sourceLimitations": [
+        "掲載名は旧アロマタイプです。公式確認先は現行品で、処方世代を同一視していません。"
+      ]
+    }
   },
   {
     "id": 169,
@@ -4641,17 +6382,68 @@
       "乾燥・かさつき",
       "シワ・たるみ"
     ],
-    "desc": "ライスパワーNo.11配合で肌の水分保持能を改善する薬用美容液。乾燥による小じわにもアプローチする実力派の集中ケア。",
+    "desc": "ライスパワーNo.11を有効成分とする30mLの薬用保湿美容液。朝晩、化粧水後に2プッシュが目安です。",
     "keyIngredients": [
-      "ライスパワーNo.11",
-      "ビタミンC誘導体",
-      "グリセリン"
+      "ライスパワーNo.11"
     ],
     "icon": "🍚",
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/naturehill-hill/cabinet/gtrkitj4ig9rr4.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "米肌 肌潤改善エッセンス",
+          "url": "https://maihada.jp/site/g/gPRBE/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "薬用保湿美容液",
+        "contentAmount": "30mL",
+        "classification": "医薬部外品",
+        "activeIngredients": "ライスパワーNo.11",
+        "usage": "化粧水後、朝晩2プッシュ。乳液・クリームの前に使用",
+        "duration": "約1〜1.5か月分"
+      },
+      "officialFeatures": [
+        "ライスパワーNo.11を有効成分とし、皮膚水分保持能の改善を承認範囲として掲げる医薬部外品です。",
+        "30mLで、朝晩2プッシュを化粧水後に使う案内です。"
+      ],
+      "comparisonPoints": [
+        "同ブランドの活潤リフトクリームは化粧品で、本品は医薬部外品です。",
+        "価格だけでなく30mL・約1〜1.5か月という使用量目安で比較できます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "ライスパワーNo.11を有効成分とする医薬部外品を探している",
+          "化粧水後に使う保湿美容液を比較したい"
+        ],
+        "compareWhen": [
+          "クリームだけで保湿工程を完結したい",
+          "低価格のセラミド系美容液を優先する"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 142,
+          "reason": "同ブランドのクリームとして分類と使用順を比較"
+        },
+        {
+          "id": 97,
+          "reason": "同価格帯以下のセラミド系保湿美容液として比較"
+        },
+        {
+          "id": 6,
+          "reason": "同じ保湿目的の化粧水として工程を比較"
+        }
+      ]
+    }
   },
   {
     "id": 178,
@@ -4705,7 +6497,58 @@
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/cosme-venus/cabinet/skuimage/topimage/8809695678363-set.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "VT リードルショット300",
+          "url": "https://www.vtcosmetics.jp/product/%E3%83%AA%E3%83%BC%E3%83%89%E3%83%AB%E3%82%B7%E3%83%A7%E3%83%83%E3%83%88300/653/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "美容液",
+        "contentAmount": "50mL",
+        "countryOfOrigin": "韓国",
+        "afterOpening": "開封後12か月、未開封36か月"
+      },
+      "officialFeatures": [
+        "50mLの美容液で、商品名の300は同シリーズ内の強度識別に使われています。",
+        "公式ページでは開封後12か月・未開封36か月の使用期限が示されています。"
+      ],
+      "comparisonPoints": [
+        "最優先は同シリーズの100で、価格だけでなく商品番号と使用上の案内を比較します。",
+        "ニードル系ではない美容液と同じ基準で刺激感を推定しないことが重要です。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "リードルショット100から300へのシリーズ比較をしたい",
+          "50mLの韓国美容液として比較したい"
+        ],
+        "compareWhen": [
+          "シリーズを初めて使うため、より低い番号から検討したい",
+          "使用感を編集部実使用レビューで確認したい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 153,
+          "reason": "同シリーズ100として商品番号と価格を比較"
+        },
+        {
+          "id": 242,
+          "reason": "別ブランドのニードル系美容液として比較"
+        },
+        {
+          "id": 121,
+          "reason": "ニードル系ではない韓国美容液として選択肢を比較"
+        }
+      ]
+    }
   },
   {
     "id": 180,
@@ -5027,7 +6870,7 @@
   },
   {
     "id": 192,
-    "name": "キールズ レチノール スキン-リニューイング デイリー マイクロ-ドーズ セラム",
+    "name": "キールズ DS RTN リニューイング セラム",
     "brand": "キールズ",
     "category": "美容液",
     "price": 8800,
@@ -5040,9 +6883,10 @@
       "シワ・たるみ",
       "毛穴の開き・黒ずみ"
     ],
-    "desc": "毎日使える低刺激設計のレチノール美容液。マイクロドーズ処方でハリ・キメ・なめらかさを整える、エイジングケア入門にも人気。",
+    "desc": "レチノール、ナイアシンアミド、ペプチド、セラミドを組み合わせた美容液。初心者は2日に1回からの使用案内があります。",
     "keyIngredients": [
       "レチノール",
+      "ナイアシンアミド",
       "ペプチド",
       "セラミド"
     ],
@@ -5050,7 +6894,60 @@
     "origin": "アメリカ",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/kiehls/cabinet/images/packshots/250409_ww0151kie.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "キールズ DS RTN リニューイング セラム",
+          "url": "https://www.kiehls.jp/skincare/face-product/face-serums/retinol-skin-renewing-daily-micro-dose-serum/WW0124KIE.html",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "レチノール美容液",
+        "contentAmount": "10mL・30mL・50mL",
+        "keyIngredients": "レチノール、ナイアシンアミド、ペプチド、セラミド",
+        "usage": "化粧水後に2〜3プッシュ、その後クリーム。初心者は2日に1回から",
+        "caution": "朝は日焼け止めを使用。妊娠・授乳中、レーザー・ワックス直後などの注意事項あり"
+      },
+      "officialFeatures": [
+        "レチノールにナイアシンアミド、ペプチド、セラミドを組み合わせた美容液です。",
+        "10mL・30mL・50mLがあり、初めて使う場合は2日に1回から始める公式案内があります。",
+        "妊娠・授乳中や施術直後など、公式の使用注意が明示されています。"
+      ],
+      "comparisonPoints": [
+        "レチノール美容液は濃度だけでなく、開始頻度と併用・使用時の注意事項を比較します。",
+        "同価格帯以下の韓国レチノール美容液とは容量と開始手順が異なります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "開始頻度と使用注意が公式に詳しく示されたレチノール美容液を探している",
+          "10mLから試せる容量展開を比較したい"
+        ],
+        "compareWhen": [
+          "妊娠・授乳中、または施術直後に使用したい",
+          "低価格のレチノール美容液を優先する"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 121,
+          "reason": "低価格の韓国レチノール美容液として比較"
+        },
+        {
+          "id": 175,
+          "reason": "同ブランド系統のレチノール・シカ美容液として比較"
+        },
+        {
+          "id": 162,
+          "reason": "レチノール配合ナイト保湿剤として剤形を比較"
+        }
+      ]
+    }
   },
   {
     "id": 193,
@@ -5067,17 +6964,75 @@
       "ニキビ・吹き出物",
       "毛穴の開き・黒ずみ"
     ],
-    "desc": "硫黄配合の薬用洗顔。ニキビ・毛穴汚れをケアしながらすっきり洗い上げる、プチプラの定番洗顔ペースト。",
+    "desc": "イオウとグリチルレチン酸ステアリルを有効成分とする120gの薬用洗顔料。朝晩約1cmが使用目安です。",
     "keyIngredients": [
       "イオウ",
-      "グリチルリチン酸",
-      "海泥"
+      "グリチルレチン酸ステアリル"
     ],
     "icon": "🧼",
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/sundrug/cabinet/82/4901696541869.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "ロゼット洗顔パスタ アクネクリア",
+          "url": "https://www.rosette.jp/Form/Product/ProductDetail.aspx?pid=054186-900&shop=0",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-brand",
+          "title": "ロゼット よくある質問",
+          "url": "https://www.rosette.jp/Page/guide_faq.aspx",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "薬用洗顔料",
+        "contentAmount": "120g",
+        "classification": "医薬部外品",
+        "saleName": "ロゼット洗顔パスタA",
+        "activeIngredients": "イオウ、グリチルレチン酸ステアリル",
+        "usage": "朝晩、約1cmを泡立てて使用。約40日分の目安"
+      },
+      "officialFeatures": [
+        "イオウとグリチルレチン酸ステアリルを有効成分とする120gの薬用洗顔料です。",
+        "朝晩に約1cmを使い、約40日分という目安が公式FAQにあります。"
+      ],
+      "comparisonPoints": [
+        "同ブランドの海泥スムースは化粧品で、本品は医薬部外品です。",
+        "ニキビ予防系洗顔では有効成分、容量、1回量を比較できます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "医薬部外品のニキビ予防洗顔を探している",
+          "1回量と使用期間の目安を確認して選びたい"
+        ],
+        "compareWhen": [
+          "イオウを含まない洗顔料を希望する",
+          "クレンジングオイルを探している"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 54,
+          "reason": "同ブランドの海泥系洗顔として分類を比較"
+        },
+        {
+          "id": 139,
+          "reason": "同価格帯の薬用ニキビ予防洗顔として有効成分を比較"
+        },
+        {
+          "id": 245,
+          "reason": "別ブランドの薬用ニキビ予防洗顔として比較"
+        }
+      ]
+    }
   },
   {
     "id": 194,
@@ -5134,7 +7089,7 @@
   },
   {
     "id": 196,
-    "name": "グーダル 青みかんビタCクレンジングフォームΩ",
+    "name": "グーダル 青みかんビタCクレンジングフォーム",
     "brand": "goodal",
     "category": "洗顔",
     "price": 1650,
@@ -5147,7 +7102,7 @@
       "シミ・くすみ",
       "毛穴の開き・黒ずみ"
     ],
-    "desc": "青みかん由来ビタミン配合の韓国洗顔フォーム。くすみオフとうるおいを両立、さっぱりした洗い心地。",
+    "desc": "青みかんエキス、ビタミンC誘導体、ナイアシンアミドなどを配合した150mLの洗顔フォーム。",
     "keyIngredients": [
       "青みかんエキス",
       "ビタミンC誘導体",
@@ -5156,7 +7111,64 @@
     "icon": "🍊",
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "goodal 青みかんビタCクレンジングフォーム",
+          "url": "https://goodalcosmetic.jp/products/goodal-green-tangerine-dark-spot-c-v%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0-150ml",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-press-release",
+          "title": "goodal 青みかんビタCクレンジングフォーム 日本発売",
+          "url": "https://prtimes.jp/main/html/rd/p/000000043.000056098.html",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "洗顔フォーム",
+        "contentAmount": "150mL",
+        "keyIngredients": "青みかんエキス、ビタミンC誘導体、ナイアシンアミド、アルブチン",
+        "release": "日本のオフライン販売は2022年12月開始"
+      },
+      "officialFeatures": [
+        "150mLの洗顔フォームで、青みかんエキスとビタミンC誘導体などを配合しています。",
+        "国内販売開始時期を公式販売元のプレスリリースで確認できます。"
+      ],
+      "comparisonPoints": [
+        "ビタミンC系洗顔では、洗い流す製品か塗布する美容液かを分けて比較します。",
+        "同価格帯の洗顔フォームとは医薬部外品か化粧品か、内容量を比較できます。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "ビタミンC誘導体を含む洗顔フォームを比較したい",
+          "150mLの韓国洗顔料を探している"
+        ],
+        "compareWhen": [
+          "ニキビ予防の承認効能を持つ医薬部外品を希望する",
+          "ビタミンCを塗布する美容液を探している"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 198,
+          "reason": "同じビタミンC系の洗顔フォームとして比較"
+        },
+        {
+          "id": 193,
+          "reason": "医薬部外品のニキビ予防洗顔として分類を比較"
+        },
+        {
+          "id": 54,
+          "reason": "低価格のクレイ系洗顔として比較"
+        }
+      ]
+    }
   },
   {
     "id": 197,
@@ -5211,7 +7223,7 @@
   },
   {
     "id": 199,
-    "name": "ぬちまーす 洗顔石けん",
+    "name": "ぬちまーす リュウミネ 石鹸",
     "brand": "ぬちまーす",
     "category": "洗顔",
     "price": 1320,
@@ -5224,17 +7236,66 @@
       "乾燥・かさつき",
       "肌荒れ・赤み"
     ],
-    "desc": "沖縄の海塩ミネラル配合の無添加石けん。やさしい洗い心地で敏感肌・乾燥肌にも使える固形洗顔。",
-    "keyIngredients": [
-      "海塩ミネラル",
-      "オリーブオイル",
-      "ココナッツオイル"
-    ],
+    "desc": "メーカー公式資料で商品名と80gを確認できる固形石鹸。無添加項目や敏感肌への適合は公式確認できないため断定しません。",
+    "keyIngredients": [],
     "icon": "🧼",
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/okinawa-chulaharberlu/cabinet/04860452/imgrc0104106677.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-pdf",
+          "title": "ぬちまーす 商品案内（リュウミネ 石鹸）",
+          "url": "https://www.nutima-su.com/slide/osirase.pdf",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "石鹸",
+        "contentAmount": "80g",
+        "officialProductName": "リュウミネ 石鹸"
+      },
+      "officialFeatures": [
+        "メーカー公式資料で確認できた商品名は『リュウミネ 石鹸』、内容量は80gです。",
+        "公式資料で確認できない無添加項目や敏感肌への適合は断定していません。"
+      ],
+      "comparisonPoints": [
+        "固形石鹸と洗顔フォームでは、形状・内容量・使用方法を分けて比較します。",
+        "詳細な全成分や不使用項目を公式テキストで確認できる商品を優先する場合は別候補も必要です。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "ぬちまーす公式資料に載る80g石鹸を探している",
+          "固形石鹸を洗顔候補として比較したい"
+        ],
+        "compareWhen": [
+          "全成分や不使用項目を国内公式ページで詳しく確認したい",
+          "泡で出る洗顔料を希望する"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 201,
+          "reason": "泡タイプの洗顔料として形状を比較"
+        },
+        {
+          "id": 55,
+          "reason": "同価格帯以下の洗顔フォームとして比較"
+        },
+        {
+          "id": 195,
+          "reason": "敏感肌向け表示のある泡洗顔として比較"
+        }
+      ],
+      "sourceLimitations": [
+        "現行の詳細商品ページを確認できず、公式PDFで商品名と80gのみ確認しました。未確認の処方特徴は掲載していません。"
+      ]
+    }
   },
   {
     "id": 200,
@@ -5330,7 +7391,7 @@
     "concern": [
       "シミ・くすみ"
     ],
-    "desc": "ビタミンC配合のUV乳液。SPF50+で紫外線を防ぎながら美白ケアもできる、プチプラの人気UV。",
+    "desc": "SPF50+・PA++++の50g朝用UV乳液。化粧下地として使え、2種のビタミンC誘導体をうるおい成分として配合しています。",
     "keyIngredients": [
       "ビタミンC誘導体",
       "ビタミンE",
@@ -5340,7 +7401,62 @@
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/beautiful-marche/cabinet/09844648/13063454/13104966/imgrc0150367167.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "メラノCC ディープデイケアUV乳液",
+          "url": "https://www.shop.rohto.co.jp/category/skincare/melanocc/191048.html",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "朝用UV乳液・化粧下地",
+        "contentAmount": "50g",
+        "classification": "化粧品",
+        "spf": "SPF50+",
+        "pa": "PA++++",
+        "usage": "朝、スキンケア後に使用",
+        "keyIngredients": "2種のビタミンC誘導体（うるおい成分）",
+        "fragrance": "香料配合"
+      },
+      "officialFeatures": [
+        "SPF50+・PA++++の朝用UV乳液で、化粧下地としても使用できます。",
+        "2種のビタミンC誘導体をうるおい成分として配合し、成分表示には香料があります。"
+      ],
+      "comparisonPoints": [
+        "同価格帯のUVエッセンスとは、乳液かエッセンスか、香り、内容量を比較できます。",
+        "薬用美白美容液ではなく化粧品のUV乳液です。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "朝の乳液とUV・化粧下地を1品で比較したい",
+          "SPF50+・PA++++の50g乳液を探している"
+        ],
+        "compareWhen": [
+          "無香料を必須にしている",
+          "医薬部外品の美白美容液を探している"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 56,
+          "reason": "同価格帯のUVエッセンスとして剤形と容量を比較"
+        },
+        {
+          "id": 60,
+          "reason": "同価格帯のUVジェルとして比較"
+        },
+        {
+          "id": 241,
+          "reason": "同ブランドメーカーのUVミルクとして比較"
+        }
+      ]
+    }
   },
   {
     "id": 204,
@@ -5369,7 +7485,7 @@
   },
   {
     "id": 205,
-    "name": "d プログラム 薬用 アクネケア エッセンス",
+    "name": "d プログラム 薬用 アクネケア美容液",
     "brand": "資生堂",
     "category": "美容液",
     "price": 3850,
@@ -5382,21 +7498,82 @@
       "ニキビ・吹き出物",
       "肌荒れ・赤み"
     ],
-    "desc": "敏感肌のための薬用ニキビケア美容液。うるおいを与えながら繰り返すニキビ・肌荒れを防ぐ。",
+    "desc": "トラネキサム酸とグリチルリチン酸ジカリウムを有効成分とする15gの部分用美容液。メイクの上からも使えます。",
     "keyIngredients": [
       "トラネキサム酸",
-      "グリチルリチン酸",
-      "ヒアルロン酸"
+      "グリチルリチン酸ジカリウム"
     ],
     "icon": "🛡️",
     "origin": "日本",
     "purchase": "https://www.amazon.co.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/matsuya-cosme/cabinet/img/45142549536791808.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "d プログラム 薬用 アクネケア美容液",
+          "url": "https://www.shiseido.co.jp/dprogram/product/acnecare_serum/",
+          "scope": "domestic"
+        },
+        {
+          "type": "official-product",
+          "title": "資生堂オンラインストア d プログラム 薬用 アクネケア美容液",
+          "url": "https://www.shiseido.co.jp/sw/onlinestore/products/H26401.html",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "部分用美容液",
+        "contentAmount": "15g",
+        "classification": "医薬部外品",
+        "activeIngredients": "トラネキサム酸、グリチルリチン酸ジカリウム",
+        "usage": "化粧水後、気になる部分に使用。メイクの上からも使用可能",
+        "oil": "オイルフリー",
+        "fragrance": "無香料",
+        "countryOfOrigin": "日本",
+        "release": "2024-04-21"
+      },
+      "officialFeatures": [
+        "トラネキサム酸とグリチルリチン酸ジカリウムを有効成分とする15gの部分用美容液です。",
+        "透明ジェルのオイルフリー処方で、化粧水後またはメイクの上から使えます。"
+      ],
+      "comparisonPoints": [
+        "全顔用美容液とは異なり、15gの部分用として使用量と価格を比較します。",
+        "ニキビ予防系では、洗顔料や化粧水ではなく美容液工程に置く商品です。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "医薬部外品の部分用アクネケア美容液を探している",
+          "メイクの上からも使える透明ジェルを比較したい"
+        ],
+        "compareWhen": [
+          "全顔に使う大容量美容液を探している",
+          "洗顔や化粧水だけでニキビ予防ケアを組みたい"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 13,
+          "reason": "同ブランド系統の薬用アクネケア化粧水として工程を比較"
+        },
+        {
+          "id": 130,
+          "reason": "薬用ジェルクリームとして剤形と使用範囲を比較"
+        },
+        {
+          "id": 193,
+          "reason": "薬用洗顔料としてケア工程を比較"
+        }
+      ]
+    }
   },
   {
     "id": 206,
-    "name": "CICA デイリースージングトナーパッド メガ",
+    "name": "VT CICA マイルドトナーパッド",
     "brand": "VT Cosmetics",
     "category": "化粧水",
     "price": 2640,
@@ -5409,17 +7586,73 @@
       "肌荒れ・赤み",
       "毛穴の開き・黒ずみ"
     ],
-    "desc": "CICA配合の大容量トナーパッド。拭き取りで角質ケアと鎮静を同時に、コスパの良い韓国の人気品。",
+    "desc": "60枚・130mLのCICA系トナーパッド。開封後3か月の使用期限が公式に示されています。",
     "keyIngredients": [
-      "CICA",
-      "パンテノール",
-      "BHA"
+      "ツボクサエキス",
+      "ヒアルロン酸",
+      "サリチル酸"
     ],
     "icon": "🍀",
     "origin": "韓国",
     "purchase": "https://www.qoo10.jp/",
     "image": "https://thumbnail.image.rakuten.co.jp/@0_mall/neocosme/cabinet/12828955/compass1752039928.jpg?_ex=300x300",
-    "audience": "unisex"
+    "audience": "unisex",
+    "editorialEvidence": {
+      "verifiedAt": "2026-08-10",
+      "updatedAt": "2026-08-10",
+      "referencePriceCheckedAt": "2026-06",
+      "sources": [
+        {
+          "type": "official-product",
+          "title": "VT CICA マイルドトナーパッド",
+          "url": "https://vtcosmetics.jp/product/cica-%E3%83%9E%E3%82%A4%E3%83%AB%E3%83%89%E3%83%88%E3%83%8A%E3%83%BC%E3%83%91%E3%83%83%E3%83%89/220/",
+          "scope": "domestic"
+        }
+      ],
+      "specs": {
+        "manufacturerCategory": "トナーパッド",
+        "contentAmount": "60枚・130mL",
+        "countryOfOrigin": "韓国",
+        "afterOpening": "開封後3か月",
+        "keyIngredients": "ツボクサエキス、ヒアルロン酸、サリチル酸",
+        "fragrance": "香料配合"
+      },
+      "officialFeatures": [
+        "国内公式で確認できる商品名は『CICA マイルドトナーパッド』で、60枚・130mLです。",
+        "開封後3か月の使用期限が示され、成分表示にはサリチル酸と香料があります。"
+      ],
+      "comparisonPoints": [
+        "トナーパッドでは枚数だけでなく液量と開封後期限を比較できます。",
+        "同価格帯のヒアルロン酸系・マデカソサイド系パッドとは主軸が異なります。"
+      ],
+      "decision": {
+        "chooseWhen": [
+          "60枚・130mLのCICA系トナーパッドを探している",
+          "開封後期限を確認して使い切りやすさを比較したい"
+        ],
+        "compareWhen": [
+          "無香料を必須にしている",
+          "掲載中の『メガ』表記の別容量を探している"
+        ]
+      },
+      "comparisonCandidates": [
+        {
+          "id": 171,
+          "reason": "マデカソサイド系トナーパッドとして比較"
+        },
+        {
+          "id": 180,
+          "reason": "ヒアルロン酸系トナーパッドとして比較"
+        },
+        {
+          "id": 15,
+          "reason": "同ブランドの通常化粧水として剤形を比較"
+        }
+      ],
+      "sourceLimitations": [
+        "掲載名の『デイリースージングトナーパッド メガ』は国内公式で確認できませんでした。公式に確認できる60枚品を根拠にしています。"
+      ]
+    }
   },
   {
     "id": 207,

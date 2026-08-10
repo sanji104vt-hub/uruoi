@@ -20,7 +20,9 @@ jobs:
           node build-hub-pages.mjs
 
       - name: Verify generated internal URLs
-        run: node scripts/verify-public-urls.mjs
+        run: |
+          node scripts/verify-public-urls.mjs
+          node scripts/verify-indexing-priority5.mjs
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
