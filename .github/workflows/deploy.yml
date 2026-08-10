@@ -12,6 +12,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Build production SEO pages
+        run: |
+          node build-product-pages.mjs
+          node build-column-pages.mjs
+          node build-hub-pages.mjs
+
       - name: Verify generated internal URLs
         run: node scripts/verify-public-urls.mjs
 

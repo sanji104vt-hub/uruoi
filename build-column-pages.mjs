@@ -208,7 +208,7 @@ function breadcrumbJsonLd(column, canonical){
     "@type":"BreadcrumbList",
     "itemListElement":[
       {"@type":"ListItem","position":1,"name":"Moilum","item":SITE_ORIGIN + "/"},
-      {"@type":"ListItem","position":2,"name":"スキンケアコラム","item":SITE_ORIGIN + "/column"},
+      {"@type":"ListItem","position":2,"name":"スキンケアコラム","item":SITE_ORIGIN + "/columns"},
       {"@type":"ListItem","position":3,"name":column.title,"item":canonical}
     ]
   };
@@ -300,10 +300,10 @@ gtag('event','column_view',{column_id:${safeJson(column.id)},column_title:${safe
 </script>
 </head>
 <body>
-<header class="topbar"><a class="logo" href="/">Moi<span>lum</span></a><a class="column-home" href="/column">コラム一覧</a></header>
+<header class="topbar"><a class="logo" href="/">Moi<span>lum</span></a><a class="column-home" href="/columns">コラム一覧</a></header>
 <div class="pr-banner">本サイトはアフィリエイト広告を利用しています。商品選定・記事内容はMoilum編集部が独自に作成しています。</div>
 <article>
-  <nav class="crumb"><a href="/">ホーム</a><span class="sep">›</span><a href="/column">コラム</a><span class="sep">›</span><span>${escHtml(truncate(column.title, 28))}</span></nav>
+  <nav class="crumb"><a href="/">ホーム</a><span class="sep">›</span><a href="/columns">コラム</a><span class="sep">›</span><span>${escHtml(truncate(column.title, 28))}</span></nav>
   <span class="cat-tag">${escHtml(column.cat)}</span>
   <h1>${escHtml(column.title)}</h1>
   <div class="article-meta">執筆：Moilum編集部（一行／個人運営） ・ ${escHtml(column.readtime || "約8分")}<br>最終更新：${escHtml(updated)} ／ 掲載商品データ基準日：2026-06</div>
@@ -313,7 +313,7 @@ gtag('event','column_view',{column_id:${safeJson(column.id)},column_title:${safe
   <section class="more-columns"><h2>あわせて読みたい記事</h2><div class="more-grid">
     ${moreColumns.map(c => `<a class="more-card" href="/columns/${c.id}"><small>${escHtml(c.cat)}</small><strong>${escHtml(c.title)}</strong><span>${escHtml(c.excerpt)}</span></a>`).join("")}
   </div></section>
-  <a class="backhome" href="/column">← コラム一覧に戻る</a>
+  <a class="backhome" href="/columns">← コラム一覧に戻る</a>
 </article>
 <footer><div><a href="/">ホーム</a><a href="/about/rating-policy">評価方針</a><a href="/about/sources">情報源</a></div><p>© Moilum</p></footer>
 <script>

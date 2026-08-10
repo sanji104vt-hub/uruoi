@@ -30,7 +30,7 @@ const PRODUCT_REDIRECTS = {
 };
 
 function buildSitemap(){
-  const staticPaths = ["/","/brands","/ranking","/diagnosis","/column","/favorites","/about/rating-policy","/about/sources","/about/changelog"];
+  const staticPaths = ["/","/columns","/brands","/ranking","/diagnosis","/about/rating-policy","/about/sources","/about/changelog"];
   const now = new Date().toISOString().slice(0,10);
   const urls = [];
   for (const path of staticPaths){
@@ -75,7 +75,7 @@ export default {
     // キーはクエリ文字列を除外した canonical URL に固定（?bust= のようなキャッシュバスターで
     // 別キー扱いになるのを防ぐ）。TTL は Cache-Control ヘッダー(max-age=3600)に従う。
     if (pathname === "/sitemap.xml"){
-      const cacheKey = new Request("https://moilum.asutelu.com/sitemap.xml", { method: "GET" });
+      const cacheKey = new Request("https://moilum.asutelu.com/sitemap.xml?version=seo-priority2-v1", { method: "GET" });
       const cache = caches.default;
       let cached = await cache.match(cacheKey);
       if (cached) return cached;
@@ -92,6 +92,26 @@ export default {
         ctx.waitUntil(cache.put(cacheKey, response.clone()));
       }
       return response;
+    }
+
+    // 旧コラム一覧URLは、正規URLへ1回だけ恒久転送する。
+    if (pathname === "/column" || pathname === "/column/"){
+      return Response.redirect(`${SITE_ORIGIN}/columns`, 301);
+    }
+
+    // SPAと同じ内容を返さず、検索エンジンが初回HTMLだけで理解できる専用ページを返す。
+    const hubPages = {
+      "/columns": "columns",
+      "/brands": "brands",
+      "/ranking": "ranking",
+      "/diagnosis": "diagnosis",
+      "/favorites": "favorites"
+    };
+    const hubName = hubPages[pathname.replace(/\/$/, "")];
+    if (hubName){
+      const rewriteUrl = new URL(request.url);
+      rewriteUrl.pathname = `/hubs/${hubName}.html`;
+      return env.ASSETS.fetch(new Request(rewriteUrl, request));
     }
 
     // /products/{id} → /products/{id}.html リライト（Sillageの/columns/{slug}と同パターン）

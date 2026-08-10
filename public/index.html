@@ -93,7 +93,8 @@ header{
 nav{display:flex;gap:4px}
 .nav-btn{
   background:none;border:none;padding:8px 14px;border-radius:var(--radius-sm);
-  color:var(--txt2);font-size:14px;transition:all .2s;
+  color:var(--txt2);font-size:14px;transition:all .2s;text-decoration:none;
+  display:inline-flex;align-items:center;min-height:44px;
 }
 .nav-btn:hover,.nav-btn.active{background:var(--accent2);color:var(--accent)}
 .dark-btn{
@@ -1400,7 +1401,7 @@ nav{display:flex;gap:4px}
 </div></noscript>
 
 <header>
-  <div class="logo" onclick="showPage('products')" style="cursor:pointer">
+  <a class="logo" href="/" onclick="return navigatePage(event,'products')" style="cursor:pointer;text-decoration:none">
     <svg class="logo-mark" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
       <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0%" class="brand-stop-1"/><stop offset="100%" class="brand-stop-2"/>
@@ -1409,15 +1410,15 @@ nav{display:flex;gap:4px}
       <ellipse cx="12.5" cy="18" rx="3" ry="4.5" fill="#fff" opacity="0.45"/>
     </svg>
     <span class="logo-text">Moi<span class="logo-accent">lum</span></span>
-  </div>
+  </a>
   <nav>
-    <button class="nav-btn active" onclick="showPage('products')">商品</button>
-    <button class="nav-btn" onclick="showPage('brands')">ブランド</button>
-    <button class="nav-btn" onclick="showPage('ranking')">ランキング</button>
-    <button class="nav-btn" onclick="showPage('diagnosis')">肌診断</button>
-    <button class="nav-btn" onclick="showPage('column')">コラム</button>
-    <button class="nav-btn" onclick="showPage('karte')">肌カルテ</button>
-    <button class="nav-btn" onclick="showPage('favorites')">お気に入り</button>
+    <a class="nav-btn active" data-page="products" href="/" onclick="return navigatePage(event,'products')">商品</a>
+    <a class="nav-btn" data-page="brands" href="/brands" onclick="return navigatePage(event,'brands')">ブランド</a>
+    <a class="nav-btn" data-page="ranking" href="/ranking" onclick="return navigatePage(event,'ranking')">ランキング</a>
+    <a class="nav-btn" data-page="diagnosis" href="/diagnosis" onclick="return navigatePage(event,'diagnosis')">肌診断</a>
+    <a class="nav-btn" data-page="column" href="/columns" onclick="return navigatePage(event,'column')">コラム</a>
+    <a class="nav-btn" data-page="karte" href="/?page=karte" onclick="return navigatePage(event,'karte')">肌カルテ</a>
+    <a class="nav-btn" data-page="favorites" href="/favorites" onclick="return navigatePage(event,'favorites')">お気に入り</a>
     <button class="dark-btn" onclick="toggleDark()">🌙</button>
   </nav>
 </header>
@@ -1443,7 +1444,7 @@ nav{display:flex;gap:4px}
       <h1 class="hero-title">濁りのない、<br><span>スキンケア比較</span>。</h1>
       <p class="hero-sub" data-skincare-count>{count}商品を独自スコアで正直にレビュー。「向かない人」まで書きます。</p>
       <div class="hero-actions">
-        <button class="hero-btn primary" onclick="showPage('diagnosis')">肌タイプ診断をはじめる</button>
+        <a class="hero-btn primary" href="/diagnosis" onclick="return navigatePage(event,'diagnosis')">肌タイプ診断をはじめる</a>
         <button class="hero-btn ghost" onclick="document.getElementById('search').scrollIntoView({behavior:'smooth'});document.getElementById('search').focus()">商品をさがす</button>
       </div>
     </div>
@@ -3631,12 +3632,23 @@ document.querySelectorAll(".q-opt").forEach(btn=>{
   });
 });
 
+const PAGE_PATHS={products:"/",brands:"/brands",ranking:"/ranking",diagnosis:"/diagnosis",column:"/columns",karte:"/?page=karte",favorites:"/favorites"};
+function navigatePage(event,name){
+  if(event&&(event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)) return true;
+  if(event) event.preventDefault();
+  const target=PAGE_PATHS[name]||"/";
+  try{
+    if(window.location.pathname+window.location.search!==target) history.pushState({page:name},"",target);
+  }catch(e){}
+  showPage(name);
+  return false;
+}
+
 function showPage(name){
   document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
   document.querySelectorAll(".nav-btn").forEach(b=>b.classList.remove("active"));
   document.getElementById(name+"Page").classList.add("active");
-  const idx=["products","brands","ranking","diagnosis","column","karte","favorites"].indexOf(name);
-  document.querySelectorAll(".nav-btn")[idx]?.classList.add("active");
+  document.querySelector(`.nav-btn[data-page="${name}"]`)?.classList.add("active");
   if(name==="diagnosis") trackEvent("diagnosis_start",{source:window.location.pathname});
   if(name==="brands") renderBrands();
   if(name==="ranking") renderRanking();
@@ -3660,7 +3672,7 @@ function showPage(name){
     });
     if(bcUI){
       bcUI.style.display="block";
-      bcUI.innerHTML=`<a onclick="showPage('products')">ホーム</a><span class="bc-sep">›</span><span>${PAGE_LABELS[name]||name}</span>`;
+      bcUI.innerHTML=`<a href="/" onclick="return navigatePage(event,'products')">ホーム</a><span class="bc-sep">›</span><span>${PAGE_LABELS[name]||name}</span>`;
     }
   }
 }
@@ -6366,6 +6378,12 @@ renderRecoFeed();
 // 初回HTTPレスポンス時点でheadは正しく差し替え済み。ここではJS側の表示状態を該当ページに合わせる。
 (function(){
   function openFromPath(pathname){
+    const pageRoutes={"/brands":"brands","/ranking":"ranking","/diagnosis":"diagnosis","/columns":"column","/favorites":"favorites"};
+    const pageName=pageRoutes[pathname.replace(/\/$/,"")];
+    if(pageName){
+      showPage(pageName);
+      return true;
+    }
     const productM = pathname.match(/^\/products\/(\d+)\/?$/);
     if (productM){
       const id = parseInt(productM[1], 10);
