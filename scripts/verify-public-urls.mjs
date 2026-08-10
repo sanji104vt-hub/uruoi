@@ -13,6 +13,18 @@ const productIds = new Set(products.map(product => String(product.id)));
 const columnSlugs = new Set(columns.map(column => String(column.id)));
 const guideSlugSet = new Set(guideSlugs.map(String));
 
+for (const product of products) {
+  if (Object.prototype.hasOwnProperty.call(product, "reviews")) {
+    throw new Error(`src/products.json: 商品ID ${product.id} に廃止済みreviewsフィールドがあります`);
+  }
+}
+for (const builder of ["build-product-pages.mjs", "build-column-pages.mjs", "build-hub-pages.mjs", "build-guide-pages.mjs"]) {
+  const source = fs.readFileSync(path.join(root, builder), "utf8");
+  if (/\bp\.reviews\b|\breviews\s*[<>]=?/.test(source)) {
+    throw new Error(`${builder}: 公開評価ロジックがreviewsへ依存しています`);
+  }
+}
+
 const files = [];
 function walk(directory) {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
@@ -27,6 +39,12 @@ const errors = [];
 const internalLinks = { products: new Set(), columns: new Set() };
 let jsonLdCount = 0;
 let inlineScriptCount = 0;
+const trustCounts = {
+  productPages: 0,
+  editorUsedPages: 0,
+  publicInfoPages: 0,
+  historicalReviewMentions: 0
+};
 
 function relative(file) {
   return path.relative(root, file).replaceAll("\\", "/");
@@ -87,6 +105,24 @@ function checkJsonLdUrls(file, value, key = "root") {
   }
 }
 
+function checkJsonLdTrust(file, value, key = "root") {
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => checkJsonLdTrust(file, item, `${key}[${index}]`));
+    return;
+  }
+  if (!value || typeof value !== "object") return;
+  for (const [childKey, childValue] of Object.entries(value)) {
+    const location = `${key}.${childKey}`;
+    if (["aggregateRating", "reviewCount", "ratingCount"].includes(childKey)) {
+      fail(file, `JSON-LDに禁止されたユーザーレビュー集計 ${location} があります`);
+    }
+    if (childKey === "@type" && (childValue === "Review" || (Array.isArray(childValue) && childValue.includes("Review")))) {
+      fail(file, `JSON-LDに実在レビューのないReview型があります: ${location}`);
+    }
+    checkJsonLdTrust(file, childValue, location);
+  }
+}
+
 function ordinaryAnchorHrefs(source) {
   const content = source
     .replace(/<script\b[\s\S]*?<\/script>/gi, "")
@@ -108,6 +144,22 @@ function internalPathname(href) {
 
 for (const file of files) {
   const source = fs.readFileSync(file, "utf8");
+  const rel = relative(file);
+  const isChangelog = rel === "public/about/changelog.html";
+
+  if (/\.(?:html|xml|txt)$/i.test(file)) {
+    if (!isChangelog && /(?:207|192)商品/.test(source)) fail(file, "古い固定商品数（207商品または192商品）が残っています");
+    if (!isChangelog && /(?:人気度45%|レビュー数だけに偏らず|市場での使用実績が豊富|レビュー数の多い定番)/.test(source)) {
+      fail(file, "レビュー件数に由来する旧評価表現が残っています");
+    }
+    if (!isChangelog && /ユーザー評価(?:が高い|[：:]\s*[★0-9]|\s+★)/.test(source)) {
+      fail(file, "Moilum編集部評価をユーザー評価として表示する表現があります");
+    }
+    if (!isChangelog && /(?:参考レビュー|レビュー件数)[^<\n]{0,50}\d[\d,]*件/.test(source)) {
+      fail(file, "出典を説明できないレビュー件数が公開テキストに残っています");
+    }
+    if (isChangelog) trustCounts.historicalReviewMentions += (source.match(/レビュー件数/g) || []).length;
+  }
 
   for (const token of ["${p.id}", "${mc.id}"]) {
     if (source.includes(token)) fail(file, `禁止トークン ${token} が残存`);
@@ -141,7 +193,9 @@ for (const file of files) {
       if (!body) continue;
       jsonLdCount += 1;
       try {
-        checkJsonLdUrls(file, JSON.parse(body));
+        const parsed = JSON.parse(body);
+        checkJsonLdUrls(file, parsed);
+        checkJsonLdTrust(file, parsed);
       } catch (error) {
         fail(file, `JSON-LDをJSONとして解析できません: ${error.message}`);
       }
@@ -163,6 +217,8 @@ for (const file of files) {
 }
 
 const indexSource = fs.readFileSync(path.join(publicDir, "index.html"), "utf8");
+if (/"reviews"\s*:/.test(indexSource)) fail(path.join(publicDir, "index.html"), "SPA商品データに廃止済みreviewsフィールドがあります");
+if (/\bp\.reviews\b|\breviews\s*[<>]=?/.test(indexSource)) fail(path.join(publicDir, "index.html"), "SPA評価ロジックがreviewsへ依存しています");
 if (!indexSource.includes("data-product-link-id=")) fail(path.join(publicDir, "index.html"), "商品リンクの安全なID属性がありません");
 if (!indexSource.includes("data-column-link-slug=")) fail(path.join(publicDir, "index.html"), "コラムリンクの安全なslug属性がありません");
 if (!indexSource.includes("function hydrateInternalLinks(")) fail(path.join(publicDir, "index.html"), "内部リンクの展開処理がありません");
@@ -233,6 +289,22 @@ if (!productHubSource.includes(`全${products.length}件`) || !productHubSource.
   fail(productHubFile, "商品総数がSSoTから生成された表示を確認できません");
 }
 
+const expectedProductCounts = {
+  total: products.length,
+  current: products.filter(product => product.productType !== "makeup" && product.status !== "previous_generation").length,
+  related: products.filter(product => product.productType === "makeup").length,
+  previous: products.filter(product => product.status === "previous_generation").length,
+  "editor-used": products.filter(product => product.reviewedByEditor === true).length
+};
+for (const [aboutName, requiredKeys] of [["sources.html", Object.keys(expectedProductCounts)], ["rating-policy.html", ["editor-used"]]]) {
+  const file = path.join(publicDir, "about", aboutName);
+  const source = fs.readFileSync(file, "utf8");
+  for (const key of requiredKeys) {
+    const value = source.match(new RegExp(`<span\\s+data-product-count=["']${key}["']>(\\d+)<\\/span>`))?.[1];
+    if (Number(value) !== expectedProductCounts[key]) fail(file, `商品数 ${key} がSSoTと不一致です: ${value || "なし"}/${expectedProductCounts[key]}`);
+  }
+}
+
 const rootProductIds = new Set(ordinaryAnchorHrefs(indexSource).map(href => internalPathname(href)?.match(/^\/products\/(\d+)$/)?.[1]).filter(Boolean));
 if (!rootProductIds.size) fail(path.join(publicDir, "index.html"), "トップ初期HTMLに実商品への通常リンクがありません");
 const skincareIds = new Set(products.filter(product => product.productType !== "makeup" && product.status !== "previous_generation").map(product => String(product.id)));
@@ -248,9 +320,21 @@ if (rankingProductLinks.length !== 50) fail(rankingFile, `ランキングの商�
 for (const product of products) {
   const file = path.join(publicDir, "products", `${product.id}.html`);
   const source = fs.readFileSync(file, "utf8");
+  trustCounts.productPages += 1;
   const canonical = source.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1];
   if (canonical !== `${siteOrigin}/products/${product.id}`) fail(file, `商品self canonicalが不正です: ${canonical || "なし"}`);
+  const hasEditorUse = source.includes("編集部が実際に購入・使用した商品です");
+  const hasPublicInfo = source.includes("公開情報・公式情報をもとに比較");
+  if (hasEditorUse === hasPublicInfo) fail(file, "実使用商品と公開情報のみ商品の表示区分が一意ではありません");
+  if (hasEditorUse) trustCounts.editorUsedPages += 1;
+  if (hasPublicInfo) trustCounts.publicInfoPages += 1;
+  if (/(?:レビュー件数|参考レビュー|市場での使用実績が豊富|ユーザー評価が高い)/.test(source)) {
+    fail(file, "商品ページに旧レビュー依存表現があります");
+  }
 }
+const editorUsedCount = products.filter(product => product.reviewedByEditor === true).length;
+if (trustCounts.editorUsedPages !== editorUsedCount) fail(publicDir, `実使用表示数がSSoTと不一致です: ${trustCounts.editorUsedPages}/${editorUsedCount}`);
+if (trustCounts.publicInfoPages !== products.length - editorUsedCount) fail(publicDir, `公開情報表示数がSSoTと不一致です: ${trustCounts.publicInfoPages}/${products.length - editorUsedCount}`);
 for (const column of columns) {
   const file = path.join(publicDir, "columns", `${column.id}.html`);
   const source = fs.readFileSync(file, "utf8");
@@ -362,3 +446,5 @@ console.log(`専用一覧ページ: ${hubExpectations.length}件 / indexable: 5�
 console.log(`商品ハブ通常リンク: ${productHubIds.length}件 / ユニーク商品: ${uniqueProductHubIds.size}件`);
 console.log(`トップ初期HTMLの実商品リンク: ${rootProductIds.size}件`);
 console.log(`内部リンクグラフ: 商品到達 ${productDepths.length}/${productIds.size}件 / 孤立 ${unreachableProductCount}件 / 最大深度 ${maxProductDepth} / 平均深度 ${averageProductDepth.toFixed(2)}`);
+console.log(`信頼性検査: 商品ページ ${trustCounts.productPages}件 / 編集部実使用 ${trustCounts.editorUsedPages}件 / 公開情報のみ ${trustCounts.publicInfoPages}件`);
+console.log(`変更履歴で許可した「レビュー件数」言及: ${trustCounts.historicalReviewMentions}件`);

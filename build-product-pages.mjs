@@ -1,4 +1,4 @@
-// 軽量な商品個別ページ (/public/products/{id}.html) を207件分ビルドする。
+// 軽量な商品個別ページ (/public/products/{id}.html) をSSoTの商品数分ビルドする。
 // Sillageの /public/columns/{slug}.html と同パターン。
 // Workerは /products/{id} → /products/{id}.html にリライトするだけ。
 // GA4/GSCタグは含めるが、SPA本体のJSは含めない（軽量化＆重複コンテンツ解消）。
@@ -21,57 +21,51 @@ const products = JSON.parse(fs.readFileSync("src/products.json", "utf8"));
 // 静的商品ページにもメリット/デメリット/向いている人/向いていない人を出すため、
 // 同じ関数を移植する(新規データ捏造なし、既存アルゴリズムをそのまま再利用)。
 function productScores(p){
-  const overall=Math.round(((p.rating-4.0)/0.9*4+1)*10)/10;
-  const popularity=Math.min(5,Math.round((Math.log10(p.reviews+1)/Math.log10(16000)*5)*10)/10);
-  const priceScore=Math.max(1,5-(Math.log10(p.price)-2.6)/(4.6-2.6)*4);
-  const cospa=Math.round(Math.min(5,(priceScore*0.7+p.rating/4.9*5*0.3))*10)/10;
-  let moist=2.8+(p.rating-4.2)*1.5;
+  const editorial=Math.round(Math.min(5,Math.max(1,((Number(p.rating||4)-4.0)/0.9*4+1)))*10)/10;
+  const affordability=Math.round(Math.min(5,Math.max(1,5-(Math.log10(Math.max(Number(p.price)||1,1))-2.6)/(4.6-2.6)*4))*10)/10;
+  let dryFit=1;
   const moistWords=["セラミド","ヒアルロン酸","保湿","スクワラン","コラーゲン","グリセリン","パンテノール"];
-  if((p.keyIngredients||[]).some(i=>moistWords.some(w=>i.includes(w)))) moist+=1.2;
-  if((p.concern||[]).includes("乾燥・かさつき")) moist+=0.5;
-  if(["保湿クリーム","化粧水"].includes(p.category)) moist+=0.3;
-  moist=Math.round(Math.min(5,Math.max(1,moist))*10)/10;
-  let mild=2.8+(p.rating-4.2)*1.2;
-  if((p.skin||[]).includes("敏感肌")) mild+=1.3;
-  const mildWords=["CICA","ツボクサ","パンテノール","アラントイン","ドクダミ","グリチルリチン"];
-  if((p.keyIngredients||[]).some(i=>mildWords.some(w=>i.includes(w)))) mild+=0.7;
-  if((p.concern||[]).includes("肌荒れ・赤み")) mild+=0.4;
-  mild=Math.round(Math.min(5,Math.max(1,mild))*10)/10;
-  return {overall,popularity,cospa,moist,mild};
+  if((p.keyIngredients||[]).some(i=>moistWords.some(w=>String(i).includes(w)))) dryFit+=1;
+  if((p.concern||[]).includes("乾燥・かさつき")) dryFit+=2;
+  if(["保湿クリーム","化粧水"].includes(p.category)) dryFit+=1;
+  dryFit=Math.min(5,dryFit);
+  let sensitiveFit=1;
+  if((p.skin||[]).includes("敏感肌")) sensitiveFit+=3;
+  else if((p.skin||[]).includes("全肌質")) sensitiveFit+=2;
+  if((p.concern||[]).includes("肌荒れ・赤み")) sensitiveFit+=1;
+  sensitiveFit=Math.min(5,sensitiveFit);
+  return {editorial,affordability,dryFit,sensitiveFit};
 }
 function prosConsData(p){
   const s=productScores(p);
   const pros=[], cons=[], fit=[], unfit=[];
-  if(p.rating>=4.6) pros.push(`編集部評価が高い（★${p.rating}）`);
-  if(p.reviews>=4000) pros.push(`市場での使用実績が豊富な定番`);
-  if(s.cospa>=4.3) pros.push("価格に対する満足度が高くコスパ良好");
-  if(s.moist>=4.5) pros.push("保湿力が高く乾燥対策に向く");
-  if(s.mild>=4.5) pros.push("低刺激で敏感肌でも使いやすい");
+  if(p.rating>=4.6) pros.push(`Moilum編集部評価が高い（★${p.rating}）`);
+  if(s.dryFit>=4) pros.push("掲載データ上、乾燥ケア向けとして分類");
+  if(s.sensitiveFit>=4) pros.push("掲載データ上、敏感肌向け候補として分類");
   if(p.price<=1500) pros.push("手に取りやすい価格で続けやすい");
-  if((p.keyIngredients||[]).length>=4) pros.push("複数の有効成分を配合");
+  if((p.keyIngredients||[]).length>=4) pros.push("主要成分情報を4種以上掲載");
   if(p.price>=8000) cons.push("価格が高めで継続にはコストがかかる");
-  if(s.mild<3.5) cons.push("敏感肌の人は刺激を感じる可能性");
-  if(p.reviews<1500) cons.push("新しめの商品で市場での定着度は判断途上");
-  if(s.cospa<3) cons.push("コスパ面では割高に感じる場合がある");
-  if(!pros.length) pros.push("バランスの取れた使い心地");
-  if(!cons.length) cons.push("特に大きな欠点は見当たらないが、肌との相性は個人差あり");
-  (p.skin||[]).forEach(sk=>{ if(sk!=="全肌質") fit.push(`${sk}の人`); });
-  if((p.skin||[]).includes("全肌質")) fit.push("肌質を選ばず使いたい人");
-  (p.concern||[]).slice(0,2).forEach(c=>fit.push(`${c}が気になる人`));
-  if(s.cospa>=4.3) fit.push("コスパを重視する人");
+  if(p.reviewedByEditor!==true) cons.push("公開情報中心の比較で、編集部の実使用評価は未掲載");
+  if((p.keyIngredients||[]).length<=1) cons.push("掲載している主要成分情報が限定的");
+  if(!pros.length) pros.push("価格・主要成分・分類情報を一覧で確認できる");
+  if(!cons.length) cons.push("公開情報だけでは香りや使用感、肌との相性を判断できない");
+  (p.skin||[]).forEach(sk=>{ if(sk!=="全肌質") fit.push(`${sk}向け候補を比較したい人`); });
+  if((p.skin||[]).includes("全肌質")) fit.push("幅広い肌タイプ向け候補を探す人");
+  (p.concern||[]).slice(0,2).forEach(c=>fit.push(`${c}向け候補を比較したい人`));
+  if(s.affordability>=4.3) fit.push("価格の手頃さを重視する人");
   if(p.price>=8000) unfit.push("プチプラ重視の人");
-  if(s.mild<3.5) unfit.push("刺激にとても敏感な人");
+  if(p.reviewedByEditor!==true) unfit.push("編集部の実使用レビューを重視する人");
   const allSkin=["乾燥肌","脂性肌","混合肌","敏感肌","普通肌"];
   const notFor=allSkin.filter(sk=>!(p.skin||[]).includes(sk)&&!(p.skin||[]).includes("全肌質"));
-  if(notFor.length&&notFor.length<=2) unfit.push(`${notFor.join("・")}の人には他の選択肢も`);
-  if(!unfit.length) unfit.push("特になし（幅広い人に使いやすい）");
+  if(notFor.length&&notFor.length<=2) unfit.push(`掲載肌タイプに${notFor.join("・")}を含む商品を探す人`);
+  if(!unfit.length) unfit.push("香りやテクスチャーを事前に確認して選びたい人");
   return {pros,cons,fit:[...new Set(fit)].slice(0,4),unfit:unfit.slice(0,3)};
 }
 
-// ===== 一次情報コンポーネント（2026-07-26 に11商品で有効化）=====
+// ===== 一次情報コンポーネント（件数は reviewedByEditor からビルド時に集計）=====
 // src/products.json の商品オブジェクトに以下フィールドを追加すると、
 // 静的商品ページに「編集部の一次情報」ブロックが自動表示される。
-// フィールド未設定の商品では何も表示されない（現在は11商品のみ設定済み）。
+// フィールド未設定の商品では、公開情報に基づく比較であることを明示する。
 //
 // 入力例：
 //   {
@@ -93,7 +87,11 @@ function primarySourceHtml(p){
   const hasTexture = !!p.editorTexturePhoto;
   const hasReview = p.reviewedByEditor === true;
   const hasNote = !!p.editorNote;
-  if (!hasPhoto && !hasTexture && !hasReview && !hasNote) return "";
+  if (!hasPhoto && !hasTexture && !hasReview && !hasNote) return `<div class="primary-source">
+    <div class="ps-header">📚 公開情報・公式情報をもとに比較</div>
+    <p class="ps-note">商品名・価格・主要成分・カテゴリ・掲載肌タイプなどの公開情報を整理しています。編集部が実際に使用した商品のレビューではありません。</p>
+    <div class="ps-disclaimer">※香り・テクスチャー・刺激感・効果実感は、このページの情報だけでは判断できません。</div>
+  </div>`;
   const badges = [];
   if (hasReview)   badges.push('<span class="ps-badge">📷 編集部が実際に使用</span>');
   if (hasPhoto)    badges.push('<span class="ps-badge">編集部撮影</span>');
@@ -163,7 +161,6 @@ function buildProductJsonLd(p){
       "@type": "Offer",
       "price": p.price,
       "priceCurrency": "JPY",
-      "availability": "https://schema.org/InStock",
       "url": p.purchase || `${SITE_ORIGIN}/products/${p.id}`
     };
   }
@@ -220,7 +217,7 @@ function buildProductHtml(p, all){
   const related = getRelatedProducts(p, all);
   const productLd = buildProductJsonLd(p);
   const crumbLd = buildBreadcrumbJsonLd(p);
-  const hasRating = p.rating > 0 && p.reviews > 0;
+  const hasRating = p.rating > 0;
 
   return `<!DOCTYPE html>
 <html lang="ja">
@@ -368,7 +365,7 @@ gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},p
       <span class="meta-label">Moilum編集部評価</span>
       <span class="meta-val"><span class="rating">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5 - Math.round(p.rating))}</span> ${p.rating}</span>
     </div>
-    <div style="font-size:11px;color:var(--txt3);line-height:1.6;padding:4px 0 10px">※編集部が独自に付与した5段階評価です。ユーザーレビュー件数の集計値ではありません。<a href="/about/rating-policy" style="color:var(--accent)">算出基準</a></div>` : ""}
+    <div style="font-size:11px;color:var(--txt3);line-height:1.6;padding:4px 0 10px">※過去に付与したMoilum編集部の参考指標です。ユーザー評価や実測値ではなく、商品ごとの付与記録が完全ではないという限界があります。現在の自動分類やメリット・注意点に件数データは使用していません。<a href="/about/rating-policy" style="color:var(--accent)">評価方針</a></div>` : ""}
     <div class="meta-row">
       <span class="meta-label">カテゴリ</span>
       <span class="meta-val">${escHtml(p.category)}</span>
@@ -381,36 +378,36 @@ gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},p
     <div class="ing-list">${p.keyIngredients.map(i => `<span class="ing-item">${escHtml(i)}</span>`).join("")}</div>
   </div>` : ""}
   ${(Array.isArray(p.skin) && p.skin.length) || (Array.isArray(p.concern) && p.concern.length) ? `<div class="suitability">
-    <h2>こんな人に向いています</h2>
-    ${Array.isArray(p.skin) && p.skin.length ? `<div class="suit-row"><span class="suit-label">適した肌タイプ</span><div class="suit-chips">${p.skin.map(s => `<span class="suit-chip">${escHtml(s)}</span>`).join("")}</div></div>` : ""}
-    ${Array.isArray(p.concern) && p.concern.length ? `<div class="suit-row"><span class="suit-label">対応する悩み</span><div class="suit-chips">${p.concern.map(c => `<span class="suit-chip">${escHtml(c)}</span>`).join("")}</div></div>` : ""}
+    <h2>掲載データ上の候補条件</h2>
+    ${Array.isArray(p.skin) && p.skin.length ? `<div class="suit-row"><span class="suit-label">掲載肌タイプ</span><div class="suit-chips">${p.skin.map(s => `<span class="suit-chip">${escHtml(s)}</span>`).join("")}</div></div>` : ""}
+    ${Array.isArray(p.concern) && p.concern.length ? `<div class="suit-row"><span class="suit-label">掲載悩み分類</span><div class="suit-chips">${p.concern.map(c => `<span class="suit-chip">${escHtml(c)}</span>`).join("")}</div></div>` : ""}
   </div>` : ""}
   ${primarySourceHtml(p)}
   ${(() => {
     const pc = prosConsData(p);
     return `<div class="proscons">
-    <h2>メリット・デメリット / 向いている人・向かない人</h2>
+    <h2>掲載データから確認できる点・確認できない点</h2>
     <div class="pc-grid">
       <div class="pc-box pc-pros">
-        <div class="pc-title">👍 メリット</div>
+        <div class="pc-title">✓ 確認できる点</div>
         <ul>${pc.pros.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
       </div>
       <div class="pc-box pc-cons">
-        <div class="pc-title">👎 デメリット</div>
+        <div class="pc-title">△ 確認できない点・注意点</div>
         <ul>${pc.cons.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
       </div>
     </div>
     <div class="pc-grid">
       <div class="pc-box pc-fit">
-        <div class="pc-title">⭕ 向いている人</div>
+        <div class="pc-title">○ 候補にしやすい人</div>
         <ul>${pc.fit.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
       </div>
       <div class="pc-box pc-unfit">
-        <div class="pc-title">△ 向かない人</div>
+        <div class="pc-title">△ 別候補も検討したい人</div>
         <ul>${pc.unfit.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
       </div>
     </div>
-    <div class="pc-note">※ Moilum編集部が商品データ（評価・レビュー数・価格・成分・対応肌タイプ）から自動集計した参考情報です。実際の使用感には個人差があります。</div>
+    <div class="pc-note">※ Moilum編集部が、参考価格・主要成分・カテゴリ・掲載肌タイプ・掲載悩み分類・実使用情報の有無から機械的に整理した参考情報です。出典を説明できない件数データは使用していません。掲載分類は効果や肌への適合を保証するものではありません。</div>
   </div>`;
   })()}
   <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は2026年6月時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>

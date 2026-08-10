@@ -443,7 +443,7 @@ function buildJsonLd(guide, hits, canonical){
 
 function buildGuideHtml(guide){
   const hits = SKINCARE.filter(guide.filter)
-    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0) || (a.price || Infinity) - (b.price || Infinity) || a.id - b.id)
     .slice(0, guide.limit || 12);
   const canonical = `${SITE_ORIGIN}/guides/${guide.slug}`;
   const relatedColumns = (guide.relatedColumnIds || [])
@@ -555,7 +555,7 @@ gtag('js',new Date());gtag('config','${GA4_ID}');
 
   <div class="rationale">
     <b>このページの比較基準</b><br>
-    ${escHtml(guide.selectionRationale)} 掲載順は Moilum 編集部評価（★）順で、★が同点の商品はレビュー件数の対数を副次キーにしています。この評価軸の詳細は <a href="/about/rating-policy">評価基準ページ</a> をご覧ください。
+    ${escHtml(guide.selectionRationale)} 掲載順は Moilum編集部評価（★）順で、同点の場合は参考価格の低い順、商品ID順です。件数データは並び順に使用していません。評価の意味と限界は <a href="/about/rating-policy">評価基準ページ</a> をご覧ください。
   </div>
 
   <h2>該当商品${hits.length}件（編集部評価順）</h2>
@@ -617,7 +617,7 @@ fs.mkdirSync(outDir, { recursive: true });
 
 const buildLog = [];
 for (const guide of GUIDES){
-  const hits = SKINCARE.filter(guide.filter).sort((a, b) => (b.rating || 0) - (a.rating || 0));
+  const hits = SKINCARE.filter(guide.filter).sort((a, b) => (b.rating || 0) - (a.rating || 0) || (a.price || Infinity) - (b.price || Infinity) || a.id - b.id);
   const shown = Math.min(hits.length, guide.limit || 12);
   const html = buildGuideHtml(guide);
   const outFile = path.join(outDir, guide.slug + ".html");

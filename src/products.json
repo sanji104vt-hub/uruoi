@@ -6,7 +6,6 @@
     "category": "化粧水",
     "price": 1760,
     "rating": 4.6,
-    "reviews": 2841,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -34,7 +33,6 @@
     "category": "化粧水",
     "price": 763,
     "rating": 4.4,
-    "reviews": 8932,
     "skin": [
       "乾燥肌",
       "普通肌",
@@ -62,7 +60,6 @@
     "category": "化粧水",
     "price": 1190,
     "rating": 4.3,
-    "reviews": 6521,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -90,7 +87,6 @@
     "category": "化粧水",
     "price": 3080,
     "rating": 4.7,
-    "reviews": 5123,
     "skin": [
       "混合肌",
       "脂性肌",
@@ -120,7 +116,6 @@
     "category": "化粧水",
     "price": 1650,
     "rating": 4.5,
-    "reviews": 3421,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -148,7 +143,6 @@
     "category": "化粧水",
     "price": 4950,
     "rating": 4.5,
-    "reviews": 1234,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -176,7 +170,6 @@
     "category": "化粧水",
     "price": 2200,
     "rating": 4.4,
-    "reviews": 2890,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -203,7 +196,6 @@
     "category": "化粧水",
     "price": 1650,
     "rating": 4.3,
-    "reviews": 1890,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -231,7 +223,6 @@
     "category": "化粧水",
     "price": 1320,
     "rating": 4.2,
-    "reviews": 4210,
     "skin": [
       "混合肌",
       "普通肌"
@@ -259,7 +250,6 @@
     "category": "化粧水",
     "price": 715,
     "rating": 4.5,
-    "reviews": 12043,
     "skin": [
       "脂性肌",
       "混合肌",
@@ -287,7 +277,6 @@
     "category": "化粧水",
     "price": 2400,
     "rating": 4.6,
-    "reviews": 4532,
     "skin": [
       "敏感肌",
       "乾燥肌",
@@ -316,7 +305,6 @@
     "category": "化粧水",
     "price": 660,
     "rating": 4.3,
-    "reviews": 5621,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -342,7 +330,6 @@
     "category": "化粧水",
     "price": 1650,
     "rating": 4.4,
-    "reviews": 3210,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -370,7 +357,6 @@
     "category": "化粧水",
     "price": 9900,
     "rating": 4.6,
-    "reviews": 1567,
     "skin": [
       "普通肌",
       "混合肌"
@@ -397,7 +383,6 @@
     "category": "化粧水",
     "price": 1980,
     "rating": 4.4,
-    "reviews": 2103,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -425,7 +410,6 @@
     "category": "化粧水",
     "price": 3520,
     "rating": 4.5,
-    "reviews": 1876,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -453,7 +437,6 @@
     "category": "化粧水",
     "price": 990,
     "rating": 4.3,
-    "reviews": 3654,
     "skin": [
       "普通肌",
       "乾燥肌"
@@ -481,7 +464,6 @@
     "category": "化粧水",
     "price": 5500,
     "rating": 4.6,
-    "reviews": 2341,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -509,7 +491,6 @@
     "category": "化粧水",
     "price": 4400,
     "rating": 4.4,
-    "reviews": 987,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -537,7 +518,6 @@
     "category": "化粧水",
     "price": 8470,
     "rating": 4.5,
-    "reviews": 654,
     "skin": [
       "普通肌",
       "乾燥肌"
@@ -564,7 +544,6 @@
     "category": "美容液",
     "price": 25300,
     "rating": 4.8,
-    "reviews": 9876,
     "skin": [
       "普通肌",
       "乾燥肌",
@@ -592,7 +571,6 @@
     "category": "美容液",
     "price": 3450,
     "rating": 4.7,
-    "reviews": 3890,
     "skin": [
       "乾燥肌",
       "普通肌",
@@ -621,7 +599,6 @@
     "category": "美容液",
     "price": 5380,
     "rating": 4.6,
-    "reviews": 4210,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -649,7 +626,6 @@
     "category": "美容液",
     "price": 11000,
     "rating": 4.6,
-    "reviews": 3421,
     "skin": [
       "普通肌",
       "混合肌"
@@ -677,7 +653,6 @@
     "category": "美容液",
     "price": 2530,
     "rating": 4.6,
-    "reviews": 4321,
     "skin": [
       "乾燥肌",
       "敏感肌",
@@ -706,7 +681,6 @@
     "category": "美容液",
     "price": 1980,
     "rating": 4.6,
-    "reviews": 5643,
     "skin": [
       "普通肌",
       "乾燥肌",
@@ -735,7 +709,6 @@
     "category": "美容液",
     "price": 12100,
     "rating": 4.7,
-    "reviews": 4532,
     "skin": [
       "全肌質",
       "普通肌"
@@ -763,7 +736,6 @@
     "category": "美容液",
     "price": 1180,
     "rating": 4.4,
-    "reviews": 9821,
     "skin": [
       "普通肌",
       "脂性肌"
@@ -796,7 +768,6 @@
     "category": "美容液",
     "price": 2640,
     "rating": 4.5,
-    "reviews": 2341,
     "skin": [
       "敏感肌",
       "混合肌",
@@ -825,7 +796,6 @@
     "category": "美容液",
     "price": 3810,
     "rating": 4.5,
-    "reviews": 1654,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -853,7 +823,6 @@
     "category": "美容液",
     "price": 4180,
     "rating": 4.4,
-    "reviews": 876,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -880,7 +849,6 @@
     "category": "美容液",
     "price": 4180,
     "rating": 4.5,
-    "reviews": 2103,
     "skin": [
       "普通肌",
       "混合肌"
@@ -907,7 +875,6 @@
     "category": "美容液",
     "price": 2640,
     "rating": 4.5,
-    "reviews": 1432,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -935,7 +902,6 @@
     "category": "美容液",
     "price": 6050,
     "rating": 4.7,
-    "reviews": 5234,
     "skin": [
       "普通肌",
       "乾燥肌"
@@ -961,7 +927,6 @@
     "category": "美容液",
     "price": 5170,
     "rating": 4.4,
-    "reviews": 3421,
     "skin": [
       "普通肌",
       "混合肌"
@@ -989,7 +954,6 @@
     "category": "美容液",
     "price": 2860,
     "rating": 4.5,
-    "reviews": 2341,
     "skin": [
       "普通肌",
       "混合肌",
@@ -1018,7 +982,6 @@
     "category": "保湿クリーム",
     "price": 598,
     "rating": 4.4,
-    "reviews": 15432,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -1045,7 +1008,6 @@
     "category": "保湿クリーム",
     "price": 33000,
     "rating": 4.9,
-    "reviews": 3456,
     "skin": [
       "普通肌",
       "乾燥肌",
@@ -1074,7 +1036,6 @@
     "category": "保湿クリーム",
     "price": 3300,
     "rating": 4.7,
-    "reviews": 4123,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -1102,7 +1063,6 @@
     "category": "保湿クリーム",
     "price": 2200,
     "rating": 4.5,
-    "reviews": 3210,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -1130,7 +1090,6 @@
     "category": "保湿クリーム",
     "price": 2280,
     "rating": 4.5,
-    "reviews": 3987,
     "skin": [
       "乾燥肌",
       "敏感肌",
@@ -1158,7 +1117,6 @@
     "category": "保湿クリーム",
     "price": 3300,
     "rating": 4.5,
-    "reviews": 1234,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -1186,7 +1144,6 @@
     "category": "保湿クリーム",
     "price": 4400,
     "rating": 4.5,
-    "reviews": 1678,
     "skin": [
       "脂性肌",
       "混合肌",
@@ -1214,7 +1171,6 @@
     "category": "保湿クリーム",
     "price": 4290,
     "rating": 4.6,
-    "reviews": 2341,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -1242,7 +1198,6 @@
     "category": "保湿クリーム",
     "price": 1980,
     "rating": 4.4,
-    "reviews": 1876,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -1269,7 +1224,6 @@
     "category": "保湿クリーム",
     "price": 2860,
     "rating": 4.5,
-    "reviews": 1543,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -1295,7 +1249,6 @@
     "category": "保湿クリーム",
     "price": 6160,
     "rating": 4.5,
-    "reviews": 987,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -1322,7 +1275,6 @@
     "category": "洗顔",
     "price": 1870,
     "rating": 4.6,
-    "reviews": 2103,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -1349,7 +1301,6 @@
     "category": "洗顔",
     "price": 1870,
     "rating": 4.6,
-    "reviews": 8765,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -1375,7 +1326,6 @@
     "category": "洗顔",
     "price": 1100,
     "rating": 4.4,
-    "reviews": 4321,
     "skin": [
       "全肌質",
       "混合肌"
@@ -1401,7 +1351,6 @@
     "category": "洗顔",
     "price": 1980,
     "rating": 4.5,
-    "reviews": 2341,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -1428,7 +1377,6 @@
     "category": "洗顔",
     "price": 550,
     "rating": 4.4,
-    "reviews": 9876,
     "skin": [
       "全肌質",
       "普通肌"
@@ -1454,7 +1402,6 @@
     "category": "洗顔",
     "price": 2640,
     "rating": 4.5,
-    "reviews": 1876,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -1480,7 +1427,6 @@
     "category": "洗顔",
     "price": 660,
     "rating": 4.3,
-    "reviews": 5432,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -1507,7 +1453,6 @@
     "category": "洗顔",
     "price": 750,
     "rating": 4.3,
-    "reviews": 3210,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -1534,7 +1479,6 @@
     "category": "日焼け止め",
     "price": 990,
     "rating": 4.6,
-    "reviews": 12341,
     "skin": [
       "全肌質",
       "混合肌"
@@ -1560,7 +1504,6 @@
     "category": "日焼け止め",
     "price": 3300,
     "rating": 4.7,
-    "reviews": 8765,
     "skin": [
       "全肌質",
       "普通肌"
@@ -1587,7 +1530,6 @@
     "category": "日焼け止め",
     "price": 3740,
     "rating": 4.6,
-    "reviews": 4532,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -1615,7 +1557,6 @@
     "category": "日焼け止め",
     "price": 825,
     "rating": 4.4,
-    "reviews": 6543,
     "skin": [
       "全肌質",
       "混合肌"
@@ -1642,7 +1583,6 @@
     "category": "日焼け止め",
     "price": 990,
     "rating": 4.4,
-    "reviews": 3210,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -1669,7 +1609,6 @@
     "category": "日焼け止め",
     "price": 2090,
     "rating": 4.4,
-    "reviews": 1654,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -1696,7 +1635,6 @@
     "category": "パック・マスク",
     "price": 1650,
     "rating": 4.4,
-    "reviews": 5432,
     "skin": [
       "普通肌",
       "混合肌"
@@ -1724,7 +1662,6 @@
     "category": "パック・マスク",
     "price": 2200,
     "rating": 4.5,
-    "reviews": 4321,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -1751,7 +1688,6 @@
     "category": "パック・マスク",
     "price": 1100,
     "rating": 4.3,
-    "reviews": 3210,
     "skin": [
       "普通肌",
       "乾燥肌"
@@ -1778,7 +1714,6 @@
     "category": "パック・マスク",
     "price": 2640,
     "rating": 4.5,
-    "reviews": 2103,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -1806,7 +1741,6 @@
     "category": "パック・マスク",
     "price": 1430,
     "rating": 4.4,
-    "reviews": 2341,
     "skin": [
       "普通肌",
       "混合肌"
@@ -1834,7 +1768,6 @@
     "category": "アイケア",
     "price": 4980,
     "rating": 4.5,
-    "reviews": 1876,
     "skin": [
       "普通肌",
       "乾燥肌"
@@ -1861,7 +1794,6 @@
     "category": "アイケア",
     "price": 2980,
     "rating": 4.2,
-    "reviews": 3210,
     "skin": [
       "普通肌",
       "乾燥肌"
@@ -1889,7 +1821,6 @@
     "category": "アイケア",
     "price": 1980,
     "rating": 4.4,
-    "reviews": 1543,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -1915,7 +1846,6 @@
     "category": "美容液",
     "price": 13200,
     "rating": 4.7,
-    "reviews": 2341,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -1943,7 +1873,6 @@
     "category": "保湿クリーム",
     "price": 4180,
     "rating": 4.5,
-    "reviews": 3210,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -1971,7 +1900,6 @@
     "category": "美容液",
     "price": 16500,
     "rating": 4.6,
-    "reviews": 1234,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -1999,7 +1927,6 @@
     "category": "アイケア",
     "price": 420,
     "rating": 4.3,
-    "reviews": 8765,
     "skin": [
       "全肌質"
     ],
@@ -2026,7 +1953,6 @@
     "category": "美容液",
     "price": 15400,
     "rating": 4.7,
-    "reviews": 1654,
     "skin": [
       "全肌質",
       "普通肌"
@@ -2054,7 +1980,6 @@
     "category": "美容液",
     "price": 13200,
     "rating": 4.7,
-    "reviews": 5432,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -2083,7 +2008,6 @@
     "category": "美容液",
     "price": 11000,
     "rating": 4.6,
-    "reviews": 4321,
     "skin": [
       "全肌質",
       "普通肌"
@@ -2110,7 +2034,6 @@
     "category": "美容液",
     "price": 3300,
     "rating": 4.5,
-    "reviews": 1432,
     "skin": [
       "普通肌",
       "乾燥肌"
@@ -2138,7 +2061,6 @@
     "category": "美容液",
     "price": 2530,
     "rating": 4.4,
-    "reviews": 1876,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -2165,7 +2087,6 @@
     "category": "化粧水",
     "price": 5500,
     "rating": 4.5,
-    "reviews": 2341,
     "skin": [
       "普通肌",
       "混合肌"
@@ -2193,7 +2114,6 @@
     "category": "保湿クリーム",
     "price": 6050,
     "rating": 4.5,
-    "reviews": 2103,
     "skin": [
       "乾燥肌",
       "混合肌"
@@ -2219,7 +2139,6 @@
     "category": "洗顔",
     "price": 3960,
     "rating": 4.5,
-    "reviews": 6543,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -2246,7 +2165,6 @@
     "category": "洗顔",
     "price": 2420,
     "rating": 4.5,
-    "reviews": 4321,
     "skin": [
       "敏感肌",
       "全肌質"
@@ -2273,7 +2191,6 @@
     "category": "洗顔",
     "price": 1100,
     "rating": 4.3,
-    "reviews": 2341,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -2300,7 +2217,6 @@
     "category": "保湿クリーム",
     "price": 3300,
     "rating": 4.4,
-    "reviews": 987,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -2326,7 +2242,6 @@
     "category": "洗顔",
     "price": 4620,
     "rating": 4.5,
-    "reviews": 765,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -2352,7 +2267,6 @@
     "category": "化粧水",
     "price": 6050,
     "rating": 4.6,
-    "reviews": 1543,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -2380,7 +2294,6 @@
     "category": "化粧水",
     "price": 1320,
     "rating": 4.5,
-    "reviews": 3210,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -2407,7 +2320,6 @@
     "category": "化粧水",
     "price": 1320,
     "rating": 4.4,
-    "reviews": 4532,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -2434,7 +2346,6 @@
     "category": "保湿クリーム",
     "price": 770,
     "rating": 4.4,
-    "reviews": 5432,
     "skin": [
       "脂性肌",
       "混合肌",
@@ -2461,7 +2372,6 @@
     "category": "美容液",
     "price": 3300,
     "rating": 4.5,
-    "reviews": 2103,
     "skin": [
       "普通肌",
       "混合肌"
@@ -2489,7 +2399,6 @@
     "category": "アイケア",
     "price": 4290,
     "rating": 4.4,
-    "reviews": 1654,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -2517,7 +2426,6 @@
     "category": "美容液",
     "price": 9180,
     "rating": 4.6,
-    "reviews": 2341,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -2545,7 +2453,6 @@
     "category": "美容液",
     "price": 5478,
     "rating": 4.5,
-    "reviews": 3210,
     "skin": [
       "普通肌",
       "混合肌"
@@ -2571,7 +2478,6 @@
     "category": "美容液",
     "price": 6600,
     "rating": 4.4,
-    "reviews": 654,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -2598,7 +2504,6 @@
     "category": "化粧水",
     "price": 2530,
     "rating": 4.4,
-    "reviews": 1432,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -2626,7 +2531,6 @@
     "category": "美容液",
     "price": 2860,
     "rating": 4.4,
-    "reviews": 1543,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -2654,7 +2558,6 @@
     "category": "美容液",
     "price": 4400,
     "rating": 4.5,
-    "reviews": 2103,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -2682,7 +2585,6 @@
     "category": "保湿クリーム",
     "price": 4400,
     "rating": 4.5,
-    "reviews": 3210,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -2709,7 +2611,6 @@
     "category": "美容液",
     "price": 1990,
     "rating": 4.3,
-    "reviews": 3654,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -2737,7 +2638,6 @@
     "category": "アイケア",
     "price": 1320,
     "rating": 4.4,
-    "reviews": 2341,
     "skin": [
       "全肌質"
     ],
@@ -2763,7 +2663,6 @@
     "category": "化粧水",
     "price": 4400,
     "rating": 4.4,
-    "reviews": 2103,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -2790,7 +2689,6 @@
     "category": "保湿クリーム",
     "price": 2200,
     "rating": 4.4,
-    "reviews": 1543,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -2818,7 +2716,6 @@
     "category": "美容液",
     "price": 1200,
     "rating": 4.4,
-    "reviews": 5432,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -2845,7 +2742,6 @@
     "category": "美容液",
     "price": 1300,
     "rating": 4.4,
-    "reviews": 4321,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -2871,7 +2767,6 @@
     "category": "パック・マスク",
     "price": 3300,
     "rating": 4.5,
-    "reviews": 3210,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -2897,7 +2792,6 @@
     "category": "アイケア",
     "price": 2640,
     "rating": 4.6,
-    "reviews": 6543,
     "skin": [
       "全肌質"
     ],
@@ -2924,7 +2818,6 @@
     "category": "美容液",
     "price": 1100,
     "rating": 4.3,
-    "reviews": 2341,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -2949,7 +2842,6 @@
     "category": "アイケア",
     "price": 2980,
     "rating": 4.2,
-    "reviews": 1654,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -2977,7 +2869,6 @@
     "category": "日焼け止め",
     "price": 1650,
     "rating": 4.6,
-    "reviews": 4532,
     "skin": [
       "全肌質",
       "混合肌"
@@ -3003,7 +2894,6 @@
     "category": "日焼け止め",
     "price": 1980,
     "rating": 4.5,
-    "reviews": 3210,
     "skin": [
       "全肌質",
       "混合肌"
@@ -3029,7 +2919,6 @@
     "category": "日焼け止め",
     "price": 990,
     "rating": 4.3,
-    "reviews": 3654,
     "skin": [
       "全肌質"
     ],
@@ -3054,7 +2943,6 @@
     "category": "日焼け止め",
     "price": 1980,
     "rating": 4.5,
-    "reviews": 1876,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -3081,7 +2969,6 @@
     "category": "日焼け止め",
     "price": 990,
     "rating": 4.3,
-    "reviews": 2341,
     "skin": [
       "敏感肌",
       "全肌質"
@@ -3107,7 +2994,6 @@
     "category": "アイケア",
     "price": 1320,
     "rating": 4.3,
-    "reviews": 2103,
     "skin": [
       "全肌質"
     ],
@@ -3133,7 +3019,6 @@
     "category": "アイケア",
     "price": 1320,
     "rating": 4.4,
-    "reviews": 1543,
     "skin": [
       "全肌質"
     ],
@@ -3159,7 +3044,6 @@
     "category": "保湿クリーム",
     "price": 2860,
     "rating": 4.4,
-    "reviews": 1234,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -3187,7 +3071,6 @@
     "category": "保湿クリーム",
     "price": 5170,
     "rating": 4.5,
-    "reviews": 4321,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -3215,7 +3098,6 @@
     "category": "保湿クリーム",
     "price": 4180,
     "rating": 4.4,
-    "reviews": 5432,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -3243,7 +3125,6 @@
     "category": "日焼け止め",
     "price": 3520,
     "rating": 4.4,
-    "reviews": 1654,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -3270,7 +3151,6 @@
     "category": "保湿クリーム",
     "price": 1320,
     "rating": 4.4,
-    "reviews": 2341,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -3298,7 +3178,6 @@
     "category": "美容液",
     "price": 3960,
     "rating": 4.4,
-    "reviews": 1432,
     "skin": [
       "普通肌",
       "混合肌"
@@ -3326,7 +3205,6 @@
     "category": "保湿クリーム",
     "price": 2530,
     "rating": 4.6,
-    "reviews": 3210,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -3354,7 +3232,6 @@
     "category": "美容液",
     "price": 8800,
     "rating": 4.5,
-    "reviews": 987,
     "skin": [
       "普通肌",
       "混合肌"
@@ -3382,7 +3259,6 @@
     "category": "美容液",
     "price": 11000,
     "rating": 4.7,
-    "reviews": 3654,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -3410,7 +3286,6 @@
     "category": "洗顔",
     "price": 1320,
     "rating": 4.4,
-    "reviews": 1543,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -3435,7 +3310,6 @@
     "category": "美容液",
     "price": 1100,
     "rating": 4.2,
-    "reviews": 876,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -3459,7 +3333,6 @@
     "category": "美容液",
     "price": 4400,
     "rating": 4.5,
-    "reviews": 2341,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -3487,7 +3360,6 @@
     "category": "保湿クリーム",
     "price": 1980,
     "rating": 4.5,
-    "reviews": 2103,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -3515,7 +3387,6 @@
     "category": "洗顔",
     "price": 550,
     "rating": 4.3,
-    "reviews": 3210,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -3541,7 +3412,6 @@
     "category": "保湿クリーム",
     "price": 1430,
     "rating": 4.3,
-    "reviews": 1876,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -3569,7 +3439,6 @@
     "category": "パック・マスク",
     "price": 825,
     "rating": 4.3,
-    "reviews": 2341,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -3596,7 +3465,6 @@
     "category": "パック・マスク",
     "price": 2640,
     "rating": 4.5,
-    "reviews": 1432,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -3623,7 +3491,6 @@
     "category": "化粧水",
     "price": 990,
     "rating": 4.4,
-    "reviews": 4321,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -3651,7 +3518,6 @@
     "category": "化粧水",
     "price": 1320,
     "rating": 4.3,
-    "reviews": 2103,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -3679,7 +3545,6 @@
     "category": "洗顔",
     "price": 1804,
     "rating": 4.5,
-    "reviews": 6543,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -3706,7 +3571,6 @@
     "category": "美容液",
     "price": 1430,
     "rating": 4.3,
-    "reviews": 1234,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -3732,7 +3596,6 @@
     "category": "パック・マスク",
     "price": 1320,
     "rating": 4.4,
-    "reviews": 5432,
     "skin": [
       "全肌質",
       "混合肌"
@@ -3759,7 +3622,6 @@
     "category": "アイケア",
     "price": 1540,
     "rating": 4.6,
-    "reviews": 8765,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -3787,7 +3649,6 @@
     "category": "洗顔",
     "price": 660,
     "rating": 4.2,
-    "reviews": 2341,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -3821,7 +3682,6 @@
     "category": "美容液",
     "price": 6600,
     "rating": 4.5,
-    "reviews": 765,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -3848,7 +3708,6 @@
     "category": "美容液",
     "price": 2750,
     "rating": 4.6,
-    "reviews": 4321,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -3873,7 +3732,6 @@
     "category": "保湿クリーム",
     "price": 6600,
     "rating": 4.5,
-    "reviews": 1543,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -3901,7 +3759,6 @@
     "category": "アイケア",
     "price": 2200,
     "rating": 4.5,
-    "reviews": 3210,
     "skin": [
       "全肌質"
     ],
@@ -3926,7 +3783,6 @@
     "category": "美容液",
     "price": 3300,
     "rating": 4.4,
-    "reviews": 1654,
     "skin": [
       "普通肌",
       "混合肌"
@@ -3954,7 +3810,6 @@
     "category": "保湿クリーム",
     "price": 1100,
     "rating": 4.4,
-    "reviews": 3210,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -3981,7 +3836,6 @@
     "category": "化粧水",
     "price": 1870,
     "rating": 4.4,
-    "reviews": 1876,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -4009,7 +3863,6 @@
     "category": "化粧水",
     "price": 11000,
     "rating": 4.5,
-    "reviews": 1432,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -4036,7 +3889,6 @@
     "category": "保湿クリーム",
     "price": 9900,
     "rating": 4.5,
-    "reviews": 765,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -4064,7 +3916,6 @@
     "category": "保湿クリーム",
     "price": 2200,
     "rating": 4.5,
-    "reviews": 1543,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -4092,7 +3943,6 @@
     "category": "化粧水",
     "price": 1490,
     "rating": 4.3,
-    "reviews": 2103,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -4120,7 +3970,6 @@
     "category": "アイケア",
     "price": 880,
     "rating": 4.4,
-    "reviews": 2341,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -4147,7 +3996,6 @@
     "category": "美容液",
     "price": 2980,
     "rating": 4.4,
-    "reviews": 2341,
     "skin": [
       "普通肌",
       "乾燥肌"
@@ -4173,7 +4021,6 @@
     "category": "美容液",
     "price": 3960,
     "rating": 4.5,
-    "reviews": 4321,
     "skin": [
       "普通肌",
       "混合肌"
@@ -4201,7 +4048,6 @@
     "category": "美容液",
     "price": 1290,
     "rating": 4.5,
-    "reviews": 6543,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -4226,7 +4072,6 @@
     "category": "パック・マスク",
     "price": 1100,
     "rating": 4.3,
-    "reviews": 2341,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -4254,7 +4099,6 @@
     "category": "洗顔",
     "price": 660,
     "rating": 4.4,
-    "reviews": 3210,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -4280,7 +4124,6 @@
     "category": "化粧水",
     "price": 4180,
     "rating": 4.5,
-    "reviews": 3654,
     "skin": [
       "普通肌",
       "混合肌"
@@ -4308,7 +4151,6 @@
     "category": "化粧水",
     "price": 1320,
     "rating": 4.4,
-    "reviews": 2103,
     "skin": [
       "敏感肌",
       "脂性肌",
@@ -4335,7 +4177,6 @@
     "category": "美容液",
     "price": 11000,
     "rating": 4.6,
-    "reviews": 3210,
     "skin": [
       "普通肌",
       "混合肌"
@@ -4362,7 +4203,6 @@
     "category": "保湿クリーム",
     "price": 4400,
     "rating": 4.3,
-    "reviews": 543,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -4389,7 +4229,6 @@
     "category": "化粧水",
     "price": 990,
     "rating": 4.4,
-    "reviews": 5432,
     "skin": [
       "普通肌",
       "脂性肌"
@@ -4422,7 +4261,6 @@
     "category": "保湿クリーム",
     "price": 3980,
     "rating": 4.4,
-    "reviews": 2341,
     "skin": [
       "普通肌",
       "乾燥肌"
@@ -4450,7 +4288,6 @@
     "category": "パック・マスク",
     "price": 1320,
     "rating": 4.3,
-    "reviews": 2103,
     "skin": [
       "全肌質"
     ],
@@ -4476,7 +4313,6 @@
     "category": "洗顔",
     "price": 1980,
     "rating": 4.5,
-    "reviews": 3210,
     "skin": [
       "全肌質",
       "混合肌"
@@ -4503,7 +4339,6 @@
     "category": "保湿クリーム",
     "price": 2750,
     "rating": 4.4,
-    "reviews": 1876,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -4530,7 +4365,6 @@
     "category": "化粧水",
     "price": 6600,
     "rating": 4.5,
-    "reviews": 1234,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -4558,7 +4392,6 @@
     "category": "洗顔",
     "price": 1870,
     "rating": 4.7,
-    "reviews": 5234,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -4586,7 +4419,6 @@
     "category": "美容液",
     "price": 2970,
     "rating": 4.6,
-    "reviews": 3120,
     "skin": [
       "普通肌",
       "混合肌"
@@ -4614,7 +4446,6 @@
     "category": "美容液",
     "price": 3300,
     "rating": 4.5,
-    "reviews": 2870,
     "skin": [
       "普通肌",
       "混合肌"
@@ -4641,7 +4472,6 @@
     "category": "化粧水",
     "price": 2200,
     "rating": 4.5,
-    "reviews": 3450,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -4669,7 +4499,6 @@
     "category": "日焼け止め",
     "price": 2860,
     "rating": 4.6,
-    "reviews": 4210,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -4697,7 +4526,6 @@
     "category": "パック・マスク",
     "price": 990,
     "rating": 4.4,
-    "reviews": 3210,
     "skin": [
       "普通肌",
       "脂性肌"
@@ -4725,7 +4553,6 @@
     "category": "パック・マスク",
     "price": 2970,
     "rating": 4.6,
-    "reviews": 5430,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -4752,7 +4579,6 @@
     "category": "美容液",
     "price": 4290,
     "rating": 4.5,
-    "reviews": 2340,
     "skin": [
       "普通肌",
       "混合肌"
@@ -4780,7 +4606,6 @@
     "category": "化粧水",
     "price": 11550,
     "rating": 4.7,
-    "reviews": 1870,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -4808,7 +4633,6 @@
     "category": "美容液",
     "price": 8800,
     "rating": 4.6,
-    "reviews": 2140,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -4836,7 +4660,6 @@
     "category": "美容液",
     "price": 15400,
     "rating": 4.7,
-    "reviews": 3420,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -4864,7 +4687,6 @@
     "category": "美容液",
     "price": 4950,
     "rating": 4.5,
-    "reviews": 3870,
     "skin": [
       "普通肌",
       "混合肌"
@@ -4892,7 +4714,6 @@
     "category": "化粧水",
     "price": 2640,
     "rating": 4.6,
-    "reviews": 2980,
     "skin": [
       "敏感肌",
       "乾燥肌",
@@ -4920,7 +4741,6 @@
     "category": "アイケア",
     "price": 3600,
     "rating": 4.4,
-    "reviews": 1230,
     "skin": [
       "普通肌",
       "乾燥肌"
@@ -4948,7 +4768,6 @@
     "category": "保湿クリーム",
     "price": 6600,
     "rating": 4.5,
-    "reviews": 1540,
     "skin": [
       "全肌質",
       "乾燥肌"
@@ -4976,7 +4795,6 @@
     "category": "保湿クリーム",
     "price": 1870,
     "rating": 4.5,
-    "reviews": 2340,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -5004,7 +4822,6 @@
     "category": "保湿クリーム",
     "price": 2530,
     "rating": 4.5,
-    "reviews": 1980,
     "skin": [
       "乾燥肌",
       "混合肌"
@@ -5030,7 +4847,6 @@
     "category": "アイケア",
     "price": 6050,
     "rating": 4.4,
-    "reviews": 1340,
     "skin": [
       "普通肌",
       "乾燥肌"
@@ -5057,7 +4873,6 @@
     "category": "美容液",
     "price": 3960,
     "rating": 4.5,
-    "reviews": 2670,
     "skin": [
       "乾燥肌",
       "敏感肌"
@@ -5085,7 +4900,6 @@
     "category": "日焼け止め",
     "price": 1100,
     "rating": 4.6,
-    "reviews": 4520,
     "skin": [
       "全肌質",
       "混合肌"
@@ -5112,7 +4926,6 @@
     "category": "保湿クリーム",
     "price": 38500,
     "rating": 4.7,
-    "reviews": 1230,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -5140,7 +4953,6 @@
     "category": "化粧水",
     "price": 1320,
     "rating": 4.3,
-    "reviews": 1670,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -5167,7 +4979,6 @@
     "category": "アイケア",
     "price": 1320,
     "rating": 4.4,
-    "reviews": 2130,
     "skin": [
       "全肌質"
     ],
@@ -5194,7 +5005,6 @@
     "category": "保湿クリーム",
     "price": 1078,
     "rating": 4.3,
-    "reviews": 2450,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -5222,7 +5032,6 @@
     "category": "美容液",
     "price": 8800,
     "rating": 4.5,
-    "reviews": 1760,
     "skin": [
       "普通肌",
       "混合肌"
@@ -5250,7 +5059,6 @@
     "category": "洗顔",
     "price": 660,
     "rating": 4.3,
-    "reviews": 3210,
     "skin": [
       "脂性肌",
       "混合肌"
@@ -5278,7 +5086,6 @@
     "category": "洗顔",
     "price": 2200,
     "rating": 4.5,
-    "reviews": 2890,
     "skin": [
       "全肌質",
       "混合肌"
@@ -5306,7 +5113,6 @@
     "category": "洗顔",
     "price": 1100,
     "rating": 4.5,
-    "reviews": 3450,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -5333,7 +5139,6 @@
     "category": "洗顔",
     "price": 1650,
     "rating": 4.4,
-    "reviews": 1980,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -5360,7 +5165,6 @@
     "category": "洗顔",
     "price": 1540,
     "rating": 4.4,
-    "reviews": 2340,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -5387,7 +5191,6 @@
     "category": "洗顔",
     "price": 1980,
     "rating": 4.4,
-    "reviews": 1670,
     "skin": [
       "普通肌",
       "混合肌"
@@ -5413,7 +5216,6 @@
     "category": "洗顔",
     "price": 1320,
     "rating": 4.3,
-    "reviews": 890,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -5441,7 +5243,6 @@
     "category": "洗顔",
     "price": 1760,
     "rating": 4.4,
-    "reviews": 1540,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -5469,7 +5270,6 @@
     "category": "洗顔",
     "price": 748,
     "rating": 4.4,
-    "reviews": 4320,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -5497,7 +5297,6 @@
     "category": "洗顔",
     "price": 1320,
     "rating": 4.5,
-    "reviews": 2870,
     "skin": [
       "全肌質",
       "混合肌"
@@ -5524,7 +5323,6 @@
     "category": "日焼け止め",
     "price": 990,
     "rating": 4.4,
-    "reviews": 2340,
     "skin": [
       "普通肌",
       "混合肌"
@@ -5551,7 +5349,6 @@
     "category": "保湿クリーム",
     "price": 2860,
     "rating": 4.5,
-    "reviews": 1230,
     "skin": [
       "乾燥肌",
       "混合肌"
@@ -5577,7 +5374,6 @@
     "category": "美容液",
     "price": 3850,
     "rating": 4.4,
-    "reviews": 1340,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -5605,7 +5401,6 @@
     "category": "化粧水",
     "price": 2640,
     "rating": 4.5,
-    "reviews": 2100,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -5633,7 +5428,6 @@
     "category": "洗顔",
     "price": 660,
     "rating": 4.3,
-    "reviews": 3120,
     "skin": [
       "全肌質",
       "混合肌"
@@ -5666,7 +5460,6 @@
     "category": "化粧水",
     "price": 6490,
     "rating": 4.6,
-    "reviews": 97,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -5691,7 +5484,6 @@
     "category": "化粧水",
     "price": 3401,
     "rating": 4.2,
-    "reviews": 0,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -5716,7 +5508,6 @@
     "category": "化粧水",
     "price": 1806,
     "rating": 4.6,
-    "reviews": 20,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -5741,7 +5532,6 @@
     "category": "化粧水",
     "price": 1300,
     "rating": 4.2,
-    "reviews": 0,
     "skin": [
       "脂性肌",
       "乾燥肌"
@@ -5766,7 +5556,6 @@
     "category": "化粧水",
     "price": 4400,
     "rating": 4.2,
-    "reviews": 0,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -5791,7 +5580,6 @@
     "category": "化粧水",
     "price": 2180,
     "rating": 4.2,
-    "reviews": 0,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -5816,7 +5604,6 @@
     "category": "化粧水",
     "price": 1190,
     "rating": 4.8,
-    "reviews": 169,
     "skin": [
       "敏感肌",
       "乾燥肌",
@@ -5842,7 +5629,6 @@
     "category": "洗顔",
     "price": 2680,
     "rating": 4.6,
-    "reviews": 105,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -5867,7 +5653,6 @@
     "category": "洗顔",
     "price": 632,
     "rating": 4.8,
-    "reviews": 16,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -5892,7 +5677,6 @@
     "category": "洗顔",
     "price": 880,
     "rating": 4.4,
-    "reviews": 44,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -5917,7 +5701,6 @@
     "category": "洗顔",
     "price": 1639,
     "rating": 4.2,
-    "reviews": 2,
     "skin": [
       "脂性肌"
     ],
@@ -5941,7 +5724,6 @@
     "category": "洗顔",
     "price": 1400,
     "rating": 4.2,
-    "reviews": 0,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -5966,7 +5748,6 @@
     "category": "化粧水",
     "price": 5899,
     "rating": 4.2,
-    "reviews": 0,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -5991,7 +5772,6 @@
     "category": "日焼け止め",
     "price": 1080,
     "rating": 4.8,
-    "reviews": 10,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6016,7 +5796,6 @@
     "category": "日焼け止め",
     "price": 1496,
     "rating": 4.6,
-    "reviews": 292,
     "skin": [
       "全肌質",
       "混合肌",
@@ -6042,7 +5821,6 @@
     "category": "オールインワン",
     "price": 2555,
     "rating": 4.2,
-    "reviews": 1,
     "skin": [
       "脂性肌"
     ],
@@ -6066,7 +5844,6 @@
     "category": "オールインワン",
     "price": 1320,
     "rating": 4.2,
-    "reviews": 1,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6091,7 +5868,6 @@
     "category": "オールインワン",
     "price": 1738,
     "rating": 4.9,
-    "reviews": 9,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6116,7 +5892,6 @@
     "category": "洗顔",
     "price": 585,
     "rating": 4.6,
-    "reviews": 15,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6141,7 +5916,6 @@
     "category": "洗顔",
     "price": 536,
     "rating": 4.5,
-    "reviews": 39,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6166,7 +5940,6 @@
     "category": "洗顔",
     "price": 1144,
     "rating": 4.4,
-    "reviews": 67,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6191,7 +5964,6 @@
     "category": "洗顔",
     "price": 547,
     "rating": 4.5,
-    "reviews": 6,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6216,7 +5988,6 @@
     "category": "洗顔",
     "price": 491,
     "rating": 4.7,
-    "reviews": 20,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6241,7 +6012,6 @@
     "category": "保湿クリーム",
     "price": 2142,
     "rating": 4.7,
-    "reviews": 15,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6266,7 +6036,6 @@
     "category": "化粧水",
     "price": 1430,
     "rating": 4.2,
-    "reviews": 5,
     "skin": [
       "敏感肌"
     ],
@@ -6290,7 +6059,6 @@
     "category": "洗顔",
     "price": 498,
     "rating": 4.8,
-    "reviews": 6,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6315,7 +6083,6 @@
     "category": "洗顔",
     "price": 2017,
     "rating": 4.2,
-    "reviews": 0,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6340,7 +6107,6 @@
     "category": "日焼け止め",
     "price": 1091,
     "rating": 4.2,
-    "reviews": 2,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6365,7 +6131,6 @@
     "category": "日焼け止め",
     "price": 1020,
     "rating": 4.2,
-    "reviews": 1,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6390,7 +6155,6 @@
     "category": "保湿クリーム",
     "price": 820,
     "rating": 4.2,
-    "reviews": 0,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6414,7 +6178,6 @@
     "category": "アフターシェーブ",
     "price": 2659,
     "rating": 4.2,
-    "reviews": 0,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6439,7 +6202,6 @@
     "category": "アフターシェーブ",
     "price": 587,
     "rating": 4.4,
-    "reviews": 49,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6464,7 +6226,6 @@
     "category": "アフターシェーブ",
     "price": 3730,
     "rating": 4.2,
-    "reviews": 0,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6489,7 +6250,6 @@
     "category": "日焼け止め",
     "price": 1662,
     "rating": 4.2,
-    "reviews": 3,
     "skin": [
       "混合肌",
       "脂性肌"
@@ -6515,7 +6275,6 @@
     "category": "美容液",
     "price": 4581,
     "rating": 4.2,
-    "reviews": 0,
     "skin": [
       "敏感肌",
       "混合肌"
@@ -6549,7 +6308,6 @@
     "category": "保湿クリーム",
     "price": 1650,
     "rating": 4.9,
-    "reviews": 138,
     "skin": [
       "敏感肌",
       "乾燥肌"
@@ -6581,7 +6339,6 @@
     "category": "美容液",
     "price": 1480,
     "rating": 4.6,
-    "reviews": 121,
     "skin": [
       "普通肌",
       "混合肌",
@@ -6615,7 +6372,6 @@
     "category": "洗顔",
     "price": 466,
     "rating": 4.2,
-    "reviews": 4,
     "skin": [
       "混合肌",
       "脂性肌",
@@ -6651,7 +6407,6 @@
     "category": "保湿クリーム",
     "price": 1157,
     "rating": 4.2,
-    "reviews": 2,
     "skin": [
       "乾燥肌",
       "普通肌"
@@ -6683,7 +6438,6 @@
     "category": "化粧水",
     "price": 1028,
     "rating": 4.6,
-    "reviews": 29,
     "skin": [
       "混合肌",
       "乾燥肌"
@@ -6716,7 +6470,6 @@
     "category": "保湿クリーム",
     "price": 855,
     "rating": 4.2,
-    "reviews": 4,
     "skin": [
       "混合肌",
       "乾燥肌"

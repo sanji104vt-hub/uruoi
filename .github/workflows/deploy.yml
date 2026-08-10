@@ -16,6 +16,7 @@ jobs:
         run: |
           node build-product-pages.mjs
           node build-column-pages.mjs
+          node build-guide-pages.mjs
           node build-hub-pages.mjs
 
       - name: Verify generated internal URLs

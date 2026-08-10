@@ -71,38 +71,28 @@ function stripHtml(value){
 
 function productScores(p){
   const rating = Number(p.rating) || 0;
-  const reviews = Number(p.reviews) || 0;
   const price = Math.max(1, Number(p.price) || 1);
-  const overall = Math.round(((rating - 4.0) / 0.9 * 4 + 1) * 10) / 10;
-  const popularity = Math.min(5, Math.round((Math.log10(reviews + 1) / Math.log10(16000) * 5) * 10) / 10);
-  const priceScore = Math.max(1, 5 - (Math.log10(price) - 2.6) / (4.6 - 2.6) * 4);
-  const cospa = Math.round(Math.min(5, (priceScore * 0.7 + rating / 4.9 * 5 * 0.3)) * 10) / 10;
-  let moist = 2.8 + (rating - 4.2) * 1.5;
+  const editorial = Math.round(Math.min(5, Math.max(1, ((rating - 4.0) / 0.9 * 4 + 1))) * 10) / 10;
+  const affordability = Math.round(Math.min(5, Math.max(1, 5 - (Math.log10(price) - 2.6) / (4.6 - 2.6) * 4)) * 10) / 10;
+  let dryFit = 1;
   const moistWords = ["セラミド","ヒアルロン酸","保湿","スクワラン","コラーゲン","グリセリン","パンテノール"];
-  if ((p.keyIngredients || []).some(i => moistWords.some(w => i.includes(w)))) moist += 1.2;
-  if ((p.concern || []).includes("乾燥・かさつき")) moist += 0.5;
-  if (["保湿クリーム","化粧水"].includes(p.category)) moist += 0.3;
-  moist = Math.round(Math.min(5, Math.max(1, moist)) * 10) / 10;
-  let mild = 2.8 + (rating - 4.2) * 1.2;
-  if ((p.skin || []).includes("敏感肌")) mild += 1.3;
-  const mildWords = ["CICA","ツボクサ","パンテノール","アラントイン","ドクダミ","グリチルリチン"];
-  if ((p.keyIngredients || []).some(i => mildWords.some(w => i.includes(w)))) mild += 0.7;
-  if ((p.concern || []).includes("肌荒れ・赤み")) mild += 0.4;
-  mild = Math.round(Math.min(5, Math.max(1, mild)) * 10) / 10;
-  return {
-    overall: Math.min(5, Math.max(1, overall)),
-    popularity: Math.min(5, Math.max(1, popularity)),
-    cospa, moist, mild
-  };
+  if ((p.keyIngredients || []).some(i => moistWords.some(w => String(i).includes(w)))) dryFit += 1;
+  if ((p.concern || []).includes("乾燥・かさつき")) dryFit += 2;
+  if (["保湿クリーム","化粧水"].includes(p.category)) dryFit += 1;
+  let sensitiveFit = 1;
+  if ((p.skin || []).includes("敏感肌")) sensitiveFit += 3;
+  else if ((p.skin || []).includes("全肌質")) sensitiveFit += 2;
+  if ((p.concern || []).includes("肌荒れ・赤み")) sensitiveFit += 1;
+  return { editorial, affordability, dryFit:Math.min(5,dryFit), sensitiveFit:Math.min(5,sensitiveFit) };
 }
 
 function radarSvg(p){
   const scores = productScores(p);
-  const values = [scores.overall, scores.popularity, scores.cospa, scores.moist, scores.mild];
-  const labels = ["総合","人気","コスパ","保湿","低刺激"];
+  const values = [scores.editorial, scores.affordability, scores.dryFit, scores.sensitiveFit];
+  const labels = ["編集部","価格目安","乾燥分類","敏感分類"];
   const cx = 130, cy = 118, radius = 78;
   const point = (index, ratio) => {
-    const angle = -Math.PI / 2 + index * Math.PI * 2 / 5;
+    const angle = -Math.PI / 2 + index * Math.PI * 2 / labels.length;
     return `${(cx + Math.cos(angle) * radius * ratio).toFixed(1)},${(cy + Math.sin(angle) * radius * ratio).toFixed(1)}`;
   };
   const grid = [0.2,0.4,0.6,0.8,1].map(level =>
@@ -114,7 +104,7 @@ function radarSvg(p){
     const [x, y] = point(i, 1.22).split(",");
     return `<text x="${x}" y="${y}" text-anchor="middle" dominant-baseline="middle">${label}</text>`;
   }).join("");
-  return `<svg class="radar-svg" viewBox="0 0 260 236" role="img" aria-label="${escAttr(p.name)}の独自スコア。総合${scores.overall}、人気${scores.popularity}、コスパ${scores.cospa}、保湿${scores.moist}、低刺激${scores.mild}">
+  return `<svg class="radar-svg" viewBox="0 0 260 236" role="img" aria-label="${escAttr(p.name)}の参考指標。編集部${scores.editorial}、価格目安${scores.affordability}、乾燥分類${scores.dryFit}、敏感分類${scores.sensitiveFit}">
     ${grid}${axes}
     <polygon points="${valuePolygon}" fill="var(--iris-2)" fill-opacity=".78" stroke="var(--accent)" stroke-width="2"/>
     ${values.map((value, i) => `<circle cx="${point(i, value / 5).split(",")[0]}" cy="${point(i, value / 5).split(",")[1]}" r="3" fill="var(--accent)"/>`).join("")}
@@ -130,12 +120,12 @@ function productRows(ids){
     <tbody>${items.map(p => `<tr>
       <td><a class="product-link" href="/products/${p.id}" data-product-id="${p.id}" data-product-name="${escAttr(p.name)}">${escHtml(p.name)}</a><small>${escHtml(p.brand)}</small></td>
       <td class="ct-price">¥${Number(p.price || 0).toLocaleString()}</td>
-      <td class="ct-rating">${p.rating ? `★${escHtml(p.rating)}` : "—"}${p.reviews ? `<small>${Number(p.reviews).toLocaleString()}件</small>` : ""}</td>
+      <td class="ct-rating">${p.rating ? `★${escHtml(p.rating)}` : "—"}</td>
       <td>${escHtml((p.keyIngredients || []).slice(0,3).join("、") || "—")}</td>
       <td>${escHtml((p.skin || []).join("・") || "—")}</td>
     </tr>`).join("")}</tbody>
   </table></div>
-  <p class="data-note">※価格は${PRICE_DATE}時点の参考値。評価・レビュー件数は当サイト集計の参考値です。</p>`;
+  <p class="data-note">※価格は${PRICE_DATE}時点の参考値。★はMoilum編集部の参考指標で、ユーザー評価ではありません。</p>`;
 }
 
 function radarCards(ids){
@@ -143,7 +133,7 @@ function radarCards(ids){
   if (!items.length) return "";
   return `<div class="col-radar-box"><div class="col-radar-grid">
     ${items.map(p => `<div class="radar-card"><div class="cr-name"><a class="product-link" href="/products/${p.id}" data-product-id="${p.id}" data-product-name="${escAttr(p.name)}">${escHtml(truncate(p.name, 28))}</a></div>${radarSvg(p)}</div>`).join("")}
-  </div><p class="data-note center">※評価・価格・成分などからMoilumが独自算出した参考値です。</p></div>`;
+  </div><p class="data-note center">※価格・主要成分・掲載肌タイプ・掲載悩み分類などから機械整理した参考指標です。乾燥分類・敏感分類は効果や安全性を保証しません。</p></div>`;
 }
 
 function relatedProductCards(ids, label = "この記事で紹介した商品"){

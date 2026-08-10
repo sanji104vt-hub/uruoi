@@ -112,7 +112,8 @@ for (const c of candidates){
   keyToId[key] = nextId;
   // フィールド順を既存商品に合わせるため id を先頭に再構築
   const ordered = { id: clone.id };
-  for (const k of ["name","brand","category","price","rating","reviews","skin","concern","desc","keyIngredients","icon","origin","purchase","image","audience"]){
+  // reviews は出典を説明できない旧フィールドのため、候補データに残っていても本番SSoTへ移さない。
+  for (const k of ["name","brand","category","price","rating","skin","concern","desc","keyIngredients","icon","origin","purchase","image","audience"]){
     if (clone[k] !== undefined) ordered[k] = clone[k];
   }
   PRODUCTS.push(ordered);

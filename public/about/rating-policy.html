@@ -4,26 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>編集部の評価基準｜Moilum（モイルム）</title>
-<meta name="description" content="Moilum編集部がスキンケア商品の総合・人気・コスパ・保湿・低刺激の5軸スコアをどのように算出しているか、また『メリット・デメリット・向かない人』の自動生成ロジックを開示するページです。広告主・アフィリエイト先からの影響を受けていないことも明記しています。">
+<meta name="description" content="Moilumの商品比較で使う4軸参考指標、編集部評価の意味と限界、自動分類に使うデータ・使わないデータ、実使用情報の区別を公開する評価方針ページです。">
 <meta name="google-site-verification" content="UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q" />
 <link rel="canonical" href="https://moilum.asutelu.com/about/rating-policy">
 <meta name="robots" content="index,follow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="編集部の評価基準｜Moilum">
-<meta property="og:description" content="Moilum編集部の商品評価の算出ロジック・独立性・データの由来を開示するページ。">
+<meta property="og:description" content="Moilumの4軸参考指標、編集部評価の限界、使用データと不使用データを開示するページ。">
 <meta property="og:url" content="https://moilum.asutelu.com/about/rating-policy">
 <meta property="og:image" content="https://moilum.asutelu.com/ogp-image.png">
 <meta property="og:site_name" content="Moilum">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="編集部の評価基準｜Moilum">
-<meta name="twitter:description" content="Moilum編集部の商品評価の算出ロジック・独立性・データの由来を開示するページ。">
+<meta name="twitter:description" content="Moilumの4軸参考指標、編集部評価の限界、使用データと不使用データを開示するページ。">
 <meta name="twitter:image" content="https://moilum.asutelu.com/ogp-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Moilum","item":"https://moilum.asutelu.com/"},{"@type":"ListItem","position":2,"name":"サイト情報","item":"https://moilum.asutelu.com/about/rating-policy"},{"@type":"ListItem","position":3,"name":"編集部の評価基準","item":"https://moilum.asutelu.com/about/rating-policy"}]}</script>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"編集部の評価基準","url":"https://moilum.asutelu.com/about/rating-policy","description":"Moilum編集部が5軸スコア(総合/人気/コスパ/保湿/低刺激)とメリット/デメリット/向かない人をどのように算出しているかを開示するページ。","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"Moilum","url":"https://moilum.asutelu.com/"},"publisher":{"@type":"Organization","name":"Moilum","url":"https://moilum.asutelu.com/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"編集部の評価基準","url":"https://moilum.asutelu.com/about/rating-policy","description":"Moilumの4軸参考指標、編集部評価の意味と限界、自動分類に使うデータ・使わないデータを開示するページ。","inLanguage":"ja","isPartOf":{"@type":"WebSite","name":"Moilum","url":"https://moilum.asutelu.com/"},"publisher":{"@type":"Organization","name":"Moilum","url":"https://moilum.asutelu.com/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Moilum","alternateName":"モイルム","url":"https://moilum.asutelu.com/","logo":"https://moilum.asutelu.com/ogp-image.png","description":"スキンケア商品を肌タイプ・お悩み・予算で比較する、個人運営の比較メディア。","foundingDate":"2026","contactPoint":{"@type":"ContactPoint","email":"sanji.104vt@gmail.com","contactType":"customer support","availableLanguage":["Japanese"]}}</script>
 <style>
 :root{--base:#FBF9F6;--ink:#2B2622;--water:#DCEAEC;--deep:#B7CDD3;--iris-2:#D5E4E8;--accent:#7FA8B3;--border:#e3e9e5;--txt2:#5a6b6e;--txt3:#8fa3a7}
@@ -79,73 +79,79 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   <nav class="crumb"><a href="/">ホーム</a><span class="sep">›</span>サイト情報<span class="sep">›</span>編集部の評価基準</nav>
   <span class="cat-tag">サイト情報</span>
   <h1>編集部の評価基準</h1>
-  <p class="lede">Moilumに掲載しているスキンケア商品の総合スコア・5軸レーダー・「メリット／デメリット／向かない人」は、すべて<strong>Moilum編集部が独自に定めたロジックで自動算出</strong>したものです。このページでは、その算出根拠・データの由来・独立性の担保について、できるだけ包み隠さず公開します。</p>
+  <p class="lede">Moilumは、出典を説明できない件数データを商品評価から撤去しました。現在のレーダーと自動コメントは、<strong>既存のMoilum編集部評価・参考価格・主要成分・カテゴリ・掲載肌タイプ・掲載悩み分類・実使用情報の有無</strong>だけを使います。ここでは実装と同じルール、使わないデータ、限界を公開します。</p>
 
   <div class="callout"><b>要点</b><br>
-    ・評価は編集部が独立に決めており、広告主・アフィリエイト先からの金銭的な影響は受けていません。<br>
-    ・商品ページに表示している★評価とレビュー件数は、編集部が公開情報をもとに集計した参考値です。特定のECサイトのレビュー平均を転載したものではありません。<br>
-    ・スコアは商品データからの機械的な算出値で、編集部が実使用して官能評価したものではありません。</p>
+    ・レビュー件数、reviewCount、ratingCountは表示・並び順・ランキング・自動コメント・レーダーに使用しません。<br>
+    ・★は「Moilum編集部評価」であり、ユーザー評価、ECレビュー平均、実測値ではありません。<br>
+    ・編集部が実際に使用した商品と、公開情報だけで比較した商品を明確に分けます。</p>
   </div>
 
-  <h2>1. 5軸スコアの定義</h2>
-  <p>商品詳細ページのレーダーチャートで表示している5軸は、以下の算出ロジックに基づいています。すべての商品に同一の関数を適用しているため、カテゴリ間・価格帯間で相対比較できます（ロジックは <code class="formula">productScores()</code> として実装）。</p>
+  <h2>1. 現在の4軸参考指標</h2>
+  <p>レーダーは5軸から4軸へ縮小しました。安全に説明できない「人気」軸は廃止し、件数データを別名で残していません。各値は1〜5の範囲に収めます。</p>
   <div class="card">
   <table>
-    <thead><tr><th>軸</th><th>定義と算出根拠</th><th>1〜5点のスケール意味</th></tr></thead>
+    <thead><tr><th>軸</th><th>定義と算出根拠</th><th>意味と限界</th></tr></thead>
     <tbody>
-      <tr><td class="axis-name">総合</td><td>編集部評価（★）を1〜5に線形正規化。<span class="formula">rating 4.0→1点、4.9→5点</span></td><td>4.6以上でメリット「評価が高い」扱い</td></tr>
-      <tr><td class="axis-name">人気</td><td>参考レビュー件数を対数で圧縮して5段階に。<span class="formula">log10(reviews+1) / log10(16000) × 5</span>。母数の大きい定番品ほど高得点。</td><td>4,000件超で「実績豊富」扱い</td></tr>
-      <tr><td class="axis-name">コスパ</td><td>価格の対数（安いほど有利）と評価の高さを 7:3 の重み付けで合成。<span class="formula">priceScore × 0.7 + rating × 0.3</span></td><td>4.3以上で「コスパ良好」扱い、3未満で「割高感」扱い</td></tr>
-      <tr><td class="axis-name">保湿</td><td>基本値=評価連動＋保湿系成分（セラミド・ヒアルロン酸・スクワラン・コラーゲン・グリセリン・パンテノール）を含む場合＋1.2点、対応悩みに「乾燥・かさつき」を含む場合＋0.5点、カテゴリが化粧水/保湿クリームの場合＋0.3点、上限5点。</td><td>4.5以上でメリット「保湿力が高い」扱い</td></tr>
-      <tr><td class="axis-name">低刺激</td><td>基本値=評価連動＋対応肌タイプに「敏感肌」を含む場合＋1.3点、鎮静成分（CICA・ツボクサ・パンテノール・アラントイン・ドクダミ・グリチルリチン）を含む場合＋0.7点、対応悩みに「肌荒れ・赤み」を含む場合＋0.4点、上限5点。</td><td>4.5以上で「敏感肌でも」扱い、3.5未満で「刺激を感じる可能性」扱い</td></tr>
+      <tr><td class="axis-name">編集部</td><td>既存のMoilum編集部評価（★）を線形変換。<span class="formula">clamp(((rating-4.0)/0.9×4)+1, 1, 5)</span></td><td>ユーザー評価や実測値ではありません。付与記録が全商品で完全ではないため、参考指標としてのみ表示します。</td></tr>
+      <tr><td class="axis-name">価格目安</td><td>参考価格だけを対数変換。<span class="formula">clamp(5-(log10(price)-2.6)/2×4, 1, 5)</span></td><td>数値が高いほど価格が手頃という目安です。内容量、品質、効果、満足度を含まないため「コスパ」とは呼びません。</td></tr>
+      <tr><td class="axis-name">乾燥分類</td><td>基本1点。掲載悩みに「乾燥・かさつき」+2、掲載主要成分に保湿関連語+1、カテゴリが化粧水・保湿クリーム+1。</td><td>掲載データ上の分類の強さです。実測した保湿力や効果を意味しません。</td></tr>
+      <tr><td class="axis-name">敏感分類</td><td>基本1点。掲載肌タイプに「敏感肌」+3、「全肌質」+2、掲載悩みに「肌荒れ・赤み」+1。</td><td>敏感肌向け候補として登録された情報量の目安です。低刺激性や安全性を保証しません。</td></tr>
     </tbody>
   </table>
   </div>
 
-  <h2>2. 「メリット・デメリット・向かない人」の生成ロジック</h2>
-  <p>商品ページに表示している4象限のコメントは、上記5軸スコアと商品の基本データ（価格・肌タイプ・成分数）から機械的に生成しています。編集部が個別に書き下ろしているのではなく、<strong>全207商品に同一のルールセット</strong>を適用しています。</p>
+  <h2>2. 自動コメントの生成ロジック</h2>
+  <p>商品ページの「確認できる点・確認できない点・候補にしやすい人・別候補も検討したい人」は、全商品へ同じルールを適用します。香り・使用感・刺激感は、実使用情報がある商品以外では生成しません。</p>
 
-  <h3>👍 メリット判定</h3>
+  <h3>確認できる点</h3>
   <ul>
-    <li>★4.6以上：「ユーザー評価が高い」</li>
-    <li>参考レビュー4,000件以上：「実績豊富」</li>
-    <li>コスパ4.3以上：「コスパ良好」</li>
-    <li>保湿4.5以上：「乾燥対策に向く」</li>
-    <li>低刺激4.5以上：「敏感肌でも使いやすい」</li>
+    <li>★4.6以上：「Moilum編集部評価が高い」と明記。</li>
+    <li>乾燥分類4以上：「掲載データ上、乾燥ケア向けとして分類」。</li>
+    <li>敏感分類4以上：「掲載データ上、敏感肌向け候補として分類」。</li>
     <li>価格1,500円以下：「続けやすい価格」</li>
-    <li>主要成分4種以上：「複数の有効成分」</li>
+    <li>主要成分4種以上：「主要成分情報を4種以上掲載」。成分の有効性は断定しません。</li>
   </ul>
 
-  <h3>👎 デメリット判定</h3>
+  <h3>確認できない点・注意点</h3>
   <ul>
     <li>価格8,000円以上：「継続にコストがかかる」</li>
-    <li>低刺激3.5未満：「敏感肌には刺激の可能性」</li>
-    <li>参考レビュー1,500件未満：「レビュー件数が少なめ」</li>
-    <li>コスパ3未満：「割高に感じる場合がある」</li>
+    <li>実使用情報なし：「公開情報中心の比較で、編集部の実使用評価は未掲載」</li>
+    <li>主要成分情報が1種以下：「掲載している主要成分情報が限定的」</li>
+    <li>根拠なく「刺激を感じる」「保湿力が高い」「市場実績が豊富」とは生成しません。</li>
   </ul>
 
-  <h3>⭕ 向いている人 / △ 向かない人</h3>
+  <h3>候補条件</h3>
   <ul>
-    <li>「対応肌タイプ」に登録されている肌質と、「対応する悩み」の上位2つを、そのまま「向いている人」として表示。</li>
-    <li>コスパ4.3以上の商品には「コスパを重視する人」を追加。</li>
-    <li>価格8,000円以上には「プチプラ重視の人」を「向かない人」として明示。</li>
-    <li>登録されていない肌タイプ（例：敏感肌以外のみ対応の場合の「敏感肌」）は「他の選択肢も検討候補」として明示。</li>
+    <li>掲載肌タイプ・掲載悩み分類を「候補を比較したい人」として表示し、適合を断定しません。</li>
+    <li>価格目安4.3以上は「価格の手頃さを重視する人」を追加します。</li>
+    <li>実使用情報がない商品は「編集部の実使用レビューを重視する人」に別候補を案内します。</li>
   </ul>
 
-  <h2>3. データの由来（★評価について）</h2>
-  <p>商品ページに表示している★評価は、<strong>編集部が各商品の公開情報（メーカー公式・大手ECの商品ページ・レビュー動向等）を横断参照して独自に付与した5段階評価</strong>です。以下の点にご留意ください。</p>
+  <h2>3. Moilum編集部評価（★）の意味と限界</h2>
+  <p>★は過去に付与されたMoilum独自の編集部指標です。<strong>商品ごとの付与時の判断記録が完全には残っておらず、全数について同じ根拠を再現できません</strong>。そのため、別の説明で正当化せず、次の制限を明記して維持しています。</p>
   <ul>
-    <li>特定のECサイト（Amazon・楽天市場・Qoo10等）のレビュー平均をそのまま転載したものではありません。「Amazon平均★4.6」等と読み替えることはできません。</li>
-    <li>付与時点でのスナップショットであり、リアルタイムに追随して更新されるものではありません。</li>
-    <li>個人の使用感には差があります。この評価だけで商品を選ぶのではなく、対応肌タイプ・成分・価格と合わせてご判断ください。</li>
+    <li>ユーザー評価、ECレビュー平均、臨床評価、実測値ではありません。</li>
+    <li>現時点では表示、カードの見せ方、ランキング・ガイド・関連商品の掲載順、診断・おすすめフィードの補助順、レーダーの「編集部」軸、★4.6以上のラベルに使います。件数データは副次キーにも使いません。</li>
+    <li>同点は参考価格の低い順、商品ID順です。★だけで購入を決めず、主要成分・掲載分類・価格・公式情報を確認してください。</li>
   </ul>
-  <div class="callout" style="margin-top:14px"><b>2026-07-20 変更のお知らせ：レビュー件数表示の廃止</b><br>
-    以前は各商品ページに「参考レビュー件数◯件」等の数字を併記していましたが、<strong>この件数は出典を厳密に説明できない（複数媒体からの参考集計であり、個人運営で数千件規模を独自集計したと読者に誠実に説明できない）ため、表示を廃止しました</strong>。<br>
-    併せて、Google 構造化データの <code>aggregateRating</code>（ユーザーレビュー集計）スキーマも撤去しました。当サイトの評価は編集部の独自付与によるもので、schema.org 上の「ユーザーレビュー集計」とは意味が異なるためです。<br>
-    <strong>評価（★）そのものは編集部評価として今後も維持</strong>し、算出根拠は本ページで開示を続けます。
-  </div>
 
-  <h2>4. 独立性の担保</h2>
+  <h2>4. 使っているデータ・使っていないデータ</h2>
+  <div class="card"><table><thead><tr><th>区分</th><th>項目</th></tr></thead><tbody>
+    <tr><td class="axis-name">使用</td><td>参考価格、主要成分、カテゴリ、掲載肌タイプ、掲載悩み分類、編集部実使用フラグ、既存のMoilum編集部評価。</td></tr>
+    <tr><td class="axis-name">不使用</td><td>レビュー件数、reviewCount、ratingCount、ECごとの評価平均、SNSの反応数。Product構造化データにも aggregateRating、reviewCount、ratingCount を出力しません。</td></tr>
+  </tbody></table></div>
+
+  <h2>5. 人が編集する部分と自動算出部分</h2>
+  <ul>
+    <li><strong>人が編集</strong>：商品名、説明、参考価格、主要成分、カテゴリ、掲載肌タイプ・悩み分類、実使用メモ。</li>
+    <li><strong>自動算出</strong>：4軸参考指標、自動コメント、条件別の抽出、並び順、関連商品の選定。</li>
+    <li><strong>実使用メモ</strong>：データ上で <code>reviewedByEditor=true</code> の<span data-product-count="editor-used">11</span>商品だけに表示し、未使用商品へテンプレート生成しません。</li>
+  </ul>
+
+  <div class="callout"><b>変更履歴</b><br>2026-07-20に説明できないレビュー件数の表示を廃止し、今回その値を内部ロジックと商品データからも撤去しました。ユーザーレビュー集計を意味する <code>aggregateRating</code> も出力しません。詳しくは<a href="/about/changelog">更新履歴</a>をご覧ください。</div>
+
+  <h2>6. 独立性の担保</h2>
   <p>Moilumはアフィリエイト収益で運営していますが、<strong>掲載順位・スコアリング・「向かない人」の明示は、広告主・販売事業者からの依頼や金銭的動機を受けて調整することは一切ありません</strong>。</p>
   <ul>
     <li>高単価商品を上位表示する調整は行っていません（実際に上位ランキングにはプチプラ品も入っています）。</li>
@@ -153,14 +159,14 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
     <li>「向かない人」欄も、価格の高い商品ほど「プチプラ重視の人には向かない」等を機械的に表示しており、忖度していません。</li>
   </ul>
 
-  <h2>5. スコアの限界について正直に</h2>
-  <p>このロジックには、以下の限界があります：</p>
+  <h2>7. 限界</h2>
   <ul>
-    <li>編集部が実際に商品を使用して官能評価しているわけではありません（<a href="/about/sources">情報ソースページ</a>参照）。</li>
-    <li>「保湿力」「低刺激」は成分名の含有チェックによる推定であり、実際の処方バランスや個人の肌との相性は反映できません。</li>
-    <li>コスパは価格と評価のみで算出しており、内容量あたりの単価は考慮していません（詰替の有無なども未考慮）。</li>
+    <li>編集部評価の個別付与記録が全商品で完全ではありません。</li>
+    <li>乾燥分類・敏感分類は登録情報の有無を示すだけで、処方全体、配合量、効果、安全性、肌との相性を評価できません。</li>
+    <li>価格目安は内容量、詰替、使用量を考慮しません。容量データが揃っていないため、mL単価やコスパは算出しません。</li>
+    <li>公開情報のみの商品では、香り・テクスチャー・刺激感・効果実感を判断できません。</li>
   </ul>
-  <p>この限界を承知のうえで、<strong>「肌タイプと予算で候補を絞り込む一次スクリーニング」</strong>としてご活用ください。</p>
+  <p>この限界を前提に、<strong>肌タイプ・悩み・予算から候補を絞る一次スクリーニング</strong>として利用してください。</p>
 
   <div class="about-links">
     <a href="/about/sources">→ 情報ソース・評価方法</a>

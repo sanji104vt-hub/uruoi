@@ -107,7 +107,7 @@ const brands = [...new Map(skincare.map(p => [p.brand, []])).entries()];
 for (const product of skincare) brands.find(([brand]) => brand === product.brand)[1].push(product);
 brands.sort((a,b) => b[1].length - a[1].length || a[0].localeCompare(b[0], "ja"));
 const brandCards = brands.map(([brand, items]) => {
-  const productRows = list => list.map(p => `<a class="product-link" href="/products/${encodeURIComponent(p.id)}"><span class="icon">${esc(p.icon || "💧")}</span><span>${esc(p.name)}<br><small>参考価格 ¥${yen(p.price)}・評価 ${esc(p.rating)}</small></span></a>`).join("");
+  const productRows = list => list.map(p => `<a class="product-link" href="/products/${encodeURIComponent(p.id)}"><span class="icon">${esc(p.icon || "💧")}</span><span>${esc(p.name)}<br><small>参考価格 ¥${yen(p.price)}・Moilum編集部評価 ${esc(p.rating)}</small></span></a>`).join("");
   const remaining = items.slice(3);
   return `<section class="card brand-card" data-search="${esc((brand + " " + items.map(p=>p.name).join(" ")).toLowerCase())}"><h2>${esc(brand)}</h2><p class="meta">掲載 ${items.length}商品${items[0]?.origin ? `・${esc(items[0].origin)}` : ""}</p>${productRows(items.slice(0,3))}${remaining.length ? `<details class="brand-more"><summary>残り${remaining.length}商品を見る</summary>${productRows(remaining)}</details>` : ""}</section>`;
 }).join("");
@@ -121,23 +121,11 @@ page({
   script:brandSearchScript
 });
 
-function scores(p){
-  const overall = Math.round(((p.rating - 4) / .9 * 4 + 1) * 10) / 10;
-  const popularity = Math.min(5, Math.round((Math.log10((p.reviews || 0) + 1) / Math.log10(16000) * 5) * 10) / 10);
-  const priceScore = Math.max(1, 5 - (Math.log10(Math.max(p.price || 1, 1)) - 2.6) / 2 * 4);
-  const cospa = Math.round(Math.min(5, priceScore * .7 + p.rating / 4.9 * 5 * .3) * 10) / 10;
-  let moist = 2.8 + (p.rating - 4.2) * 1.5;
-  if ((p.keyIngredients || []).some(i => ["セラミド","ヒアルロン酸","保湿","スクワラン","コラーゲン","グリセリン","パンテノール"].some(w => i.includes(w)))) moist += 1.2;
-  if ((p.concern || []).includes("乾燥・かさつき")) moist += .5;
-  if (["保湿クリーム","化粧水"].includes(p.category)) moist += .3;
-  moist = Math.min(5, Math.max(1, moist));
-  let mild = 2.8 + (p.rating - 4.2) * 1.2;
-  if ((p.skin || []).includes("敏感肌")) mild += 1;
-  if ((p.keyIngredients || []).some(i => ["CICA","ツボクサ","アラントイン","グリチルリチン","セラミド","パンテノール"].some(w => i.includes(w)))) mild += .7;
-  mild = Math.min(5, Math.max(1, mild));
-  return { overall, popularity, cospa, moist, mild };
+function editorialSort(a,b){
+  return (Number(b.rating)||0)-(Number(a.rating)||0)
+    || (Number(a.price)||Infinity)-(Number(b.price)||Infinity)
+    || Number(a.id)-Number(b.id);
 }
-function rankScore(p){ const s=scores(p); const popularity=s.overall + Math.min(Math.log10((p.reviews || 0)+10),4)*.4; return popularity*.45+s.cospa*.4+((s.moist+s.mild)/2)*.15; }
 const rankingGroups = [
   ["dry","乾燥肌",p=>(p.concern||[]).includes("乾燥・かさつき")],
   ["pore","毛穴・皮脂",p=>(p.concern||[]).includes("毛穴の開き・黒ずみ")],
@@ -146,15 +134,15 @@ const rankingGroups = [
   ["sensitive","敏感肌",p=>(p.skin||[]).includes("敏感肌")]
 ];
 const rankingSections = rankingGroups.map(([id,label,match]) => {
-  const ranked = skincare.filter(match).sort((a,b)=>rankScore(b)-rankScore(a)).slice(0,10);
-  return `<section id="${id}"><h2>${label}ランキング TOP10</h2><p class="meta">人気度45%・コスパ40%・中身15%の編集部スコアで集計。</p><div class="ranking-list">${ranked.map(p=>`<div class="rank-row"><div><a href="/products/${p.id}">${esc(p.name)}</a><div class="meta">${esc(p.brand)}・${esc(p.category)}・評価 ${esc(p.rating)}（${yen(p.reviews)}件）</div></div><div class="price">¥${yen(p.price)}</div></div>`).join("")}</div></section>`;
+  const ranked = skincare.filter(match).sort(editorialSort).slice(0,10);
+  return `<section id="${id}"><h2>${label}比較 TOP10</h2><p class="meta">掲載条件で抽出後、Moilum編集部評価順。同点は参考価格の低い順です。</p><div class="ranking-list">${ranked.map(p=>`<div class="rank-row"><div><a href="/products/${p.id}">${esc(p.name)}</a><div class="meta">${esc(p.brand)}・${esc(p.category)}・Moilum編集部評価 ${esc(p.rating)}</div></div><div class="price">¥${yen(p.price)}</div></div>`).join("")}</div></section>`;
 }).join("");
 page({
   file:"ranking.html", pathName:"/ranking", active:"/ranking",
-  title:"スキンケア人気ランキング｜肌悩み別に実データで比較｜Moilum",
+  title:"スキンケア比較ランキング｜肌悩み別に掲載データで比較｜Moilum",
   description:"乾燥、毛穴、ニキビ・肌荒れ、エイジングケア、敏感肌の5テーマでスキンケア商品を比較したランキングです。",
-  body:`<section class="hero"><h1>スキンケア人気ランキング</h1><p class="lead">レビュー数だけに偏らず、人気度45%・コスパ40%・中身15%で比較。高額だから上位、とは限らない基準です。</p></section><p class="note">評価・レビュー数・参考価格は掲載データに基づきます。肌との相性や使用感には個人差があります。</p><nav class="section-nav" aria-label="ランキング分類">${rankingGroups.map(([id,label])=>`<a href="#${id}">${label}</a>`).join("")}</nav>${rankingSections}`,
-  jsonLd:[breadcrumb("スキンケア人気ランキング", "/ranking"), {"@context":"https://schema.org","@type":"WebPage","name":"スキンケア人気ランキング","url":SITE_ORIGIN + "/ranking"}]
+  body:`<section class="hero"><h1>スキンケア比較ランキング</h1><p class="lead">肌悩み・掲載肌タイプで候補を抽出し、Moilum編集部評価順に比較します。同点は参考価格の低い順です。</p></section><p class="note">編集部評価はユーザー評価や実測値ではありません。価格・成分・掲載分類と合わせて候補を絞るための参考情報です。</p><nav class="section-nav" aria-label="ランキング分類">${rankingGroups.map(([id,label])=>`<a href="#${id}">${label}</a>`).join("")}</nav>${rankingSections}`,
+  jsonLd:[breadcrumb("スキンケア比較ランキング", "/ranking"), {"@context":"https://schema.org","@type":"WebPage","name":"スキンケア比較ランキング","url":SITE_ORIGIN + "/ranking"}]
 });
 
 const diagnosisData = skincare.map(p => ({id:p.id,name:p.name,brand:p.brand,category:p.category,price:p.price,rating:p.rating,skin:p.skin||[],concern:p.concern||[],icon:p.icon||"💧",audience:p.audience||"unisex"}));
@@ -179,7 +167,7 @@ page({
   jsonLd:[], script:favoritesScript
 });
 
-const homeFeatured = [...skincare].sort((a,b) => rankScore(b) - rankScore(a) || b.reviews - a.reviews).slice(0, 8);
+const homeFeatured = [...skincare].sort(editorialSort).slice(0, 8);
 const homeFeaturedBlock = `<!-- HOME_PRODUCT_LINKS_START -->
   <section class="home-product-links" aria-labelledby="homeFeaturedTitle">
     <div class="home-product-links-head"><div><span class="home-product-links-kicker">FEATURED PRODUCTS</span><h2 id="homeFeaturedTitle">まず比較したい8商品</h2></div><a class="home-products-all" href="/products">全${products.length}商品を見る →</a></div>
@@ -191,5 +179,23 @@ const indexSource = fs.readFileSync(indexPath, "utf8");
 const homeMarkerPattern = /<!-- HOME_PRODUCT_LINKS_START -->[\s\S]*?<!-- HOME_PRODUCT_LINKS_END -->/;
 if (!homeMarkerPattern.test(indexSource)) throw new Error("public/index.html にHOME_PRODUCT_LINKSマーカーがありません");
 fs.writeFileSync(indexPath, indexSource.replace(homeMarkerPattern, homeFeaturedBlock), "utf8");
+
+// Aboutページの商品数は src/products.json から同期し、手書き固定値の陳腐化を防ぐ。
+const aboutCounts = {
+  total: products.length,
+  current: skincare.length,
+  related: products.filter(product => product.productType === "makeup").length,
+  previous: products.filter(product => product.status === "previous_generation").length,
+  "editor-used": products.filter(product => product.reviewedByEditor === true).length
+};
+for (const aboutFile of ["public/about/sources.html", "public/about/rating-policy.html"]){
+  let source = fs.readFileSync(aboutFile, "utf8");
+  for (const [key, value] of Object.entries(aboutCounts)){
+    const pattern = new RegExp(`(<span\\s+data-product-count=["']${key}["']>)\\d+(<\\/span>)`, "g");
+    if (!pattern.test(source)) continue;
+    source = source.replace(pattern, `$1${value}$2`);
+  }
+  fs.writeFileSync(aboutFile, source, "utf8");
+}
 
 console.log(`SEO hub pages generated: columns=${columns.length}, brands=${brands.length}, products=${products.length}, skincare=${skincare.length}`);
