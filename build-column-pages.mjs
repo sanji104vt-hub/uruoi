@@ -30,6 +30,7 @@ function extractColumns(html){
 const columns = extractColumns(indexHtml);
 const metaById = new Map(columnMeta.map(c => [c.id, c]));
 const productById = new Map(products.map(p => [Number(p.id), p]));
+const PRIORITY6_IDS = new Set(["ingredient-comparison", "depacos-vs-puchipura", "sunscreen"]);
 
 const bodyIds = new Set(columns.map(c => c.id));
 const metaIds = new Set(columnMeta.map(c => c.id));
@@ -177,8 +178,8 @@ function extractFaqs(body){
   return faqs;
 }
 
-function articleJsonLd(column, description, canonical, updated){
-  return {
+function articleJsonLd(column, description, canonical, published, updated){
+  const schema = {
     "@context":"https://schema.org",
     "@type":"Article",
     "headline":column.title,
@@ -187,9 +188,11 @@ function articleJsonLd(column, description, canonical, updated){
     "dateModified":updated,
     "mainEntityOfPage":{"@type":"WebPage","@id":canonical},
     "image":OGP_IMAGE,
-    "author":{"@type":"Organization","name":"Moilum編集部","url":SITE_ORIGIN + "/"},
+    "author":{"@type":"Organization","name":column.authorName || "Moilum編集部","url":SITE_ORIGIN + "/"},
     "publisher":{"@type":"Organization","name":"Moilum","logo":{"@type":"ImageObject","url":OGP_IMAGE}}
   };
+  if (published) schema.datePublished = published;
+  return schema;
 }
 
 function breadcrumbJsonLd(column, canonical){
@@ -230,11 +233,13 @@ function buildColumnHtml(column){
   const title = truncate(`${column.title}｜Moilum スキンケアコラム`, 68);
   const canonical = `${SITE_ORIGIN}/columns/${column.id}`;
   const updated = column.updated || meta.updated || DEFAULT_UPDATED;
+  const published = column.published || meta.published || "";
   const body = expandBody(column.body || "");
   const faqs = extractFaqs(body);
   const moreColumns = getMoreColumns(column);
   const relatedIds = [...new Set((column.related || []).map(Number))].filter(id => productById.has(id));
-  const schemas = [articleJsonLd(column, description, canonical, updated), breadcrumbJsonLd(column, canonical)];
+  const priority6Styles = PRIORITY6_IDS.has(column.id) ? `.p6-data-analysis{margin:22px 0 30px;padding:20px;background:linear-gradient(145deg,#fff,var(--water));border:1px solid var(--border);border-radius:var(--radius)}.p6-data-analysis h3{margin-top:0}.p6-method{font-size:13px;color:var(--txt2)}.p6-bars{display:grid;gap:10px;margin:18px 0}.p6-bar-row{display:grid;grid-template-columns:125px minmax(100px,1fr) 70px;gap:10px;align-items:center;font-size:12px}.p6-bar-row>span{height:16px;background:#fff;border-radius:999px;overflow:hidden}.p6-bar-row i{display:block;height:100%;background:linear-gradient(90deg,var(--deep),var(--iris-1));border-radius:inherit}.p6-bar-row b{text-align:right;font-family:var(--font-num)}.p6-metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.p6-metric-grid article{padding:14px;background:rgba(255,255,255,.82);border-radius:var(--radius-sm)}.p6-metric-grid h4{font-family:var(--font-head);margin:0 0 8px}.p6-metric-grid p{font-size:12px;margin:5px 0}.p6-metric-grid b{font-family:var(--font-num);font-size:18px}.p6-sources{padding:18px;background:#fff;border:1px solid var(--border);border-radius:var(--radius)}.p6-sources h3{font-size:17px}.p6-price-table{min-width:900px}.p6-split-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.p6-split-grid section,.p6-check-table>div{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:16px}.p6-check-table{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}.p6-check-table strong,.p6-check-table span{display:block}.p6-check-table span{font-size:13px;color:var(--txt2);margin-top:6px}@media(max-width:600px){.p6-data-analysis{padding:15px}.p6-bar-row{grid-template-columns:105px minmax(70px,1fr) 62px}.p6-split-grid,.p6-check-table{grid-template-columns:1fr}}\n` : "";
+  const schemas = [articleJsonLd(column, description, canonical, published, updated), breadcrumbJsonLd(column, canonical)];
   if (faqs.length) schemas.push(faqJsonLd(faqs));
 
   return `<!DOCTYPE html>
@@ -274,7 +279,7 @@ h1,h2,h3{font-family:var(--font-head);line-height:1.5;color:var(--ink)}h1{font-s
 .col-bars{margin:18px 0 24px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px}.col-bars .cb-title{font-size:13px;font-weight:800;color:var(--txt2);margin-bottom:14px}.col-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}.col-bar-label{flex:none;width:130px;font-size:12px;font-weight:600;line-height:1.4}.col-bar-track{flex:1;height:18px;background:var(--water);border-radius:9px;overflow:hidden}.col-bar-fill{height:100%;background:linear-gradient(90deg,var(--deep),var(--accent));border-radius:9px}.col-bar-val{flex:none;width:76px;font-size:12px;font-weight:800;color:var(--accent);text-align:right;font-family:var(--font-num)}
 .col-radar-box{margin:18px 0 26px;background:linear-gradient(145deg,#fff,var(--water));border:1px solid var(--border);border-radius:var(--radius);padding:18px}.col-radar-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}.radar-card{background:rgba(255,255,255,.75);border-radius:var(--radius-sm);padding:12px}.cr-name{font-size:13px;font-weight:800;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center}.radar-svg{display:block;width:100%;max-width:300px;margin:auto}.radar-labels{font-size:11px;fill:var(--txt2);font-family:var(--font-body)}
 .col-unfit{background:#fff;border:1px solid var(--deep);border-radius:var(--radius);padding:18px;margin:24px 0}.col-unfit h3{margin-top:0}.col-faq{margin:30px 0}.col-faq h3{font-size:19px}.col-faq-item{border:1px solid var(--border);border-radius:var(--radius-sm);padding:15px 17px;margin-bottom:10px;background:#fff}.col-faq-item .q{font-size:14px;font-weight:700;margin-bottom:8px}.col-faq-item .q::before{content:"Q. ";color:var(--accent)}.col-faq-item .a{font-size:13.5px;color:var(--txt2)}.col-faq-item .a::before{content:"A. ";color:var(--deep);font-weight:800}
-.col-cta{background:linear-gradient(135deg,var(--water),var(--iris-2));border-radius:var(--radius);padding:22px;text-align:center;margin:28px 0}.col-cta p{margin-bottom:12px}.diagnosis-link{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;text-decoration:none;border-radius:24px;padding:11px 26px;min-height:46px;font-size:14px;font-weight:700}
+${priority6Styles}.col-cta{background:linear-gradient(135deg,var(--water),var(--iris-2));border-radius:var(--radius);padding:22px;text-align:center;margin:28px 0}.col-cta p{margin-bottom:12px}.diagnosis-link{display:inline-flex;align-items:center;justify-content:center;background:var(--accent);color:#fff;text-decoration:none;border-radius:24px;padding:11px 26px;min-height:46px;font-size:14px;font-weight:700}
 .related-products{margin:34px 0;padding-top:8px}.related-products h2{font-size:21px}.related-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:12px}.related-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:11px;text-decoration:none;transition:transform .18s,box-shadow .18s}.related-card:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(43,38,34,.07)}.related-card img,.related-card .no-image{width:100%;aspect-ratio:1/1;height:auto;object-fit:contain;border-radius:10px;background:#fff;margin-bottom:8px}.related-card .no-image{display:flex;align-items:center;justify-content:center;background:var(--water);font-size:42px}.rc-brand{font-size:10px;color:var(--txt3)}.related-card strong{font-size:12px;line-height:1.5;margin:3px 0}.rc-price{margin-top:auto;color:var(--accent);font-weight:800;font-size:13px}
 .more-columns{margin-top:44px;border-top:1px solid var(--border);padding-top:28px}.more-columns h2{border:0;padding:0;margin-top:0}.more-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.more-card{display:block;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:15px;text-decoration:none}.more-card small{color:var(--accent);font-weight:700}.more-card strong{display:block;font-family:var(--font-head);line-height:1.55;margin:5px 0}.more-card span{font-size:12px;color:var(--txt3);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .disclaimer{font-size:11px;color:var(--txt3);margin-top:28px}.backhome{display:inline-flex;align-items:center;min-height:44px;margin-top:24px;color:var(--accent);font-weight:700}footer{background:#fff;border-top:1px solid var(--border);padding:25px clamp(16px,4vw,42px);font-size:12px;color:var(--txt3)}footer a{margin-right:14px;color:var(--accent)}
@@ -296,7 +301,7 @@ gtag('event','column_view',{column_id:${safeJson(column.id)},column_title:${safe
   <nav class="crumb"><a href="/">ホーム</a><span class="sep">›</span><a href="/columns">コラム</a><span class="sep">›</span><span>${escHtml(truncate(column.title, 28))}</span></nav>
   <span class="cat-tag">${escHtml(column.cat)}</span>
   <h1>${escHtml(column.title)}</h1>
-  <div class="article-meta">執筆：Moilum編集部（一行／個人運営） ・ ${escHtml(column.readtime || "約8分")}<br>最終更新：${escHtml(updated)} ／ 掲載商品データ基準日：2026-06</div>
+  <div class="article-meta">執筆：${escHtml(column.authorName || "Moilum編集部（一行／個人運営）")} ・ ${escHtml(column.readtime || "約8分")}<br>${published ? `公開：${escHtml(published)} ／ ` : ""}最終更新：${escHtml(updated)} ／ 掲載商品データ基準日：${published ? "2026-08-11" : "2026-06"}</div>
   ${body}
   ${relatedProductCards(relatedIds)}
   <p class="disclaimer">※本記事は一般的な情報提供を目的としたもので、医学的助言や効果を保証するものではありません。肌トラブルが続く場合は皮膚科専門医にご相談ください。</p>

@@ -167,18 +167,8 @@ page({
   jsonLd:[], script:favoritesScript
 });
 
-const homeFeatured = [...skincare].sort(editorialSort).slice(0, 8);
-const homeFeaturedBlock = `<!-- HOME_PRODUCT_LINKS_START -->
-  <section class="home-product-links" aria-labelledby="homeFeaturedTitle">
-    <div class="home-product-links-head"><div><span class="home-product-links-kicker">FEATURED PRODUCTS</span><h2 id="homeFeaturedTitle">まず比較したい8商品</h2></div><a class="home-products-all" href="/products">全${products.length}商品を見る →</a></div>
-    <div class="home-product-links-grid">${homeFeatured.map(product => `<article><span>${esc(product.category)}</span><h3><a href="/products/${encodeURIComponent(product.id)}">${esc(product.name)}</a></h3><p>${esc(product.brand)}・編集部評価 ${esc(product.rating)}・参考価格 ¥${yen(product.price)}</p></article>`).join("")}</div>
-  </section>
-  <!-- HOME_PRODUCT_LINKS_END -->`;
-const indexPath = path.join("public", "index.html");
-const indexSource = fs.readFileSync(indexPath, "utf8");
-const homeMarkerPattern = /<!-- HOME_PRODUCT_LINKS_START -->[\s\S]*?<!-- HOME_PRODUCT_LINKS_END -->/;
-if (!homeMarkerPattern.test(indexSource)) throw new Error("public/index.html にHOME_PRODUCT_LINKSマーカーがありません");
-fs.writeFileSync(indexPath, indexSource.replace(homeMarkerPattern, homeFeaturedBlock), "utf8");
+// トップページは scripts/build-priority6-content.mjs がSSoTから生成する。
+// hub生成ではトップに触れず、専用hubとAboutページだけを更新する。
 
 // Aboutページの商品数は src/products.json から同期し、手書き固定値の陳腐化を防ぐ。
 const aboutCounts = {
