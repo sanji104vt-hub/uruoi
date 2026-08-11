@@ -54,6 +54,11 @@ function cleanSentence(value){
 export function factualSummary(product){
   const evidence = evidenceOf(product);
   const identity = `${product.name}は${product.brand}の${product.category}です`;
+  if (product.sourceType === "rakuten_product_api") {
+    const checkedAt = String(product.availabilityCheckedAt || product.priceCheckedAt || "");
+    const checked = checkedAt ? `${checkedAt}時点で` : "取得時点で";
+    return `${identity}。楽天市場の商品価格ナビAPIで、${checked}購入可能な販売情報と商品画像を確認しています。参考価格は購入可能な店舗の最低価格で、成分・使用感・肌との相性は未確認です。`;
+  }
   if (product.status === "previous_generation") {
     const feature = cleanSentence(evidence?.officialFeatures?.[0]);
     return `${identity}。Moilumでは旧製品・前世代情報として掲載しています${feature ? `。メーカー公式情報で確認できた当時の特徴は「${feature}」です` : ""}。`;

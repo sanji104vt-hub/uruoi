@@ -14,8 +14,10 @@ const fail = message => errors.push(message);
 const imageProducts = products.filter(product => typeof product.image === "string" && product.image.startsWith("https://"));
 const missingProducts = products.filter(product => !product.image);
 
-if (products.length !== 247) fail(`商品数が247件ではありません: ${products.length}`);
-if (imageProducts.length < 225) fail(`実画像付き商品が225件未満です: ${imageProducts.length}`);
+const rakutenApiProducts = products.filter(product => product.sourceType === "rakuten_product_api");
+if (products.length < 247) fail(`商品数が基準値247件未満です: ${products.length}`);
+if (imageProducts.length < 225 + rakutenApiProducts.length) fail(`追加商品を含む実画像数が不足しています: ${imageProducts.length}`);
+if (rakutenApiProducts.some(product => !product.image || product.availability !== 1 || Number(product.rakutenSalesItemCount) < 1)) fail("楽天API追加商品に画像なし・在庫なしの商品があります");
 if (imageProducts.length + missingProducts.length !== products.length) fail("不正なimage値を持つ商品があります");
 
 const directoryCards = count(productsHtml, /<article class="product-directory-card"/g);

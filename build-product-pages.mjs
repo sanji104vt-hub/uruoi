@@ -224,7 +224,7 @@ function variantComparisonHtml(p, all){
 function rakutenDestination(p){
   try{
     const purchase = new URL(p.purchase || "");
-    if (purchase.hostname === "item.rakuten.co.jp") return purchase.href;
+    if (purchase.hostname === "item.rakuten.co.jp" || purchase.hostname === "product.rakuten.co.jp") return purchase.href;
     if (purchase.hostname === "hb.afl.rakuten.co.jp"){
       const direct = purchase.searchParams.get("pc");
       if (direct) return direct;
@@ -245,6 +245,34 @@ function moshimoRakutenLink(p){
   return "https://af.moshimo.com/af/c/click?" + query.toString();
 }
 
+function isRakutenCatalogProduct(p){
+  return p.sourceType === "rakuten_product_api";
+}
+
+function formatCheckedDate(value){
+  const match = String(value || "").match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  return match ? `${match[1]}年${Number(match[2])}月${Number(match[3])}日` : "API取得時";
+}
+
+function priceDateLabel(p){
+  return isRakutenCatalogProduct(p) ? formatCheckedDate(p.priceCheckedAt) : "2026年6月";
+}
+
+function rakutenCatalogInfoHtml(p){
+  if (!isRakutenCatalogProduct(p)) return "";
+  const hasReview = Number(p.rakutenReviewCount) > 0 && Number(p.rakutenReviewAverage) > 0;
+  return `<section class="rakuten-catalog" aria-labelledby="rakuten-catalog-title">
+    <h2 id="rakuten-catalog-title">楽天市場で確認した掲載情報</h2>
+    <dl>
+      <div><dt>在庫確認</dt><dd>${escHtml(formatCheckedDate(p.availabilityCheckedAt))}時点で購入可能な店舗 ${Number(p.rakutenSalesItemCount).toLocaleString()}件</dd></div>
+      <div><dt>参考価格</dt><dd>購入可能な店舗の最低価格 ¥${Number(p.price).toLocaleString()}</dd></div>
+      ${hasReview ? `<div><dt>楽天レビュー</dt><dd>★${Number(p.rakutenReviewAverage).toFixed(2)}（${Number(p.rakutenReviewCount).toLocaleString()}件）</dd></div>` : ""}
+      <div><dt>JANコード</dt><dd>${escHtml(p.productCode || "未掲載")}</dd></div>
+    </dl>
+    <p>楽天の商品価格ナビAPIから取得した販売情報です。成分・使用感・肌適合はMoilum編集部では未確認です。最新の価格と在庫は購入先でご確認ください。</p>
+  </section>`;
+}
+
 function buildProductJsonLd(p){
   const obj = {
     "@context": "https://schema.org",
@@ -261,9 +289,11 @@ function buildProductJsonLd(p){
       "@type": "Offer",
       "price": p.price,
       "priceCurrency": "JPY",
-      "url": p.purchase || `${SITE_ORIGIN}/products/${p.id}`
+      "url": p.purchase || `${SITE_ORIGIN}/products/${p.id}`,
+      ...(isRakutenCatalogProduct(p) && p.availability === 1 ? { "availability": "https://schema.org/InStock" } : {})
     };
   }
+  if (isRakutenCatalogProduct(p) && p.productCode) obj.sku = p.productCode;
   // aggregateRating は撤去。schema.org の aggregateRating は
   // 「ユーザーレビューの集計」を意味するプロパティで、当サイトの
   // 編集部独自評価とは意味が異なるため、正直な使い方として出力しない。
@@ -311,10 +341,13 @@ function getRelatedProducts(p, all){
 
 function buildProductHtml(p, all){
   const evidence = p.editorialEvidence;
-  const title = truncate(evidence ? `${p.name}の公式仕様・比較ポイント｜Moilum` : `${p.name}｜${p.brand}｜Moilum`, 68);
+  const catalogProduct = isRakutenCatalogProduct(p);
+  const title = truncate(evidence ? `${p.name}の公式仕様・比較ポイント｜Moilum` : catalogProduct ? `${p.name}の価格・在庫｜${p.brand}｜Moilum` : `${p.name}｜${p.brand}｜Moilum`, 68);
   const desc = truncate(evidence
     ? `${p.name}（${p.brand}）の公式仕様と比較候補を確認。${(evidence.officialFeatures || [p.desc || ""])[0]} 参考価格 ${(p.price || 0).toLocaleString()}円。`
-    : `${p.name}（${p.brand}）を独自スコアで比較。参考価格 ¥${(p.price || 0).toLocaleString()}／カテゴリ ${p.category}。${p.desc || ""}`, 156);
+    : catalogProduct
+      ? `${p.name}（${p.brand}）の楽天市場での参考価格は¥${(p.price || 0).toLocaleString()}。${formatCheckedDate(p.availabilityCheckedAt)}時点で購入可能な店舗${Number(p.rakutenSalesItemCount)}件を確認。`
+      : `${p.name}（${p.brand}）を独自スコアで比較。参考価格 ¥${(p.price || 0).toLocaleString()}／カテゴリ ${p.category}。${p.desc || ""}`, 156);
   const canonical = `${SITE_ORIGIN}/products/${p.id}`;
   const ogImage = p.image || OGP_IMAGE;
   const related = getRelatedProducts(p, all);
@@ -421,6 +454,7 @@ ${evidence ? `.evidence{background:#fff;border:1px solid var(--deep);border-radi
 .editor-used-badge{display:inline-flex;align-items:center;gap:3px;background:var(--water);border:1px solid var(--deep);color:var(--accent);font-size:10px;font-weight:800;padding:1px 7px;border-radius:10px;white-space:nowrap;margin-bottom:4px}
 .proscons{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}
 .data-limit{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}.data-limit h2{font-size:16px;margin-bottom:10px}.data-limit ul{padding-left:20px;font-size:13px}.data-limit li{margin-bottom:6px}.variant-comparison{background:#fff;border:1px solid var(--deep);border-radius:16px;padding:20px;margin-bottom:24px}.variant-comparison h2{font-size:18px;margin-bottom:12px}.variant-scroll{overflow-x:auto}.variant-comparison table{width:100%;min-width:680px;border-collapse:collapse;font-size:12px}.variant-comparison th,.variant-comparison td{padding:10px;border:1px solid var(--border);text-align:left;vertical-align:top}.variant-comparison th{background:var(--water)}.variant-comparison tr.is-current{background:#f8fbfb}.variant-comparison a{text-decoration:underline;font-weight:700}.variant-comparison p{font-size:11px;color:var(--txt3);margin-top:10px}
+.rakuten-catalog{background:linear-gradient(145deg,#fff,var(--water));border:1px solid var(--deep);border-radius:16px;padding:20px;margin-bottom:24px}.rakuten-catalog h2{font-size:18px;margin-bottom:12px}.rakuten-catalog dl{margin:0}.rakuten-catalog dl div{display:grid;grid-template-columns:120px 1fr;gap:12px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px}.rakuten-catalog dt{font-weight:700;color:var(--txt2)}.rakuten-catalog dd{margin:0}.rakuten-catalog p{font-size:11px;color:var(--txt3);margin-top:12px}@media(max-width:480px){.rakuten-catalog dl div{grid-template-columns:1fr;gap:2px}}
 .proscons h2{font-size:16px;margin-bottom:14px}
 .pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .pc-box{border-radius:12px;padding:14px;font-size:13.5px;line-height:1.7}
@@ -467,7 +501,7 @@ gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},p
 <header class="topbar">
   <a class="logo" href="/">Moi<span>lum</span></a>
 </header>
-<div class="pr-banner">本サイトはアフィリエイト広告（Amazon・楽天・Qoo10等）を利用しています。商品の選定・評価は編集部が独自に行っています。価格・在庫は各販売サイトでご確認ください。</div>
+<div class="pr-banner">本サイトはアフィリエイト広告（Amazon・楽天・Qoo10等）を利用しています。編集部評価と楽天API掲載情報は区別して表示しています。価格・在庫は各販売サイトでご確認ください。</div>
 <article>
   <nav class="crumb"><a href="/">ホーム</a><span class="sep">›</span><a href="/products">商品一覧</a><span class="sep">›</span><span>${escHtml(truncate(p.name, 26))}</span></nav>
   <span class="cat-tag">${escHtml(p.category)}</span>
@@ -475,42 +509,44 @@ gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},p
   <div class="brand">${escHtml(p.brand)}${p.origin ? " ・ " + escHtml(p.origin) : ""}</div>
 ${productStatusHtml(p,all)}
   ${p.image
-    ? `<img class="product-img" src="${escAttr(p.image)}" alt="${escAttr(p.name)}" loading="lazy">`
+    ? `<img class="product-img" src="${escAttr(p.image)}" alt="${escAttr(p.name)}" loading="lazy" decoding="async" referrerpolicy="no-referrer-when-downgrade">`
     : `<div class="no-image" aria-hidden="true">${escHtml(p.icon || "💧")}</div>`}
   <div class="meta">
     <div class="meta-row">
       <span class="meta-label">参考価格</span>
-      <span class="meta-val price">¥${(p.price || 0).toLocaleString()}<span class="price-note">（2026年6月時点）</span></span>
+      <span class="meta-val price">¥${(p.price || 0).toLocaleString()}<span class="price-note">（${escHtml(priceDateLabel(p))}時点）</span></span>
     </div>
-    ${hasRating ? `<div class="meta-row">
+${hasRating ? `<div class="meta-row">
       <span class="meta-label">Moilum編集部評価</span>
       <span class="meta-val"><span class="rating">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5 - Math.round(p.rating))}</span> ${p.rating}</span>
     </div>
     <div style="font-size:11px;color:var(--txt3);line-height:1.6;padding:4px 0 10px">※過去に付与したMoilum編集部の参考指標です。ユーザー評価や実測値ではなく、商品ごとの付与記録が完全ではないという限界があります。現在の自動分類やメリット・注意点に件数データは使用していません。<a href="/about/rating-policy" style="color:var(--accent)">評価方針</a></div>` : ""}
+${catalogProduct && Number(p.rakutenReviewCount) > 0 && Number(p.rakutenReviewAverage) > 0 ? `<div class="meta-row"><span class="meta-label">楽天レビュー</span><span class="meta-val">★${Number(p.rakutenReviewAverage).toFixed(2)}（${Number(p.rakutenReviewCount).toLocaleString()}件）</span></div>` : ""}
     <div class="meta-row">
       <span class="meta-label">カテゴリ</span>
       <span class="meta-val">${escHtml(p.category)}</span>
     </div>
-    ${p.origin ? `<div class="meta-row"><span class="meta-label">原産国</span><span class="meta-val">${escHtml(p.origin)}</span></div>` : ""}
+${p.origin ? `<div class="meta-row"><span class="meta-label">原産国</span><span class="meta-val">${escHtml(p.origin)}</span></div>` : ""}
   </div>
   <div class="desc">${escHtml(p.desc || "")}</div>
 ${displayIngredients.length ? `  <div class="ingredients">
     <h2>主要成分</h2>
     <div class="ing-list">${displayIngredients.map(i => `<span class="ing-item">${escHtml(i)}</span>`).join("")}</div>
   </div>` : ""}
-  ${(Array.isArray(p.skin) && p.skin.length) || (Array.isArray(p.concern) && p.concern.length) ? `<div class="suitability">
+${(Array.isArray(p.skin) && p.skin.length) || (Array.isArray(p.concern) && p.concern.length) ? `<div class="suitability">
     <h2>掲載データ上の候補条件</h2>
 ${Array.isArray(p.skin) && p.skin.length ? `<div class="suit-row"><span class="suit-label">掲載肌タイプ</span><div class="suit-chips">${p.skin.map(s => `<span class="suit-chip">${escHtml(s)}</span>`).join("")}</div></div>` : ""}
 ${Array.isArray(p.concern) && p.concern.length ? `<div class="suit-row"><span class="suit-label">掲載悩み分類</span><div class="suit-chips">${p.concern.map(c => `<span class="suit-chip">${escHtml(c)}</span>`).join("")}</div></div>` : ""}
   </div>` : ""}
 ${primarySourceHtml(p)}
+${rakutenCatalogInfoHtml(p)}
 ${editorialEvidenceHtml(p, all)}
 ${variantComparisonHtml(p,all)}
-${p.editorialEvidence?"":`<section class="data-limit"><h2>このページで確認できる範囲</h2><ul><li>商品名・ブランド・カテゴリ・参考価格を掲載しています。</li><li>肌タイプと悩みはMoilum内の比較用分類で、効果や適合を保証する情報ではありません。</li><li>商品固有の公式仕様をSSoTへ未記録のため、使用感・成分効果・現行販売状況は判断していません。</li></ul></section>`}
-  <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は2026年6月時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>
+${p.editorialEvidence?"":catalogProduct?`<section class="data-limit"><h2>このページで確認できる範囲</h2><ul><li>楽天APIで商品名・ブランド・カテゴリ・参考価格・画像・購入可能な店舗数を確認しています。</li><li>主要成分、肌タイプ、使用感は確認していないため掲載していません。</li><li>在庫は${escHtml(formatCheckedDate(p.availabilityCheckedAt))}時点です。最新状況は販売ページでご確認ください。</li></ul></section>`:`<section class="data-limit"><h2>このページで確認できる範囲</h2><ul><li>商品名・ブランド・カテゴリ・参考価格を掲載しています。</li><li>肌タイプと悩みはMoilum内の比較用分類で、効果や適合を保証する情報ではありません。</li><li>商品固有の公式仕様をSSoTへ未記録のため、使用感・成分効果・現行販売状況は判断していません。</li></ul></section>`}
+  <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は${escHtml(priceDateLabel(p))}時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>
   <div class="buy-btns">
     <a class="buy-btn amazon" data-shop="amazon" href="https://www.amazon.co.jp/s?k=${encodeURIComponent(p.brand + " " + p.name)}" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
-    <a class="buy-btn rakuten" data-shop="rakuten" href="${escAttr(moshimoRakutenLink(p))}" rel="nofollow sponsored noopener" referrerpolicy="no-referrer-when-downgrade" target="_blank">楽天で見る</a>
+    <a class="buy-btn rakuten" data-shop="rakuten" href="${escAttr(moshimoRakutenLink(p))}" rel="nofollow sponsored noopener" referrerpolicy="no-referrer-when-downgrade" target="_blank">楽天で見る（もしも）</a>
     <a class="buy-btn qoo10" data-shop="qoo10" href="https://www.qoo10.jp/s/?keyword=${encodeURIComponent(p.brand + " " + p.name)}" rel="nofollow sponsored noopener" target="_blank">Qoo10で見る</a>
   </div>
 ${related.length ? `  <div class="related">
@@ -546,6 +582,17 @@ document.querySelectorAll('.buy-btn[data-shop]').forEach(function(link){
 const outDir = "public/products";
 fs.mkdirSync(outDir, { recursive: true });
 
+// SSoTから除外した商品ページが公開ディレクトリに残らないよう、
+// このビルダーが生成する数字ID.htmlだけを対象に古い生成物を掃除する。
+const currentProductIds = new Set(products.map(product => String(product.id)));
+let removedStale = 0;
+for (const file of fs.readdirSync(outDir)) {
+  const match = file.match(/^(\d+)\.html$/);
+  if (!match || currentProductIds.has(match[1])) continue;
+  fs.unlinkSync(path.join(outDir, file));
+  removedStale++;
+}
+
 let count = 0;
 let withAggRating = 0;
 let withoutAggRating = 0;
@@ -566,6 +613,7 @@ const min = Math.min(...sizes);
 const max = Math.max(...sizes);
 
 console.log(`✓ 生成完了: ${count} 商品ページ`);
+if (removedStale) console.log(`  古い生成ページを削除: ${removedStale}件`);
 console.log(`  ファイルサイズ: 平均 ${(avg/1024).toFixed(1)}KB / 最小 ${(min/1024).toFixed(1)}KB / 最大 ${(max/1024).toFixed(1)}KB`);
 console.log(`  編集部評価あり: ${withAggRating} / なし: ${withoutAggRating}（aggregateRatingスキーマは撤去済み）`);
 console.log(`  実写真あり: ${withImage} / SVGフォールバック: ${count - withImage}`);

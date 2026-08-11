@@ -45,7 +45,7 @@ function jaccard(a,b){
   return intersection/(a.size+b.size-intersection);
 }
 
-if(products.length !== 247) fail(`商品数が247ではありません: ${products.length}`);
+if(products.length < 247) fail(`商品数が基準値247件未満です: ${products.length}`);
 if(columns.length !== 27) fail(`コラム数が27ではありません: ${columns.length}`);
 if(guides.length !== 12) fail(`ガイド数が12ではありません: ${guides.length}`);
 for(const token of ["G-BC0FBSZSWX","UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q","54ebba1a.f0b1f403.54ebba1b.9f0abc5f"]){

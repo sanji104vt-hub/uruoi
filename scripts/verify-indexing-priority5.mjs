@@ -65,7 +65,7 @@ const productHub = fs.readFileSync("public/hubs/products.html", "utf8");
 const descriptions = new Map();
 const mainGrams = [];
 
-if (products.length !== 247 || spaProducts.length !== 247) fail(`商品数が247ではありません: JSON=${products.length}, SPA=${spaProducts.length}`);
+if (products.length < 247 || spaProducts.length !== products.length) fail(`商品数またはSPA同期が不正です: JSON=${products.length}, SPA=${spaProducts.length}`);
 
 for (const id of TARGET_IDS) {
   const product = productById.get(id);

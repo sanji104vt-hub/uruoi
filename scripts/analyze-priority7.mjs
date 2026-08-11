@@ -5,7 +5,7 @@ import { REPORT_DATE, RISK_TERMS, EXPERIENCE_TERMS, evidenceOf, flatten, sourceQ
 const mode = process.argv[2] || "before";
 if (!new Set(["before","after"]).has(mode)) throw new Error("mode must be before or after");
 const products = JSON.parse(fs.readFileSync("src/products.json","utf8"));
-if (products.length !== 247) throw new Error(`expected 247 products, got ${products.length}`);
+if (products.length < 247) throw new Error(`expected at least 247 products, got ${products.length}`);
 const byId = new Map(products.map(product => [product.id, product]));
 const reportDir = "reports";
 fs.mkdirSync(reportDir,{recursive:true});

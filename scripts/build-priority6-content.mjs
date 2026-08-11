@@ -23,7 +23,7 @@ const editorProducts = products.filter(product => product.reviewedByEditor === t
 const publicOnlyProducts = products.filter(product => product.reviewedByEditor !== true);
 const productById = new Map(products.map(product => [Number(product.id), product]));
 
-if (products.length !== 247) throw new Error(`商品総数が想定外です: ${products.length}`);
+if (products.length < 247) throw new Error(`商品総数が基準値247件未満です: ${products.length}`);
 if (columns.length !== 27) throw new Error(`コラム総数が想定外です: ${columns.length}`);
 if (guideSlugs.length !== 12) throw new Error(`ガイド総数が想定外です: ${guideSlugs.length}`);
 if (editorProducts.length < 8 || editorProducts.length > 16) throw new Error(`トップ掲載商品数が8〜16件の範囲外です: ${editorProducts.length}`);
@@ -97,7 +97,7 @@ function ingredientAnalysis(){
 }
 
 function priceAnalysis(){
-  const categories = ["化粧水","美容液","保湿クリーム","洗顔","日焼け止め"];
+  const categories = ["化粧水","乳液","美容液","保湿クリーム","洗顔","日焼け止め"];
   const rows = categories.map(category => {
     const items = activeProducts.filter(product => product.category === category && Number(product.price) > 0);
     const prices = items.map(product => Number(product.price));

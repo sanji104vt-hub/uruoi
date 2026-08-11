@@ -3,7 +3,7 @@ import { factualSummary } from "./priority7-policy.mjs";
 
 const file = "src/products.json";
 const products = JSON.parse(fs.readFileSync(file,"utf8"));
-if(products.length!==247) throw new Error(`expected 247 products, got ${products.length}`);
+if(products.length<247) throw new Error(`expected at least 247 products, got ${products.length}`);
 const byId=new Map(products.map(product=>[product.id,product]));
 
 function requireProduct(id){

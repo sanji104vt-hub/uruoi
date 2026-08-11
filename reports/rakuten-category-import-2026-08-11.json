@@ -1,0 +1,62 @@
+{
+  "checkedAt": "2026-08-11",
+  "targetPerCategory": 100,
+  "removedImported": [
+    {
+      "id": 362,
+      "name": "eシェーブ フェイスウォッシュ ホワイトティー  /4oz",
+      "category": "化粧水"
+    },
+    {
+      "id": 396,
+      "name": "エステデュウ フォー プロフェッショナルズ モイストクレンジングウォーター(500mL)",
+      "category": "化粧水"
+    },
+    {
+      "id": 456,
+      "name": "レン ローサ センチフォリア クレンジングジェル  全ての肌タイプ   /5.1oz",
+      "category": "乳液"
+    },
+    {
+      "id": 499,
+      "name": "べたつかない乳液ホワイトモイスチャーミルク",
+      "category": "乳液"
+    }
+  ],
+  "categories": {
+    "洗顔": {
+      "genreId": "216301",
+      "total": 100,
+      "added": 0,
+      "refreshed": 0,
+      "inspected": 0,
+      "pages": 0
+    },
+    "化粧水": {
+      "genreId": "216307",
+      "total": 100,
+      "added": 2,
+      "refreshed": 20,
+      "inspected": 60,
+      "pages": 2
+    },
+    "乳液": {
+      "genreId": "216387",
+      "total": 100,
+      "added": 2,
+      "refreshed": 0,
+      "inspected": 30,
+      "pages": 1
+    },
+    "美容液": {
+      "genreId": "216348",
+      "total": 100,
+      "added": 0,
+      "refreshed": 0,
+      "inspected": 0,
+      "pages": 0
+    }
+  },
+  "totalProducts": 647,
+  "importedProducts": 400
+}

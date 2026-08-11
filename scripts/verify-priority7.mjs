@@ -39,7 +39,7 @@ function sourceMatchesProduct(product,source){
 }
 
 const spaProducts=extractProducts(spa);
-if(products.length!==247||spaProducts.length!==247)fail(`商品数不一致: SSoT=${products.length}, SPA=${spaProducts.length}`);
+if(products.length<247||spaProducts.length!==products.length)fail(`商品数またはSPA同期が不正です: SSoT=${products.length}, SPA=${spaProducts.length}`);
 if(JSON.stringify(products)!==JSON.stringify(spaProducts))fail("SSoTとSPA PRODUCTSが一致しません");
 
 const canonicals=new Set(),metas=[];
@@ -120,4 +120,4 @@ if(unsupported)fail(`unsupported summaryが${unsupported}件残っています`)
 console.log(`Priority 7 CI: products=${products.length}, errors=${errors.length}, warnings=${warnings.length}, sourceD=${sourceD}, statusUnknown=${statusUnknown}`);
 for(const message of warnings)console.warn(`WARNING: ${message}`);
 if(errors.length){for(const message of errors)console.error(`FAIL: ${message}`);process.exit(1);}
-console.log(`✓ 247商品のclaim coverage・カード整合・status・variant・canonical・レビュー系ガードを確認（variant group ${variantGroups}件）`);
+console.log(`✓ ${products.length}商品のclaim coverage・カード整合・status・variant・canonical・レビュー系ガードを確認（variant group ${variantGroups}件）`);
