@@ -285,7 +285,7 @@ const productHubFile = path.join(publicDir, "hubs", "products.html");
 const productHubSource = fs.readFileSync(productHubFile, "utf8");
 const productHubIds = ordinaryAnchorHrefs(productHubSource).map(href => internalPathname(href)?.match(/^\/products\/(\d+)$/)?.[1]).filter(Boolean);
 const uniqueProductHubIds = new Set(productHubIds);
-if (productHubIds.length !== productIds.size) fail(productHubFile, `商品リンクは1商品1本である必要があります: ${productHubIds.length}/${productIds.size}`);
+if (productHubIds.length !== productIds.size * 2) fail(productHubFile, `商品リンクは画像と詳細ボタンの2本である必要があります: ${productHubIds.length}/${productIds.size * 2}`);
 if (uniqueProductHubIds.size !== productIds.size) fail(productHubFile, `商品ハブの実在商品リンクが不足しています: ${uniqueProductHubIds.size}/${productIds.size}`);
 for (const id of productIds) {
   if (!uniqueProductHubIds.has(id)) fail(productHubFile, `商品ハブに通常リンクがありません: ${id}`);

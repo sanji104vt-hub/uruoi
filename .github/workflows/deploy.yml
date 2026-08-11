@@ -29,6 +29,7 @@ jobs:
           node scripts/verify-priority6.mjs
           node scripts/analyze-priority7.mjs after
           node scripts/verify-priority7.mjs
+          node scripts/verify-product-images.mjs
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3

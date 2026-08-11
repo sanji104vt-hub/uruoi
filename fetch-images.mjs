@@ -8,28 +8,18 @@ if (!APP_ID || !ACCESS_KEY) {
   process.exit(1);
 }
 
-const SITE_URL = "https://moilum.sanji-104vt.workers.dev/";
+const SITE_URL = "https://moilum.asutelu.com/";
 
 // 既存の取得結果（あればマージ）
 const results = existsSync("image-urls.json")
   ? JSON.parse(readFileSync("image-urls.json", "utf8"))
   : {};
 
-// public/index.html の PRODUCTS から「image プロパティがまだ無い」商品だけを抽出
-const html = readFileSync("public/index.html", "utf8");
-const startIdx = html.indexOf("const PRODUCTS=[");
-const endIdx = html.indexOf("];", startIdx);
-const block = html.slice(startIdx, endIdx);
-
-const targets = [];
-for (const line of block.split("\n")) {
-  if (!/^\s*\{"id":/.test(line)) continue;
-  if (/"image"\s*:/.test(line)) continue; // 既に画像あり → スキップ
-  const id = parseInt(line.match(/"id":\s*(\d+)/)[1]);
-  const name = line.match(/"name":\s*"([^"]+)"/)[1];
-  const brand = line.match(/"brand":\s*"([^"]+)"/)[1];
-  targets.push({ id, name, brand });
-}
+// 商品SSoTから「image プロパティがまだ無い」商品だけを抽出
+const products = JSON.parse(readFileSync("src/products.json", "utf8"));
+const targets = products
+  .filter((product) => !product.image)
+  .map(({ id, name, brand, category }) => ({ id, name, brand, category }));
 
 console.log(`画像未取得の商品: ${targets.length} 件を取得します`);
 
@@ -49,47 +39,80 @@ function buildKeyword(brand, name) {
   const uniq = [...new Set(filtered)];
   return uniq.slice(0, 3).join(" ");
 }
+function keywordAttempts(product) {
+  const brandTokens = cleanKeyword(product.brand).split(" ").filter(Boolean);
+  const nameTokens = cleanKeyword(product.name).split(" ").filter(Boolean);
+  const brandKeys = new Set(brandTokens.map(token => token.toLowerCase()));
+  const rest = nameTokens.filter(token => !brandKeys.has(token.toLowerCase()));
+  return [...new Set([
+    buildKeyword(product.brand, product.name),
+    [...brandTokens.slice(0, 1), ...rest.slice(0, 1)].join(" "),
+    rest.slice(0, 2).join(" "),
+    cleanKeyword(product.name),
+    [...brandTokens.slice(0, 1), product.category].join(" "),
+  ].map(cleanKeyword).filter(Boolean))];
+}
+function normalized(value) {
+  return cleanKeyword(value).normalize("NFKC").toLowerCase().replace(/\s/g, "");
+}
+function grams(value) {
+  const source = normalized(value);
+  const set = new Set();
+  for (let index = 0; index <= source.length - 3; index++) set.add(source.slice(index, index + 3));
+  return set;
+}
+function similarity(left, right) {
+  const a = grams(left), b = grams(right);
+  let common = 0;
+  for (const value of a) if (b.has(value)) common++;
+  return common / (a.size + b.size - common || 1);
+}
 
-const BASE = "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260401";
+const BASE = "https://openapi.rakuten.co.jp/ichibams/api/IchibaItem/Search/20260701";
 let success = 0;
 let fail = 0;
 
 for (const p of targets) {
-  const keyword = buildKeyword(p.brand, p.name);
-  const url = new URL(BASE);
-  url.searchParams.set("accessKey", ACCESS_KEY);
-  url.searchParams.set("applicationId", APP_ID);
-  url.searchParams.set("keyword", keyword);
-  url.searchParams.set("hits", "1");
-  url.searchParams.set("imageFlag", "1");
-  url.searchParams.set("formatVersion", "2");
-  url.searchParams.set("elements", "itemName,mediumImageUrls,itemPrice,itemUrl");
-
-  try {
-    const res = await fetch(url.toString(), {
-      headers: { "Referer": SITE_URL, "Origin": new URL(SITE_URL).origin },
-    });
-    if (!res.ok) {
-      const body = await res.text();
-      throw new Error(`HTTP ${res.status}: ${body.slice(0, 150)}`);
+  let best = null;
+  for (const keyword of keywordAttempts(p)) {
+    const url = new URL(BASE);
+    url.searchParams.set("accessKey", ACCESS_KEY);
+    url.searchParams.set("applicationId", APP_ID);
+    url.searchParams.set("keyword", keyword);
+    url.searchParams.set("hits", "5");
+    url.searchParams.set("imageFlag", "1");
+    url.searchParams.set("formatVersion", "2");
+    url.searchParams.set("elements", "itemName,mediumImageUrls,itemPrice,itemUrl");
+    try {
+      const res = await fetch(url.toString(), {
+        headers: { "Referer": SITE_URL, "Origin": new URL(SITE_URL).origin },
+      });
+      if (!res.ok) {
+        const body = await res.text();
+        throw new Error(`HTTP ${res.status}: ${body.slice(0, 150)}`);
+      }
+      const data = await res.json();
+      for (const item of data.Items || []) {
+        if (!item.mediumImageUrls?.length) continue;
+        const score = similarity(p.name, item.itemName || "");
+        if (!best || score > best.score) best = { item, keyword, score };
+      }
+      if (best?.score >= 0.45) break;
+    } catch (e) {
+      console.log(`[RETRY] id:${p.id} ${p.name} (kw: ${keyword}) → ${e.message}`);
     }
-    const data = await res.json();
-    const items = data.Items;
-    if (items && items.length > 0 && items[0].mediumImageUrls && items[0].mediumImageUrls.length > 0) {
-      const imgUrl = items[0].mediumImageUrls[0].replace(/\?_ex=\d+x\d+$/, "?_ex=300x300");
-      results[p.id] = imgUrl;
-      success++;
-      console.log(`[OK] id:${p.id} ${p.name}  (kw: ${keyword})`);
-    } else {
-      fail++;
-      console.log(`[NO IMAGE] id:${p.id} ${p.name}  (kw: ${keyword})`);
-    }
-  } catch (e) {
-    fail++;
-    console.log(`[ERROR] id:${p.id} ${p.name}  (kw: ${keyword}) → ${e.message}`);
+    await sleep(1100); // 楽天API: 1秒1リクエスト推奨
   }
-
-  await sleep(1100); // 楽天API: 1秒1リクエスト推奨
+  // 商品名が近い別商品を誤って採用しないよう、低一致の候補は手動確認に回す。
+  if (best && best.score >= 0.45) {
+    results[p.id] = best.item.mediumImageUrls[0].replace(/\?_ex=\d+x\d+$/, "?_ex=300x300");
+    success++;
+    console.log(`[OK] id:${p.id} ${p.name} (score:${best.score.toFixed(2)} / kw:${best.keyword} / hit:${best.item.itemName})`);
+  } else {
+    fail++;
+    console.log(`[NO MATCH] id:${p.id} ${p.name}${best ? ` (best:${best.score.toFixed(2)} / ${best.item.itemName})` : ""}`);
+  }
+  await sleep(1100);
 }
 
 writeFileSync("image-urls.json", JSON.stringify(results, null, 2), "utf8");
