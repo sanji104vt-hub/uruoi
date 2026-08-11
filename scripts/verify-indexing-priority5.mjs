@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { sourceQuality } from "./priority7-policy.mjs";
 
 const TARGET_IDS = [95,10,36,40,205,157,199,19,22,28,203,24,17,64,75,135,196,179,82,39,142,38,37,206,177,23,49,3,56,159,122,168,193,154,30,166,192,117,62,91];
 const SITE_ORIGIN = "https://moilum.asutelu.com";
@@ -78,7 +79,9 @@ for (const id of TARGET_IDS) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(evidence.verifiedAt || "")) fail(`商品ID ${id}: 情報確認日が不正です`);
   if (!/^\d{4}-\d{2}$/.test(evidence.referencePriceCheckedAt || "")) fail(`商品ID ${id}: 参考価格確認月が不正です`);
   if (!Array.isArray(evidence.sources) || !evidence.sources.length) fail(`商品ID ${id}: official sourceが0件です`);
-  if ((evidence.sources || []).length === 1) warn(`商品ID ${id}: 公式情報が1ソースのみです`);
+  const quality = sourceQuality(product);
+  if (quality.grade === "D") fail(`商品ID ${id}: 公開中の公式仕様を説明できる商品固有sourceがありません`);
+  if (quality.grade === "C") warn(`商品ID ${id}: 国内メーカー公式商品ページ以外を中心に確認しています`);
   for (const source of evidence.sources || []) {
     if (!/^official-(?:product|brand|pdf|press-release|successor)$/.test(source.type || "")) fail(`商品ID ${id}: source typeが不正です (${source.type || "なし"})`);
     try { if (new URL(source.url).protocol !== "https:") throw new Error(); }
@@ -135,14 +138,20 @@ for (let a = 0; a < mainGrams.length; a++) for (let b = a + 1; b < mainGrams.len
 }
 
 for (const id of TARGET_IDS) {
-  let contextual = 0;
-  for (const directory of ["public/columns", "public/guides"]) {
-    for (const name of fs.readdirSync(directory).filter(name => name.endsWith(".html"))) {
+  let meaningfulInbound = 0;
+  for (const [directory, names] of [
+    ["public/products", fs.readdirSync("public/products").filter(name => name.endsWith(".html"))],
+    ["public/columns", fs.readdirSync("public/columns").filter(name => name.endsWith(".html"))],
+    ["public/guides", fs.readdirSync("public/guides").filter(name => name.endsWith(".html"))],
+    ["public/hubs", ["brands.html","ranking.html"]]
+  ]) {
+    for (const name of names) {
+      if (directory === "public/products" && name === `${id}.html`) continue;
       const html = fs.readFileSync(path.join(directory, name), "utf8");
-      if (html.includes(`href="/products/${id}"`)) contextual++;
+      if (html.includes(`href="/products/${id}"`)) meaningfulInbound++;
     }
   }
-  if (!contextual) warn(`商品ID ${id}: コラム・ガイドからの文脈リンクが0件です`);
+  if (!meaningfulInbound) warn(`商品ID ${id}: 商品一覧以外の内部導線が確認できません`);
 }
 
 console.log(`Priority 5 CI: target=${TARGET_IDS.length}, errors=${errors.length}, warnings=${warnings.length}`);

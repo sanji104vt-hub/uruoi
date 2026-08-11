@@ -98,7 +98,7 @@ function primarySourceHtml(p){
   const hasNote = !!p.editorNote;
   if (!hasPhoto && !hasTexture && !hasReview && !hasNote) return `<div class="primary-source">
     <div class="ps-header">📚 公開情報・公式情報をもとに比較</div>
-    <p class="ps-note">商品名・価格・主要成分・カテゴリ・掲載肌タイプなどの公開情報を整理しています。編集部が実際に使用した商品のレビューではありません。</p>
+    <p class="ps-note">商品名・価格・カテゴリ・掲載肌タイプなどの公開情報を整理しています。編集部が実際に使用した商品のレビューではありません。</p>
     <div class="ps-disclaimer">※香り・テクスチャー・刺激感・効果実感は、このページの情報だけでは判断できません。</div>
   </div>`;
   const badges = [];
@@ -204,6 +204,23 @@ function editorialEvidenceHtml(p, all){
   </section>`.replace(/^[ \t]+$/gm, "");
 }
 
+function productStatusHtml(p, all){
+  if(p.status!=="previous_generation") return "";
+  const evidence=p.editorialEvidence;
+  const successor=(evidence?.comparisonCandidates||[])
+    .map(candidate=>({...candidate,product:all.find(item=>item.id===candidate.id)}))
+    .find(candidate=>candidate.product&&/現行|後継|リニューアル/.test(candidate.reason||""));
+  return `<aside class="product-status" aria-label="商品世代に関する注意"><strong>旧製品・前世代情報</strong><p>このページは現行品としてではなく、旧製品・前世代を確認するために掲載しています。</p>${successor?`<a href="/products/${successor.product.id}">公式情報で確認できた現行・後継候補：${escHtml(successor.product.name)}</a>`:""}</aside>`;
+}
+
+function variantComparisonHtml(p, all){
+  const group=p.editorialEvidence?.variantGroup;
+  if(!group) return "";
+  const variants=all.filter(product=>product.editorialEvidence?.variantGroup===group);
+  if(variants.length<2) return "";
+  return `<section class="variant-comparison" aria-labelledby="variant-title"><h2 id="variant-title">同シリーズとの違い</h2><div class="variant-scroll"><table><thead><tr><th>商品</th><th>タイプ</th><th>容量</th><th>公式情報で確認した主な違い</th></tr></thead><tbody>${variants.map(product=>`<tr${product.id===p.id?' class="is-current"':""}><td><a href="/products/${product.id}">${escHtml(product.name)}</a></td><td>${escHtml(displayValue(product.editorialEvidence?.specs?.variants)||"—")}</td><td>${escHtml(displayValue(product.editorialEvidence?.specs?.contentAmount)||"—")}</td><td>${escHtml(product.editorialEvidence?.officialFeatures?.[0]||"確認できた公式情報が限られています")}</td></tr>`).join("")}</tbody></table></div><p>似ている点を無理に言い換えず、公式情報で確認できた容器・容量・スクラブ仕様の差だけを掲載しています。</p></section>`;
+}
+
 function rakutenDestination(p){
   try{
     const purchase = new URL(p.purchase || "");
@@ -307,7 +324,7 @@ function buildProductHtml(p, all){
   const verifiedIngredientValue = evidence?.specs?.keyIngredients || evidence?.specs?.activeIngredients;
   const displayIngredients = evidence
     ? (verifiedIngredientValue ? [displayValue(verifiedIngredientValue)] : [])
-    : (Array.isArray(p.keyIngredients) ? p.keyIngredients : []);
+    : [];
 
   return `<!DOCTYPE html>
 <html lang="ja">
@@ -364,6 +381,7 @@ h1{font-size:clamp(22px,4vw,30px);line-height:1.45;margin-bottom:12px}
 .price-note{font-size:11px;color:var(--txt3);font-weight:400;margin-left:6px}
 .rating{color:#f5a623;letter-spacing:2px;font-size:16px}
 .desc{font-size:15px;line-height:1.9;color:var(--ink);background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}
+.product-status{background:#fff8ef;border:1px solid #dbc4a5;border-radius:16px;padding:18px 20px;margin-bottom:20px}.product-status strong{display:block;font-family:"Zen Old Mincho",serif;font-size:17px}.product-status p{font-size:13px;margin:6px 0}.product-status a{color:#735c3d;text-decoration:underline;font-weight:700}
 .ingredients{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}
 .ingredients h2{font-size:16px;margin-bottom:12px}
 .ing-list{display:flex;flex-wrap:wrap;gap:8px}
@@ -402,6 +420,7 @@ ${evidence ? `.evidence{background:#fff;border:1px solid var(--deep);border-radi
 /* 関連商品カードの「編集部使用」ミニバッジ */
 .editor-used-badge{display:inline-flex;align-items:center;gap:3px;background:var(--water);border:1px solid var(--deep);color:var(--accent);font-size:10px;font-weight:800;padding:1px 7px;border-radius:10px;white-space:nowrap;margin-bottom:4px}
 .proscons{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}
+.data-limit{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}.data-limit h2{font-size:16px;margin-bottom:10px}.data-limit ul{padding-left:20px;font-size:13px}.data-limit li{margin-bottom:6px}.variant-comparison{background:#fff;border:1px solid var(--deep);border-radius:16px;padding:20px;margin-bottom:24px}.variant-comparison h2{font-size:18px;margin-bottom:12px}.variant-scroll{overflow-x:auto}.variant-comparison table{width:100%;min-width:680px;border-collapse:collapse;font-size:12px}.variant-comparison th,.variant-comparison td{padding:10px;border:1px solid var(--border);text-align:left;vertical-align:top}.variant-comparison th{background:var(--water)}.variant-comparison tr.is-current{background:#f8fbfb}.variant-comparison a{text-decoration:underline;font-weight:700}.variant-comparison p{font-size:11px;color:var(--txt3);margin-top:10px}
 .proscons h2{font-size:16px;margin-bottom:14px}
 .pc-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .pc-box{border-radius:12px;padding:14px;font-size:13.5px;line-height:1.7}
@@ -454,6 +473,7 @@ gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},p
   <span class="cat-tag">${escHtml(p.category)}</span>
   <h1>${escHtml(p.name)}</h1>
   <div class="brand">${escHtml(p.brand)}${p.origin ? " ・ " + escHtml(p.origin) : ""}</div>
+${productStatusHtml(p,all)}
   ${p.image
     ? `<img class="product-img" src="${escAttr(p.image)}" alt="${escAttr(p.name)}" loading="lazy">`
     : `<div class="no-image" aria-hidden="true">${escHtml(p.icon || "💧")}</div>`}
@@ -480,37 +500,13 @@ ${displayIngredients.length ? `  <div class="ingredients">
   </div>` : ""}
   ${(Array.isArray(p.skin) && p.skin.length) || (Array.isArray(p.concern) && p.concern.length) ? `<div class="suitability">
     <h2>掲載データ上の候補条件</h2>
-    ${Array.isArray(p.skin) && p.skin.length ? `<div class="suit-row"><span class="suit-label">掲載肌タイプ</span><div class="suit-chips">${p.skin.map(s => `<span class="suit-chip">${escHtml(s)}</span>`).join("")}</div></div>` : ""}
-    ${Array.isArray(p.concern) && p.concern.length ? `<div class="suit-row"><span class="suit-label">掲載悩み分類</span><div class="suit-chips">${p.concern.map(c => `<span class="suit-chip">${escHtml(c)}</span>`).join("")}</div></div>` : ""}
+${Array.isArray(p.skin) && p.skin.length ? `<div class="suit-row"><span class="suit-label">掲載肌タイプ</span><div class="suit-chips">${p.skin.map(s => `<span class="suit-chip">${escHtml(s)}</span>`).join("")}</div></div>` : ""}
+${Array.isArray(p.concern) && p.concern.length ? `<div class="suit-row"><span class="suit-label">掲載悩み分類</span><div class="suit-chips">${p.concern.map(c => `<span class="suit-chip">${escHtml(c)}</span>`).join("")}</div></div>` : ""}
   </div>` : ""}
-  ${primarySourceHtml(p)}
-  ${editorialEvidenceHtml(p, all)}${p.editorialEvidence ? "" : (() => {
-    const pc = prosConsData(p);
-    return `<div class="proscons">
-    <h2>掲載データから確認できる点・確認できない点</h2>
-    <div class="pc-grid">
-      <div class="pc-box pc-pros">
-        <div class="pc-title">✓ 確認できる点</div>
-        <ul>${pc.pros.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
-      </div>
-      <div class="pc-box pc-cons">
-        <div class="pc-title">△ 確認できない点・注意点</div>
-        <ul>${pc.cons.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
-      </div>
-    </div>
-    <div class="pc-grid">
-      <div class="pc-box pc-fit">
-        <div class="pc-title">○ 候補にしやすい人</div>
-        <ul>${pc.fit.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
-      </div>
-      <div class="pc-box pc-unfit">
-        <div class="pc-title">△ 別候補も検討したい人</div>
-        <ul>${pc.unfit.map(x => `<li>${escHtml(x)}</li>`).join("")}</ul>
-      </div>
-    </div>
-    <div class="pc-note">※ Moilum編集部が、参考価格・主要成分・カテゴリ・掲載肌タイプ・掲載悩み分類・実使用情報の有無から機械的に整理した参考情報です。出典を説明できない件数データは使用していません。掲載分類は効果や肌への適合を保証するものではありません。</div>
-  </div>`;
-  })()}
+${primarySourceHtml(p)}
+${editorialEvidenceHtml(p, all)}
+${variantComparisonHtml(p,all)}
+${p.editorialEvidence?"":`<section class="data-limit"><h2>このページで確認できる範囲</h2><ul><li>商品名・ブランド・カテゴリ・参考価格を掲載しています。</li><li>肌タイプと悩みはMoilum内の比較用分類で、効果や適合を保証する情報ではありません。</li><li>商品固有の公式仕様をSSoTへ未記録のため、使用感・成分効果・現行販売状況は判断していません。</li></ul></section>`}
   <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は2026年6月時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>
   <div class="buy-btns">
     <a class="buy-btn amazon" data-shop="amazon" href="https://www.amazon.co.jp/s?k=${encodeURIComponent(p.brand + " " + p.name)}" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>

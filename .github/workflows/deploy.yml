@@ -14,6 +14,7 @@ jobs:
 
       - name: Build production SEO pages
         run: |
+          node scripts/build-priority7-content.mjs
           node scripts/sync-products-to-spa.mjs
           node scripts/build-priority6-content.mjs
           node build-product-pages.mjs
@@ -26,6 +27,8 @@ jobs:
           node scripts/verify-public-urls.mjs
           node scripts/verify-indexing-priority5.mjs
           node scripts/verify-priority6.mjs
+          node scripts/analyze-priority7.mjs after
+          node scripts/verify-priority7.mjs
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
