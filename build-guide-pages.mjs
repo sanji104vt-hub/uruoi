@@ -4,6 +4,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { isComparisonProduct } from "./scripts/product-publication-policy.mjs";
 
 const SITE_ORIGIN = "https://moilum.asutelu.com";
 const OGP_IMAGE = SITE_ORIGIN + "/ogp-image.png";
@@ -15,9 +16,7 @@ const products = JSON.parse(fs.readFileSync("src/products.json", "utf8"));
 const columns = JSON.parse(fs.readFileSync("src/columns.json", "utf8"));
 
 // スキンケア母集団 (メイク・世代違い旧品を除外)
-const SKINCARE = products.filter(p =>
-  p.productType !== "makeup" && p.status !== "previous_generation"
-);
+const SKINCARE = products.filter(isComparisonProduct);
 
 function escHtml(s){
   return String(s == null ? "" : s).replace(/[<>&"']/g, c => ({"<":"&lt;",">":"&gt;","&":"&amp;","\"":"&quot;","'":"&#39;"}[c]));

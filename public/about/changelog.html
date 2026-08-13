@@ -76,6 +76,19 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   <p class="lede">Moilumサイトの主要な機能追加・データ更新・信頼性強化施策の履歴を、日付を明記して記録しています。透明性を保つため、掲載条件の変更や表示ロジックの変更などは可能な限りここに残します。</p>
 
   <div class="entry">
+    <span class="entry-date">2026-08-14</span>
+    <span class="entry-tag">SEO</span><span class="entry-tag">品質管理</span>
+    <div class="entry-title">楽天API由来の商品候補に公開ステータスと品質ゲートを導入</div>
+    <ul>
+      <li>楽天APIから取得した商品候補を削除せず、未検証のものは <code>pending</code> として保存する仕組みに変更しました。</li>
+      <li>pending商品は個別URLを <code>noindex,follow</code> とし、sitemap、商品一覧、ブランド、ランキング、肌診断、関連商品から除外しました。</li>
+      <li>編集部管理商品は <code>editorial</code>、前世代情報は <code>legacy</code> として従来のindex・canonical・内部リンクを維持しています。<a href="/products/75">前世代情報の例</a>も確認できます。</li>
+      <li>商品scope、カテゴリ不一致、ブランド表記、JAN・名称重複、詰替・セット、楽天市場の最低価格異常候補を自動監査し、公式情報確認後だけ <code>verified</code> へ昇格できるCI品質ゲートを追加しました。</li>
+      <li>楽天レビュー値は監査用データとして保持しますが、pending商品の公開UI・ランキング・診断には使用しません。</li>
+    </ul>
+  </div>
+
+  <div class="entry">
     <span class="entry-date">2026-07-26</span>
     <span class="entry-tag">一次情報</span><span class="entry-tag">信頼性</span>
     <div class="entry-title">編集部が実際に購入・使用した11商品の写真と使用感を初掲載（一次情報コンポーネント有効化）</div>

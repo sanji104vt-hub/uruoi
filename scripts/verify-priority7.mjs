@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { factualSummary, evidenceOf, sourceQuality, productStatus, riskMatches, claimDisposition, EXPERIENCE_TERMS, normalize } from "./priority7-policy.mjs";
+import { isDirectoryProduct, isExcludedProduct, isPendingProduct } from "./product-publication-policy.mjs";
 
 const SITE_ORIGIN="https://moilum.asutelu.com";
 const errors=[],warnings=[];
@@ -68,16 +69,24 @@ for(const product of products){
     else if(Date.parse("2026-08-11")-checked>366*86400000)stale++;
   }
   const file=path.join("public","products",`${product.id}.html`);
+  if(isExcludedProduct(product)){
+    if(fs.existsSync(file))fail(`商品ID ${product.id}: excludedページが生成されています`);
+    continue;
+  }
   if(!fs.existsSync(file)){fail(`商品ID ${product.id}: 商品ページがありません`);continue;}
   const html=fs.readFileSync(file,"utf8");
   const canonical=html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1]||"";
   if(canonical!==`${SITE_ORIGIN}/products/${product.id}`)fail(`商品ID ${product.id}: canonical不正`);
   if(canonicals.has(canonical))fail(`商品ID ${product.id}: canonical重複`); else canonicals.add(canonical);
   const desc=text(html.match(/<div class="desc">([\s\S]*?)<\/div>/i)?.[1]||"");
-  if(desc!==product.desc)fail(`商品ID ${product.id}: 商品詳細summaryがSSoTと矛盾`);
+  if(!isPendingProduct(product)&&desc!==product.desc)fail(`商品ID ${product.id}: 商品詳細summaryがSSoTと矛盾`);
   const meta=decode(html.match(/<meta name="description" content="([^"]+)"/i)?.[1]||"");
   metas.push({id:product.id,value:meta});
-  if(!evidence){
+  if(isPendingProduct(product)){
+    if(!/noindex\s*,\s*follow/i.test(html))fail(`商品ID ${product.id}: pendingがnoindexではありません`);
+    if(!html.includes("Moilumで公式情報を確認中です"))fail(`商品ID ${product.id}: pending表示がありません`);
+    if(/楽天レビュー|Moilum編集部評価|class="related"/.test(html))fail(`商品ID ${product.id}: pendingに評価・関連商品があります`);
+  }else if(!evidence){
     if(/<div class="ingredients">/.test(html))fail(`商品ID ${product.id}: 根拠未記録の成分一覧を表示しています`);
     if(/<div class="proscons">/.test(html))fail(`商品ID ${product.id}: 根拠未記録のメリデメ自動生成が残っています`);
     if(!html.includes('class="data-limit"'))fail(`商品ID ${product.id}: 情報不足の明示がありません`);
@@ -88,8 +97,9 @@ for(const product of products){
     if(/"(?:aggregateRating|reviewCount|ratingCount|review)"\s*:/.test(raw))fail(`商品ID ${product.id}: レビュー系JSON-LDが復活しています`);
   }
   const card=hub.match(new RegExp(`<article class="product-directory-card"[^>]*data-product-id="${product.id}"[\\s\\S]*?<\\/article>`))?.[0]||"";
-  if(!card)fail(`商品ID ${product.id}: /productsカードがありません`);
-  else if(text(card.match(/<p class="description">([\s\S]*?)<\/p>/)?.[1]||"")!==product.desc)fail(`商品ID ${product.id}: 商品カードと詳細summaryが矛盾`);
+  if(isDirectoryProduct(product)&&!card)fail(`商品ID ${product.id}: /productsカードがありません`);
+  else if(!isDirectoryProduct(product)&&card)fail(`商品ID ${product.id}: 公開対象外なのに/productsカードがあります`);
+  else if(isDirectoryProduct(product)&&text(card.match(/<p class="description">([\s\S]*?)<\/p>/)?.[1]||"")!==product.desc)fail(`商品ID ${product.id}: 商品カードと詳細summaryが矛盾`);
 }
 
 const groups=new Map();

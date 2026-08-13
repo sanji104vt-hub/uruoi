@@ -42,17 +42,17 @@ function categoryMismatch(product) {
   return false;
 }
 
-// 過去の取得分にも同じ品質条件を適用し、楽天側の明白なジャンル誤登録や
-// 使用感を商品名で断定する製品は公開対象から外して別商品で補充する。
-const removedImported = products.filter(product => product.sourceType === "rakuten_product_api" && (
+// 過去の取得分も削除せず、明白な誤取得候補はexcludedとしてSSoTに保持する。
+// 取得件数の補充対象からは外すが、監査・統合判断に使えるデータ資産は残す。
+const excludedImported = products.filter(product => product.sourceType === "rakuten_product_api" && (
   categoryMismatch(product) || EXPERIENCE_TERMS.some(term => cleanDisplayName(product.name).includes(term))
 ));
-products = products.filter(product => !removedImported.includes(product));
+for (const product of excludedImported) product.publicationStatus = "excluded";
 for (const product of products.filter(product => product.sourceType === "rakuten_product_api")) {
   product.name = cleanDisplayName(product.name);
   product.desc = factualSummary(product);
 }
-const imported = products.filter(product => product.sourceType === "rakuten_product_api");
+const imported = products.filter(product => product.sourceType === "rakuten_product_api" && product.publicationStatus !== "excluded");
 const importedByProductId = new Map(imported.map(product => [String(product.rakutenProductId), product]));
 const usedProductIds = new Set(importedByProductId.keys());
 const usedProductCodes = new Set(products.flatMap(product => {
@@ -168,6 +168,8 @@ function toProduct(item, category) {
     image: highResolutionImage(item.mediumImageUrl),
     audience: "unisex",
     sourceType: "rakuten_product_api",
+    publicationStatus: "pending",
+    productScope: "face",
     sourceUrl: directUrl,
     rakutenProductId: String(item.productId),
     productCode: String(item.productCode),
@@ -177,7 +179,10 @@ function toProduct(item, category) {
     rakutenSalesItemCount: Number(item.salesItemCount),
     availability: 1,
     availabilityCheckedAt: CHECKED_AT,
-    priceCheckedAt: CHECKED_AT
+    priceCheckedAt: CHECKED_AT,
+    marketLowestPrice: Number(item.salesMinPrice),
+    marketLowestPriceCheckedAt: CHECKED_AT,
+    priceType: "rakuten_market_lowest"
   };
   product.desc = factualSummary(product);
   return product;
@@ -185,6 +190,11 @@ function toProduct(item, category) {
 
 function refreshProduct(product, item) {
   product.price = Number(item.salesMinPrice);
+  product.marketLowestPrice = Number(item.salesMinPrice);
+  product.marketLowestPriceCheckedAt = CHECKED_AT;
+  product.priceType = "rakuten_market_lowest";
+  if (!product.publicationStatus) product.publicationStatus = "pending";
+  if (!product.productScope) product.productScope = "face";
   product.image = highResolutionImage(item.mediumImageUrl);
   product.purchase = cleanProductUrl(item.productUrlPC);
   product.sourceUrl = product.purchase;
@@ -197,7 +207,7 @@ function refreshProduct(product, item) {
   product.desc = factualSummary(product);
 }
 
-const summary = { checkedAt: CHECKED_AT, targetPerCategory: TARGET_PER_CATEGORY, removedImported: removedImported.map(product => ({ id:product.id, name:product.name, category:product.category })), categories: {} };
+const summary = { checkedAt: CHECKED_AT, targetPerCategory: TARGET_PER_CATEGORY, excludedImported: excludedImported.map(product => ({ id:product.id, name:product.name, category:product.category })), categories: {} };
 for (const category of CATEGORIES) {
   const existingForCategory = imported.filter(product => product.category === category.name);
   let accepted = existingForCategory.length;

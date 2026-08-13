@@ -57,7 +57,7 @@ export function factualSummary(product){
   if (product.sourceType === "rakuten_product_api") {
     const checkedAt = String(product.availabilityCheckedAt || product.priceCheckedAt || "");
     const checked = checkedAt ? `${checkedAt}時点で` : "取得時点で";
-    return `${identity}。楽天市場の商品価格ナビAPIで、${checked}購入可能な販売情報と商品画像を確認しています。参考価格は購入可能な店舗の最低価格で、成分・使用感・肌との相性は未確認です。`;
+    return `${identity}。楽天市場の商品価格ナビAPIで、${checked}購入可能な販売情報と商品画像を確認しています。表示価格は楽天市場で取得時点に確認できた最低価格で、編集部の参考価格とは区別しています。公式情報、成分、使用感、肌との相性は未確認です。`;
   }
   if (product.status === "previous_generation") {
     const feature = cleanSentence(evidence?.officialFeatures?.[0]);

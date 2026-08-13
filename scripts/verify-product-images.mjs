@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { isComparisonProduct, isDirectoryProduct } from "./product-publication-policy.mjs";
 
 const products = JSON.parse(fs.readFileSync("src/products.json", "utf8"));
 const indexHtml = fs.readFileSync("public/index.html", "utf8");
@@ -13,6 +14,9 @@ const count = (source, pattern) => (source.match(pattern) || []).length;
 const fail = message => errors.push(message);
 const imageProducts = products.filter(product => typeof product.image === "string" && product.image.startsWith("https://"));
 const missingProducts = products.filter(product => !product.image);
+const directoryProducts = products.filter(isDirectoryProduct);
+const directoryImageProducts = directoryProducts.filter(product => typeof product.image === "string" && product.image.startsWith("https://"));
+const directoryMissingProducts = directoryProducts.filter(product => !product.image);
 
 const rakutenApiProducts = products.filter(product => product.sourceType === "rakuten_product_api");
 if (products.length < 247) fail(`商品数が基準値247件未満です: ${products.length}`);
@@ -24,16 +28,16 @@ const directoryCards = count(productsHtml, /<article class="product-directory-ca
 const directoryMedia = count(productsHtml, /<span class="product-media directory-product-media">/g);
 const directoryImages = count(productsHtml, /<span class="product-media directory-product-media"><img /g);
 const directoryFallbacks = count(productsHtml, /<span class="product-media directory-product-media"><span class="product-image-fallback"/g);
-if (directoryCards !== products.length) fail(`商品一覧カード数が不正です: ${directoryCards}`);
-if (directoryMedia !== products.length) fail(`商品一覧の画像枠数が不正です: ${directoryMedia}`);
-if (directoryImages !== imageProducts.length) fail(`商品一覧の実画像数が不正です: ${directoryImages}`);
-if (directoryFallbacks !== missingProducts.length) fail(`商品一覧の代替画像数が不正です: ${directoryFallbacks}`);
+if (directoryCards !== directoryProducts.length) fail(`商品一覧カード数が不正です: ${directoryCards}/${directoryProducts.length}`);
+if (directoryMedia !== directoryProducts.length) fail(`商品一覧の画像枠数が不正です: ${directoryMedia}/${directoryProducts.length}`);
+if (directoryImages !== directoryImageProducts.length) fail(`商品一覧の実画像数が不正です: ${directoryImages}/${directoryImageProducts.length}`);
+if (directoryFallbacks !== directoryMissingProducts.length) fail(`商品一覧の代替画像数が不正です: ${directoryFallbacks}/${directoryMissingProducts.length}`);
 
 const homeCards = count(indexHtml, /<article class="p6-featured-card">/g);
 const homeMedia = count(indexHtml, /<a class="p6-featured-image"/g);
 if (homeCards !== 11 || homeMedia !== homeCards) fail(`トップの商品画像枠が不正です: cards=${homeCards}, media=${homeMedia}`);
 
-const skincareCount = products.filter(product => product.productType !== "makeup" && product.status !== "previous_generation").length;
+const skincareCount = products.filter(isComparisonProduct).length;
 const brandMedia = count(brandsHtml, /<span class="product-media product-thumb">/g);
 if (brandMedia !== skincareCount) fail(`ブランド一覧の画像枠数が不正です: ${brandMedia}`);
 

@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { sourceQuality } from "./priority7-policy.mjs";
+import { isDirectoryProduct, isIndexableProduct } from "./product-publication-policy.mjs";
 
 const TARGET_IDS = [95,10,36,40,205,157,199,19,22,28,203,24,17,64,75,135,196,179,82,39,142,38,37,206,177,23,49,3,56,159,122,168,193,154,30,166,192,117,62,91];
 const SITE_ORIGIN = "https://moilum.asutelu.com";
@@ -58,10 +59,11 @@ const spaProducts = extractProducts(fs.readFileSync("public/index.html", "utf8")
 const productById = new Map(products.map(product => [product.id, product]));
 const spaById = new Map(spaProducts.map(product => [product.id, product]));
 const workerSource = fs.readFileSync("src/index.js", "utf8");
-const dynamicSitemapUsesProducts = /for\s*\(const p of PRODUCTS\)/.test(workerSource)
+const dynamicSitemapUsesProducts = /for\s*\(const p of PRODUCTS\.filter\(isIndexableProduct\)\)/.test(workerSource)
   && workerSource.includes("${SITE_ORIGIN}/products/${p.id}")
   && workerSource.includes('pathname === "/sitemap.xml"');
 const productHub = fs.readFileSync("public/hubs/products.html", "utf8");
+const changelog = fs.readFileSync("public/about/changelog.html", "utf8");
 const descriptions = new Map();
 const mainGrams = [];
 
@@ -120,7 +122,8 @@ for (const id of TARGET_IDS) {
     if (!fs.existsSync(path.join("public", "products", `${candidate.id}.html`))) fail(`商品ID ${id}: 比較リンク ${candidate.id} が404になります`);
   }
   if (!dynamicSitemapUsesProducts) fail(`商品ID ${id}: 動的sitemapがPRODUCTSから生成されていません`);
-  if (!productHub.includes(`href="/products/${id}"`)) fail(`商品ID ${id}: 商品一覧からリンクされていません`);
+  if (isDirectoryProduct(product) && !productHub.includes(`href="/products/${id}"`)) fail(`商品ID ${id}: 商品一覧からリンクされていません`);
+  if (isIndexableProduct(product) && !isDirectoryProduct(product) && !changelog.includes(`href="/products/${id}"`)) fail(`商品ID ${id}: index維持用の内部リンクがありません`);
   if (/\$\{|(?:href|src|content)="[^"]*(?:undefined|null|\[object Object\])/i.test(html)) fail(`商品ID ${id}: 未展開・無効URLがあります`);
 
   for (const match of html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {

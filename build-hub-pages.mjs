@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { isComparisonProduct, isDirectoryProduct, isExcludedProduct, publicationStatus } from "./scripts/product-publication-policy.mjs";
 
 const SITE_ORIGIN = "https://moilum.asutelu.com";
 const GSC_VERIFICATION = "UucVcbwbG6YhXKLVS3GGS8nVk_egyJCLywDHkw6J-5Q";
@@ -8,9 +9,10 @@ const MOSHIMO_RAKUTEN = { aId:"5738711", pId:"54", pcId:"54", plId:"616" };
 const products = JSON.parse(fs.readFileSync("src/products.json", "utf8"));
 const columns = JSON.parse(fs.readFileSync("src/columns.json", "utf8"));
 const guideSlugs = JSON.parse(fs.readFileSync("src/guides-slugs.json", "utf8"));
-const skincare = products.filter(p => p.productType !== "makeup" && p.status !== "previous_generation");
-const relatedCategoryProducts = products.filter(p => p.productType === "makeup");
-const previousGenerationProducts = products.filter(p => p.status === "previous_generation");
+const directoryProducts = products.filter(isDirectoryProduct);
+const skincare = products.filter(isComparisonProduct);
+const relatedCategoryProducts = directoryProducts.filter(p => p.productScope !== "face");
+const previousGenerationProducts = products.filter(p => publicationStatus(p) === "legacy");
 const outputDir = path.join("public", "hubs");
 
 fs.mkdirSync(outputDir, { recursive: true });
@@ -27,10 +29,7 @@ function isRakutenCatalogProduct(product){
 
 function ratingText(product){
   if (Number.isFinite(Number(product.rating)) && Number(product.rating) > 0) return `Moilum編集部評価 ${product.rating}`;
-  if (Number(product.rakutenReviewCount) > 0 && Number(product.rakutenReviewAverage) > 0) {
-    return `楽天レビュー ${Number(product.rakutenReviewAverage).toFixed(2)}（${Number(product.rakutenReviewCount).toLocaleString("ja-JP")}件）`;
-  }
-  return "楽天掲載情報";
+  return publicationStatus(product) === "verified" ? "公式情報確認済み" : "公開情報を確認中";
 }
 
 function rakutenDestination(product){
@@ -112,9 +111,9 @@ const breadcrumb = (name, pathName) => ({
   ]
 });
 
-const categoryGroups = [...new Set(products.map(product => product.category))].map(category => [
+const categoryGroups = [...new Set(directoryProducts.map(product => product.category))].map(category => [
   category,
-  products.filter(product => product.category === category)
+  directoryProducts.filter(product => product.category === category)
 ]);
 const directoryCard = product => {
   const searchText = [product.name, product.brand, product.category, ...(product.skin || []), ...(product.concern || []), ...(product.keyIngredients || [])].join(" ").toLowerCase();
@@ -129,10 +128,10 @@ const guideLinks = guideSlugs.map(slug => `<a href="/guides/${encodeURIComponent
 const productDirectoryScript = `let directoryCategory="all";let directoryMensOnly=false;const directorySearch=document.getElementById("productDirectorySearch");const directoryPrice=document.getElementById("productDirectoryPrice");const directoryStatus=document.getElementById("productDirectoryStatus");function applyDirectoryFilters(){const q=directorySearch.value.trim().toLowerCase();const price=directoryPrice.value;let shown=0;document.querySelectorAll(".product-directory-card").forEach(function(card){const amount=Number(card.dataset.price);const priceMatch=price==="all"||(price==="under2000"&&amount<2000)||(price==="2000to5000"&&amount>=2000&&amount<5000)||(price==="5000to10000"&&amount>=5000&&amount<10000)||(price==="over10000"&&amount>=10000);const visible=(directoryCategory==="all"||card.dataset.category===directoryCategory)&&(!directoryMensOnly||card.dataset.audience==="mens")&&priceMatch&&(!q||card.dataset.search.includes(q));card.hidden=!visible;if(visible)shown+=1;});document.querySelectorAll("[data-product-section]").forEach(function(section){section.hidden=!section.querySelector(".product-directory-card:not([hidden])");});directoryStatus.textContent=shown+"商品を表示中";}document.querySelectorAll("[data-directory-category]").forEach(function(button){button.addEventListener("click",function(){directoryCategory=this.dataset.directoryCategory;document.querySelectorAll("[data-directory-category]").forEach(function(item){item.setAttribute("aria-pressed",String(item===button));});applyDirectoryFilters();});});document.getElementById("productDirectoryMens").addEventListener("click",function(){directoryMensOnly=!directoryMensOnly;this.setAttribute("aria-pressed",String(directoryMensOnly));applyDirectoryFilters();});directorySearch.addEventListener("input",applyDirectoryFilters);directoryPrice.addEventListener("change",applyDirectoryFilters);`;
 page({
   file:"products.html", pathName:"/products", active:"/products",
-  title:`スキンケア商品一覧｜${products.length}商品をカテゴリ・肌悩み・価格で比較｜Moilum`,
-  description:`Moilumの商品データ全${products.length}件を、実在する${categoryGroups.length}カテゴリ別に掲載。ブランド、参考価格、編集部評価または楽天掲載情報から商品を比較できます。`,
-  body:`<section class="hero"><h1>スキンケア商品一覧</h1><p class="lead">化粧水・乳液・美容液・洗顔など、商品データ全${products.length}件を実在カテゴリ別に整理しました。編集部評価がある商品と、楽天APIで在庫を確認した掲載商品は区別して表示しています。</p></section><p class="note">楽天掲載商品は商品価格ナビAPIで購入可能な店舗がある製品だけを追加し、価格・画像・レビュー件数を取得時点の実データで掲載しています。楽天ボタンはもしもアフィリエイト経由のPRリンクです。</p><nav class="section-nav" aria-label="商品カテゴリ">${categoryGroups.map(([category,items],index)=>`<a href="#product-category-${index + 1}">${esc(category)}（${items.length}）</a>`).join("")}</nav><section class="directory-controls" aria-label="商品を絞り込む"><label for="productDirectorySearch">商品名・ブランド・成分・肌悩みで検索</label><input id="productDirectorySearch" class="search" type="search" placeholder="例：セラミド、乾燥肌、キュレル"><div class="filter-row"><button class="filter-chip" type="button" data-directory-category="all" aria-pressed="true">全カテゴリ</button>${categoryGroups.map(([category])=>`<button class="filter-chip" type="button" data-directory-category="${esc(category)}" aria-pressed="false">${esc(category)}</button>`).join("")}<button id="productDirectoryMens" class="filter-chip" type="button" aria-pressed="false">メンズ向け</button><label><span class="meta">価格帯 </span><select id="productDirectoryPrice" class="price-filter"><option value="all">価格すべて</option><option value="under2000">2,000円未満</option><option value="2000to5000">2,000〜4,999円</option><option value="5000to10000">5,000〜9,999円</option><option value="over10000">10,000円以上</option></select></label></div><p id="productDirectoryStatus" class="sr-status" aria-live="polite">${products.length}商品を表示中</p></section>${productSections}<section><h2>肌悩み・条件別ガイド</h2><p class="meta">商品選びの基準から絞り込みたい方はこちら。</p><div class="guide-list">${guideLinks}</div></section>`,
-  jsonLd:[breadcrumb("スキンケア商品一覧", "/products"), {"@context":"https://schema.org","@type":"CollectionPage","name":"スキンケア商品一覧","url":SITE_ORIGIN + "/products","mainEntity":{"@type":"ItemList","numberOfItems":products.length}}],
+  title:`スキンケア商品一覧｜${directoryProducts.length}商品をカテゴリ・肌悩み・価格で比較｜Moilum`,
+  description:`Moilumで現在公開比較できる${directoryProducts.length}商品を、${categoryGroups.length}カテゴリ別に掲載。ブランド、参考価格、編集部評価から商品を比較できます。`,
+  body:`<section class="hero"><h1>スキンケア商品一覧</h1><p class="lead">化粧水・美容液・洗顔など、Moilumで品質確認済みの${directoryProducts.length}商品をカテゴリ別に整理しました。</p></section><p class="note">楽天APIから取得した未検証の商品候補は、公式情報・カテゴリ・ブランドを確認できるまでこの一覧や比較機能には掲載しません。公開状態の考え方は<a href="/about/sources">情報源と更新方針</a>で確認できます。</p><nav class="section-nav" aria-label="商品カテゴリ">${categoryGroups.map(([category,items],index)=>`<a href="#product-category-${index + 1}">${esc(category)}（${items.length}）</a>`).join("")}</nav><section class="directory-controls" aria-label="商品を絞り込む"><label for="productDirectorySearch">商品名・ブランド・成分・肌悩みで検索</label><input id="productDirectorySearch" class="search" type="search" placeholder="例：セラミド、乾燥肌、キュレル"><div class="filter-row"><button class="filter-chip" type="button" data-directory-category="all" aria-pressed="true">全カテゴリ</button>${categoryGroups.map(([category])=>`<button class="filter-chip" type="button" data-directory-category="${esc(category)}" aria-pressed="false">${esc(category)}</button>`).join("")}<button id="productDirectoryMens" class="filter-chip" type="button" aria-pressed="false">メンズ向け</button><label><span class="meta">価格帯 </span><select id="productDirectoryPrice" class="price-filter"><option value="all">価格すべて</option><option value="under2000">2,000円未満</option><option value="2000to5000">2,000〜4,999円</option><option value="5000to10000">5,000〜9,999円</option><option value="over10000">10,000円以上</option></select></label></div><p id="productDirectoryStatus" class="sr-status" aria-live="polite">${directoryProducts.length}商品を表示中</p></section>${productSections}<section><h2>肌悩み・条件別ガイド</h2><p class="meta">商品選びの基準から絞り込みたい方はこちら。</p><div class="guide-list">${guideLinks}</div></section>`,
+  jsonLd:[breadcrumb("スキンケア商品一覧", "/products"), {"@context":"https://schema.org","@type":"CollectionPage","name":"スキンケア商品一覧","url":SITE_ORIGIN + "/products","mainEntity":{"@type":"ItemList","numberOfItems":directoryProducts.length}}],
   script:productDirectoryScript
 });
 
@@ -200,7 +199,7 @@ page({
   script:diagnosisScript
 });
 
-const favoriteData = products.map(p => ({id:p.id,name:p.name,brand:p.brand,category:p.category,price:p.price,rating:p.rating,icon:p.icon||"💧",image:p.image||""}));
+const favoriteData = products.filter(product => !isExcludedProduct(product)).map(p => ({id:p.id,name:p.name,brand:p.brand,category:p.category,price:p.price,rating:p.rating,icon:p.icon||"💧",image:p.image||""}));
 const favoritesScript = `${clientProductMediaScript}const products=${safeJson(favoriteData)};const grid=document.getElementById("favoriteGrid");let ids=[];try{ids=JSON.parse(localStorage.getItem("ulabo_fav")||"[]");}catch(e){}const byId=new Map(products.map(function(p){return [String(p.id),p];}));const saved=ids.map(function(id){return byId.get(String(id));}).filter(Boolean);document.getElementById("favoriteCount").textContent=saved.length+"件保存されています";if(!saved.length){grid.innerHTML='<p class="empty">お気に入りはまだありません。商品ページの「お気に入り」から保存できます。</p>';}else{saved.forEach(function(p){const card=document.createElement("article");card.className="card";const h=document.createElement("h2");const a=document.createElement("a");a.href="/products/"+encodeURIComponent(p.id);a.textContent=p.name;h.appendChild(a);const meta=document.createElement("p");meta.className="meta";meta.textContent=p.brand+"・"+p.category+"・評価 "+p.rating;const price=document.createElement("p");price.className="price";price.textContent="参考価格 ¥"+Number(p.price).toLocaleString("ja-JP");card.append(clientProductMedia(p),h,meta,price);grid.appendChild(card);});}`;
 page({
   file:"favorites.html", pathName:"/favorites", active:"/favorites", noindex:true,
@@ -217,8 +216,14 @@ page({
 const aboutCounts = {
   total: products.length,
   current: skincare.length,
-  related: products.filter(product => product.productType === "makeup").length,
-  previous: products.filter(product => product.status === "previous_generation").length,
+  directory: directoryProducts.length,
+  editorial: products.filter(product => publicationStatus(product) === "editorial").length,
+  verified: products.filter(product => publicationStatus(product) === "verified").length,
+  pending: products.filter(product => publicationStatus(product) === "pending").length,
+  excluded: products.filter(product => publicationStatus(product) === "excluded").length,
+  legacy: products.filter(product => publicationStatus(product) === "legacy").length,
+  related: relatedCategoryProducts.length,
+  previous: previousGenerationProducts.length,
   "editor-used": products.filter(product => product.reviewedByEditor === true).length
 };
 for (const aboutFile of ["public/about/sources.html", "public/about/rating-policy.html"]){
@@ -231,4 +236,4 @@ for (const aboutFile of ["public/about/sources.html", "public/about/rating-polic
   fs.writeFileSync(aboutFile, source, "utf8");
 }
 
-console.log(`SEO hub pages generated: columns=${columns.length}, brands=${brands.length}, products=${products.length}, skincare=${skincare.length}`);
+console.log(`SEO hub pages generated: columns=${columns.length}, brands=${brands.length}, directory=${directoryProducts.length}, comparison=${skincare.length}, db=${products.length}`);

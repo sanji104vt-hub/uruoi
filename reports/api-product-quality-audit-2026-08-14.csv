@@ -1,0 +1,401 @@
+id,name,brand,sourceOrigin,currentStatus,proposedStatus,productScope,category,categoryAnomaly,expectedCategory,duplicateStatus,variantStatus,jan,officialSource,sourceQuality,price,priceWarning,brandStatus,verifiedCandidate,reason
+249,ワフードメイド 酒粕洗顔(170g),ワフードメイド,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4961989409177,,D,904,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+250,花王｜Kao ビオレ ザフェイス 泡洗顔料 オイルコントロール プラス 本体 200ml,花王,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901301453075,,D,880,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+251,エバメール ソフト洗顔フォーム,エバメール,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4571262440836,,D,1938,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+252,サボン フェイスポリッシャー リラクシング ラベンダー 200ml,サボン,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4589684764003,,D,6480,high-outlier,normal,false,価格:high-outlier
+253,10月5日 WAKARA 和から 練り石けん和から 130g,和から,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4589987710028,,D,2750,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+254,ウーノ ホイップウォッシュ モイスト f(130g),ウーノ(uno),rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4550516494627,,D,328,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+255,コモライフ YJエコ・フォームホワイト（洗顔料）,山甚物産,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4993069900038,,D,4180,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+256,シュクレ マッサージ&パック シトラス,シュクレー,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4562174740411,,D,3300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+257,モーニングウォッシュジェリーピンクグレープフルーツ,ヒューマンリソースコミュニケーションズ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4560202021051,,D,2864,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+258,コサナ マヌカとオリゴの泡洗顔 200ml,コサナ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4582259157156,,D,1944,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+259,ニベア クリアビューティー弱酸性泡洗顔 もっちり美肌 本体(150ml),ニベア,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901301394996,,D,460,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+260,シンエイ そのまま!ハトムギエキス 泡ソープ リッチ 500ml,シンエイ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4571128836612,,D,2240,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+261,豆腐の盛田屋 赤大豆 豆乳せっけん 自然生活,豆腐の盛田屋,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4560147176458,,D,1920,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+262,メラノCC ディープクリア酵素洗顔(130g),メラノCC,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4987241173242,,D,558,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+263,エクセルーラ ムースウォッシュ(150g),エクセルーラ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4987316094298,,D,2349,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+264,Deve｜ディブ ディブ 炭＆泥 洗顔ジェル 200g,熊野油脂,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4513574039094,,D,385,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+265,肌美精 CHOI 薬用泡洗顔 ニキビケア(160ml),肌美精,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901417629265,,D,602,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+266,スフ ソープ ミスティックガーデン(120g),スフ(Sufu),rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4976631813103,,D,2385,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+267,メンズビオレ ザフェイス うるおいケア 本体(200ml),メンズビオレ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901301439789,,D,619,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+268,クレンジングリサーチ ソープ スクラブ＆ピール(100g),クレンジングリサーチ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4515061013617,,D,880,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+269,メンソレータム アクネス 薬用ふわふわな泡洗顔(160ml),アクネス,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4987241199358,,D,506,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+270,mdレセプト2 クレンジングフォーム,エムディ化粧品,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4947130100025,,D,3300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+271,ダヴ パールシャイン 透明つや肌 洗顔料 本体(140g),ダヴ(Dove),rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4902111782652,,D,467,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+272,ダヴ ビューティモイスチャークリーミー泡洗顔料(160ml),ダヴ(Dove) 泡洗顔,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4902111736891,,D,608,none,extraction-candidate,false,ブランド:extraction-candidate
+273,ワイエスパークプロフェッショナル YSパーク エシカルソープ 20g,ワイ.エス.パークプロフェッショナル,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4981104130113,,D,513,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+274,ビオデルマ サンシビオ マイルド ウォッシングジェル 200mL,ビオデルマ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,3401381507565,,D,2590,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+275,メートル・サボン・ド・マルセイユ サボン・ド・プロヴァンス ハニー 100g メートル・サボン・ド・マルセイユ アロマソープ,ブランド情報未掲載,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,3182611231039,,D,350,none,unknown,false,ブランド:unknown
+276,ナイーブ メイク落とし洗顔フォーム(うるおい)(180g),ナイーブ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901417672858,,D,319,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+277,みなしょう OUHAソープ 洗顔石けん ハイビスカス 47g,有限会社 沖縄ウコン販売,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4538801000944,,D,770,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+278,山田養蜂場ハニーラボ 完熟蜂蜜サボン洗顔石けん枠練,山田養蜂場,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4930830109054,,D,2530,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+279,専科 メイクも落とせる洗顔料a(120g),専科,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901872471805,,D,530,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+280,EGFセルソアンEGFエクストラクリームソープ,バイオリンク販売,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4545810004016,,D,6050,high-outlier,normal,false,価格:high-outlier
+281,SEKKISEI(雪肌精)化粧水仕立て 石鹸 100g,雪肌精,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4971710251616,,D,1650,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+282,かづきれいこ イデアモイスト クリアウォッシュ 120ml,dinos,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4560289180412,,D,2640,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+283,メルサボン フェイスウォッシュ フローラルハーブ(130g),メルサボン,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4560249795137,,D,506,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+284,エリナ フェーシャルスクラブクリーム,エリナ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4562210001001,,D,4242,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+285,チアリーフ 洗顔フォーム ヒアルロン酸 100g CHEERLIEF チアリ-フセンガンフオ-ムヒアルロン,DEVIL BEAUTY,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4595988192022,,D,335,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+286,ビオテルム オムアクアパワークレンザー /4.22oz,ビオテルム,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,3605540600849,,D,4264,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+287,こんにゃくスポンジ和の力フェイス用白,山本農場,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4993924010414,,D,1210,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+288,綾花 潤肌実 メイク落とし 洗顔 石けん(80g),綾花,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4580080663570,,D,2750,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+289,DEW クリアクレイフォンデュ MT(90g),DEW(デュウ),rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4973167068304,,D,2780,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+290,プロハーブEM ホワイト洗顔クリーム(100g),プロハーブ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4937762288512,,D,1760,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+291,エクスボーテ 薬用オルリッチ クリアウォッシュ 90g,エクスボーテ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4511981011030,,D,3520,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+292,ロゼット 洗顔パスタ 本体/グリーンティーの香り 120g,ロゼット,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901696501290,,D,607,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+293,ギャツビー フェイシャルウォッシュ パーフェクトスクラブ(130g),ギャツビー(GATSBY),rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4902806470642,,D,254,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+294,パックス オリー フェイスフォーム 詰替用(140ml),パックスオリー,rakuten_product_api,pending,pending,face,洗顔,false,,refill,refill,4904735054221,,D,726,none,normal,false,重複・variant:refill
+295,クレンジア はちみつ洗顔フォーム,ウアオ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4512442005575,,D,1480,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+296,ちふれ 泡洗顔 S(180ml),ちふれ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4974972258614,,D,715,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+297,エスト クレンジングエッセンス エンリッチド チューブタイプ,エスト,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901301354594,,D,3300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+298,ほっぺの気持ち洗顔石鹸(75g),ペリカン石鹸,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4976631150109,,D,398,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+299,LISSAGE(リサージ)ボーテ クリーミィソープa 125g,リセージ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4973167261002,,D,3960,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+300,sim sim セサミハンガリアンソープ 泡立てネット&ケース付,しむら,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4580299100361,,D,2600,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+301,ママバター マイン フェイスウォッシュ オレンジ&ゼラニウムの香り 160ml,ママバター,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4977673145566,,D,2070,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+302,ゼロ スノーウィーソープ(90g),クロス・エ・キューブ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4562261830018,,D,2970,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+303,cyclear 薬用 ビタミンC 洗顔 本体 120g,熊野油脂,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4513574042865,,D,385,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+304,炭洗顔クリーム,アズマ商事,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4528428500019,,D,2574,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+305,ロゼット洗顔パスタ 海泥スムース 180g,ロゼット,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901696541906,,D,907,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+306,SABON フェイスポリッシャー リラクシングラベンダー 200ml,サボン,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,7290114041249,,D,4928,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+307,アヴァンセ マイルド洗顔パウダー(50g),アヴァンセ(AVANCE),rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4531560302250,,D,1650,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+308,4511413527702 DHC for MEN 薬用 フォーミング フェース ウォッシュ 150mL 洗顔フォーム 洗顔料 ボタニカル 医薬部外品DHC フェイス 洗う,DHC,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4511413527702,,D,1430,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+309,ビオレ おうちdeエステ ディープクレイ洗顔(180g),ビオレフェイスケア,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901301464057,,D,2260,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+310,Arencia プレミアムもちソープ 120g グリーン,Arencia,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,8809562190738,,D,1710,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+311,セルピュア オールフォーム(150ml),フロンティア,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4589986320020,,D,2750,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+312,fromo フローモ フェイスソープ ゼンザイ 洗顔石鹸,フローモ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4560337590248,,D,1760,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+313,SAM'U PHセンシティブジェルフォーム,サミュ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,8809505031586,,D,1680,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+314,焼塩夢石けん(60g),遠赤青汁,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4946403809016,,D,2200,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+315,CAC ウォッシングパウダー さっぱり/無香料 1.1g,CAC,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4932704510317,,D,2607,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+316,オリリー クリスタルソープ 100g,オリリー,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4951039012716,,D,1870,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+317,新日本製薬 パーフェクトワン フォーカス スキンクリアジェルウォッシュ 120g,新日本製薬,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4512274021903,,D,2200,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+318,5月15日 MEDIHEAL メディヒール THE ティーツリー カーミング パウダーウォッシュ 50g,メディヒール,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,8809936740101,,D,1870,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+319,コスメデコルテ AQ ウォッシング クリーム 129g 沖縄・離島を除く 化粧品 コスメ COSME DECORTE,コスメデコルテ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4971710366921,,D,5460,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+320,クリニーク リキッドフェーシャルソープ マイルド(200ml),CLINIQUE(クリニーク),rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4517989502358,,D,3029,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+321,コモエース マイルドソープ 100g,コモエース,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4531011003125,,D,1980,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+322,MENARD TK ウオッシングクリーム 無香料 130g,メナード,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4549051711634,,D,2750,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+323,ロゼット 洗顔パスタ ガスールブライト(120g),ロゼット 洗顔パスタ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901696541852,,D,660,none,extraction-candidate,false,ブランド:extraction-candidate
+324,シラスソープ シラスソープ オリジナル,日本衛生センター,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4580324790932,,D,2163,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+325,エスケー石鹸 HaRe’s 四肌のスキンソープ 100g,エスケー石鹸,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4964495710652,,D,3960,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+326,ボタニカルマルシェ マッサージ洗顔ジェリー 本体 180g,エイチ・アンド・ビー・ラボ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4589530701374,,D,1078,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+327,ダヴ 薬用ニキビケア クリーミー泡洗顔料(160ml),ダヴ(Dove) 泡洗顔,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4902111749365,,D,640,none,extraction-candidate,false,ブランド:extraction-candidate
+328,ソフティモ クレンジングウォッシュ ブラック(160g),ソフティモ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4971710628159,,D,272,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+329,メナード TK ウオッシングクリームA 130g,メナード,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4549051713096,,D,2200,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+330,TWANY(トワニー) センチュリー ザ・ソープ 130g,トワニー,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4973167151983,,D,8083,high-outlier,normal,false,価格:high-outlier
+331,化粧石鹸いつくしみ・ね！！そふと(122g),ねば塾,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4942722331146,,D,335,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+332,シェーンハイト 洗顔,インタートレードヘルスケア,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4545063000155,,D,1885,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+333,kira キラダブルクリーン 綺羅化粧品,KIRA,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,1001000013826129,,D,3000,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+334,メナード イルネージュ ウオッシングC 130g,メナード,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4549051711764,,D,6820,high-outlier,normal,false,価格:high-outlier
+335,ウドエッセンス洗顔石鹸,ラサス,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4562137100108,,D,2450,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+336,メンズビオレ ザフェイス 毛穴汚れクリア 本体(200ml),メンズビオレ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901301439819,,D,687,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+337,ニベアメン アクティブエイジ ワンステップケア 本体(150ml),ニベアメン,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901301448484,,D,1159,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+338,上質な素肌へ導くアプローチ、ベルアージュソフナー 洗顔料,ハリウッド,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4961561165095,,D,5203,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+339,IPSA クレンジング フレッシュフォームe 125g,イプサ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4931449432441,,D,3000,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+340,菊正宗 日本酒の洗顔料RN(200g),菊正宗,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4971650801506,,D,666,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+341,ビオレ おうちdeエステ 肌をなめらかにするマッサージ洗顔ジェル 炭(150g),ビオレフェイスケア,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901301408495,,D,1100,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+342,ナイーブ メイク落とし洗顔フォーム お茶の葉エキス配合(200g),ナイーブ,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901417607928,,D,220,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+343,草花木果 洗顔ミルク 本体/きめ細かくクリーミーな泡 120ml,草花木果,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4589860101431,,D,2640,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+344,こんにゃくパフ 和の力 緑茶農場蒟蒻スポンジ,山本農場,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4993924010278,,D,1100,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+345,泡の洗顔料 ビタホイップ 本体(300ml),Vita,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4902895042744,,D,670,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+346,ラボプラス クリーミィーフォーム,CBS,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4544798102509,,D,4125,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+347,ダイブ 浅野いにお「おやすみプンプン」 ミニメモ C,ロイス,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4560237180204,,D,1980,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+348,ビオレ おうちdeエステ 泡クリームメイク落とし C(210ml),ビオレフェイスケア,rakuten_product_api,pending,pending,face,洗顔,false,,none,none,4901301464262,,D,1017,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+349,DHC ECCP フレッシュローション 200ml F1,DHC,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4511413520505,,D,1320,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+350,SOC 保湿化粧水(500ml),SOC,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4974297502508,,D,2646,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+351,グリーンボトル ボタニカル化粧水(200ml),グリーンボトル,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4904651187331,,D,2640,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+352,雪美人 スキンコンディショナー,スノーデン,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4987433070038,,D,9240,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+353,DECENCIA アヤナス モイストバリアミスト 50ml,ディセンシア,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4571289480792,,D,2098,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+354,LNCモイスチャーローションしっとりタイプ,日本生物製剤,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4987480017031,,D,5170,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+355,anzena アンジーナ フェイスウォーター化粧水,クレス,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4571494690061,,D,3300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+356,acl アクル モイスト,日邦薬品,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4976084444060,,D,3765,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+357,EST LABOフィニッシングローション,エステラボ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4544798101328,,D,3432,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+358,カツウラ スキンローションg ふつう,カツウラ化粧品,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4997204011245,,D,2970,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+359,プロステージ VC100 ビタミンC モイスチャーローション リッチ(500ml),プロステージ(PROSTAGE),rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4560300000378,,D,678,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+360,DEW アフターグロウドロップ GN(170ml),DEW(デュウ),rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4973167190401,,D,3190,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+361,アロエス しっとり化粧水(240ml),アロエス,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4901234240339,,D,669,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+363,GRACEONE(グレイスワン) 薬用 美白濃密液 230ml,グレイスワン,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4971710383089,,D,1025,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+364,aveda アヴェダボタニカル キネティクス スキン トーニング エージェント,アヴェダ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,0018084981023,,D,6094,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+365,ヘチマ水(150ml),天然実感,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4582494100115,,D,1760,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+366,アルージェ モイスチャーミストローションII しっとり Lサイズ(220ml),アルージェ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4987305035264,,D,2363,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+367,CRECOS ピュアヘチマエッセンス 150ml,CRECOS,rakuten_product_api,pending,pending,face,化粧水,true,美容液,none,none,4560263171306,,D,4180,none,normal,false,現在化粧水／名称上は美容液候補
+368,花梨の化粧水(200mL),アール・フィールド,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4571295870846,,D,2200,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+369,ちふれ 濃厚 化粧水(180ml),ちふれ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4974972262819,,D,880,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+370,自由が丘クリニック ARES ステムCエッセンスローション 120ml,自由が丘クリニック,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4571109040014,,D,12671,high-outlier,normal,false,価格:high-outlier
+371,DR.G ダーモイスチャー バリアDリキッドトナー(200ml),ドクタージー,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,8809695369445,,D,2640,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+372,月桃水 ちゅらしずく,アクアグリーン沖縄,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4560266420074,,D,1100,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+373,アルピジョン アルピュア ディープウォーター 140ml,アルピジョン,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4589756690285,,D,3263,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+374,カネボウ スキン ハーモナイザー 180ml,カネボウ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4973167534847,,D,398,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+375,プロハーブEX エッセンスローション 120ml,プロハーブ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4937762288673,,D,4370,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+376,オリーブマノン オリーブリーフローション オリーブ銀葉水,オリーブマノン,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4965363005917,,D,822,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+377,フローラルウォーター ラベンダー(200ml),生活の木,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4954753090060,,D,2750,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+378,ハトムギエキス化粧水(1000mL),ラックコーポレーション,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4562259507236,,D,606,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+379,suisai(スイサイ) ホワイトニングローション2 150ml,スイサイ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4973167300381,,D,3990,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+380,アユーラ ラボラトリーズ インクリーゼ モイストローション R 200mL,アユーララボラトリーズ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4949411740524,,D,4400,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+381,エスティローダー シュープリーム プラス ブライト ミルキー ローション 100ml,エスティローダー,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,0887167589933,,D,11890,high-outlier,normal,false,価格:high-outlier
+382,サナ なめらか本舗 ミルク化粧水 ND(200ml),なめらか本舗,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4964596703416,,D,1045,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+383,RICCA（リッカ）プラセンタローション,セレクトビューティー リッカ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4580482174049,,D,6600,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+384,ミューフル ROSE EX(60ml),ミューフル,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4580119280754,,D,3380,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+385,ナリス サイクルプラス スキン ライトニング コンク 150ml,ナリス化粧品,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4955814415655,,D,2640,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+386,下呂温泉みすと(下呂温泉化粧水)(200g),スパミスト,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4582276131351,,D,2618,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+387,フィトメール ローショントニック フォーメン,フィトメール,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,3530013501661,,D,4980,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+388,NO-MU-BA-RA ボーテ Rose ローション(120mL),NO-MU-BA-RA(ノムバラ),rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4571242308095,,D,3300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+389,イハダ 薬用うるおいローション しっとり(180ml),イハダ(IHADA),rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4909978261238,,D,1199,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+390,リーフ＆ボタニクス フェイスウォーター 純米酒(100ml),L＆B(リーフ＆ボタニクス),rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4954540136186,,D,1272,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+391,REVITAL(リバイタル) ローションEX I 130ml,リバイタル,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4901872309894,,D,4488,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+392,cac メンブレン フェイスローション,CAC,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4932704540130,,D,2530,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+393,AJD エーフォルム 薬用プラセンタローション 500mL,健美舎,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4543802602455,,D,990,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+394,肌をうるおす保湿 浸透水 バランシング 詰替用(110ml),肌をうるおす保湿スキンケア,rakuten_product_api,pending,pending,face,化粧水,false,,refill,refill,4954540158690,,D,1100,none,extraction-candidate,false,ブランド:extraction-candidate / 重複・variant:refill
+395,フルベール スキンフレッシュナー,クラブコスメチックス,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4949775100163,,D,2640,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+397,ビピット VIPIT 馬油 UVミルクローション 250ml,馬油,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4582400832260,,D,660,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+398,エクスキン ゆらぎケアミスト(60ml),エクスキン,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4511981120015,,D,2200,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+399,DEW ローション とてもしっとり(150ml),DEW(デュウ),rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4973167251935,,D,3003,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+400,WELINA カレアトナー,ウェリナ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4571284860421,,D,4070,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+401,日本オリーブ オリーブマノン 紫草化粧水 146ml,日本オリーブ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4965363006358,,D,2529,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+402,菊正宗×刀剣乱舞ONLINE 日本酒の化粧水 ハリつや保湿 +お手入れポーチセット 豊前江(1セット),菊正宗,rakuten_product_api,pending,pending,face,化粧水,false,,set,set,4971650801926,,D,2970,none,normal,false,重複・variant:set
+403,エフモア オーガニック ファインミスト ジュポン化粧品,ジュポン化粧品,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4985395022515,,D,5050,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+404,ラフォーレ マリアギャラン トーニングローション 1060,ラフォーレ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4934308204791,,D,13200,high-outlier,normal,false,価格:high-outlier
+405,資生堂 クレ・ド・ポー ボーテ ローションエサンシエルA ミニ 75mL,クレ・ド・ポーボーテ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4514254225059,,D,5544,none,normalization-candidate,false,ブランド:normalization-candidate
+406,セルケア EGアミノローション 120ml,セルケア,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4528445100124,,D,5280,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+407,replenish me! ハイドレーティング ローション3(120mL),フレスカ(fresca),rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4582223590095,,D,4410,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+408,プラチナシリーズ プラチナウォーター,ビエスト化粧品,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4560171931009,,D,14800,high-outlier,normal,false,価格:high-outlier
+409,メディヒール THE N.M.F アクアトナー 正規品(500ml),MEDIHEAL(メディヒール),rakuten_product_api,pending,pending,face,化粧水,false,,none,none,8809615058824,,D,1300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+410,KOSE INFINITY インテンシブ リンクル ローション 付けかえ用 160mL,コーセー,rakuten_product_api,pending,pending,face,化粧水,false,,refill,refill,4971710287769,,D,7480,none,normal,false,重複・variant:refill
+411,小豆島ヘルシーランド ジ・エッセンスウォーター 120ml,小豆島ヘルシーランド,rakuten_product_api,pending,pending,face,化粧水,true,美容液,none,none,4510925000079,,D,7330,none,normal,false,現在化粧水／名称上は美容液候補
+412,セポラージュ Cepolage ビタローション 180ml,セポラージュ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4993997040134,,D,4510,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+413,JPコロニア アラスカンクール スキンジェル 300g No.8416,JPコロニア,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4904711084167,,D,1910,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+414,アテニア プリマモイスト エクストラモイストローション 100ml,アテニア,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4533899217403,,D,3080,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+415,hime-labo ラボエッセンスローション 保湿ケア サティス製薬,hime-labo,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,1001000013829762,,D,2860,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+416,pdc ダーマエイド トリプルアクティブローション 150mL,PDC,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4961989304007,,D,2200,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+417,ジュリエットレイ ポアレス リフレッシング ミスト(250g),ジュリエットレイ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4540811800391,,D,704,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+418,コスメデコルテ イドラクラリティ 薬用 ブライトニング エッセンス ウォーター 300mL 限定ラージ,コスメデコルテ,rakuten_product_api,pending,pending,face,化粧水,true,美容液,limited,limited,4971710634716,,D,6600,none,normal,false,現在化粧水／名称上は美容液候補 / 重複・variant:limited
+419,ドクターベルツ アンティア モイストバランサー 150ml,ドクターベルツ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4989648006406,,D,4510,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+420,美容原液 超潤化粧水 CH ヒアルロン酸＆コラーゲン(185ml),美容原液,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4936201101122,,D,332,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+421,なめらか本舗 マイルド化粧水 NC(200ml),なめらか本舗,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4964596702075,,D,745,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+422,ELECTRON ローション モイスト 120ml,G.Mコーポレーション,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4571260297029,,D,4900,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+423,pdc ワフードメイド 発酵酒粕化粧水 グロー 190ml,PDC,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4961989609096,,D,1650,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+424,Sand & Sky The Marshmallow Toner 120ml,ブランド情報未掲載,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,8886482917003,,D,4550,none,unknown,false,ブランド:unknown
+425,PRESIST スキンハイドレートローション 150ml,PRESIST,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4595121113099,,D,5300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+426,海洋深層水+ウトワ mlコンディショニングウォーター,ウトワ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4571178039292,,D,4125,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+427,ヴァルモン valmont イルミネーティング トナー,ブランド情報未掲載,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,7612017056296,,D,11500,high-outlier,unknown,false,ブランド:unknown / 価格:high-outlier
+428,そのまま！ハトムギエキス配合 ふきとり化粧水(300mL),シンエイ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4571128832850,,D,1499,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+429,ヘパソフト 薬用 顔ローション(100g),ヘパソフト,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4987241144693,,D,1180,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+430,スック suqqu ライトソリューションローション 144442,スック,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4973167144442,,D,9240,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+431,メンソレータム アクネス 薬用クリア化粧水(180ml),アクネス,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4987241165186,,D,561,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+432,イソップ B＆T バランシング トナー 200ml 沖縄・離島を除く 化粧品 コスメ B ＆ TEA BALANCING TONER AESOP,イソップ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,9319944002379,,D,8800,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+433,薬用 雪肌精 エンリッチ(360ml),雪肌精,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4971710256932,,D,5670,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+434,ベーテル 保湿ローション 容量:300ml 23-6551-00 保湿 低刺激 弱酸性 乾燥肌 ベーテル 赤ちゃん お年寄り スクワラン セラミド アルギニン,ベーテル・プラス,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4580362080118,,D,1025,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+435,パーフェクトワン 薬用SPホワイトニングローション美白化粧水 スキンケア,新日本製薬,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4512274008676,,D,3300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+436,ビワバーローション(120mL),びわ本舗,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4527436071207,,D,4114,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+437,ドクタープラセン プラセンタ コラーゲン配合 エンジェルローション,プランドゥシー・メディカル,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4560172833241,,D,3300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+438,nov ノブ 3 ノブ iiiフェイスローション ex 白濁とろみタイプ 化粧水,ノブ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4934651515230,,D,4645,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+439,福美水ミストシャワー 携帯に なスプレータイプが登場,福美人,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4562324571162,,D,1870,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+440,タマリス ルードブラック フェイスローション(120mL),タマリス,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4542881436272,,D,1095,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+441,4573512880645 CAPITOLO カピートロ CICA化粧水 1000mL,アラコーポレーション,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4573512880645,,D,858,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+442,純米水しっとり化粧水(130ml),純米スキンケア,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4903432710287,,D,766,none,extraction-candidate,false,ブランド:extraction-candidate
+443,シュウウエムラ TSUYA ローションVG フレッシュ(150mL),シュウウエムラ,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4935421643740,,D,7480,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+444,雪肌精 クリアウェルネス ピュア コンク SS(125ml),雪肌精,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4971710522884,,D,2150,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+445,エステラボ ローションwh,CBS,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4544798101014,,D,3289,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+446,トニーズコレクション TONY TANAKA トニータナカ RUBY LABEL ルビーレーベル オーガニックハーバルローション 化粧水 500ml 1686067,トニーズコレクション,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4990055011532,,D,5110,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+447,ルシェリ リンクルリペア ローション 薬用シワ改善化粧水(160ml),ルシェリ(LECHERI),rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4971710283822,,D,3080,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+448,資生堂 クレ ド ポー ボーテ タンクレームエクラ PO20 SPF25 PA＋＋,資生堂インターナショナル,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4514254031742,,D,14300,high-outlier,normal,false,価格:high-outlier
+449,Toami リンクレスホワイトミルク 120ml,ブレーンコスモス,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4571138555381,,D,2090,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+450,JPコロニア シトラスハーブ スキンミルク 300ml,JPコロニア,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4904711088646,,D,1932,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+451,ヤクルト化粧品 リベシィホワイト 薬用美白乳液 110ml,ヤクルト本社,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4903080906858,,D,6640,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+452,KOSE COSME DECORTE リフトディメンション エバーブライト プランプ エマルジョン ER 付けかえ用 200ml,コスメデコルテ,rakuten_product_api,pending,pending,face,乳液,false,,refill,refill,4971710374582,,D,6320,none,normal,false,重複・variant:refill
+453,コーモトモイスチャーミルキー乳液 保湿乳液 下地,コーモト化粧品研究所,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4571459745041,,D,3300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+454,ちふれ 美白乳液 TA シナモロールコラボ(150mL),ちふれ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4974972815619,,D,1155,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+455,純米乳液 特にしっとり乳液(130ml),美人ぬか,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4903432716531,,D,1011,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+457,アスタリフト メン モイストエマルジョン 80ml,アスタリフト,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4547410367591,,D,3888,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+458,サナ なめらか本舗 薬用リンクル乳液 ホワイト(150ml),なめらか本舗,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4964596701894,,D,700,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+459,ALBION IGNIS ホワイトニング ミルク I 200g,イグニス,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4518091406480,,D,6050,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+460,フレッシェル ミルク(EX)N(130ml),Freshel(フレッシェル),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4973167199190,,D,2200,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+461,ヘパトリート 薬用保湿乳液 本体 230g,日本ゼトック,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4582118951475,,D,1591,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+462,DEW スペリア リペアエマルジョン とてもしっとり(100ml),DEWスペリア,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4973167599143,,D,8470,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+463,clinique フォー メン アンチ エイジ モイスチャライザー,クリニーク,rakuten_product_api,pending,pending,face,乳液,false,,none,none,0020714612764,,D,5141,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+464,オルモニカ モイスチャー ミルク(120ml),エイビイエス,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4560367163948,,D,3410,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+465,3月25日 アクネオ 薬用 リペア モイスチュアライザー T 100mL,コーセー,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4971710285277,,D,2090,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+466,米ぬか美人 乳液(100mL),米ぬか美人,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4904070049227,,D,1077,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+467,ポーチュガル スキンミルク(150ml),ポーチュガル,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4903018473087,,D,2117,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+468,アマランス インプレッシヴエマルジョン(乳液)(50ml),アマランス,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4580209780027,,D,5940,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+469,suisai(スイサイ) プレミオリティ モイストフォースエマルジョンII 100ml,スイサイ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4973167300473,,D,3643,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+470,ウテナ モイスチャーミルクR(155ml),ウテナモイスチャー,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4901234215412,,D,572,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+471,スタイルジャパン KAREN MOISUTURE MILKY LOTION 桜恋PREMIUM 乳液 100g STJ03606,スタイルジャパン,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4589444503606,,D,6380,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+472,コーセー インフィニティ コンセントレート エマルジョン 2 付けかえ用 120ml,コーセー,rakuten_product_api,pending,pending,face,乳液,false,,refill,refill,4971710282269,,D,5280,none,normal,false,重複・variant:refill
+473,コーセー コスメデコルテ AQ アブソリュートエマルジョンマイクロラディアンスII 付けかえ用 200mL,コスメデコルテ,rakuten_product_api,pending,pending,face,乳液,false,,refill,refill,4971710378153,,D,8800,none,normal,false,重複・variant:refill
+474,kose プレディア プティメール タラソコンク ミルク ホワイト,コーセー,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4971710490183,,D,2071,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+475,ナチュリナ 乳液(190ml),ナチュリナ(Naturina),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4961989115245,,D,568,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+476,コーセー コスメデコルテ AQ アブソリュートエマルジョン マイクロラディアンス II 200ml,コスメデコルテ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4971710378146,,D,8639,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+477,Liftosome - Day/Night Lifting Cream All Skin Types,ブランド情報未掲載,rakuten_product_api,pending,pending,face,乳液,false,,none,none,3500465049530,,D,8100,none,unknown,false,ブランド:unknown
+478,コスメデコルテ AQ アブソリュート エマルジョン ブライト 200ml,コスメデコルテ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4971710377712,,D,1300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+479,アルビオン フラルネ フルリファイン ミルク f EM 200g,アルビオン,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4969527508023,,D,5379,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+480,クラブ すっぴんクリームC ホワイトフローラルブーケの香り(30g),クラブコスメチックス,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4901416180927,,D,1180,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+481,エリクシール デーケアレボリューション ba(35ml),エリクシール(ELIXIR),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4909978207670,,D,2340,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+482,Predia(プレディア) スパ・エ・メール モイスチュアライザーホワイトII 付けかえ用 150ml,プレディア,rakuten_product_api,pending,pending,face,乳液,false,,refill,refill,4971710460896,,D,5143,none,normal,false,重複・variant:refill
+483,パールクイーン スキンミルクAEX 200ml,パールクイーン,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4920563311039,,D,1161,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+484,DEW スペリア リペアエマルジョン さっぱり(100ml),DEWスペリア,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4973167598542,,D,8470,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+485,プラチナレーベル レチノールクリーム 175g,プラチナレーベル,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4550557493108,,D,598,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+486,SOFINA(ソフィーナ) バイタルリッチ ミルク3 しっとり 80ml,ソフィーナ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4901301209597,,D,5767,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+487,リアル LCモイスチャースキンミルク 1000ml,リアル,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4903432711703,,D,3100,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+488,KOSE/コーセー 雪肌精 エマルジョン デュオ IBFD,コーセー,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4971710477184,,D,8150,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+489,ゲラン スーパー アクア エマルジョン リッチ 50ml 化粧品 コスメ SUPER AQUA EMULSION RICH GUERLAIN,ゲラン,rakuten_product_api,pending,pending,face,乳液,false,,none,none,3346470615441,,D,12793,high-outlier,normal,false,価格:high-outlier
+490,ヘチマコロンの乳液(60ml),ヘチマコロン,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4976532001005,,D,437,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+491,ねんどのミルキィローション(120ml),ボディクレイ,rakuten_product_api,pending,pending,face,乳液,true,化粧水,none,none,4523590000169,,D,330,none,normal,false,現在乳液／名称上は化粧水候補
+492,ベネフィーク エマルジョンEX C 150ml,資生堂,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4909978203689,,D,6180,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+493,コスメデコルテ イドラクラリティ 薬用 ブライトニング トリートメント ソフナー 200mL 付けかえ,コスメデコルテ,rakuten_product_api,pending,pending,face,乳液,false,,refill,refill,4971710625141,,D,5170,none,normal,false,重複・variant:refill
+494,ソフィーナボーテ 高保湿UV乳液 SPF50 しっとり(30g),ソフィーナボーテ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4901301325327,,D,5950,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+495,チューンメーカーズ 原液スキンコンディショナー乳液(100ml),チューンメーカーズ(TUNEMAKERS),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4528620210587,,D,2640,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+496,CEFINE ザ エマルジョン 80ml,セフィーヌ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4524061007137,,D,5680,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+497,SEKKISEI(雪肌精)薬用 雪肌精 乳液140ml,雪肌精,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4971710044225,,D,5500,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+498,アロエッセン ディオスキンクリームDX 110g,アロエッセン,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4982834443290,,D,2420,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+500,レパナトゥア プレアクト 医薬部外品,ヒノキ肌粧品,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4958474003705,,D,15792,high-outlier,normal,false,価格:high-outlier
+501,資生堂 アクアレーベル バウンシング エマルジョン II(130ml),アクアレーベル(AQUALABEL),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4901872996995,,D,2280,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+502,資生堂 クレ・ド・ポー ボーテ クレームアンタンシヴn 50g,資生堂,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4514254130148,,D,15400,high-outlier,normal,false,価格:high-outlier
+503,DHC ウルミニスタ アクアエマルジョン(150ml),DHC,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4511413309568,,D,1119,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+504,アルビオン フラルネ ブライトリファイン ミルク f EM 110g,アルビオン,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4969527510385,,D,3300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+505,薬用リンクルホワイトミルク 日本製(165ml),リンクルホワイト,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4902468116070,,D,709,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+506,ALBION イグニス サニーサワーミルク 150g,イグニス,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4518091407043,,D,4899,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+507,資生堂 クレ・ド・ポー ボーテ クレームアンタンシヴn,クレ・ド・ポー ボーテ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4514254955321,,D,15400,high-outlier,normalization-candidate,false,ブランド:normalization-candidate / 価格:high-outlier
+508,ナノエマルジョン ディープ,トゥヴェール,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4582389241930,,D,2800,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+509,マルティナ サルビアモイスチャーミルク(100ml),MARTINA(マルティナ),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4032061012322,,D,4730,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+510,ドクターシーラボ VC100エマルジョンEX 150ml,ドクターシーラボ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4524734128060,,D,4760,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+511,キリョウ エマルジョン i,資生堂,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4524230370871,,D,3570,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+512,リンデンリーブス gold フェイス&ボディミスト,ブランド情報未掲載,rakuten_product_api,pending,pending,body,乳液,true,化粧水,none,none,9421001387517,,D,6600,none,unknown,false,商品名からbody候補 / 現在乳液／名称上は化粧水候補 / ブランド:unknown
+513,アテニア ドレスリフト デイエマルジョン 日中用美容乳液,アテニア,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4533899217205,,D,3090,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+514,ノートルボーテ モイスト ミルク,タカラベルモント,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4952195257416,,D,5500,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+515,RISM(リズム)カーミング ミルクエッセンス グリーンシトラス(100mL),サン・スマイル,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4526371134091,,D,440,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+516,dプログラム ブライトニングクリア エマルジョン MB(100ml),d プログラム(d program),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4514254991206,,D,4800,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+517,アレンシア レッド スムージー ローション 5 200ml レッド,ブランド情報未掲載,rakuten_product_api,pending,pending,face,乳液,true,化粧水,none,none,8809562192565,,D,2580,none,unknown,false,現在乳液／名称上は化粧水候補 / ブランド:unknown
+518,リバイタル スキンラップ(90ml),リバイタル(REVITAL),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4909978202545,,D,7040,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+519,CHANEL ル リフト フリュイド 50mL,シャネル,rakuten_product_api,pending,pending,face,乳液,false,,none,none,3145891402407,,D,17500,high-outlier,normal,false,価格:high-outlier
+520,Koh Gen Do マクロヴィンテージ ロイヤルマッサージミルク 140mL,コウゲンドウ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4560143657906,,D,13200,high-outlier,normal,false,価格:high-outlier
+521,プロメ バランサー(120ml),Prome(プロメ),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4936218002504,,D,2970,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+522,日本オリーブ オリーブマノン 薬用美白乳液 100ml,日本オリーブ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4965363006280,,D,4400,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+523,REVITAL(リバイタル) モイスチャーライザーEX II 100ml,リバイタル,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4901872309924,,D,5236,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+524,資生堂 プリオール おしろい美白乳液 シースルーカバー(31ml),プリオール(PRIOR),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4909978145910,,D,2746,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+525,ノエビア 88 ミルクローション 100ml,ノエビア,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4945022011855,,D,3135,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+526,天使の美肌乳液(210ml),天使の美肌,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4961743090306,,D,1197,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+527,SK-II (エスケーツー)フェイシャル リフト エマルジョン,エスケーツー,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4979006644029,,D,12000,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+528,モイスタージュ リフト エッセンスミルク 超しっとり(160ml),モイスタージュ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4901417645463,,D,559,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+529,アロベビー ミルキーローション(150mL),アロベビー,rakuten_product_api,pending,pending,face,乳液,true,化粧水,none,none,4571461541006,,D,2639,none,normal,false,現在乳液／名称上は化粧水候補
+530,クラシエ KRACIE バサラ リフトエッセンスミルク403 140g,クラシエ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4901417524188,,D,1540,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+531,リセプトスキン プレミアム 乳液(140ml),リセプトスキン,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4582118951185,,D,808,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+532,エビータ ボタニバイタル 艶リフトミルク II(130ml),EVITA(エビータ),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4973167278581,,D,1643,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+533,THREE バランシングステム モイスチャライザー,THREE,rakuten_product_api,pending,pending,face,乳液,false,,none,none,1001000037142090,,D,7260,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+534,アクアレーベル トリートメントミルク オイルイン しっとり(130ml),アクアレーベル(AQUALABEL),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4909978199302,,D,1495,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+535,素肌EVE KISS 美男子 乳液 本体 200ml,ケイビイラボ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4573538700057,,D,45811,high-outlier,normal,false,価格:high-outlier
+536,コスメデコルテ イドラクラリティ コンディショニング トリートメント ソフナー ER 200ml 沖縄・離島を除く 化粧品 コスメ HYDRA CLARITY CONDITIONING TREATMENT SOFTENER ER COSME DECORTE,コスメデコルテ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4971710375060,,D,3649,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+537,チューンメーカーズ 原液保湿乳液(100ml),チューンメーカーズ(TUNEMAKERS),rakuten_product_api,pending,pending,face,乳液,false,,none,none,4528620210617,,D,2750,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+538,サナ なめらか本舗 リンクル乳液 N(150ml),なめらか本舗,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4964596485770,,D,728,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+539,A-CIS SOLIDE バランシングジェルAL,エストロワ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4533572092433,,D,6820,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+540,ノエビア80 ミルクローション,ノエビア,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4945022010551,,D,2680,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+541,プロミリア モイスチャー10 乳液,コスメプロ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4512442005186,,D,1980,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+542,PROUDMEN. ディープエフェクトミルク 150mL,プラウドメン,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4528620301094,,D,2860,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+543,セタフィル モイスチャライジングローション 473ml ガルデルマ セタフイルライジングロ-シヨン473,ガルデルマ,rakuten_product_api,pending,pending,face,乳液,true,化粧水,none,none,4987851101833,,D,1252,none,normal,false,現在乳液／名称上は化粧水候補
+544,薬用 雪肌精 乳液 エンリッチ(140ml),雪肌精,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4971710567793,,D,5332,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+545,ファンケル ホワイトニング 乳液 II しっとり(30ml),ファンケル,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4908049450786,,D,1813,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+546,luamo ベーシック ディープモイスチャライザー 50mL,ロゴナ,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4560273191660,,D,2498,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+547,コスメディックス define age defying treatment with hydroxy acids & retinol /1.5oz,ブランド情報未掲載,rakuten_product_api,pending,pending,face,乳液,false,,none,none,0847137020392,,D,8100,none,unknown,false,ブランド:unknown
+548,ナリス レジュアーナ クリームインミルク （濃密 乳液）,ナリス化粧品,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4955814378417,,D,4544,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+549,Qiera アゼライン酸 美容液 30ml,ディアスリー,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4595557815017,,D,2980,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+550,ジアンプル VCアンプル(1ml×28回分),石澤研究所,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4992440037790,,D,2750,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+551,セリサージュ ホワイトシルク クレンジングオイル 197ml,セリサージュ,rakuten_product_api,pending,pending,face,美容液,true,洗顔,none,none,4531011000605,,D,3960,none,normal,false,現在美容液／名称上は洗顔候補
+552,まるまる美容液 ヒアルロン酸(20ml),まるまる美容液,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4560440413946,,D,1188,none,extraction-candidate,false,ブランド:extraction-candidate
+553,エスティ ローダー パーフェクショニスト プロ f+l セラム 美容液,ブランド情報未掲載,rakuten_product_api,pending,pending,face,美容液,false,,none,none,0887167375369,,D,1450,none,unknown,false,ブランド:unknown
+554,Ryuspa Rエッセンス,ポイントピュール,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4580113618041,,D,8800,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+555,マイノロジ｜MINOLOGI 薬用シミネールEX,マイノロジ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4573187271052,,D,1140,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+556,アスタリフト ジェリー アクアリスタ ジェリー状“先行”美容液 40g 沖縄・離島を除く 化粧品 コスメ ASTALIFT JELLY AQUARYSTA,アスタリフト,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4547410396348,,D,7560,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+557,ONE BY KOSE メラノショット ホワイト D ラージ(65ml),ONE BY KOSE(ワンバイコーセー),rakuten_product_api,pending,pending,face,美容液,false,,none,none,4971710285482,,D,7198,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+558,ラントゥルース 卵殻膜ブースターセラム 20ml,ヴィワンアークス,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4570018370014,,D,2700,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+559,ヒアロジー ピーエフェクト エッセンス(美容液),ヒアロジー,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4580187421011,,D,29700,high-outlier,normal,false,価格:high-outlier
+560,トランスダーマ A(30mL),トランスダーマ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4983982001134,,D,20350,high-outlier,normal,false,価格:high-outlier
+561,DETクリア ブライト＆ピール ピール美容液 日本製(30ml),DETクリア,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4902468226687,,D,1143,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+562,LANCOME ランコム ジェニフィック アドバンスト N 50ml,ランコム,rakuten_product_api,pending,pending,face,美容液,false,,none,none,3614272623606,,D,15200,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+563,綾花 潤肌実 美容液(30ml),綾花,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4580080662757,,D,4290,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+564,ブルークレール リペアモイストWエッセンス(50ml),ブルークレール,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4571193200332,,D,8800,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+565,R4トーニングセラム(美容液)(30ml),京未来,rakuten_product_api,pending,pending,face,美容液,false,,none,none,8809912930229,,D,2600,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+566,ALBION エクシア ブライトニングイマキュレートセラム 1.5mL,アルビオン,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4969527198088,,D,25500,high-outlier,normal,false,価格:high-outlier
+567,そのまま! コラーゲン リッチ,シンエイ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4571128833062,,D,1629,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+568,EMセラム 卵殻膜美容液 30ml,ビューティードア,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4986084007868,,D,2750,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+569,コスメデコルテ リフトディメンション セラム 50ml 化粧品 コスメ COSME DECORTE,コスメデコルテ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4971710374537,,D,8580,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+570,コーセー｜KOSE モイスチュアエッセンス F・F ゾウリョウ130mL,コーセー,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4971710291131,,D,5090,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+571,ソフィーナiP インターリンク セラム 毛穴の目立たない澄んだうるおい肌へ つけかえ用(55g),ソフィーナiP,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4901301392206,,D,3680,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+572,メディダーマ ダーマブーストセラム(30ml),明色化粧品,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4902468718045,,D,2480,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+573,ONE BY KOSE ザ リンクレス S レギュラー キット(1セット),ONE BY KOSE(ワンバイコーセー),rakuten_product_api,pending,pending,face,美容液,false,,set,set,4971710546095,,D,5975,none,normal,false,重複・variant:set
+574,ONE BY KOSE セラム ヴェール(60ml),ONE BY KOSE(ワンバイコーセー),rakuten_product_api,pending,pending,face,美容液,false,,none,none,4971710288605,,D,5335,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+575,homme dermo system pore control perfecting essence /1.7oz,ディオール,rakuten_product_api,pending,pending,face,美容液,false,,none,none,3348901352826,,D,12490,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+576,サーメージ トーンアップ リフティングバーム(22g),サーメージ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4582174749818,,D,7440,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+577,VENTUNO HADAYOHOU VC90ケアナスティック 2g,ヴェントゥーノ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4510662006143,,D,4120,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+578,エイトザタラソ バランシングセラム＆スムースリペア美容液オイル(100ml),エイトザタラソ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4589919563678,,D,1540,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+579,まるまる美容液 ビタミンC誘導体(20ml),まるまる美容液,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4560440413953,,D,1188,none,extraction-candidate,false,ブランド:extraction-candidate
+580,アンプルショット 薬用 エフェクト リンクル＆モイスト セラム 美容液(50ml),アンプルショット,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4580635111549,,D,1650,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+581,VT リードルショット 300 50ml,VT,rakuten_product_api,pending,pending,face,美容液,false,,none,none,8809695678431,,D,2880,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+582,エクソソーム サイエンス ホワイトモイストエッセンス 55ml,EXOSOME SCIENCE,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4571365222728,,D,977,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+583,オッペン化粧品 アルティメイト エッセンスR 40mL,オッペン化粧品,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4942680336504,,D,20625,high-outlier,normal,false,価格:high-outlier
+584,チューンメーカーズ レチノール誘導体配合(10ml),チューンメーカーズ(TUNEMAKERS),rakuten_product_api,pending,pending,face,美容液,false,,none,none,4528620210044,,D,1980,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+585,エニシー フォー クイック モーニング 50g,リズム（リズム時計）,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4560371873598,,D,6413,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+586,ヤーマン 目もと専用の美容液 メディリフト アイセラム YML0004 YAMAN,ヤーマン,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4540790170935,,D,1360,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+587,クリスチャン・ディオール プレステージ ル ネクターニュイ,ディオール,rakuten_product_api,pending,pending,face,美容液,false,,none,none,3348901190824,,D,28000,high-outlier,normal,false,価格:high-outlier
+588,educe beauté(エデュース ボーテ) ヒト幹細胞 美容液 20mL,educe beauté,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4571383630420,,D,3960,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+589,DEWYTREE AC ディープ ブレミッシュカーミングエッセンス 60ml,ブランド情報未掲載,rakuten_product_api,pending,pending,face,美容液,false,,none,none,8809517477969,,D,2420,none,unknown,false,ブランド:unknown
+590,ヒカリミライ ハイドラ アップ エッセンス N(100ml),ヒカリミライ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4580080663778,,D,6820,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+591,ハリウッド ナチュラルex エッセンスr,ハリウッド,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4961561163473,,D,8250,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+592,fractionalCC ニードルセラムAZ 30mL,ニードルセラム,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4571501176656,,D,2640,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+593,TWANY(トワニー)ベビーリピッドウエアN ミディ 50g,トワニー,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4973167151280,,D,2420,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+594,BLANCOW ブランカウ マルチソリューションスティックバーム,TIM HOLDINGS,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4573585970212,,D,2970,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+595,アルマード チェルラー ブリリオ 美容液,CELLULA,rakuten_product_api,pending,pending,face,美容液,false,,none,none,1001000016670088,,D,6600,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+596,ドクターフィル フィルナチュラントIC.UアルジェックスEX 15g,ドクターフィル コスメティクス,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4562133471455,,D,3790,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+597,まるまる美容液 プロテオグリカン(20ml),まるまる美容液,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4560440413991,,D,1188,none,extraction-candidate,false,ブランド:extraction-candidate
+598,アネッサ ナイトサンケア美容液(180ml),アネッサ(ANESSA),rakuten_product_api,pending,pending,face,美容液,false,,none,none,4909978136093,,D,1859,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+599,10月1日 COSRX ザ・6ペプチドスキンブースターセラム 本体 150ml,COSRX,rakuten_product_api,pending,pending,face,美容液,false,,none,none,8809598455658,,D,1580,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+600,アクセーヌ ナリシングジェル AD(20g),アクセーヌ(ACSEINE),rakuten_product_api,pending,pending,face,美容液,false,,none,none,4951819017153,,D,3532,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+601,アルビオン エクシア ブライトニング イマキュレート セラム Z,アルビオン,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4969527506722,,D,1000,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+602,オッペン アルティメイト クリーム,オッペン化粧品,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4942680336009,,D,38500,high-outlier,normal,false,価格:high-outlier
+603,ニールズヤード ワイルドローズビューティーバーム(50g),ニールズヤード(Neal's Yard),rakuten_product_api,pending,pending,face,美容液,false,,none,none,4540260005682,,D,10560,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+604,エリクシール ブースターエッセンス C 導入美容液 エイジングケア きめ 炭酸配合泡(90g),エリクシール(ELIXIR),rakuten_product_api,pending,pending,face,美容液,false,,none,none,4909978989330,,D,3550,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+605,ウテナ オルメディ オールデイズセラムP 50ml,ウテナ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4901234336018,,D,1251,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+606,トワニー シーズナルエッセンス aw,カネボウ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4973167309575,,D,5500,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+607,ONE BY KOSE (ワンバイコーセー) ザ リンクレス W(18g),ONE BY KOSE(ワンバイコーセー),rakuten_product_api,pending,pending,face,美容液,false,,none,none,4971710613278,,D,4963,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+608,化粧水 クラランス スープラ トリートメント エッセンス ローション 200ml 沖縄・離島を除く CLARINS,クラランス,rakuten_product_api,pending,pending,face,美容液,false,,none,none,3380810089035,,D,20625,high-outlier,normal,false,価格:high-outlier
+609,エピステーム ステムサイエンスオイル 26ml,ロート製薬,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4987241164417,,D,12100,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+610,AFAs アファズボディミルク(250mL),原沢製薬,rakuten_product_api,excluded,excluded,body,美容液,true,乳液,none,none,4987340030538,,D,1944,none,normal,false,商品名からbody候補 / 現在美容液／名称上は乳液候補
+611,アロエベラ生100 化粧品用アロエ原液(20g),アロベラ生,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4571252350398,,D,3300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+612,Re'senza リセンザ アスタキサンチン エイジングケア エッセンス(美容液),Re'senza,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4571383630529,,D,2180,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+613,bsp アスターナ f phマッサージゲル,日本ケミコス,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4560108895695,,D,3300,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+614,ピアベルピア ビューティエッセンス 美容液 30ml,ピアベルピア,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4949180012020,,D,2200,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+615,アルビオン フラルネ ブライトチューナー HK 40ml,アルビオン,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4969527500959,,D,4900,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+616,msh エム・エス・エイチ タイムシークレット ミネラル オイルセラム 30mL,msh,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4580295033854,,D,2640,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+617,エステダム ESTHE WHITE system モーフォフィット セロム 100ml,エステダム,rakuten_product_api,pending,pending,face,美容液,false,,none,none,3461020014540,,D,5278,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+618,雪肌精 クリアウェルネス V セラム(50ml),雪肌精,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4971710519037,,D,7450,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+619,ルナレーナ インターセルラー EX(30ml),ルナレーナ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4544903729058,,D,8360,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+620,肌美精ONE リンクルケア 濃密潤い美容液(30ml),肌美精,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4901417621559,,D,2708,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+621,アンナトゥモール ナチュラルエッセンス(50ml),アンナトゥモール,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4521697100546,,D,2970,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+622,フィトメール:フィトメール スッフル マラン セーラム 美容乳液,フィトメール,rakuten_product_api,pending,pending,face,美容液,true,乳液,none,none,3530013501746,,D,7480,none,normal,false,現在美容液／名称上は乳液候補
+623,iMPREA フェイシャル オイル 37mL,ミルボン,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4971710490114,,D,8600,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+624,ONE BY KOSE セラムヴェール ディープリペア(60ml),ONE BY KOSE(ワンバイコーセー),rakuten_product_api,pending,pending,face,美容液,false,,none,none,4971710577341,,D,4340,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+625,V コントア セラム 50ml,クラランス,rakuten_product_api,pending,pending,face,美容液,false,,none,none,3380810270990,,D,7693,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+626,アルテ倭国の美容液,アルテ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4571226030073,,D,3960,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+627,ハッコウパンダ 発酵オイルイン高濃度美容液(30mL),Ecotone株式会社,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4595556670037,,D,2069,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+628,トランスダーマ スポッツ ショット(6mL),トランスダーマ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4983982000120,,D,11000,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+629,中商 nomaro まゆ毛美容液 6ml,中商,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4580522790031,,D,990,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+630,サナ なめらか本舗 整肌美容液 NC(100ml),なめらか本舗,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4964596701481,,D,1001,none,normal,true,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+631,オルラーヌ セーラム イドラタンテ 30ml 化粧品 コスメ SUPER MOISTURIZING SERUM ORLANE,オルラーヌ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,3359998061003,,D,14100,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+632,ノエビア ウォータリーオイル セラム 50ml,ノエビア,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4945022023025,,D,13860,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+633,コスムラ 3GF TIMELESS EVOLUTION AMPOULE SERUM 45ml,コスムラ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,8809783324257,,D,8800,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+634,へちま産業｜Hechima Sangyo へちまここち 玉川温泉とへちまの力 月桃の香りスプレー 200mL 詰替用,へちま産業,rakuten_product_api,pending,pending,face,美容液,false,,refill,refill,4954277205759,,D,3300,none,normal,false,重複・variant:refill
+635,チューンメーカーズ トラネキサム酸配合(10ml),チューンメーカーズ(TUNEMAKERS),rakuten_product_api,pending,pending,face,美容液,false,,none,none,4528620210648,,D,3410,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+636,WOVE style GFセルリバース II 60mL,WOVE style,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4560158542389,,D,13000,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+637,コスモノニ化粧品 ノニピュアエッセンス(30mL),コスモノニ化粧品,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4560162350536,,D,9680,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+638,ロネージュ のエステセラム マリンプラセンタ,ロジック,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4571474063311,,D,1430,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+639,米肌 MAIHADA 肌潤美白エッセンス 本体/しっとり 30ml,コーセー,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4971710492736,,D,6970,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+640,カネボウ イルミネイティング セラムa 50ml,カネボウ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4973167097007,,D,14888,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+641,日本オリーブ オリーブマノン ナチュラルE オイル 15ml,日本オリーブ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4965363002381,,D,3360,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+642,オーブス MAISON DE AQUA ネイヴェル ホワイトセラム 30ml,オーブス,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4536596182142,,D,5940,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+643,花王ソフィーナ アルブラン イルミネイティング セラム 美容液 40g,ソフィーナ アルブラン,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4901301396235,,D,11000,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+644,コラーゲンVB10000 50ml×10本,日本漢方,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4571133879024,,D,4180,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+645,Give&Give(ギブアンドギブ) ヴィーナス(250g),ギブアンドギブ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4517466000124,,D,2541,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+646,資生堂 dプログラム パワーバイタルソリューション(25g),d プログラム(d program),rakuten_product_api,pending,pending,face,美容液,false,,none,none,4514254168394,,D,7580,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+647,カネボウ ドロッピング オイル 40ml,カネボウ,rakuten_product_api,pending,pending,face,美容液,false,,none,none,4973167938089,,D,6800,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+648,カネボウ LISSAGE ミルクオイル セットA,カネボウ,rakuten_product_api,pending,pending,face,美容液,true,乳液,set,set,4973167517888,,D,4400,none,normal,false,現在美容液／名称上は乳液候補 / 重複・variant:set
+649,ファンケル BC 化粧液,ファンケル,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,4908049365530,,D,3048,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+650,Dr.G ブラックスネイル コラーゲンミスト(100ml),ドクタージー,rakuten_product_api,pending,pending,face,化粧水,false,,none,none,8809963500075,,D,2014,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+651,LEAF＆BOTANICS リーフアンドボタニクス エマルジョン カレンデュラ 本体 100mL,松山油脂,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4954540161751,,D,1540,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持
+652,コーセー インフィニティ コンセントレート エマルジョン 1 120ml,コーセー,rakuten_product_api,pending,pending,face,乳液,false,,none,none,4971710282221,,D,5500,none,normal,false,自動監査上の明確な異常なし。公式商品ページ確認前のためpending維持

@@ -4,6 +4,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { isComparisonProduct, isIndexableProduct } from "./scripts/product-publication-policy.mjs";
 
 const SITE_ORIGIN = "https://moilum.asutelu.com";
 const OGP_IMAGE = SITE_ORIGIN + "/ogp-image.png";
@@ -15,9 +16,7 @@ const PRICE_DATE = "2026年6月";
 const products = JSON.parse(fs.readFileSync("src/products.json", "utf8"));
 const columnMeta = JSON.parse(fs.readFileSync("src/columns.json", "utf8"));
 const indexHtml = fs.readFileSync("public/index.html", "utf8");
-const skincareCount = products.filter(p =>
-  p.productType !== "makeup" && p.status !== "previous_generation"
-).length;
+const skincareCount = products.filter(isComparisonProduct).length;
 
 function extractColumns(html){
   const match = html.match(/const COLUMNS=\[([\s\S]*?)\n\];\r?\n\r?\nfunction renderColumnList/);
@@ -29,7 +28,7 @@ function extractColumns(html){
 
 const columns = extractColumns(indexHtml);
 const metaById = new Map(columnMeta.map(c => [c.id, c]));
-const productById = new Map(products.map(p => [Number(p.id), p]));
+const productById = new Map(products.filter(isIndexableProduct).map(p => [Number(p.id), p]));
 const PRIORITY6_IDS = new Set(["ingredient-comparison", "depacos-vs-puchipura", "sunscreen"]);
 
 const bodyIds = new Set(columns.map(c => c.id));

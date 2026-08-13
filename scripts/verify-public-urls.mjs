@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import vm from "node:vm";
 import { fileURLToPath } from "node:url";
+import { isComparisonProduct, isDirectoryProduct, isExcludedProduct, isIndexableProduct, isPendingProduct, publicationStatus } from "./product-publication-policy.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const publicDir = path.join(root, "public");
@@ -10,6 +11,10 @@ const products = JSON.parse(fs.readFileSync(path.join(root, "src", "products.jso
 const columns = JSON.parse(fs.readFileSync(path.join(root, "src", "columns.json"), "utf8"));
 const guideSlugs = JSON.parse(fs.readFileSync(path.join(root, "src", "guides-slugs.json"), "utf8"));
 const productIds = new Set(products.map(product => String(product.id)));
+const indexableProductIds = new Set(products.filter(isIndexableProduct).map(product => String(product.id)));
+const directoryProductIds = new Set(products.filter(isDirectoryProduct).map(product => String(product.id)));
+const comparisonProductIds = new Set(products.filter(isComparisonProduct).map(product => String(product.id)));
+const pendingProductIds = new Set(products.filter(isPendingProduct).map(product => String(product.id)));
 const columnSlugs = new Set(columns.map(column => String(column.id)));
 const guideSlugSet = new Set(guideSlugs.map(String));
 
@@ -174,11 +179,14 @@ for (const file of files) {
   }
 
   if (/\.html$/i.test(file)) {
-    const isFavoritesHub = relative(file) === "public/hubs/favorites.html";
+    const relativeFile = relative(file);
+    const isFavoritesHub = relativeFile === "public/hubs/favorites.html";
+    const productFileId = relativeFile.match(/^public\/products\/(\d+)\.html$/)?.[1];
+    const isPendingProductPage = productFileId ? pendingProductIds.has(productFileId) : false;
     if (/href\s*=\s*["']\/column\/?["']/i.test(source) || source.includes(`${siteOrigin}/column"`)) {
       fail(file, "旧 /column への公開リンクが残っています");
     }
-    if (!isFavoritesHub && /<meta\s+name=["']robots["']\s+content=["'][^"']*noindex/i.test(source)) {
+    if (!isFavoritesHub && !isPendingProductPage && /<meta\s+name=["']robots["']\s+content=["'][^"']*noindex/i.test(source)) {
       fail(file, "公開対象HTMLにnoindexが混入しています");
     }
     const attributePattern = /\b(href|src|content)\s*=\s*(["'])(.*?)\2/gis;
@@ -285,23 +293,30 @@ const productHubFile = path.join(publicDir, "hubs", "products.html");
 const productHubSource = fs.readFileSync(productHubFile, "utf8");
 const productHubIds = ordinaryAnchorHrefs(productHubSource).map(href => internalPathname(href)?.match(/^\/products\/(\d+)$/)?.[1]).filter(Boolean);
 const uniqueProductHubIds = new Set(productHubIds);
-if (productHubIds.length !== productIds.size * 2) fail(productHubFile, `商品リンクは画像と詳細ボタンの2本である必要があります: ${productHubIds.length}/${productIds.size * 2}`);
-if (uniqueProductHubIds.size !== productIds.size) fail(productHubFile, `商品ハブの実在商品リンクが不足しています: ${uniqueProductHubIds.size}/${productIds.size}`);
-for (const id of productIds) {
+if (productHubIds.length !== directoryProductIds.size * 2) fail(productHubFile, `商品リンクは公開商品ごとに画像と詳細ボタンの2本である必要があります: ${productHubIds.length}/${directoryProductIds.size * 2}`);
+if (uniqueProductHubIds.size !== directoryProductIds.size) fail(productHubFile, `商品ハブの公開商品リンクが不足しています: ${uniqueProductHubIds.size}/${directoryProductIds.size}`);
+for (const id of directoryProductIds) {
   if (!uniqueProductHubIds.has(id)) fail(productHubFile, `商品ハブに通常リンクがありません: ${id}`);
 }
-if (!productHubSource.includes(`全${products.length}件`) || !productHubSource.includes(`${products.length}商品を表示中`)) {
-  fail(productHubFile, "商品総数がSSoTから生成された表示を確認できません");
+for (const id of productIds) if (!directoryProductIds.has(id) && uniqueProductHubIds.has(id)) fail(productHubFile, `公開対象外商品が商品ハブにあります: ${id}`);
+if (!productHubSource.includes(`${directoryProductIds.size}商品`) || !productHubSource.includes(`${directoryProductIds.size}商品を表示中`)) {
+  fail(productHubFile, "公開商品数がSSoTから生成された表示を確認できません");
 }
 
 const expectedProductCounts = {
   total: products.length,
-  current: products.filter(product => product.productType !== "makeup" && product.status !== "previous_generation").length,
-  related: products.filter(product => product.productType === "makeup").length,
-  previous: products.filter(product => product.status === "previous_generation").length,
+  current: comparisonProductIds.size,
+  directory: directoryProductIds.size,
+  editorial: products.filter(product => publicationStatus(product) === "editorial").length,
+  verified: products.filter(product => publicationStatus(product) === "verified").length,
+  pending: products.filter(product => publicationStatus(product) === "pending").length,
+  excluded: products.filter(product => publicationStatus(product) === "excluded").length,
+  legacy: products.filter(product => publicationStatus(product) === "legacy").length,
+  related: products.filter(product => isDirectoryProduct(product) && product.productScope !== "face").length,
+  previous: products.filter(product => publicationStatus(product) === "legacy").length,
   "editor-used": products.filter(product => product.reviewedByEditor === true).length
 };
-for (const [aboutName, requiredKeys] of [["sources.html", Object.keys(expectedProductCounts)], ["rating-policy.html", ["editor-used"]]]) {
+for (const [aboutName, requiredKeys] of [["sources.html", ["total","current","directory","pending","excluded","related","previous","editor-used"]], ["rating-policy.html", ["editor-used"]]]) {
   const file = path.join(publicDir, "about", aboutName);
   const source = fs.readFileSync(file, "utf8");
   for (const key of requiredKeys) {
@@ -312,7 +327,7 @@ for (const [aboutName, requiredKeys] of [["sources.html", Object.keys(expectedPr
 
 const rootProductIds = new Set(ordinaryAnchorHrefs(indexSource).map(href => internalPathname(href)?.match(/^\/products\/(\d+)$/)?.[1]).filter(Boolean));
 if (!rootProductIds.size) fail(path.join(publicDir, "index.html"), "トップ初期HTMLに実商品への通常リンクがありません");
-const skincareIds = new Set(products.filter(product => product.productType !== "makeup" && product.status !== "previous_generation").map(product => String(product.id)));
+const skincareIds = comparisonProductIds;
 const brandsFile = path.join(publicDir, "hubs", "brands.html");
 const brandProductIds = new Set(ordinaryAnchorHrefs(fs.readFileSync(brandsFile, "utf8")).map(href => internalPathname(href)?.match(/^\/products\/(\d+)$/)?.[1]).filter(Boolean));
 for (const id of skincareIds) {
@@ -324,13 +339,21 @@ if (rankingProductLinks.length !== 50) fail(rankingFile, `ランキングの商�
 
 for (const product of products) {
   const file = path.join(publicDir, "products", `${product.id}.html`);
+  if (isExcludedProduct(product)) {
+    if (fs.existsSync(file)) fail(file, "excluded商品ページが生成されています");
+    continue;
+  }
+  if (!fs.existsSync(file)) { fail(file, "商品ページがありません"); continue; }
   const source = fs.readFileSync(file, "utf8");
   trustCounts.productPages += 1;
   const canonical = source.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i)?.[1];
   if (canonical !== `${siteOrigin}/products/${product.id}`) fail(file, `商品self canonicalが不正です: ${canonical || "なし"}`);
   const hasEditorUse = source.includes("編集部が実際に購入・使用した商品です");
   const hasPublicInfo = source.includes("公開情報・公式情報をもとに比較");
-  if (hasEditorUse === hasPublicInfo) fail(file, "実使用商品と公開情報のみ商品の表示区分が一意ではありません");
+  if (isPendingProduct(product)) {
+    if (!/noindex\s*,\s*follow/i.test(source)) fail(file, "pending商品がnoindex,followではありません");
+    if (hasEditorUse || hasPublicInfo) fail(file, "pending商品に編集評価ブロックがあります");
+  } else if (hasEditorUse === hasPublicInfo) fail(file, "実使用商品と公開情報のみ商品の表示区分が一意ではありません");
   if (hasEditorUse) trustCounts.editorUsedPages += 1;
   if (hasPublicInfo) trustCounts.publicInfoPages += 1;
   if (/(?:レビュー件数|参考レビュー|市場での使用実績が豊富|ユーザー評価が高い)/.test(source)) {
@@ -339,7 +362,8 @@ for (const product of products) {
 }
 const editorUsedCount = products.filter(product => product.reviewedByEditor === true).length;
 if (trustCounts.editorUsedPages !== editorUsedCount) fail(publicDir, `実使用表示数がSSoTと不一致です: ${trustCounts.editorUsedPages}/${editorUsedCount}`);
-if (trustCounts.publicInfoPages !== products.length - editorUsedCount) fail(publicDir, `公開情報表示数がSSoTと不一致です: ${trustCounts.publicInfoPages}/${products.length - editorUsedCount}`);
+const expectedPublicInfoPages = products.filter(product => !isExcludedProduct(product) && !isPendingProduct(product) && product.reviewedByEditor !== true).length;
+if (trustCounts.publicInfoPages !== expectedPublicInfoPages) fail(publicDir, `公開情報表示数がSSoTと不一致です: ${trustCounts.publicInfoPages}/${expectedPublicInfoPages}`);
 for (const column of columns) {
   const file = path.join(publicDir, "columns", `${column.id}.html`);
   const source = fs.readFileSync(file, "utf8");
@@ -366,7 +390,10 @@ const routeFiles = new Map([
   ["/ranking", path.join(publicDir, "hubs", "ranking.html")],
   ["/diagnosis", path.join(publicDir, "hubs", "diagnosis.html")]
 ]);
-for (const id of productIds) routeFiles.set(`/products/${id}`, path.join(publicDir, "products", `${id}.html`));
+for (const id of indexableProductIds) routeFiles.set(`/products/${id}`, path.join(publicDir, "products", `${id}.html`));
+routeFiles.set("/about/sources", path.join(publicDir,"about","sources.html"));
+routeFiles.set("/about/rating-policy", path.join(publicDir,"about","rating-policy.html"));
+routeFiles.set("/about/changelog", path.join(publicDir,"about","changelog.html"));
 for (const slug of columnSlugs) routeFiles.set(`/columns/${slug}`, path.join(publicDir, "columns", `${slug}.html`));
 for (const slug of guideSlugSet) routeFiles.set(`/guides/${slug}`, path.join(publicDir, "guides", `${slug}.html`));
 
@@ -396,7 +423,7 @@ while (queue.length) {
 }
 const indexTargets = [
   "/products", "/columns", "/brands", "/ranking", "/diagnosis",
-  ...[...productIds].map(id => `/products/${id}`),
+  ...[...indexableProductIds].map(id => `/products/${id}`),
   ...[...columnSlugs].map(slug => `/columns/${slug}`),
   ...[...guideSlugSet].map(slug => `/guides/${slug}`)
 ];
@@ -404,8 +431,8 @@ for (const route of indexTargets) {
   if (!depth.has(route)) fail(routeFiles.get(route), `トップから通常リンクだけで到達できません: ${route}`);
   if ((incoming.get(route) || 0) === 0) fail(routeFiles.get(route), `通常内部リンクが0本の孤立ページです: ${route}`);
 }
-const productDepths = [...productIds].map(id => depth.get(`/products/${id}`)).filter(Number.isFinite);
-const unreachableProductCount = productIds.size - productDepths.length;
+const productDepths = [...indexableProductIds].map(id => depth.get(`/products/${id}`)).filter(Number.isFinite);
+const unreachableProductCount = indexableProductIds.size - productDepths.length;
 const maxProductDepth = productDepths.length ? Math.max(...productDepths) : Infinity;
 const averageProductDepth = productDepths.length ? productDepths.reduce((sum, value) => sum + value, 0) / productDepths.length : Infinity;
 if (unreachableProductCount) fail(productHubFile, `トップから到達不能の商品があります: ${unreachableProductCount}件`);
@@ -450,6 +477,6 @@ console.log(`JSON-LD: ${jsonLdCount}件 / インラインJavaScript: ${inlineScr
 console.log(`専用一覧ページ: ${hubExpectations.length}件 / indexable: 5件 / noindex: 1件`);
 console.log(`商品ハブ通常リンク: ${productHubIds.length}件 / ユニーク商品: ${uniqueProductHubIds.size}件`);
 console.log(`トップ初期HTMLの実商品リンク: ${rootProductIds.size}件`);
-console.log(`内部リンクグラフ: 商品到達 ${productDepths.length}/${productIds.size}件 / 孤立 ${unreachableProductCount}件 / 最大深度 ${maxProductDepth} / 平均深度 ${averageProductDepth.toFixed(2)}`);
+console.log(`内部リンクグラフ: index対象商品到達 ${productDepths.length}/${indexableProductIds.size}件 / 孤立 ${unreachableProductCount}件 / 最大深度 ${maxProductDepth} / 平均深度 ${averageProductDepth.toFixed(2)}`);
 console.log(`信頼性検査: 商品ページ ${trustCounts.productPages}件 / 編集部実使用 ${trustCounts.editorUsedPages}件 / 公開情報のみ ${trustCounts.publicInfoPages}件`);
 console.log(`変更履歴で許可した「レビュー件数」言及: ${trustCounts.historicalReviewMentions}件`);

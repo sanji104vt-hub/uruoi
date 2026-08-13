@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
+import { isComparisonProduct, isDirectoryProduct } from "./product-publication-policy.mjs";
 
 const SITE = "https://moilum.asutelu.com";
 const TARGETS = [
@@ -64,10 +65,11 @@ for(const href of ["/products","/brands","/ranking","/diagnosis","/columns","/ab
   if(!home.includes(`href="${href}"`)) fail(`トップの主要リンクがありません: ${href}`);
 }
 for(const slug of guides) if(!home.includes(`href="/guides/${slug}"`)) fail(`トップのガイドリンクがありません: ${slug}`);
-const activeCount = products.filter(product => product.productType !== "makeup" && product.status !== "previous_generation").length;
+const activeCount = products.filter(isComparisonProduct).length;
+const directoryCount = products.filter(isDirectoryProduct).length;
 const editorCount = products.filter(product => product.reviewedByEditor === true).length;
-const publicOnlyCount = products.filter(product => product.reviewedByEditor !== true).length;
-for(const expected of [products.length,activeCount,editorCount,publicOnlyCount]) if(!home.includes(`>${expected}<`) && !home.includes(`掲載${expected}商品`) && !home.includes(`全${expected}商品`)) fail(`トップにSSoT件数${expected}が表示されていません`);
+const publicOnlyCount = products.filter(product => isDirectoryProduct(product) && product.reviewedByEditor !== true).length;
+for(const expected of [directoryCount,activeCount,editorCount,publicOnlyCount]) if(!home.includes(`>${expected}<`) && !home.includes(`掲載${expected}商品`) && !home.includes(`全${expected}商品`) && !home.includes(`${expected}公開商品`)) fail(`トップに公開件数${expected}が表示されていません`);
 const productsHub = fs.readFileSync("public/hubs/products.html","utf8");
 const homeSimilarity = jaccard(grams(home),grams(productsHub));
 if(homeSimilarity >= .25) fail(`トップと/productsの類似度が25%以上です: ${(homeSimilarity*100).toFixed(1)}%`);

@@ -95,15 +95,18 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
     </tbody>
   </table>
   </div>
-  <p>商品画像の一部は楽天商品検索APIで取得し、商品名・価格・主要成分・分類は編集部が確認して整理しています。ECの評価平均や件数データは公開評価へ取り込んでいません。価格や在庫はリアルタイムではありません。</p>
+  <p>楽天APIで取得した商品候補は、取得直後には公開比較へ加えません。<strong>API取得 → pending（確認中）→ 公式情報・カテゴリ・ブランド・重複の確認 → verified</strong>という手順を通り、verifiedになった商品だけを通常の比較対象へ加えます。楽天レビュー値は監査用データとして保持する場合がありますが、pending商品の公開評価・ランキング・診断には使いません。</p>
 
   <h2>2. 更新頻度</h2>
   <div class="card">
   <table>
     <thead><tr><th>データ種別</th><th>更新頻度の目安</th><th>備考</th></tr></thead>
     <tbody>
-      <tr><td>生成商品ページ</td><td>ビルドごと</td><td><span data-product-count="total">647</span>商品。<code>src/products.json</code> の全レコードから自動生成します。</td></tr>
-      <tr><td>現在比較対象</td><td>ビルドごと</td><td><span data-product-count="current">633</span>商品。関連カテゴリと前世代情報を除いた比較対象です。</td></tr>
+      <tr><td>DB登録商品候補</td><td>ビルドごと</td><td><span data-product-count="total">647</span>商品。公開前の候補データを含むSSoT（元データ）全件です。</td></tr>
+      <tr><td>正式商品一覧</td><td>ビルドごと</td><td><span data-product-count="directory">246</span>商品。editorial + verifiedだけを<a href="/products">商品一覧</a>へ掲載します。</td></tr>
+      <tr><td>現在比較対象</td><td>ビルドごと</td><td><span data-product-count="current">233</span>商品。正式公開済みでproductScopeがfaceの商品だけです。</td></tr>
+      <tr><td>確認中（pending）</td><td>API取得・監査時</td><td><span data-product-count="pending">399</span>商品。個別ページはnoindexで、主要一覧・sitemap・ランキング・診断から除外します。</td></tr>
+      <tr><td>対象外（excluded）</td><td>監査時</td><td><span data-product-count="excluded">1</span>商品。データは保持しますが公開ページは生成しません。</td></tr>
       <tr><td>関連カテゴリ</td><td>ビルドごと</td><td><span data-product-count="related">13</span>商品。スキンケア選びに関連して掲載する別カテゴリです。</td></tr>
       <tr><td>前世代情報</td><td>ビルドごと</td><td><span data-product-count="previous">1</span>商品。現行比較対象とは区別しています。</td></tr>
       <tr><td>参考価格</td><td>2〜3か月に一度の見直しを目安</td><td>商品ページには参照時点（例：「2026年6月時点」）を必ず明記。<strong>購入前に必ず各販売サイトで最新価格を確認してください</strong>。</td></tr>
@@ -114,7 +117,16 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   </table>
   </div>
 
-  <h2>3. 編集部による実使用・実測の有無</h2>
+  <h2>3. 商品公開ステータス</h2>
+  <div class="card"><table><thead><tr><th>status</th><th>扱い</th></tr></thead><tbody>
+    <tr><td>editorial</td><td>編集部管理商品。index・sitemap・一覧・比較の対象です。</td></tr>
+    <tr><td>verified</td><td>API由来でもメーカー・ブランド公式情報、カテゴリ、重複等を確認済みの商品。editorialと同じく公開可能です。</td></tr>
+    <tr><td>pending</td><td>候補データ。200で直接確認できますがnoindexで、主要導線へは出しません。</td></tr>
+    <tr><td>excluded</td><td>対象外・誤取得等。データは監査用に保持し、公開しません。</td></tr>
+    <tr><td>legacy</td><td>旧製品・前世代として価値がある情報。現行比較から外しつつindexを維持します。</td></tr>
+  </tbody></table></div>
+
+  <h2>4. 編集部による実使用・実測の有無</h2>
   <div class="honest">
     <b>正直に書きます</b><br>
     Moilum編集部は、<strong>掲載商品の全てを実際に購入して官能評価しているわけではありません</strong>。<br>
@@ -134,7 +146,7 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   </ul>
   <p>最終的な購入判断は、<strong>ご自身の肌タイプ・過去の使用経験・実店舗でのテスターや少量サイズでの試用</strong>を組み合わせてください。特に敏感肌の方は、初めての成分を含む商品はパッチテストを推奨します。</p>
 
-  <h2>4. 使用している外部データ・技術</h2>
+  <h2>5. 使用している外部データ・技術</h2>
   <div class="card">
   <ul>
     <li><strong>Googleフォント</strong>：Zen Old Mincho / Zen Kaku Gothic New（表示用フォント）</li>
@@ -145,7 +157,7 @@ gtag('js',new Date());gtag('config','G-BC0FBSZSWX');
   </ul>
   </div>
 
-  <h2>5. 情報の誤りを見つけたら</h2>
+  <h2>6. 情報の誤りを見つけたら</h2>
   <p>掲載情報の誤り（成分・価格・容量・リニューアル情報など）にお気づきの場合は、<a href="mailto:sanji.104vt@gmail.com">sanji.104vt@gmail.com</a> までお知らせください。順次確認のうえ、修正いたします。修正内容は <a href="/about/changelog">更新履歴</a> に記載します。</p>
 
   <div class="about-links">

@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { isComparisonProduct, isDirectoryProduct, isIndexableProduct } from "./product-publication-policy.mjs";
 import path from "node:path";
 import { PRIORITY6_COLUMNS } from "../src/priority6-columns.mjs";
 
@@ -18,10 +19,11 @@ const columns = JSON.parse(fs.readFileSync(COLUMNS_FILE, "utf8"));
 const guideSlugs = JSON.parse(fs.readFileSync(GUIDES_FILE, "utf8"));
 const originalIndex = fs.readFileSync(INDEX_FILE, "utf8");
 const targetIds = new Set(PRIORITY6_COLUMNS.map(column => column.id));
-const activeProducts = products.filter(product => product.productType !== "makeup" && product.status !== "previous_generation");
+const activeProducts = products.filter(isComparisonProduct);
+const directoryProducts = products.filter(isDirectoryProduct);
 const editorProducts = products.filter(product => product.reviewedByEditor === true);
-const publicOnlyProducts = products.filter(product => product.reviewedByEditor !== true);
-const productById = new Map(products.map(product => [Number(product.id), product]));
+const publicOnlyProducts = directoryProducts.filter(product => product.reviewedByEditor !== true);
+const productById = new Map(products.filter(isIndexableProduct).map(product => [Number(product.id), product]));
 
 if (products.length < 247) throw new Error(`商品総数が基準値247件未満です: ${products.length}`);
 if (columns.length !== 27) throw new Error(`コラム総数が想定外です: ${columns.length}`);
@@ -104,7 +106,7 @@ function priceAnalysis(){
     const med = median(prices);
     const near = [...items].sort((a,b) => Math.abs(Number(a.price)-med)-Math.abs(Number(b.price)-med))[0];
     return {category,items,prices,med,near};
-  });
+  }).filter(row => row.items.length > 0);
   const bands = [
     ["1,999円以下", product => product.price <= 1999],
     ["2,000〜4,999円", product => product.price >= 2000 && product.price <= 4999],
@@ -232,16 +234,16 @@ function homeHtml(){
     <canvas id="mizukagamiCanvas" class="mizukagami-canvas" aria-hidden="true" style="display:none"></canvas>
     <div class="hero-text"><div class="brand-logo"><svg class="brand-mark" viewBox="0 0 40 40" width="44" height="44" aria-hidden="true"><defs><linearGradient id="brandGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" class="brand-stop-1"/><stop offset="100%" class="brand-stop-2"/></linearGradient></defs><path d="M20 4 C20 4 7 17 7 26 a13 13 0 0 0 26 0 C33 17 20 4 20 4 Z" fill="url(#brandGrad)"/><ellipse cx="15.5" cy="23" rx="3.5" ry="5.5" fill="#fff" opacity="0.45"/></svg><div class="brand-wordmark">Moi<span>lum</span><em>モイルム</em></div></div>
       <div class="hero-badge">スキンケア比較の入口</div><h1 class="hero-title">商品・ブランド・肌悩みから探せる、<br><span>スキンケア比較サイト</span>。</h1>
-      <p class="hero-sub">掲載${products.length}商品を整理し、編集部使用レビュー、公的・公式情報、比較ガイドから選択肢を絞れます。</p>
+      <p class="hero-sub">現在比較できる${activeProducts.length}商品を整理し、編集部使用レビュー、公的・公式情報、比較ガイドから選択肢を絞れます。</p>
       <div class="hero-actions"><a class="hero-btn primary" href="/diagnosis">肌タイプ診断をはじめる</a><a class="hero-btn ghost" href="/products">商品一覧を見る</a></div>
     </div>
     <div class="hero-visual" id="heroVisualFallback" aria-hidden="true"><div class="hero-blob blob1"></div><div class="hero-blob blob2"></div><div class="hero-bottle"><div class="hb-cap"></div><div class="hb-neck"></div><div class="hb-body"><span>Moilum</span></div></div></div>
   </section>
   <div id="underwaterSection" class="underwater-section" aria-hidden="true"><span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><span class="bubble b4"></span><span class="bubble b5"></span><span class="bubble b6"></span></div>
-  <section class="p6-home-section p6-first" aria-labelledby="p6Start"><p class="p6-kicker">START HERE</p><h2 id="p6Start">初めて使う人はここから</h2><div class="p6-entry-grid"><a href="/products"><strong>商品から探す</strong><span>${products.length}商品の一覧・検索・カテゴリ比較</span></a><a href="/columns"><strong>読みながら選ぶ</strong><span>${columns.length}本のコラムと${guideSlugs.length}本の条件別ガイド</span></a><a href="/diagnosis"><strong>条件を整理する</strong><span>肌タイプ・悩み・予算から候補を絞る</span></a><a href="/about/rating-policy"><strong>評価方針を確認する</strong><span>編集部評価の考え方と限界を読む</span></a></div></section>
+  <section class="p6-home-section p6-first" aria-labelledby="p6Start"><p class="p6-kicker">START HERE</p><h2 id="p6Start">初めて使う人はここから</h2><div class="p6-entry-grid"><a href="/products"><strong>商品から探す</strong><span>${directoryProducts.length}公開商品の一覧・検索・カテゴリ比較</span></a><a href="/columns"><strong>読みながら選ぶ</strong><span>${columns.length}本のコラムと${guideSlugs.length}本の条件別ガイド</span></a><a href="/diagnosis"><strong>条件を整理する</strong><span>肌タイプ・悩み・予算から候補を絞る</span></a><a href="/about/rating-policy"><strong>評価方針を確認する</strong><span>編集部評価の考え方と限界を読む</span></a></div></section>
   <section class="p6-home-section" aria-labelledby="p6Browse"><p class="p6-kicker">BROWSE</p><h2 id="p6Browse">目的に合わせて比較する</h2><div class="p6-entry-grid"><a href="/products"><strong>商品一覧</strong><span>全商品をカテゴリ・価格・肌悩みで確認</span></a><a href="/brands"><strong>ブランド一覧</strong><span>ブランド別の掲載商品を確認</span></a><a href="/ranking"><strong>比較ランキング</strong><span>掲載条件と編集部評価で並べ替え</span></a><a href="/diagnosis"><strong>肌タイプ診断</strong><span>4つの質問で比較条件を整理</span></a><a href="/columns"><strong>コラム一覧</strong><span>成分・価格・使い方を詳しく読む</span></a></div></section>
-  <section class="p6-home-section" aria-labelledby="p6Method"><p class="p6-kicker">HOW WE COMPARE</p><h2 id="p6Method">Moilumの商品比較の仕組み</h2><div class="p6-stat-grid"><article><b>${products.length}</b><span>登録商品</span></article><article><b>${activeProducts.length}</b><span>現在の比較対象</span></article><article><b>${editorProducts.length}</b><span>編集部使用レビュー</span></article><article><b>${publicOnlyProducts.length}</b><span>公開情報中心の商品</span></article></div><p class="p6-method-note">商品データはメーカー公式情報や販売情報を確認して整理します。編集部が実際に使用した商品と、公開情報を中心に整理した商品を区別し、評価はユーザーレビューの平均ではありません。価格は掲載時点の参考値で、在庫・販売価格は変動します。</p><p><a href="/about/sources">情報源と更新方針</a> ／ <a href="/about/rating-policy">評価方針</a> ／ <a href="/about/changelog">更新履歴</a></p></section>
-  <section class="p6-home-section" aria-labelledby="p6Featured"><p class="p6-kicker">EDITOR-USED</p><h2 id="p6Featured">編集部が実際に使用した${editorProducts.length}商品</h2><p>写真と使用メモがある商品だけを掲載しています。ここでの掲載順はおすすめ順位ではありません。</p><div class="p6-featured-grid">${featured}</div><p class="p6-more"><a href="/products">全${products.length}商品の一覧へ →</a></p></section>
+  <section class="p6-home-section" aria-labelledby="p6Method"><p class="p6-kicker">HOW WE COMPARE</p><h2 id="p6Method">Moilumの商品比較の仕組み</h2><div class="p6-stat-grid"><article><b>${directoryProducts.length}</b><span>公開商品</span></article><article><b>${activeProducts.length}</b><span>現在の比較対象</span></article><article><b>${editorProducts.length}</b><span>編集部使用レビュー</span></article><article><b>${publicOnlyProducts.length}</b><span>公開情報中心の商品</span></article></div><p class="p6-method-note">商品データはメーカー公式情報や販売情報を確認して整理します。API取得直後の商品候補は公開せず、公式情報・カテゴリ・ブランドを確認できた商品だけを比較対象にします。編集部評価はユーザーレビューの平均ではありません。</p><p><a href="/about/sources">情報源と更新方針</a> ／ <a href="/about/rating-policy">評価方針</a> ／ <a href="/about/changelog">更新履歴</a></p></section>
+  <section class="p6-home-section" aria-labelledby="p6Featured"><p class="p6-kicker">EDITOR-USED</p><h2 id="p6Featured">編集部が実際に使用した${editorProducts.length}商品</h2><p>写真と使用メモがある商品だけを掲載しています。ここでの掲載順はおすすめ順位ではありません。</p><div class="p6-featured-grid">${featured}</div><p class="p6-more"><a href="/products">全${directoryProducts.length}公開商品の一覧へ →</a></p></section>
   <section class="p6-home-section" aria-labelledby="p6Guides"><p class="p6-kicker">CONDITION GUIDES</p><h2 id="p6Guides">肌悩み・条件別の${guideSlugs.length}ガイド</h2><div class="p6-guide-grid">${guideLinks}</div></section>
   <!-- PRIORITY6_HOME_END -->
 </div>

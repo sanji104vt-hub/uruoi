@@ -5,6 +5,7 @@
 
 import fs from "node:fs";
 import path from "node:path";
+import { isComparisonProduct, isExcludedProduct, isIndexableProduct, isPendingProduct, publicationStatus } from "./scripts/product-publication-policy.mjs";
 
 const SITE_ORIGIN = "https://moilum.asutelu.com";
 const OGP_IMAGE = SITE_ORIGIN + "/ogp-image.png";
@@ -260,16 +261,14 @@ function priceDateLabel(p){
 
 function rakutenCatalogInfoHtml(p){
   if (!isRakutenCatalogProduct(p)) return "";
-  const hasReview = Number(p.rakutenReviewCount) > 0 && Number(p.rakutenReviewAverage) > 0;
   return `<section class="rakuten-catalog" aria-labelledby="rakuten-catalog-title">
-    <h2 id="rakuten-catalog-title">楽天市場で確認した掲載情報</h2>
+    <h2 id="rakuten-catalog-title">現在確認済みの楽天掲載情報</h2>
     <dl>
       <div><dt>在庫確認</dt><dd>${escHtml(formatCheckedDate(p.availabilityCheckedAt))}時点で購入可能な店舗 ${Number(p.rakutenSalesItemCount).toLocaleString()}件</dd></div>
-      <div><dt>参考価格</dt><dd>購入可能な店舗の最低価格 ¥${Number(p.price).toLocaleString()}</dd></div>
-      ${hasReview ? `<div><dt>楽天レビュー</dt><dd>★${Number(p.rakutenReviewAverage).toFixed(2)}（${Number(p.rakutenReviewCount).toLocaleString()}件）</dd></div>` : ""}
+      <div><dt>楽天市場の最低価格</dt><dd>取得時点で購入可能な店舗の最低価格 ¥${Number(p.marketLowestPrice ?? p.price).toLocaleString()}</dd></div>
       <div><dt>JANコード</dt><dd>${escHtml(p.productCode || "未掲載")}</dd></div>
     </dl>
-    <p>楽天の商品価格ナビAPIから取得した販売情報です。成分・使用感・肌適合はMoilum編集部では未確認です。最新の価格と在庫は購入先でご確認ください。</p>
+    <p>楽天の商品価格ナビAPIから取得した販売情報です。ブランド、カテゴリ、成分、使用感、肌適合はMoilum編集部で確認中です。最新の価格と在庫は購入先でご確認ください。</p>
   </section>`;
 }
 
@@ -334,7 +333,7 @@ const ORGANIZATION_JSONLD = {
 function getRelatedProducts(p, all){
   // 同カテゴリで、自分以外の商品からrating順で最大3件
   return all
-    .filter(x => x.id !== p.id && x.category === p.category)
+    .filter(x => isComparisonProduct(x) && x.id !== p.id && x.category === p.category)
     .sort((a, b) => (b.rating || 0) - (a.rating || 0))
     .slice(0, 3);
 }
@@ -342,15 +341,18 @@ function getRelatedProducts(p, all){
 function buildProductHtml(p, all){
   const evidence = p.editorialEvidence;
   const catalogProduct = isRakutenCatalogProduct(p);
-  const title = truncate(evidence ? `${p.name}の公式仕様・比較ポイント｜Moilum` : catalogProduct ? `${p.name}の価格・在庫｜${p.brand}｜Moilum` : `${p.name}｜${p.brand}｜Moilum`, 68);
+  const pending = isPendingProduct(p);
+  const title = truncate(pending ? `${p.name}｜公式情報確認中｜Moilum` : evidence ? `${p.name}の公式仕様・比較ポイント｜Moilum` : catalogProduct ? `${p.name}の価格・在庫｜${p.brand}｜Moilum` : `${p.name}｜${p.brand}｜Moilum`, 68);
   const desc = truncate(evidence
     ? `${p.name}（${p.brand}）の公式仕様と比較候補を確認。${(evidence.officialFeatures || [p.desc || ""])[0]} 参考価格 ${(p.price || 0).toLocaleString()}円。`
+    : pending
+      ? `${p.name}は現在Moilumで公式情報を確認中です。楽天市場で取得した商品名、最低価格、JAN、販売店舗数だけを掲載しています。`
     : catalogProduct
       ? `${p.name}（${p.brand}）の楽天市場での参考価格は¥${(p.price || 0).toLocaleString()}。${formatCheckedDate(p.availabilityCheckedAt)}時点で購入可能な店舗${Number(p.rakutenSalesItemCount)}件を確認。`
       : `${p.name}（${p.brand}）を独自スコアで比較。参考価格 ¥${(p.price || 0).toLocaleString()}／カテゴリ ${p.category}。${p.desc || ""}`, 156);
   const canonical = `${SITE_ORIGIN}/products/${p.id}`;
   const ogImage = p.image || OGP_IMAGE;
-  const related = getRelatedProducts(p, all);
+  const related = pending ? [] : getRelatedProducts(p, all);
   const productLd = buildProductJsonLd(p);
   const crumbLd = buildBreadcrumbJsonLd(p);
   const hasRating = p.rating > 0;
@@ -368,7 +370,7 @@ function buildProductHtml(p, all){
 <meta name="description" content="${escAttr(desc)}">
 <meta name="google-site-verification" content="${GSC_VERIFICATION}" />
 <link rel="canonical" href="${canonical}">
-<meta name="robots" content="index,follow">
+<meta name="robots" content="${pending ? "noindex,follow" : "index,follow"}">
 <meta property="og:type" content="product">
 <meta property="og:title" content="${escAttr(title)}">
 <meta property="og:description" content="${escAttr(desc)}">
@@ -383,7 +385,7 @@ function buildProductHtml(p, all){
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" rel="stylesheet">
-<script type="application/ld+json">${JSON.stringify(productLd)}</script>
+${pending ? "" : `<script type="application/ld+json">${JSON.stringify(productLd)}</script>`}
 <script type="application/ld+json">${JSON.stringify(crumbLd)}</script>
 <script type="application/ld+json">${JSON.stringify(ORGANIZATION_JSONLD)}</script>
 <style>
@@ -415,6 +417,7 @@ h1{font-size:clamp(22px,4vw,30px);line-height:1.45;margin-bottom:12px}
 .rating{color:#f5a623;letter-spacing:2px;font-size:16px}
 .desc{font-size:15px;line-height:1.9;color:var(--ink);background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}
 .product-status{background:#fff8ef;border:1px solid #dbc4a5;border-radius:16px;padding:18px 20px;margin-bottom:20px}.product-status strong{display:block;font-family:"Zen Old Mincho",serif;font-size:17px}.product-status p{font-size:13px;margin:6px 0}.product-status a{color:#735c3d;text-decoration:underline;font-weight:700}
+.pending-notice{background:var(--water);border:1px solid var(--deep);border-radius:16px;padding:18px 20px;margin-bottom:20px}.pending-notice strong{display:block;font-family:"Zen Old Mincho",serif;font-size:18px;margin-bottom:6px}.pending-notice p{font-size:13px;color:var(--txt2)}
 .ingredients{background:#fff;border:1px solid var(--border);border-radius:16px;padding:20px;margin-bottom:24px}
 .ingredients h2{font-size:16px;margin-bottom:12px}
 .ing-list{display:flex;flex-wrap:wrap;gap:8px}
@@ -504,6 +507,7 @@ gtag('event','product_detail_view',{product_id:${JSON.stringify(String(p.id))},p
 <div class="pr-banner">本サイトはアフィリエイト広告（Amazon・楽天・Qoo10等）を利用しています。編集部評価と楽天API掲載情報は区別して表示しています。価格・在庫は各販売サイトでご確認ください。</div>
 <article>
   <nav class="crumb"><a href="/">ホーム</a><span class="sep">›</span><a href="/products">商品一覧</a><span class="sep">›</span><span>${escHtml(truncate(p.name, 26))}</span></nav>
+  ${pending ? `<aside class="pending-notice"><strong>この商品は現在、Moilumで公式情報を確認中です。</strong><p>楽天APIで取得した候補データを保管しています。公式情報・ブランド・カテゴリ・仕様の確認が終わるまで、検索結果・商品一覧・ランキング・肌診断には掲載しません。</p></aside>` : ""}
   <span class="cat-tag">${escHtml(p.category)}</span>
   <h1>${escHtml(p.name)}</h1>
   <div class="brand">${escHtml(p.brand)}${p.origin ? " ・ " + escHtml(p.origin) : ""}</div>
@@ -513,7 +517,7 @@ ${productStatusHtml(p,all)}
     : `<div class="no-image" aria-hidden="true">${escHtml(p.icon || "💧")}</div>`}
   <div class="meta">
     <div class="meta-row">
-      <span class="meta-label">参考価格</span>
+      <span class="meta-label">${pending ? "楽天市場の最低価格" : "参考価格"}</span>
       <span class="meta-val price">¥${(p.price || 0).toLocaleString()}<span class="price-note">（${escHtml(priceDateLabel(p))}時点）</span></span>
     </div>
 ${hasRating ? `<div class="meta-row">
@@ -521,14 +525,13 @@ ${hasRating ? `<div class="meta-row">
       <span class="meta-val"><span class="rating">${"★".repeat(Math.round(p.rating))}${"☆".repeat(5 - Math.round(p.rating))}</span> ${p.rating}</span>
     </div>
     <div style="font-size:11px;color:var(--txt3);line-height:1.6;padding:4px 0 10px">※過去に付与したMoilum編集部の参考指標です。ユーザー評価や実測値ではなく、商品ごとの付与記録が完全ではないという限界があります。現在の自動分類やメリット・注意点に件数データは使用していません。<a href="/about/rating-policy" style="color:var(--accent)">評価方針</a></div>` : ""}
-${catalogProduct && Number(p.rakutenReviewCount) > 0 && Number(p.rakutenReviewAverage) > 0 ? `<div class="meta-row"><span class="meta-label">楽天レビュー</span><span class="meta-val">★${Number(p.rakutenReviewAverage).toFixed(2)}（${Number(p.rakutenReviewCount).toLocaleString()}件）</span></div>` : ""}
     <div class="meta-row">
       <span class="meta-label">カテゴリ</span>
       <span class="meta-val">${escHtml(p.category)}</span>
     </div>
 ${p.origin ? `<div class="meta-row"><span class="meta-label">原産国</span><span class="meta-val">${escHtml(p.origin)}</span></div>` : ""}
   </div>
-  <div class="desc">${escHtml(p.desc || "")}</div>
+  <div class="desc">${pending ? "このページでは、楽天APIで取得時点に確認できた商品識別情報と販売情報だけを表示しています。編集部評価、肌タイプ、効果、おすすめ判断は掲載していません。" : escHtml(p.desc || "")}</div>
 ${displayIngredients.length ? `  <div class="ingredients">
     <h2>主要成分</h2>
     <div class="ing-list">${displayIngredients.map(i => `<span class="ing-item">${escHtml(i)}</span>`).join("")}</div>
@@ -538,11 +541,11 @@ ${(Array.isArray(p.skin) && p.skin.length) || (Array.isArray(p.concern) && p.con
 ${Array.isArray(p.skin) && p.skin.length ? `<div class="suit-row"><span class="suit-label">掲載肌タイプ</span><div class="suit-chips">${p.skin.map(s => `<span class="suit-chip">${escHtml(s)}</span>`).join("")}</div></div>` : ""}
 ${Array.isArray(p.concern) && p.concern.length ? `<div class="suit-row"><span class="suit-label">掲載悩み分類</span><div class="suit-chips">${p.concern.map(c => `<span class="suit-chip">${escHtml(c)}</span>`).join("")}</div></div>` : ""}
   </div>` : ""}
-${primarySourceHtml(p)}
+${pending ? "" : primarySourceHtml(p)}
 ${rakutenCatalogInfoHtml(p)}
-${editorialEvidenceHtml(p, all)}
-${variantComparisonHtml(p,all)}
-${p.editorialEvidence?"":catalogProduct?`<section class="data-limit"><h2>このページで確認できる範囲</h2><ul><li>楽天APIで商品名・ブランド・カテゴリ・参考価格・画像・購入可能な店舗数を確認しています。</li><li>主要成分、肌タイプ、使用感は確認していないため掲載していません。</li><li>在庫は${escHtml(formatCheckedDate(p.availabilityCheckedAt))}時点です。最新状況は販売ページでご確認ください。</li></ul></section>`:`<section class="data-limit"><h2>このページで確認できる範囲</h2><ul><li>商品名・ブランド・カテゴリ・参考価格を掲載しています。</li><li>肌タイプと悩みはMoilum内の比較用分類で、効果や適合を保証する情報ではありません。</li><li>商品固有の公式仕様をSSoTへ未記録のため、使用感・成分効果・現行販売状況は判断していません。</li></ul></section>`}
+${pending ? "" : editorialEvidenceHtml(p, all)}
+${pending ? "" : variantComparisonHtml(p,all)}
+${pending ? "" : p.editorialEvidence?"":catalogProduct?`<section class="data-limit"><h2>このページで確認できる範囲</h2><ul><li>楽天APIで商品名・ブランド・カテゴリ・参考価格・画像・購入可能な店舗数を確認しています。</li><li>主要成分、肌タイプ、使用感は確認していないため掲載していません。</li><li>在庫は${escHtml(formatCheckedDate(p.availabilityCheckedAt))}時点です。最新状況は販売ページでご確認ください。</li></ul></section>`:`<section class="data-limit"><h2>このページで確認できる範囲</h2><ul><li>商品名・ブランド・カテゴリ・参考価格を掲載しています。</li><li>肌タイプと悩みはMoilum内の比較用分類で、効果や適合を保証する情報ではありません。</li><li>商品固有の公式仕様をSSoTへ未記録のため、使用感・成分効果・現行販売状況は判断していません。</li></ul></section>`}
   <div class="buy-note"><span class="pr-tag">PR</span>以下は広告リンクです。掲載価格は${escHtml(priceDateLabel(p))}時点の参考値です。最新の価格・在庫は各販売サイトでご確認ください。</div>
   <div class="buy-btns">
     <a class="buy-btn amazon" data-shop="amazon" href="https://www.amazon.co.jp/s?k=${encodeURIComponent(p.brand + " " + p.name)}" rel="nofollow sponsored noopener" target="_blank">Amazonで見る</a>
@@ -576,7 +579,7 @@ document.querySelectorAll('.buy-btn[data-shop]').forEach(function(link){
 </script>
 </body>
 </html>
-`;
+`.replace(/[ \t]+$/gm, "");
 }
 
 const outDir = "public/products";
@@ -584,7 +587,8 @@ fs.mkdirSync(outDir, { recursive: true });
 
 // SSoTから除外した商品ページが公開ディレクトリに残らないよう、
 // このビルダーが生成する数字ID.htmlだけを対象に古い生成物を掃除する。
-const currentProductIds = new Set(products.map(product => String(product.id)));
+const generatedProducts = products.filter(product => !isExcludedProduct(product));
+const currentProductIds = new Set(generatedProducts.map(product => String(product.id)));
 let removedStale = 0;
 for (const file of fs.readdirSync(outDir)) {
   const match = file.match(/^(\d+)\.html$/);
@@ -598,7 +602,7 @@ let withAggRating = 0;
 let withoutAggRating = 0;
 let withImage = 0;
 
-for (const p of products){
+for (const p of generatedProducts){
   const html = buildProductHtml(p, products);
   fs.writeFileSync(path.join(outDir, `${p.id}.html`), html, "utf8");
   count++;
@@ -612,7 +616,7 @@ const avg = Math.round(sizes.reduce((s, v) => s + v, 0) / sizes.length);
 const min = Math.min(...sizes);
 const max = Math.max(...sizes);
 
-console.log(`✓ 生成完了: ${count} 商品ページ`);
+console.log(`✓ 生成完了: ${count} 商品ページ（index ${generatedProducts.filter(isIndexableProduct).length} / noindex ${generatedProducts.filter(isPendingProduct).length} / excluded非生成 ${products.filter(isExcludedProduct).length}）`);
 if (removedStale) console.log(`  古い生成ページを削除: ${removedStale}件`);
 console.log(`  ファイルサイズ: 平均 ${(avg/1024).toFixed(1)}KB / 最小 ${(min/1024).toFixed(1)}KB / 最大 ${(max/1024).toFixed(1)}KB`);
 console.log(`  編集部評価あり: ${withAggRating} / なし: ${withoutAggRating}（aggregateRatingスキーマは撤去済み）`);

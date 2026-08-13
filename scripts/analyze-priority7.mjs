@@ -17,7 +17,10 @@ function textFromHtml(value){
   return decode(String(value || "").replace(/<script\b[\s\S]*?<\/script>/gi," ").replace(/<style\b[\s\S]*?<\/style>/gi," ").replace(/<[^>]+>/g," ")).replace(/\s+/g," ").trim();
 }
 function extract(source, regex){ return regex.exec(source)?.[1] || ""; }
-function productHtml(id){ return fs.readFileSync(path.join("public","products",`${id}.html`),"utf8"); }
+function productHtml(id){
+  const file = path.join("public","products",`${id}.html`);
+  return fs.existsSync(file) ? fs.readFileSync(file,"utf8") : "";
+}
 function specificText(html){
   const blocks = [
     /<div class="desc">([\s\S]*?)<\/div>/,

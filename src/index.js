@@ -23,6 +23,17 @@ const ABOUT_SLUGS = new Set(["rating-policy", "sources", "changelog"]);
 // /guides/{slug} で公開している悩み別ハブページの allowlist（生成物由来）
 const GUIDE_SLUG_SET = new Set(GUIDE_SLUGS);
 
+function publicationStatus(product){
+  if (["editorial","verified","pending","excluded","legacy"].includes(product?.publicationStatus)) return product.publicationStatus;
+  if (product?.sourceType === "rakuten_product_api") return "pending";
+  if (product?.status === "previous_generation") return "legacy";
+  return "editorial";
+}
+
+function isIndexableProduct(product){
+  return ["editorial","verified","legacy"].includes(publicationStatus(product));
+}
+
 // 統合・削除された商品IDから統合先IDへの 301 リダイレクトマップ。
 // 重複商品の統合時に旧URLを新URLに恒久的に転送する（SEOの被リンク集約用）。
 const PRODUCT_REDIRECTS = {
@@ -40,7 +51,7 @@ function buildSitemap(){
   for (const slug of GUIDE_SLUGS){
     urls.push(`  <url><loc>${SITE_ORIGIN}/guides/${escapeXml(slug)}</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>`);
   }
-  for (const p of PRODUCTS){
+  for (const p of PRODUCTS.filter(isIndexableProduct)){
     urls.push(`  <url><loc>${SITE_ORIGIN}/products/${p.id}</loc><lastmod>${now}</lastmod><changefreq>weekly</changefreq><priority>0.8</priority></url>`);
   }
   for (const c of COLUMNS){
@@ -75,7 +86,7 @@ export default {
     // キーはクエリ文字列を除外した canonical URL に固定（?bust= のようなキャッシュバスターで
     // 別キー扱いになるのを防ぐ）。TTL は Cache-Control ヘッダー(max-age=3600)に従う。
     if (pathname === "/sitemap.xml"){
-      const cacheKey = new Request("https://moilum.asutelu.com/sitemap.xml?version=seo-priority3-v1", { method: "GET" });
+      const cacheKey = new Request("https://moilum.asutelu.com/sitemap.xml?version=priority7-publication-gate-v1", { method: "GET" });
       const cache = caches.default;
       let cached = await cache.match(cacheKey);
       if (cached) return cached;
@@ -125,9 +136,20 @@ export default {
       }
       const p = PRODUCTS.find(x => x.id === id);
       if (p){
+        const status = publicationStatus(p);
+        if (status === "excluded"){
+          return new Response("この商品候補はMoilumの掲載対象外です。", {
+            status: 410,
+            headers: { "content-type":"text/plain; charset=utf-8", "cache-control":"public, max-age=300", "x-robots-tag":"noindex, nofollow" }
+          });
+        }
         const rewriteUrl = new URL(request.url);
         rewriteUrl.pathname = `/products/${id}.html`;
-        return env.ASSETS.fetch(new Request(rewriteUrl, request));
+        const response = await env.ASSETS.fetch(new Request(rewriteUrl, request));
+        if (status !== "pending") return response;
+        const headers = new Headers(response.headers);
+        headers.set("x-robots-tag", "noindex, follow");
+        return new Response(response.body, { status:response.status, statusText:response.statusText, headers });
       }
       // 該当なし → SPA(トップ)にフォールバック
       const fallbackUrl = new URL(request.url);
