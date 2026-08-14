@@ -91,9 +91,9 @@ function ingredientAnalysis(){
   const maxCount = Math.max(...groups.map(group => group.count));
   return `<section class="p6-data-analysis" aria-labelledby="ingredientDataHeading">
   <h3 id="ingredientDataHeading">Moilum掲載データで見る3成分群</h3>
-  <p class="p6-method">集計対象は現在の比較対象${activeProducts.length}商品です。各商品の「主要成分」欄に対象語がある商品を機械抽出しています。配合量・濃度・効果の比較ではなく、掲載傾向の確認です。1商品が複数群に重複する場合があります。</p>
+  <p class="p6-method">集計対象は現在の比較対象${activeProducts.length}商品です。各商品の「比較用成分タグ」欄に対象語がある商品を機械抽出しています。タグはMoilumの編集分類で、全成分表・配合量・濃度・効果の比較ではありません。1商品が複数群に重複する場合があります。</p>
   <div class="p6-bars">${groups.map(group => `<div class="p6-bar-row"><strong>${group.label}</strong><span><i style="width:${pct(group.count,maxCount)}%"></i></span><b>${group.count}商品</b></div>`).join("")}</div>
-  <div class="p6-metric-grid">${groups.map(group => `<article><h4>${group.label}</h4><p><b>${group.count}</b>商品／参考価格中央値 <b>¥${yen(group.medianPrice)}</b></p><p>多いカテゴリ：${group.categories.map(([name,count]) => `${esc(name)} ${count}`).join("、") || "—"}</p><p>掲載肌タイプ：${group.skins.map(([name,count]) => `${esc(name)} ${count}`).join("、") || "—"}</p><p>同じ主要成分欄に多い表示：${group.coIngredients.map(([name,count]) => `${esc(name)} ${count}`).join("、") || "—"}</p><p class="p6-samples">価格の広がり：${group.samples.map(productLink).join(" ／ ") || "—"}</p></article>`).join("")}</div>
+  <div class="p6-metric-grid">${groups.map(group => `<article><h4>${group.label}</h4><p><b>${group.count}</b>商品／参考価格中央値 <b>¥${yen(group.medianPrice)}</b></p><p>多いカテゴリ：${group.categories.map(([name,count]) => `${esc(name)} ${count}`).join("、") || "—"}</p><p>掲載肌タイプ：${group.skins.map(([name,count]) => `${esc(name)} ${count}`).join("、") || "—"}</p><p>同じ比較用成分タグ欄に多い表示：${group.coIngredients.map(([name,count]) => `${esc(name)} ${count}`).join("、") || "—"}</p><p class="p6-samples">価格の広がり：${group.samples.map(productLink).join(" ／ ") || "—"}</p></article>`).join("")}</div>
   <p class="data-note">※参考価格は商品1点の掲載価格であり、容量差を補正していません。成分名の有無だけで製品の優劣や肌との相性は判断できません。</p>
 </section>`;
 }
@@ -140,7 +140,7 @@ function sunscreenAnalysis(){
   const maxBand = Math.max(...bands.map(([,count]) => count));
   return `<section class="p6-data-analysis" aria-labelledby="uvDataHeading">
   <h3 id="uvDataHeading">Moilum掲載UV商品の記載状況</h3>
-  <p class="p6-method">日焼け止めカテゴリ${items.length}商品について、商品名・説明・主要成分・確認済み公式仕様に明記された語を集計しました。数値の記載がない商品を低性能と判断する集計ではありません。</p>
+  <p class="p6-method">日焼け止めカテゴリ${items.length}商品について、商品名・説明・比較用成分タグ・登録済み公式仕様に明記された語を集計しました。数値の記載がない商品を低性能と判断する集計ではありません。</p>
   <div class="p6-metric-grid"><article><h4>表示の明記</h4><p>SPF50/50+：<b>${spf50}</b>商品</p><p>PA++++：<b>${pa4}</b>商品</p><p>参考価格中央値：<b>¥${yen(median(items.map(product => product.price)))}</b></p></article><article><h4>公式一次情報の確認済み範囲</h4><p>公式商品ページを記録済み：<b>${verified.length}</b>商品</p><p>耐水性の記録あり：<b>${resistance}</b>商品</p><p>落とし方の記録あり：<b>${removable}</b>商品</p></article></div>
   <div class="p6-bars">${bands.map(([label,count]) => `<div class="p6-bar-row"><strong>${label}</strong><span><i style="width:${pct(count,maxBand)}%"></i></span><b>${count}商品</b></div>`).join("")}</div>
   <div class="col-table-wrap"><table class="col-table"><thead><tr><th>公式情報を記録済みの商品</th><th>参考価格</th><th>確認できる仕様</th></tr></thead><tbody>${verified.map(product => `<tr><td>${productLink(product)}</td><td>¥${yen(product.price)}</td><td>${esc(Object.values(product.editorialEvidence?.specs || {}).filter(Boolean).slice(0,5).join(" ／ ") || "公式商品ページを記録")}</td></tr>`).join("")}</tbody></table></div>

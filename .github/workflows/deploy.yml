@@ -16,6 +16,7 @@ jobs:
         run: |
           node scripts/build-priority7-content.mjs
           node scripts/audit-api-product-quality.mjs
+          node scripts/audit-editorial-product-sources.mjs
           node scripts/sync-products-to-spa.mjs
           node scripts/build-priority6-content.mjs
           node build-product-pages.mjs
@@ -33,6 +34,7 @@ jobs:
           node scripts/verify-priority7.mjs
           node scripts/verify-product-images.mjs
           node scripts/verify-publication-gate.mjs
+          node scripts/verify-priority8.mjs
 
       - name: Deploy to Cloudflare Workers
         uses: cloudflare/wrangler-action@v3
